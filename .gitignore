@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.aistudio/
+.env
+!.env.example
+*.bak-*
+*.log
+*.bak-20261110
+.DS_Store
+__pycache__/
+*.pyc
+*.db
+task_states.json
+0.35
+600
+vite
+TEST_FILE*.txt

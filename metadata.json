@@ -1,0 +1,7 @@
+{
+  "name": "MT16 QuantMind",
+  "description": "Küresel ölçekli çoklu-varlık (BIST, NASDAQ, CRYPTO) Kuant Karar Destek Terminali: 9-Küp, Ön Filtre Kural Motoru, Jüri Tartışma ve Risk Yönetimi.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

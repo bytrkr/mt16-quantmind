@@ -1,0 +1,11 @@
+# Sozluk
+- VPIN: Hacim senkronize toksisite gostergesi. >0.35 = toksik akis.
+- OBI: Order Book Imbalance. -1..+1. Negatif = satis baskisi.
+- CVD: Kumulatif hacim deltasi (agresif alim - agresif satim).
+- Wall Z: En buyuk duvar lotunun Z-skoru.
+- Funding Rate: Perpetual vadeli funding orani. Pozitif = long'lar odiyor.
+- Fear & Greed: 0-100. <25 asiri korku, >75 asiri aclik.
+- OI: Open Interest, acik pozisyon sayisi.
+- VETO_HOLD: Islem yapma, bekle.
+- PROCEED: Tum veto kurallari gecti.
+- VERI YOK: Kaynak bagli degil, fiyat uretilmez.
