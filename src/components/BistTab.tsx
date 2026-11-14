@@ -1,4 +1,5 @@
 // src/components/BistTab.tsx
+import InteractiveChart from './InteractiveChart';
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import {
   TrendingUp,

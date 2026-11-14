@@ -724,6 +724,7 @@ app.use('/api', generalApiLimiter);
 app.use(chatRouter);
 import llmProxyRouter from './routes/llmProxy.js';
 app.use('/api/llm', llmProxyRouter);
+app.use('/api/indicators', indicatorsRoute);
 app.use(llmProxyRouter);
 import newsRouter from './routes/news.js';
 app.use('/api/news', newsRouter);
@@ -3266,6 +3267,7 @@ process.on('uncaughtException', (err) => {
 
 // Register error logger at the end
 import { errorLogger } from './middleware/errorLogger.js';
+import indicatorsRoute from './routes/indicators';
 app.use(errorLogger);
 
 process.on('SIGTERM', () => process.exit(0));
