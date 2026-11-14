@@ -21,3 +21,9 @@ TEST_FILE*.txt
 .env.*
 *.qodi_bak*
 .qodi_bak*
+
+# Qodi: .env yedekleri asla commit edilmemeli
+.env
+.env.*
+*.qodi_bak*
+.qodi_bak*
