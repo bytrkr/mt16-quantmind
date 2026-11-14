@@ -650,6 +650,7 @@ export default function App() {
                   </button>
                   <LazyModuleWrapper>
                     <SmartJuryDiagnosisCard
+                      compositeAnomaly={null}
                       marketType={selectedMarket}
                       ticker={activeMarketSymbol}
                       onVetoStatusChange={setIsJuryVetoed}

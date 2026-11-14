@@ -315,7 +315,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
           currentSymbol,
           compScore,
           zVol,
-          verdict.reason || 'Kritik anomali eşiği aşıldı.'
+          verdict.reason || 'VERİ YOK: Anomali değerlendirmesi yapılamadı'
         );
       }
     }

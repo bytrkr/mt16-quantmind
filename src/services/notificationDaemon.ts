@@ -116,6 +116,18 @@ export class NotificationDaemon {
     const { symbol, calendar, meanReversion, price = null, oco, forceBroadcast = false } = params;
 
     const now = Date.now();
+
+    // Qodi v6.1: Gercek fiyat verisi yoksa (price: null) alert FIRLATMA.
+    // Mock verilerle 'surekli anomali' uyarisi YASAK.
+    if (params.price === null || params.price === undefined) {
+      return null;
+    }
+
+    // Qodi v6.1: Gercek fiyat verisi yoksa (price: null) alert FIRLATMA.
+    // Mock verilerle 'surekli anomali' uyarisi YASAK.
+    if (params.price === null || params.price === undefined) {
+      return null;
+    }
     const cooldownMs = 300000; // 5 dakikalık bildirim soğuma süresi (spam engelleme)
     const compositeScore = params.composite?.compositeScore ?? null;
     const isCriticalScore = (compositeScore !== null && compositeScore >= 80) || meanReversion.regime === 'EXTREME_EXPANSION';

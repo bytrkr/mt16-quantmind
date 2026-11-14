@@ -30,6 +30,7 @@ import { BehavioralHerdingResult } from '../services/anomalies/behavioralHerding
 import { logDataIssue } from '../utils/dataAudit';
 
 export interface SmartJuryDiagnosisCardProps {
+  fundamentals?: any; // Qodi: Temel analiz verileri
   marketType?: 'BIST' | 'CRYPTO' | 'NASDAQ' | 'FOREX';
   ticker?: string;
   className?: string;
@@ -80,6 +81,7 @@ export const SmartJuryDiagnosisCard: React.FC<SmartJuryDiagnosisCardProps> = ({
   className = '',
   onVetoStatusChange,
   compositeAnomaly,
+  fundamentals,
   valueQuality,
   microstructure,
   behavioralHerding,
@@ -261,7 +263,7 @@ export const SmartJuryDiagnosisCard: React.FC<SmartJuryDiagnosisCardProps> = ({
 
   // 24 Saatlik Composite Anomaly Score Trend Verisi (Sparkline & Tampon Bellek)
   const anomalySparklineData = useMemo(() => {
-    const currentScore = compositeAnomaly?.compositeAnomalyScore || 58;
+    const currentScore = compositeAnomaly?.compositeAnomalyScore ?? null; // Qodi: VERI YOK ise null
     const currentZ = gatewaySnap.liveZScore || 0;
     const records = AnomalyHistoryBuffer.recordAnomaly(activeSymbol, currentScore, currentZ);
     return records.map(r => ({ time: r.timeString, score: r.compositeAnomalyScore }));
