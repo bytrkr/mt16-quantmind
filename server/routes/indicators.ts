@@ -42,7 +42,36 @@ router.get('/:symbol', async (req: Request, res: Response) => {
     const atr14 = ATR.calculate({ high: highArr, low: lowArr, close: closeArr, period: 14 });
     const rsiData = rsi14.map((v: number, i: number) => ({ time: candles[candles.length - rsi14.length + i].time, value: Math.round(v * 100) / 100 }));
     const macdData = macd.map((m: any, i: number) => ({ time: candles[candles.length - macd.length + i].time, value: Math.round((m.MACD || 0) * 100) / 100 }));
-    return res.json({ success: true, symbol, source: 'Yahoo Finance (proxy)', candles, rsi: rsiData, macd: macdData, sma20: sma20.slice(-1)[0], ema50: ema50.slice(-1)[0], bollinger: bb.slice(-1)[0], atr14: atr14.slice(-1)[0], lastPrice: candles[candles.length - 1].close, fundamentals: {} });
+    let fundamentals: any = {};
+    try {
+      const fundUrl = `http://localhost:3000/api/yahoo-fundamentals-proxy?symbol=${encodeURIComponent(yahooSymbol)}`;
+      const fRes = await fetch(fundUrl, { signal: AbortSignal.timeout(10000) });
+      if (fRes.ok) {
+        const fData: any = await fRes.json();
+        const result = fData?.quoteSummary?.result?.[0] || {};
+        const stats = result.defaultKeyStatistics || {};
+        const fin = result.financialData || {};
+        const detail = result.summaryDetail || {};
+        const price = result.price || {};
+        fundamentals = {
+          trailingPE: detail.trailingPE?.raw ?? null,
+          priceToBook: stats.priceToBook?.raw ?? null,
+          marketCap: price.marketCap?.raw ?? null,
+          beta: stats.beta?.raw ?? null,
+          dividendYield: detail.dividendYield?.raw ?? null,
+          returnOnEquity: fin.returnOnEquity?.raw ?? null,
+          profitMargins: fin.profitMargins?.raw ?? null,
+          forwardPE: detail.forwardPE?.raw ?? null,
+          sharesOutstanding: stats.sharesOutstanding?.raw ?? null,
+          bookValue: stats.bookValue?.raw ?? null,
+          fiftyTwoWeekHigh: detail.fiftyTwoWeekHigh?.raw ?? null,
+          fiftyTwoWeekLow: detail.fiftyTwoWeekLow?.raw ?? null,
+          rsi14: rsiData.slice(-1)[0]?.value ?? null,
+        };
+      }
+    } catch (e) {}
+
+    return res.json({ success: true, symbol, source: 'Yahoo Finance (proxy)', candles, rsi: rsiData, macd: macdData, sma20: sma20.slice(-1)[0], ema50: ema50.slice(-1)[0], bollinger: bb.slice(-1)[0], atr14: atr14.slice(-1)[0], lastPrice: candles[candles.length - 1].close, fundamentals });
   } catch (e: any) {
     return res.status(500).json({ success: false, error: 'VERİ YOK - ' + (e?.message || 'bilinmeyen') });
   }

@@ -115,6 +115,52 @@ app.get('/api/yahoo-proxy', async (req: Request, res: Response) => {
   }
 });
 
+
+// 📊 Yahoo Finance Fundamentals (quoteSummary) Proxy - Cookie/Crumb destekli
+app.get('/api/yahoo-fundamentals-proxy', async (req: Request, res: Response) => {
+  const symbol = req.query.symbol as string;
+  const modules = req.query.modules as string || 'defaultKeyStatistics,financialData,summaryDetail,price';
+  if (!symbol) return res.json(null);
+
+  try {
+    // 1. Cookie al (fc.yahoo.com)
+    const cookieRes = await fetch('https://fc.yahoo.com', {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+      redirect: 'manual',
+    });
+    const setCookie = cookieRes.headers.get('set-cookie') || '';
+    const cookie = setCookie.split(';')[0] || '';
+
+    // 2. Crumb al
+    const crumbRes = await fetch('https://query1.finance.yahoo.com/v1/test/getcrumb', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'Cookie': cookie,
+      },
+    });
+    const crumb = await crumbRes.text();
+
+    if (!crumb || crumb.length > 50) {
+      // Crumb alinamadi, null don
+      return res.json(null);
+    }
+
+    // 3. quoteSummary istegi (crumb ile)
+    const url = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${encodeURIComponent(symbol)}?modules=${modules}&crumb=${encodeURIComponent(crumb)}`;
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'Cookie': cookie,
+      },
+    });
+    if (!response.ok) return res.json(null);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.json(null);
+  }
+});
+
 // 📈 TradingView Screener CORS & Rate-Limit Shielded Proxy Uç Noktası
 app.get('/api/tradingview-proxy', generalApiLimiter, async (req: Request, res: Response) => {
   const symbol = req.query.symbol as string;
