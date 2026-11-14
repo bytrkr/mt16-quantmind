@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { Router, Request, Response } from 'express';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
@@ -33,17 +36,40 @@ async function callGeminiProvider(
   temperature: number = 0.2,
   maxTokens: number = 1000
 ): Promise<ProviderAttemptResult> {
-  if (!GEMINI_API_KEY) throw new Error('GEMINI_API_KEY tanimli degil.');
-  const model = 'gemini-1.5-flash';
-  const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-  const geminiModel = genAI.getGenerativeModel({ model, systemInstruction });
-  const result = await geminiModel.generateContent({
+  if (!GEMINI_API_KEY) {
+    console.warn('[llmProxy] Gemini anahtari yok, atlaniyor.');
+    throw new Error('GEMINI_API_KEY tanimli degil.');
+  }
+  const model = 'gemini-flash-latest';
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+  
+  const body: any = {
     contents: [{ role: 'user', parts: [{ text: prompt }] }],
     generationConfig: { temperature, maxOutputTokens: maxTokens },
+  };
+  if (systemInstruction) {
+    body.systemInstruction = { parts: [{ text: systemInstruction }] };
+  }
+  
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'x-goog-api-key': GEMINI_API_KEY,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(15000),
   });
-  const text = result.response.text();
+  
+  if (!response.ok) {
+    const errText = await response.text().catch(() => '');
+    throw new Error(`Gemini HTTP ${response.status}: ${errText.slice(0, 200)}`);
+  }
+  
+  const data = await response.json();
+  const text = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
   if (!text) throw new Error('Gemini bos yanit dondurdu.');
-  return { provider: 'gemini', model, content: text.trim() };
+  return { provider: 'gemini', model, content: text };
 }
 
 async function callDeepSeekProvider(
@@ -111,7 +137,7 @@ async function callGroqProvider(
   maxTokens: number = 1000
 ): Promise<ProviderAttemptResult> {
   if (!GROQ_API_KEY) throw new Error('GROQ_API_KEY tanimli degil.');
-  const model = 'llama-3.3-70b-versatile';
+  const model = 'openai/gpt-oss-120b';
   const messages: Array<{ role: string; content: string }> = [];
   if (systemInstruction) messages.push({ role: 'system', content: systemInstruction });
   messages.push({ role: 'user', content: prompt });
@@ -161,7 +187,7 @@ async function handleGenerate(req: Request<{}, {}, LLMGenerateRequestBody>, res:
   if (!prompt) return res.status(400).json({ success: false, error: 'Prompt zorunludur.' });
 
   const priority: Array<'gemini' | 'deepseek' | 'qwen' | 'groq' | 'openrouter'> =
-    providerPriority || ['gemini', 'deepseek', 'qwen', 'groq', 'openrouter'];
+    providerPriority || ['groq', 'openrouter', 'deepseek', 'qwen', 'gemini'];
 
   const errors: string[] = [];
 

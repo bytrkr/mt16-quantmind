@@ -11,7 +11,7 @@ Protokol:
 """
 
 import math
-import random
+import secrets
 import json
 
 def wilcoxon_signed_rank(x, y):

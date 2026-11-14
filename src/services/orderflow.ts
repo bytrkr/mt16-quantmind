@@ -179,27 +179,20 @@ export class OrderflowEngine {
   }
 
   /**
-   * @deprecated Sentetik veri kullanımı Anayasa'ya aykırıdır. Sadece izole testlerde kullanılmalıdır.
+   * @deprecated QODI v6.1: Sentetik veri üretimi YASAK (0 Math.random).
+   * Bu fonksiyon artık veri üretmez. Sadece uyarı loglar ve boş ticks döner.
+   * Gerçek veri için marketGateway / binance / matriks kullanılmalıdır.
    */
   public generateSyntheticTicks(currentPrice: number | null, count: number = 30): void {
-    if (currentPrice === null) return;
-    const brokers = ['BofA', 'Citibank', 'Yatırım Finansman', 'İş Yatırım', 'Garanti BBVA', 'Diğer Bireysel'];
+    // Qodi v6.1 Kural 2: Math.random yasak. Sentetik tick üretimi devre dışı.
     this.ticks = [];
+    if (currentPrice === null) return;
 
-    for (let i = 0; i < count; i++) {
-      const isBuy = Math.random() > 0.42;
-      const broker = brokers[Math.floor(Math.random() * brokers.length)];
-      const volume = Math.floor(Math.random() * 8000) + 500;
-      const priceVariation = (Math.random() - 0.48) * (currentPrice * 0.003);
-      
-      this.ticks.push({
-        price: Number((currentPrice + priceVariation).toFixed(2)),
-        volume,
-        side: isBuy ? 'BUY' : 'SELL',
-        broker,
-        timestamp: Date.now() - (count - i) * 1000
-      });
-    }
+    console.warn(
+      '[QODI v6.1] generateSyntheticTicks çağrıldı ancak sentetik veri üretimi yasak. ' +
+      'Gerçek veri kaynağı (Binance/Matriks/Alpaca) kullanın. Boş ticks döndürülüyor.'
+    );
+    return;
   }
 }
 

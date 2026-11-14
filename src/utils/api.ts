@@ -50,12 +50,14 @@ export async function apiFetch<T = any>(endpoint: string, options: FetchOptions 
   if (response.status === 401 && !url.includes('/api/auth/')) {
     localStorage.removeItem(BISTAPP_TOKEN_KEY);
     window.location.reload(); 
-    throw new Error('Oturum süresi doldu, lütfen tekrar giriş yapın.');
+    console.warn('[api.ts] QODI v6.1: Oturum süresi doldu, istek iptal edildi.');
+      return null; // Qodi: throw yerine null
   }
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({ detail: 'Sunucu hatası oluştu.' }));
-    throw new Error(errorData.detail || `İstek başarısız: ${response.status}`);
+    console.warn('[api.ts] QODI v6.1: İstek başarısız, null döndürülüyor:', response.status);
+      return null; // Qodi: throw yerine null
   }
 
   return response.json();

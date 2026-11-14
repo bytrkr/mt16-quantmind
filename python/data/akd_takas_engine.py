@@ -8,7 +8,7 @@ BofA / Garanti / İş Yatırım net lot akışlarını analiz eder ve #TOON/v3.5
 from __future__ import annotations
 import os
 import sys
-import random
+import secrets
 import time
 from typing import Dict, Any, List, Optional
 

@@ -184,7 +184,7 @@ class PostMortemEngine:
                 # Mock veya dinamik çıkış fiyatı (piyasa simülasyonu / gerçek veritabanı senkronizasyonu)
                 # Karar AL ise ve fiyat yükselmişse ya da SAT ise ve fiyat düşmüşse başarılı kabul edilir
                 # Test/demo için gerçekçi piyasa simülasyonu drifti ekle
-                import random
+                import secrets
                 pct_drift = random.uniform(-0.04, 0.06)  # %-4 ile %+6 arası değişim
                 exit_px = round(entry_px * (1.0 + pct_drift), 2)
                 pnl_pct = round(((exit_px - entry_px) / entry_px) * 100.0, 2)

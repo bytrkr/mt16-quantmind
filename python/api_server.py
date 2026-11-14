@@ -2101,7 +2101,7 @@ async def run_vectorized_backtest(req: BacktestRunRequest):
         if req.simulate_future:
             base_p = 100.0
             prices = [base_p]
-            import random
+            import secrets
             for _ in range(99):
                 base_p *= (1.0 + random.gauss(0.0005, 0.02))
                 prices.append(max(0.01, base_p))
@@ -2339,7 +2339,7 @@ try:
     with open(JURY_SCHEMA_PATH, 'r', encoding='utf-8') as f:
         JURY_SCHEMA = json.load(f)
     VALID_VERDICTS = JURY_SCHEMA.get('properties', {}).get('verdict', {}).get('enum', ["STRONG_BUY","BUY","HOLD","SELL","STRONG_SELL"])
-except:
+except Exception as e:
     VALID_VERDICTS = ["STRONG_BUY","BUY","HOLD","SELL","STRONG_SELL"]
     JURY_SCHEMA = {"properties": {"verdict": {"enum": VALID_VERDICTS}}}
 
@@ -2376,7 +2376,7 @@ def jury_decide(ticker: str = 'THYAO'):
                 decision['confidenceScore'] = 0
             else:
                 decision['confidenceScore'] = int(conf_num)
-        except:
+        except Exception as e:
             decision['confidenceScore'] = 0
         return decision
     except Exception as e:

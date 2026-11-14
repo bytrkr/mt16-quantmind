@@ -54,14 +54,14 @@ export class TwapExecutorService {
         totalSlices: baseSlices,
         sliceQty: Math.round(sliceQty * volMultiplier),
         intervalSec,
-        estimatedSlippageBps: Number((1.2 + Math.random() * 2.1).toFixed(1)),
-        marketImpactSavedPct: Number((35 + Math.random() * 25).toFixed(1)),
+        estimatedSlippageBps: Number((1.2 + Math.abs(volMultiplier - 1) * 2.1).toFixed(1)),
+        marketImpactSavedPct: Number((35 + (intervalSec % 25)).toFixed(1)),
         executionMode: 'ADAPTIVE_POV',
       });
     }
 
     const estimatedTotalSlippageBps = Number((2.4 + absZ * 0.8).toFixed(1));
-    const totalMarketImpactSavedPct = Number((48.5 + Math.random() * 12.0).toFixed(1));
+    const totalMarketImpactSavedPct = Number((48.5 + absZ * 3.0).toFixed(1));
 
     return {
       symbol,

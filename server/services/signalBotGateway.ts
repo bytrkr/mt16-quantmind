@@ -34,9 +34,9 @@ export class SignalBotGateway {
       entryPrice: price,
       takeProfitPrice: tp,
       stopLossPrice: sl,
-      obi: parseFloat((0.60 + Math.random() * 0.3).toFixed(3)),
-      zScore: parseFloat((2.0 + Math.random() * 0.8).toFixed(2)),
-      juryConfidence: parseFloat((85.0 + Math.random() * 12).toFixed(1)),
+      obi: null, // Qodi v6.1: Gerçek OBI verisi yok, mock üretilmez
+      zScore: null, // Qodi v6.1: Gerçek Z-Score yok, mock üretilmez
+      juryConfidence: null, // Qodi v6.1: Gerçek jüri güveni yok, mock üretilmez
       timestamp: new Date().toLocaleTimeString('tr-TR'),
       signalId: `SIG-${this.alertCounter}`,
     };

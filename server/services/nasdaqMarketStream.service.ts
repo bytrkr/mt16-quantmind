@@ -109,7 +109,7 @@ class NasdaqMarketStreamService {
     let bidVolTotal = 0;
     for (let i = 0; i < 10; i++) {
       const price = Number((bestBid - i * spreadStep).toFixed(2));
-      const qty = Math.round(500 + Math.random() * 2500 + (10 - i) * 200);
+      const qty = Math.round(500 + (3000 - i * 250) + (10 - i) * 200); // Qodi: deterministik
       bidVolTotal += qty;
       bids.push({
         price,
@@ -123,7 +123,7 @@ class NasdaqMarketStreamService {
     let askVolTotal = 0;
     for (let i = 0; i < 10; i++) {
       const price = Number((bestAsk + i * spreadStep).toFixed(2));
-      const qty = Math.round(450 + Math.random() * 2400 + (10 - i) * 180);
+      const qty = Math.round(450 + (2850 - i * 240) + (10 - i) * 180); // Qodi: deterministik
       askVolTotal += qty;
       asks.push({
         price,

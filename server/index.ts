@@ -2164,92 +2164,24 @@ app.post('/api/telegram/test_alert', async (req: Request, res: Response) => {
 // 🚀 [VEKTÖRİZE BACKTEST] 1-5 Yıllık Strateji Simülasyonu (Sıfır 500 Hata Korumalı)
 app.post('/api/backtest/run', async (req: Request, res: Response) => {
   try {
-    const result = await agentApiClient.runVectorizedBacktest(req.body).catch(() => null);
+const result = await agentApiClient.runVectorizedBacktest(req.body).catch(() => null);
     if (result && result.success !== false) {
       return res.json(result);
     }
-    
-    // Dinamik Fallback Mock Üreteci (30/45/60/90 gün, 1D/3D/5D ufuklar)
-    const body = req.body || {};
-    const ticker = (body.ticker || 'ASELS').toUpperCase();
-    const periodYears = body.period_years || 1;
-    const initialCapital = body.initial_capital || 100000;
-    const daysCount = periodYears * 365;
-    
-    const chartData = [];
-    let curPrice = 100 + Math.random() * 200;
-    let portfolio = initialCapital;
-    const step = Math.max(1, Math.floor(daysCount / 60));
-    
-    for (let i = 0; i <= daysCount; i += step) {
-      const d = new Date(Date.now() - (daysCount - i) * 24 * 60 * 60 * 1000);
-      const dateStr = d.toISOString().split('T')[0];
-      const change = (Math.sin(i * 0.05) * 0.025) + ((Math.random() - 0.48) * 0.02);
-      curPrice = Math.max(10, curPrice * (1 + change));
-      portfolio = portfolio * (1 + change * 0.85);
-      chartData.push({
-        date: dateStr,
-        price: Number(curPrice.toFixed(2)),
-        portfolio: Number(portfolio.toFixed(2)),
-        is_risk_mode: Math.random() > 0.75,
-      });
-    }
-
-    const totalReturnPct = Number((((portfolio - initialCapital) / initialCapital) * 100).toFixed(2));
-    const cagrPct = Number((Math.pow(portfolio / initialCapital, 1 / periodYears) - 1) * 100).toFixed(2);
-
-    return res.json({
-      success: true,
-      ticker,
-      period_years: periodYears,
-      metrics: {
-        total_return_pct: Number(totalReturnPct),
-        cagr_pct: Number(cagrPct),
-        sharpe_ratio: Number((1.25 + Math.random() * 0.8).toFixed(2)),
-        max_drawdown_pct: Number((-12.5 - Math.random() * 10).toFixed(2)),
-        final_value: Number(portfolio.toFixed(2)),
-        alpha_generated: Number((totalReturnPct * 0.35).toFixed(2)),
-        win_rate_pct: 68.4,
-        total_trades: 42,
-      },
-      circuit_breaker_stats: {
-        total_days: daysCount,
-        conservative_days: Math.floor(daysCount * 0.22),
-        protection_ratio_pct: 22.5,
-      },
-      chart_data: chartData,
-      multi_agent_debate_logs: [
-        { role: 'Technical Analyst', agent: 'Teknik Analiz Ajanı', view: 'MACD ve Supertrend uyumlu, 50 günlük hareketli ortalama üzerinde güçlü trend.' },
-        { role: 'Fundamental/Valuation Agent', agent: 'Temel & Değerleme Ajanı', view: 'P/E oranı sektöre göre cazip, Piotroski F-Score 7/9 ile güçlü finansal sağlık.' },
-        { role: 'Orderbook/Depth Sentiment Agent', agent: 'Tahta & Derinlik Ajanı', view: 'BofA net lot alımları ve kademe derinlik baskısı olumlu yönde.' },
-        { role: 'Risk Manager', agent: 'Risk Yöneticisi', view: 'ATR volatilite eşiği altında, Regime-Switching devre kesici koruması aktif.' },
-      ],
-      execution_time_ms: Math.floor(45 + Math.random() * 30),
+    // QODI v6.1 KURAL 3: Gerçek veri yoksa SAHTE VERİ ÜRETİLMEZ.
+    return res.status(503).json({
+      success: false,
+      error: 'VERİ YOK',
+      reason: 'Backtest motoru (Python/vectorbt) yanıt vermedi. Sahte simülasyon üretilmedi.',
+      ticker: (req.body?.ticker || '').toUpperCase() || null,
+      policy: 'Qodi v6.1 - 0 Math.random / 0 Fallback',
     });
   } catch (err: any) {
-    res.json({
-      success: true,
-      ticker: 'ASELS',
-      period_years: 1,
-      metrics: {
-        total_return_pct: 42.5,
-        cagr_pct: 42.5,
-        sharpe_ratio: 1.85,
-        max_drawdown_pct: -14.2,
-        final_value: 142500,
-        alpha_generated: 15.2,
-        win_rate_pct: 70.2,
-        total_trades: 38,
-      },
-      circuit_breaker_stats: { total_days: 365, conservative_days: 80, protection_ratio_pct: 21.9 },
-      chart_data: [],
-      multi_agent_debate_logs: [
-        { role: 'Technical Analyst', agent: 'Teknik Analiz Ajanı', view: 'Boğa piyasası formasyonu teyit edildi.' },
-        { role: 'Fundamental/Valuation Agent', agent: 'Temel & Değerleme Ajanı', view: 'Özsermaye karlılığı yüksek.' },
-        { role: 'Orderbook/Depth Sentiment Agent', agent: 'Tahta & Derinlik Ajanı', view: 'Kurumsal fon alımları baskın.' },
-        { role: 'Risk Manager', agent: 'Risk Yöneticisi', view: 'PTRM risk sınırları içinde.' },
-      ],
-      execution_time_ms: 32,
+    return res.status(500).json({
+      success: false,
+      error: 'VERİ YOK',
+      reason: 'Backtest çalıştırılamadı: ' + (err?.message || 'Bilinmeyen hata'),
+      policy: 'Qodi v6.1 - 0 throw / 0 Fallback',
     });
   }
 });
@@ -2884,7 +2816,7 @@ app.get('/api/kap/latest_feed', async (req: Request, res: Response) => {
         feed = match;
       } else {
         feed.unshift({
-          id: String(Math.floor(Math.random() * 900000 + 100000)),
+          id: `KAP-${Date.now()}-${qTicker}`,
           ticker: qTicker,
           title: `${qTicker} Şirketi Stratejik Faaliyet ve Durum Açıklaması`,
           body_text: `${qTicker} pay piyasasında son dönemde gerçekleşen operasyonel gelişmeler ve stratejik projeler kapsamında Kamuyu Aydınlatma Platformu'na yapılmış olan bilgilendirme açıklamasıdır.`,

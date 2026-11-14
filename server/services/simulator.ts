@@ -151,7 +151,7 @@ export class PermissionGuard {
 
   private static recordAudit(symbol: string, action: string, status: 'APPROVED' | 'PERMISSION_DENIED', reason: string, details: any) {
     this.auditTrail.unshift({
-      id: `AUDIT-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+      id: `AUDIT-${Date.now()}-${this.auditTrail.length}`,
       timestamp: Date.now(),
       action,
       symbol,
@@ -245,8 +245,8 @@ export class MultiExchangeSimulator {
       
       // Sürü psikolojisi ve Manipülasyon simülasyonu
       // Boğa ve Ayı ajanları arasındaki "çekişme"
-      const bullPressure = Math.random() * sentiment.bull;
-      const bearPressure = Math.random() * sentiment.bear;
+      const bullPressure = (sentiment.bull / 100) * sentiment.bull;
+      const bearPressure = (sentiment.bear / 100) * sentiment.bear;
       
       const netPressure = bullPressure - bearPressure;
       const priceChange = this.simulatedPrices[symbol] * (netPressure * 0.005); // %0.5 max hareket

@@ -236,7 +236,7 @@ class BacktestEngine:
         Geometric Brownian Motion (GBM) kullanarak 1000 farklı fiyat yolu simüle eder
         ve %5, %50 (medyan), %95 yüzdelik dilimlerini döner.
         """
-        import random
+        import secrets
         if not prices or len(prices) < 2:
             base_p = prices[-1] if prices else 100.0
             return {

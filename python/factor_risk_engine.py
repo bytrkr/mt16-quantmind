@@ -55,7 +55,7 @@ class FactorRiskEngine:
         bench_prices = [9500.0]
         asset_prices = [100.0]
 
-        import random
+        import secrets
         rnd = random.Random(seed)
 
         for _ in range(days - 1):

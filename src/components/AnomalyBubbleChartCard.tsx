@@ -39,7 +39,8 @@ export const AnomalyBubbleChartCard: React.FC<AnomalyBubbleChartCardProps> = ({
         { symbol: 'NVDA', name: 'NVIDIA Corp', zVol: 2.85, zPrice: 2.39, obi: 0.45, forensicRisk: 18, beneishMScore: -2.45, anomalyTag: 'KURUMSAL_DIP', changePct: 2.39, price: 138.50 },
         { symbol: 'AAPL', name: 'Apple Inc', zVol: -0.85, zPrice: 0.85, obi: 0.12, forensicRisk: 12, beneishMScore: -2.60, anomalyTag: 'NORMAL', changePct: 0.85, price: 228.20 },
         { symbol: 'MSFT', name: 'Microsoft Corp', zVol: 1.25, zPrice: 1.10, obi: 0.28, forensicRisk: 15, beneishMScore: -2.55, anomalyTag: 'KURUMSAL_DIP', changePct: 1.10, price: 425.10 },
-        { symbol: 'TSLA', name: 'Tesla Inc', zVol: 3.40, zPrice: -2.15, obi: -0.58, forensicRisk: 68, beneishMScore: -1.65, anomalyTag: 'SPOOFING_BASKI', changePct: -2.15, price: null // SAHTE FIYAT YOK },
+                // SAHTE FIYAT YOK: TSLA için price null (Qodi v6.1)
+        { symbol: 'TSLA', name: 'Tesla Inc', zVol: 3.40, zPrice: -2.15, obi: -0.58, forensicRisk: 68, beneishMScore: -1.65, anomalyTag: 'SPOOFING_BASKI', changePct: -2.15, price: null },
         { symbol: 'AMZN', name: 'Amazon.com', zVol: 0.45, zPrice: 1.20, obi: 0.18, forensicRisk: 22, beneishMScore: -2.30, anomalyTag: 'NORMAL', changePct: 1.20, price: 186.30 },
         { symbol: 'GOOGL', name: 'Alphabet Inc', zVol: -1.15, zPrice: 0.65, obi: -0.05, forensicRisk: 14, beneishMScore: -2.50, anomalyTag: 'NORMAL', changePct: 0.65, price: 165.40 },
         { symbol: 'META', name: 'Meta Platforms', zVol: 2.10, zPrice: 2.30, obi: 0.38, forensicRisk: 25, beneishMScore: -2.20, anomalyTag: 'FOMO_TUZAGI', changePct: 2.30, price: 575.20 },

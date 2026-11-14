@@ -14,6 +14,6 @@ export function getNextGeminiKey(): { key: string } | null {
   ].filter(Boolean) as string[];
 
   if (keys.length === 0) return null;
-  const picked = keys[Math.floor(Math.random() * keys.length)];
+  const picked = keys[Math.floor(Date.now() / 60000) % keys.length]; // Qodi: dakika bazlı rotation
   return { key: sanitizeKey(picked) };
 }

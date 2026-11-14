@@ -38,6 +38,7 @@ function sanitizeEvdsNumber(val: unknown, fallback: number): number {
 }
 
 export class TcmbService {
+  private auditCounter = 0;
   private apiKey: string;
   private baseUrl: string = 'https://evds2.tcmb.gov.tr/service/evds';
   private backupBaseUrl: string = 'https://evds2.tcmb.gov.tr/service/evds';
@@ -54,7 +55,7 @@ export class TcmbService {
   private recordAudit(action: string, severity: AuditLogEntry['severity'], details: string): void {
     try {
       this.auditTrail.unshift({
-        auditId: `AUD-TCMB-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+        auditId: `AUD-TCMB-${Date.now()}-${(this.auditCounter = (this.auditCounter || 0) + 1)}`,
         service: 'TcmbService',
         action,
         severity,

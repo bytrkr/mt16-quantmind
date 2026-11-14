@@ -1,0 +1,5512 @@
+{
+  "timestamp": "2026-11-14T18:07:59.692450+00:00",
+  "root": "/home/bytrkr/bistapp",
+  "policy": "Qodi v6.1",
+  "scanned_files": 385,
+  "issues": [
+    {
+      "file": "src/App.tsx",
+      "line": 241,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const currentTicker = selectedMarket === 'NASDAQ' ? (nasdaqSymbol || 'NVDA') : selectedMarket === 'CRYPTO' ? (cryptoPair || 'BTCUSDT') : (activeTicker || 'THYAO');"
+    },
+    {
+      "file": "src/App.tsx",
+      "line": 291,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const currentTicker = selectedMarket === 'NASDAQ' ? (nasdaqSymbol || 'NVDA') : selectedMarket === 'CRYPTO' ? (cryptoPair || 'BTCUSDT') : (activeTicker || 'THYAO');"
+    },
+    {
+      "file": "src/App.tsx",
+      "line": 314,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const sym = selectedMarket === 'NASDAQ' ? (nasdaqSymbol || 'NVDA') : activeTicker || 'NVDA';"
+    },
+    {
+      "file": "src/App.tsx",
+      "line": 342,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const currentTicker = selectedMarket === 'NASDAQ' ? (nasdaqSymbol || 'NVDA') : selectedMarket === 'CRYPTO' ? (cryptoPair || 'BTCUSDT') : (activeTicker || 'THYAO');"
+    },
+    {
+      "file": "src/App.tsx",
+      "line": 351,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const textToSend = (msgOverride || '').trim();"
+    },
+    {
+      "file": "src/components/IsometricDepthTopography.tsx",
+      "line": 30,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const obi = snapshot?.liveObi ?? 0.12;"
+    },
+    {
+      "file": "src/components/KapFeedPanel.tsx",
+      "line": 47,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = (currentTicker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '');"
+    },
+    {
+      "file": "src/components/KapFeedPanel.tsx",
+      "line": 70,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = (currentTicker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '');"
+    },
+    {
+      "file": "src/components/KapFeedPanel.tsx",
+      "line": 347,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "{customAnalysis.monetary?.currency !== 'TL' && (customAnalysis.monetary?.amount_raw ?? 0) > 0 ? ("
+    },
+    {
+      "file": "src/components/SignalBotCard.tsx",
+      "line": 50,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "setGatewayTicker(snap.ticker || '');"
+    },
+    {
+      "file": "src/components/SignalBotCard.tsx",
+      "line": 186,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "Canlı Z-Skor Anomali Momentumu ({gatewayTicker || 'GENEL PAZAR'})"
+    },
+    {
+      "file": "src/components/SignalBotCard.tsx",
+      "line": 190,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "Math.abs(liveZScore ?? 0) >= 2.0"
+    },
+    {
+      "file": "src/components/SignalBotCard.tsx",
+      "line": 192,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": ": Math.abs(liveZScore ?? 0) >= 1.0"
+    },
+    {
+      "file": "src/components/SignalBotCard.tsx",
+      "line": 198,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "{Math.abs(liveZScore ?? 0) >= 2.0 ? ' • TETİK BÖLGESİ' : ' • STABİL'}"
+    },
+    {
+      "file": "src/components/SmartJuryDiagnosisCard.tsx",
+      "line": 216,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const isNetInflow = (tcmb?.weeklyForeignEquityFlow ?? 0) > 0;"
+    },
+    {
+      "file": "src/components/SmartJuryDiagnosisCard.tsx",
+      "line": 227,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "sentimentScore: finnhub?.sentimentScore ?? 0.75,"
+    },
+    {
+      "file": "src/components/SmartJuryDiagnosisCard.tsx",
+      "line": 264,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const currentScore = compositeAnomaly?.compositeAnomalyScore || 58;"
+    },
+    {
+      "file": "src/components/SmartJuryDiagnosisCard.tsx",
+      "line": 265,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const currentZ = gatewaySnap.liveZScore || 0;"
+    },
+    {
+      "file": "src/components/SmartJuryDiagnosisCard.tsx",
+      "line": 496,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<span>🔥 GÜÇLÜ KATALİZÖR: {consensus.catalystOverrideNote || 'Bilanço/KAP Etki Puanı veya Para Girişi sebebiyle L2 OBI nötr seviyesi bypass edilerek GÜÇLÜ TREND kararı alındı.'}</sp"
+    },
+    {
+      "file": "src/components/SmartJuryDiagnosisCard.tsx",
+      "line": 610,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const scoreColor = getScoreColor(agent.confidenceScore ?? 0, isVetoed && isSentiment);"
+    },
+    {
+      "file": "src/components/SmartJuryDiagnosisCard.tsx",
+      "line": 655,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<div className=\"font-bold text-emerald-400\">{rrDetails.entryPrice > 0 ? `+${(rrDetails?.takeProfitPct ?? 'VERİ YOK')}%` : '---'}</div>"
+    },
+    {
+      "file": "src/components/SmartJuryDiagnosisCard.tsx",
+      "line": 712,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "(newsImpact?.impactPoints ?? 0) >= 0"
+    },
+    {
+      "file": "src/components/SmartJuryDiagnosisCard.tsx",
+      "line": 764,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{finnhub?.jury4Comment || 'Finnhub haber ve sosyal duygu skoru kritik eşiğin altına indi (Sentiment < 0.35). Piyasa algısındaki aşırı bozulma sebebiyle otonom robot donduruldu.'}"
+    },
+    {
+      "file": "src/components/SmartJuryDiagnosisCard.tsx",
+      "line": 770,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "? `\"${tcmb?.jury2Recommendation || 'TCMB EVDS: Haftalık yabancı sermaye girişi ve yabancı takas payı 4 haftalık ortalama (SMA_4) üzerinde. Jüri 2 puanı artırıldı.'}\"`"
+    },
+    {
+      "file": "src/components/SmartJuryDiagnosisCard.tsx",
+      "line": 772,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "? `\"${finnhub?.jury4Comment || 'Finnhub Sentiment: Haber akışı güçlü pozitif, kurumsal Insider net alımı teyit edildi. Jüri 4 tam puan verdi.'}\"`"
+    },
+    {
+      "file": "src/components/SmartJuryDiagnosisCard.tsx",
+      "line": 799,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "%{tcmb?.foreignCustodyShare ?? 38.7} / %{tcmb?.foreignCustodySMA4 ?? 37.9}"
+    },
+    {
+      "file": "src/components/CryptoDerivativesIntelligenceCard.tsx",
+      "line": 378,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{derivatives?.cascadeRisk || 'DÜŞÜK'}"
+    },
+    {
+      "file": "src/components/PortfolioCorrelationCard.tsx",
+      "line": 408,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const val = isSelf ? 1.0 : CORRELATION_MATRIX[row.symbol]?.[col.symbol] ?? 0.0;"
+    },
+    {
+      "file": "src/components/BinanceTestnetExecutorCard.tsx",
+      "line": 271,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "onChange={e => setUsdtAmount(Number(e.target.value) || 250)}"
+    },
+    {
+      "file": "src/components/BinanceTestnetExecutorCard.tsx",
+      "line": 285,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "onChange={e => setTpPct(Number(e.target.value) || 2.0)}"
+    },
+    {
+      "file": "src/components/BinanceTestnetExecutorCard.tsx",
+      "line": 297,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "onChange={e => setSlPct(Number(e.target.value) || 1.0)}"
+    },
+    {
+      "file": "src/components/EnterpriseValuationModal.tsx",
+      "line": 69,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "setMessage(data.message || 'White-Label ayarları kaydedildi.');"
+    },
+    {
+      "file": "src/components/TrackRecordPanel.tsx",
+      "line": 94,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<span className=\"text-slate-500 font-mono text-[11px]\">Son Güncelleme: {lastUpdated || 'Anlık'}</span>"
+    },
+    {
+      "file": "src/components/DynamicPresetScreener.tsx",
+      "line": 411,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "{(asset.obvSlope ?? 0.05) > 0 && (asset.cmf20 ?? 0.1) > 0 && ("
+    },
+    {
+      "file": "src/components/DynamicPresetScreener.tsx",
+      "line": 416,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "{(asset.bookImb5 ?? 0.28) > 0.25 && (asset.bookImb10 ?? 0.18) > 0.15 && ("
+    },
+    {
+      "file": "src/components/VolatileCircuitBreakerCard.tsx",
+      "line": 167,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "Tetiklenme: {tripTimestamp || 'Şimdi'}"
+    },
+    {
+      "file": "src/components/AdaptiveExecutionCard.tsx",
+      "line": 70,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "onChange={(e) => setTotalOrderLot(Math.max(1000, parseInt(e.target.value) || 10000))}"
+    },
+    {
+      "file": "src/components/AdaptiveExecutionCard.tsx",
+      "line": 114,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "onChange={(e) => setDurationMin(Math.max(5, parseInt(e.target.value) || 15))}"
+    },
+    {
+      "file": "src/components/AdaptiveExecutionCard.tsx",
+      "line": 133,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "{simulation.slicePlan[0]?.intervalSec || 30} saniyede 1"
+    },
+    {
+      "file": "src/components/AlpacaExecutorCard.tsx",
+      "line": 140,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "alert(`Emir İletim Hatası: ${err?.message || 'Bilinmeyen hata'}`);"
+    },
+    {
+      "file": "src/components/LiveJuryBoard.tsx",
+      "line": 102,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = (t || 'ASELS').toUpperCase();"
+    },
+    {
+      "file": "src/components/LiveJuryBoard.tsx",
+      "line": 289,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{preFilterResult?.priority || 'CRITICAL / VETO'}"
+    },
+    {
+      "file": "src/components/LiveJuryBoard.tsx",
+      "line": 293,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "Nihai Karar: {preFilterResult?.finalVerdict || activeData?.consensus || 'VETO'}"
+    },
+    {
+      "file": "src/components/LiveJuryBoard.tsx",
+      "line": 297,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{preFilterResult?.reason || activeData?.finalDecision?.summary || 'Kök Veri Motoru (DataRuleEngine) kural ihlali tespit ederek jüri tartışmasını veto etti.'}"
+    },
+    {
+      "file": "src/components/LiveJuryBoard.tsx",
+      "line": 553,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "<span className=\"text-emerald-400 font-bold\">%{(activeData.finalDecision.fractionalKellyPct ?? activeData.finalDecision.targetPercent ?? 5.87).toFixed(2)}</span>"
+    },
+    {
+      "file": "src/components/AnomalyRadarCard.tsx",
+      "line": 581,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<div className=\"text-[11px] font-bold text-slate-200 mt-0.5 truncate\" title={effectiveCalendar.description || 'Standart'}>"
+    },
+    {
+      "file": "src/components/AnomalyRadarCard.tsx",
+      "line": 582,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{effectiveCalendar.description || 'VERİ YOK'}"
+    },
+    {
+      "file": "src/components/MamPropDashboardCard.tsx",
+      "line": 80,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "setMessage(data.message || 'Master OCO emri başarıyla iletildi.');"
+    },
+    {
+      "file": "src/components/MamPropDashboardCard.tsx",
+      "line": 205,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "onChange={e => setMasterNotional(Number(e.target.value) || 0)}"
+    },
+    {
+      "file": "src/components/AllBistStocksModal.tsx",
+      "line": 70,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "let valA: any = a[sortBy] ?? '';"
+    },
+    {
+      "file": "src/components/AllBistStocksModal.tsx",
+      "line": 71,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "let valB: any = b[sortBy] ?? '';"
+    },
+    {
+      "file": "src/components/AllBistStocksModal.tsx",
+      "line": 208,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const isUp = (stock.rate ?? 0) >= 0;"
+    },
+    {
+      "file": "src/components/InstitutionalFlowMeter.tsx",
+      "line": 27,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const bofaNetLot = snapshot?.bofaNetLot ?? 145000;"
+    },
+    {
+      "file": "src/components/InstitutionalFlowMeter.tsx",
+      "line": 75,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const grandTotal = totalBuyerLot + totalSellerLot || 1;"
+    },
+    {
+      "file": "src/components/HeaderBar.tsx",
+      "line": 217,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "⚠️ {licenseStatus.warning || 'LİSANS DURUMU: VERİ YOK'}"
+    },
+    {
+      "file": "src/components/HeaderBar.tsx",
+      "line": 433,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<span>{user?.email || 'Misafir'}</span>"
+    },
+    {
+      "file": "src/components/ForensicRedFlagCard.tsx",
+      "line": 21,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const zScore = snapshot?.liveZScore ?? 0.0;"
+    },
+    {
+      "file": "src/components/ForensicRedFlagCard.tsx",
+      "line": 22,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const obi = snapshot?.liveObi ?? 0.0;"
+    },
+    {
+      "file": "src/components/ForensicRedFlagCard.tsx",
+      "line": 30,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "changePct: snapshot?.dayChangePct ?? 0,"
+    },
+    {
+      "file": "src/components/ForensicRedFlagCard.tsx",
+      "line": 33,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "piotroskiF: snapshot?.piotroskiF ?? 7,"
+    },
+    {
+      "file": "src/components/ForensicRedFlagCard.tsx",
+      "line": 34,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "altmanZ: snapshot?.altmanZ ?? 2.65,"
+    },
+    {
+      "file": "src/components/ForensicRedFlagCard.tsx",
+      "line": 41,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const piotroskiF = snapshot?.piotroskiF ?? 7;"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 69,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const obi = microstructureMetrics?.obi ?? 0.0;"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 70,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const spoofingRisk = microstructureMetrics?.spoofingRisk ?? 0;"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 72,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const icebergSide = microstructureMetrics?.icebergSide ?? 'NONE';"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 73,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const dominantBroker = orderflowMetrics?.dominantBrokerFlow?.broker ?? 'Gözlem Modu';"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 74,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const brokerNet = orderflowMetrics?.dominantBrokerFlow?.netVolume ?? 0;"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 76,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const juryScore = isPriceMissing ? 0 : (juryDecision?.score ?? 50);"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 78,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const juryVerdict = isPriceMissing ? 'VERİ YOK / BEKLE' : (juryDecision?.verdict ?? 'NEUTRAL');"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 92,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const riskReward = executionPlan?.riskRewardRatio ?? 0;"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 94,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const bookImb5 = (microstructureMetrics as any)?.bookImb5 ?? 0.28;"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 95,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const bookImb10 = (microstructureMetrics as any)?.bookImb10 ?? 0.18;"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 112,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "badge: `${orderflowMetrics?.institutionalDominance ?? 50}% Kurumsal Ağırlık`,"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 121,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "? `Anlık Fiyat: ₺${currentPrice.toFixed(2)} | Spread: %${microstructureMetrics?.spreadPct?.toFixed(2) ?? '0.08'} | Derinlik: ${((microstructureMetrics?.bidDepthTotal ?? 0) / 1000)."
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 121,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "? `Anlık Fiyat: ₺${currentPrice.toFixed(2)} | Spread: %${microstructureMetrics?.spreadPct?.toFixed(2) ?? '0.08'} | Derinlik: ${((microstructureMetrics?.bidDepthTotal ?? 0) / 1000)."
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 169,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "? `🛡️ ÖN FİLTRE VETOSU: ${preFilterResult?.reason || 'Kök veri kuralları gereği jüri atlandı ve karar kilitlendi.'}`"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 223,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "? `🛡️ Ön filtre kuralı tetiklendi (${preFilterResult?.finalVerdict || 'KİLİTLİ'}). Gerekçe: ${preFilterResult?.reason || 'Güvenlik kuralı ihlali.'}`"
+    },
+    {
+      "file": "src/components/cubes.tsx",
+      "line": 304,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "finalPetitionText: `T.C. SPK MEVZUATI VE MT16 BİLİŞSEL KARAR BLOK MATRİSİ İCRA DİLEKÇESİ\\n\\nBAŞVURU KONUSU: #${symbol} Varlığı Üzerinde Tespit Edilen L2 Likidite ve Bilişsel Blok İ"
+    },
+    {
+      "file": "src/components/NlpSearchPanel.tsx",
+      "line": 318,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{result.sql_where || '1 = 1'}"
+    },
+    {
+      "file": "src/components/NlpSearchPanel.tsx",
+      "line": 327,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const isPos = (stk.daily_change ?? 0) >= 0;"
+    },
+    {
+      "file": "src/components/NlpSearchPanel.tsx",
+      "line": 355,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "<span className={(stk.bofa_net_lot ?? 0) >= 0 ? 'text-emerald-400' : 'text-rose-400'}>"
+    },
+    {
+      "file": "src/components/NasdaqStreamTab.tsx",
+      "line": 86,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const [selectedSymbol, setSelectedSymbol] = useState<string>(activeSymbol || 'NVDA');"
+    },
+    {
+      "file": "src/components/NasdaqStreamTab.tsx",
+      "line": 206,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<span className=\"text-slate-500 font-mono text-[11px]\">Son Güncelleme: {lastUpdated || 'Anlık'}</span>"
+    },
+    {
+      "file": "src/components/NasdaqStreamTab.tsx",
+      "line": 268,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "changePct: orderBook?.priceChangePercent ?? 1.45,"
+    },
+    {
+      "file": "src/components/NasdaqStreamTab.tsx",
+      "line": 269,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "zScore: orderBook?.zScore ?? 1.35,"
+    },
+    {
+      "file": "src/components/NasdaqStreamTab.tsx",
+      "line": 270,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "obi: orderBook?.obi ?? 0.24,"
+    },
+    {
+      "file": "src/components/NasdaqStreamTab.tsx",
+      "line": 272,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "wallLot: Math.round(orderBook?.askTotalVolume || 8500),"
+    },
+    {
+      "file": "src/components/NasdaqStreamTab.tsx",
+      "line": 277,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "latestKapTime: lastUpdated || 'Canlı',"
+    },
+    {
+      "file": "src/components/TacticalCard.tsx",
+      "line": 196,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "message: `⚠️ Deterministik Motor Devrede (LLM: ${response.reason || 'SERVER_DOWN'})`,"
+    },
+    {
+      "file": "src/components/TacticalCard.tsx",
+      "line": 209,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "message: `⚠️ Deterministik Motor Devrede (LLM: ${err?.message || 'SERVER_DOWN'})`,"
+    },
+    {
+      "file": "src/components/TacticalCard.tsx",
+      "line": 512,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "message: `Yükleme başarısız: ${err.message || 'Python sunucusuna bağlanılamadı.'}`"
+    },
+    {
+      "file": "src/components/TacticalCard.tsx",
+      "line": 782,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{fullDecision?.reason || 'P0 Boru Hattı Doğrulaması'}"
+    },
+    {
+      "file": "src/components/TacticalCard.tsx",
+      "line": 1194,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "{latestNewsItem.analysis?.impact_score ?? 0}"
+    },
+    {
+      "file": "src/components/TacticalCard.tsx",
+      "line": 1294,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<span>HHI: {akdView.hhi ?? 'VERİ YOK'}</span>"
+    },
+    {
+      "file": "src/components/TacticalCard.tsx",
+      "line": 1389,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<div>Reel Getiri (USD): <strong className={typeof taxView.realPnlUsd === 'number' && taxView.realPnlUsd >= 0 ? 'text-emerald-400' : 'text-rose-400'}>{typeof taxView.realPnlUsd === "
+    },
+    {
+      "file": "src/components/TacticalCard.tsx",
+      "line": 1574,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{verdict.engines.forensic.spkFlags[0] || 'SPK Bayrağı Yok'}"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 131,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return localStorage.getItem('export_token') || '';"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 171,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanTicker = String(data?.ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase();"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 182,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "setOptError(err.message || 'Optimizasyon başarısız');"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 194,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanTicker = String(data?.ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase();"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 205,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "setWalkForwardError(err.message || 'Walk-forward optimizasyon başarısız');"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 242,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanTicker = String(data?.ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase();"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 258,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "karar: baselineReport?.jury?.karar || 'BEKLE',"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 259,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "bilesik: baselineReport?.jury?.bilesik || 0,"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 260,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "sebep: baselineReport?.jury?.sebep || '',"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 261,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "sentimentPuan: baselineReport?.jury?.oylar?.sentiment?.puan ?? 0,"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 262,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "technicalPuan: baselineReport?.jury?.oylar?.technical?.puan ?? 0,"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 263,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "flowPuan: baselineReport?.jury?.oylar?.flow?.puan ?? 0,"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 266,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "karar: newReport?.jury?.karar || 'BEKLE',"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 267,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "bilesik: newReport?.jury?.bilesik || 0,"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 268,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "sebep: newReport?.jury?.sebep || '',"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 269,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "sentimentPuan: newReport?.jury?.oylar?.sentiment?.puan ?? 0,"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 270,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "technicalPuan: newReport?.jury?.oylar?.technical?.puan ?? 0,"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 271,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "flowPuan: newReport?.jury?.oylar?.flow?.puan ?? 0,"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 332,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "setExportStatus(`Hata: ${err.message || 'İndirilemedi'}`);"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 338,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const isPositive = (data?.dayChangePct ?? 0) >= 0;"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 339,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const companyName = getBistCompanyName(data?.ticker || 'ASELS');"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 340,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const activeCleanTicker = String(data?.ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase();"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 506,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(t || '').replace(/\\.IS$/i, '').toUpperCase();"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 594,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "<div className={`px-3 py-1.5 bg-slate-950/60 rounded-xl border shadow-[0_0_10px_rgba(0,0,0,0.1)] transition-all ${((data as any)?.bofaNetLot ?? 0) < 0 ? 'border-rose-500/20 hover:b"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 596,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "<span className={`font-bold drop-shadow-sm ${((data as any)?.bofaNetLot ?? 0) < 0 ? 'text-rose-400 drop-shadow-[0_0_8px_rgba(244,63,94,0.3)]' : 'text-emerald-400 drop-shadow-[0_0_8"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1296,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "%{Math.round((walkForwardResult?.robustWeights?.sentiment ?? 0) * 100)}"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1305,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "%{Math.round((walkForwardResult?.robustWeights?.technical ?? 0) * 100)}"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1314,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "%{Math.round((walkForwardResult?.robustWeights?.flow ?? 0) * 100)}"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1332,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "%{Math.round((optResult.best.sentiment || 0) * 100)} / %{Math.round((optResult.best.technical || 0) * 100)} / %{Math.round((optResult.best.flow || 0) * 100)}"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1372,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const isPositive = (w.best?.totalPnl ?? 0) >= 0;"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1392,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "🧠 %{Math.round((w.best?.sentiment || 0) * 100)}"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1395,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "📈 %{Math.round((w.best?.technical || 0) * 100)}"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1398,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "🏛️ %{Math.round((w.best?.flow || 0) * 100)}"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1505,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "sortino: r.sortino ?? 0,"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1506,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "sharpe: r.sharpe ?? 0,"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1507,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "calmar: r.calmar ?? 0,"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1508,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "maxDrawdown: r.maxDrawdown ?? 0,"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1527,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const sortinoVal = p.sortino ?? 0;"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1528,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const sharpeVal = p.sharpe ?? 0;"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1529,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const calmarVal = p.calmar ?? 0;"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1544,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "y={optResult.baseline?.score || 0}"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1548,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "value: `Baseline: ${optResult.baseline?.score || 0}`,"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1557,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return <Cell key={`bar-${idx}`} fill={colors[idx] || '#64748b'} />;"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1597,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "<span title={`Sortino: ${r.sortino ?? 0}`}>"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1599,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "<strong className={(r.sortino ?? 0) >= 2 ? 'text-emerald-400' : (r.sortino ?? 0) >= 1 ? 'text-amber-400' : 'text-rose-400'}>"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1600,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "{r.sortino ?? 0}"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1603,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "<span title={`Max DD: ${r.maxDrawdown ?? 0}%`}>"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1700,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const oldVal = Math.round((comparisonData.oldWeights?.[item.key] || 0) * 100);"
+    },
+    {
+      "file": "src/components/Header.tsx",
+      "line": 1701,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const newVal = Math.round((comparisonData.newWeights?.[item.key] || 0) * 100);"
+    },
+    {
+      "file": "src/components/SearchBar.tsx",
+      "line": 80,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "setError(err?.message || 'Arama gerçekleştirilirken bir hata oluştu');"
+    },
+    {
+      "file": "src/components/SearchBar.tsx",
+      "line": 189,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{result.sql_where || '1 = 1'}"
+    },
+    {
+      "file": "src/components/SearchBar.tsx",
+      "line": 214,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const isPos = (stk.daily_change ?? 0) >= 0;"
+    },
+    {
+      "file": "src/components/SearchBar.tsx",
+      "line": 258,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<span>%{stk.dividend_yield?.toFixed(1) ?? '0.0'}</span>"
+    },
+    {
+      "file": "src/components/SearchBar.tsx",
+      "line": 262,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "<span className={(stk.bofa_net_lot ?? 0) > 0 ? 'text-emerald-400' : 'text-rose-400'}>"
+    },
+    {
+      "file": "src/components/CommandBar.tsx",
+      "line": 131,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "setCmdResultToast(`Hata: ${e?.message || 'VERİ YOK'}`);"
+    },
+    {
+      "file": "src/components/WarrenAiChat.tsx",
+      "line": 170,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "kapScore: result.context.latestKap?.analysis.impact_score ?? 0,"
+    },
+    {
+      "file": "src/components/WarrenAiChat.tsx",
+      "line": 184,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const zScoreVal = liveContext?.zScoreClamped ?? gatewayState.liveZScore ?? 1.45;"
+    },
+    {
+      "file": "src/components/WarrenAiChat.tsx",
+      "line": 185,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const obiVal = liveContext?.l2Obi ?? gatewayState.liveObi ?? 0.12;"
+    },
+    {
+      "file": "src/components/WarrenAiChat.tsx",
+      "line": 186,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const latestKapScore = liveContext?.latestKap?.analysis.impact_score ?? 0;"
+    },
+    {
+      "file": "src/components/BacktestPanel.tsx",
+      "line": 91,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const safeTicker = (ticker || snap.ticker || 'ASELS').toUpperCase();"
+    },
+    {
+      "file": "src/components/BacktestPanel.tsx",
+      "line": 116,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "totalTrades: alpha.totalEvents || 142,"
+    },
+    {
+      "file": "src/components/BacktestPanel.tsx",
+      "line": 117,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "winRatePct: alpha.winRatePct || 73.8,"
+    },
+    {
+      "file": "src/components/BacktestPanel.tsx",
+      "line": 118,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "profitFactor: alpha.profitFactor || 2.34,"
+    },
+    {
+      "file": "src/components/BacktestPanel.tsx",
+      "line": 119,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "sharpeRatio: alpha.sharpeRatio || 2.45,"
+    },
+    {
+      "file": "src/components/BacktestPanel.tsx",
+      "line": 416,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "correlation_score: corr || 0.5,"
+    },
+    {
+      "file": "src/components/ProjectManagerTerminal.tsx",
+      "line": 260,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "((realPriceMs || 0) + (realVpinMs || 0) + (realSentinelMs || 0) + (realAlphaMs || 0) + (realWallMs || 0) + (realDecMs || 0) + (realPortMs || 0)) * 100"
+    },
+    {
+      "file": "src/components/ProjectManagerTerminal.tsx",
+      "line": 449,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "{ label: 'Optimal Ağırlık', value: isWallSkipped ? 'ATLANDI (null)' : `%${analysisData.portfolio?.optimalWeightPct || 20.0}` },"
+    },
+    {
+      "file": "src/components/ProjectManagerTerminal.tsx",
+      "line": 450,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{ label: 'Portföy Riski', value: isWallSkipped ? 'ATLANDI (null)' : (analysisData.portfolio?.portfolioRisk || \"VERİ YOK, sebep: Volatilite hesaplanamadı\") },"
+    },
+    {
+      "file": "src/components/ProjectManagerTerminal.tsx",
+      "line": 452,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{ label: '2. Derece Volatilite', value: analysisData.extra?.volatility || \"VERİ YOK, sebep: Yahoo'da 20 günlük kapanış verisi yok\" },"
+    },
+    {
+      "file": "src/components/ProjectManagerTerminal.tsx",
+      "line": 453,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{ label: 'Sharpe Oranı', value: analysisData.extra?.sharpeRatio || \"VERİ YOK, sebep: Volatilite hesaplanamadı [Risksiz Faiz: %40]\" },"
+    },
+    {
+      "file": "src/components/ProjectManagerTerminal.tsx",
+      "line": 454,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{ label: 'Beta Skoru', value: analysisData.extra?.beta || \"VERİ YOK, sebep: Yahoo BIST100 serisi eksik\" },"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 201,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const stdDev = spotPrice * 0.018 || 1.8;"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 228,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "bofaNetLot: collectorInput.bofaNetLot || 0,"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 230,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "{ name: 'BofA', netLot: collectorInput.bofaNetLot || 12000, percentage: 42 },"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 239,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "rewardRiskRatio: ocoDetails.riskRewardRatio || 2.18,"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 254,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const anomalyTag = enrichedQuantData?.composite_anomaly?.anomalyTag || 'NORMAL';"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 255,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const score = enrichedQuantData?.composite_anomaly?.compositeAnomalyScore || 50;"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 301,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const compScore = enrichedQuantData.composite_anomaly?.compositeAnomalyScore || 0;"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 302,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const zVol = snapshot.liveZScore || 0;"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 318,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "verdict.reason || 'Kritik anomali eşiği aşıldı.'"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 351,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "volume: Math.round(b.volume * (1 + (snapshot.liveObi || 0) * 0.4))"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 358,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const orderflowMetrics = orderflowEngine.calculateMetrics(verdict.changePct || 0);"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 365,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "altmanZ: snapshot.altmanZ || collectorInput.altmanZ || 3.12,"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 366,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "piotroskiF: snapshot.piotroskiF || collectorInput.piotroskiF || 8,"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 370,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "volumeZScore: snapshot.liveZScore !== undefined ? snapshot.liveZScore : (verdict.zScore || 1.8),"
+    },
+    {
+      "file": "src/components/DashboardLayout.tsx",
+      "line": 371,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "kapSentimentScore: verdict.juryScore || 82,"
+    },
+    {
+      "file": "src/components/BistTab.tsx",
+      "line": 328,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const sum = liveKapDisclosures.reduce((acc, item) => acc + (item.analysis?.impact_score || 0), 0);"
+    },
+    {
+      "file": "src/components/BistTab.tsx",
+      "line": 368,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "desc: mtfMatrix?.alignment.description || 'Çoklu zaman dilimi sinyal matrisi aktif',"
+    },
+    {
+      "file": "src/components/BistTab.tsx",
+      "line": 382,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "desc: takasAnalysis?.recommendation || 'MKK & yabancı aracı kurum takas akışı',"
+    },
+    {
+      "file": "src/components/BistTab.tsx",
+      "line": 838,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "Z: {item.volumeAnomaly?.zScore >= 0 ? '+' : ''}{item.volumeAnomaly?.zScore ?? 1.5}σ"
+    },
+    {
+      "file": "src/components/BistTab.tsx",
+      "line": 906,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "onChange={e => onUpdatePortfolio(p => ({ ...p, lot: Number(e.target.value) || 0 }))}"
+    },
+    {
+      "file": "src/components/BistTab.tsx",
+      "line": 916,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "onChange={e => onUpdatePortfolio(p => ({ ...p, cost: Number(e.target.value) || 0 }))}"
+    },
+    {
+      "file": "src/components/BistTab.tsx",
+      "line": 1056,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "badgeText={`WIN %${alphaSummary?.winRatePct ?? 79.2}`}"
+    },
+    {
+      "file": "src/components/BistTab.tsx",
+      "line": 1074,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "%{alphaSummary?.winRatePct ?? 79.2}"
+    },
+    {
+      "file": "src/components/BistTab.tsx",
+      "line": 1080,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "{alphaSummary?.sharpeRatio ?? 2.15}"
+    },
+    {
+      "file": "src/components/BistTab.tsx",
+      "line": 1092,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "%{alphaSummary?.testWinRatePct ?? 74.8}"
+    },
+    {
+      "file": "src/components/LiveOrderBookOverlay.tsx",
+      "line": 58,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const basePrice = price ?? 100.0; // Chart display only fallback"
+    },
+    {
+      "file": "src/components/LiveOrderBookOverlay.tsx",
+      "line": 59,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const safeObi = obi ?? 0;"
+    },
+    {
+      "file": "src/components/LiveOrderBookOverlay.tsx",
+      "line": 116,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<div className=\"text-[10px] text-slate-500\">Kütle Direnci %{board.massResistance ?? '---'}</div>"
+    },
+    {
+      "file": "src/components/CryptoStreamTab.tsx",
+      "line": 84,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const [selectedPair, setSelectedPair] = useState<string>(activePair || 'BTCUSDT');"
+    },
+    {
+      "file": "src/components/CryptoStreamTab.tsx",
+      "line": 186,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<span className=\"text-slate-500 font-mono text-[11px]\">Son Güncelleme: {lastUpdated || 'Anlık'}</span>"
+    },
+    {
+      "file": "src/components/CryptoStreamTab.tsx",
+      "line": 268,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "latestKapTime: lastUpdated || 'Canlı',"
+    },
+    {
+      "file": "src/components/SystemHealthLatencyCard.tsx",
+      "line": 207,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "latencyHistory.reduce((acc, curr) => acc + curr.ms, 0) / (latencyHistory.length || 1)"
+    },
+    {
+      "file": "src/components/SystemHealthLatencyCard.tsx",
+      "line": 266,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "{deadMansReason || 'Borsa/WebSocket bağlantısı 5 saniyeden uzun süredir yanıt vermiyor!'}"
+    },
+    {
+      "file": "src/components/SaasSubscriptionModal.tsx",
+      "line": 64,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "setMessage(data.message || 'Plan başarıyla güncellendi.');"
+    },
+    {
+      "file": "src/components/SystemPulseWidget.tsx",
+      "line": 84,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "{snapshot.latencyMs || 14}ms"
+    },
+    {
+      "file": "src/components/AutonomousRiskGuard.tsx",
+      "line": 62,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const liveZScore = snapshot?.liveZScore || 0;"
+    },
+    {
+      "file": "src/components/AutonomousRiskGuard.tsx",
+      "line": 63,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const liveSpreadPct = snapshot?.spreadPct || 0.4;"
+    },
+    {
+      "file": "src/components/EducationPanel.tsx",
+      "line": 210,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "<span>\"{searchQuery}\" için {filteredSearchResults?.length || 0} sonuç bulundu:</span>"
+    },
+    {
+      "file": "src/components/ArchitectureMap.tsx",
+      "line": 148,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "fallbackBlocked: true, // Tüm servislerde || 0, ?? 0 yasağı uygulandı"
+    },
+    {
+      "file": "src/components/ArchitectureMap.tsx",
+      "line": 198,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "setRenderError(err?.message || 'Diyagram çiziminde hata oluştu.');"
+    },
+    {
+      "file": "src/components/MarketLiquidityHeatmap.tsx",
+      "line": 44,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const activeTicker = (ticker || gatewaySnap.ticker || 'ASELS').toUpperCase();"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 31,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const safeLastPrice = Number(lastPrice) || 0;"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 32,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const safeSpread = Number(spread) || 0;"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 33,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const safeObi = Number(obi) || 0;"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 34,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const safeZScore = Number(zScore) || 0;"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 39,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const maxBidTotal = safeBids[safeBids.length - 1]?.total || 1;"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 40,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const maxAskTotal = safeAsks[safeAsks.length - 1]?.total || 1;"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 44,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const topBidWall = safeBids.reduce((max, b) => (b?.qty || 0) > (max?.qty || 0) ? b : max, safeBids[0] || { price: 0, qty: 0 });"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 45,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const topAskWall = safeAsks.reduce((max, a) => (a?.qty || 0) > (max?.qty || 0) ? a : max, safeAsks[0] || { price: 0, qty: 0 });"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 86,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const bPrice = Number(bid?.price) || 0;"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 87,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const bQty = Number(bid?.qty) || 0;"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 88,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const bTotal = Number(bid?.total) || 0;"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 125,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const aPrice = Number(ask?.price) || 0;"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 126,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const aQty = Number(ask?.qty) || 0;"
+    },
+    {
+      "file": "src/components/OrderBookHeatmapVisualizer.tsx",
+      "line": 127,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const aTotal = Number(ask?.total) || 0;"
+    },
+    {
+      "file": "src/data/bistAllStocks.ts",
+      "line": 42,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "market: item.market || 'Yıldız',"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 26,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "logDataIssue('commandRegistry', symbol, 'hacim', json.error || 'data null');"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 27,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return `VERİ YOK - ${json.error || 'data null'}`;"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 33,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return `VERİ YOK - ${e?.message || 'fetch hatası'}`;"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 48,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "if (!j || (j.error && !j.verdict)) return `VERİ YOK - ${j.error || 'Sonuç alınamadı'}`;"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 49,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return `Jüri Kararı (${symbol}): ${j.verdict} (Güven: %${j.confidenceScore ?? 'N/A'}) | Giriş: ${j.entryZone ?? 'N/A'} | TP: ${j.targetPrice ?? 'N/A'} | SL: ${j.stopLoss ?? 'N/A'} "
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 51,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return `VERİ YOK - ${e?.message || 'Bağlantı hatası'}`;"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 66,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "if (!j || !j.success || !j.data) return `VERİ YOK - ${j?.message || 'Duvar verisi alınamadı'}`;"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 70,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return `VERİ YOK - ${e?.message || 'İstek zaman aşımına uğradı'}`;"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 85,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "if (!j || !j.success || !j.data) return `VERİ YOK - ${j?.message || 'Merdiven oluşturulamadı'}`;"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 90,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return `VERİ YOK - ${e?.message || 'Hata'}`;"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 105,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "if (!j || !j.success || !j.data) return `VERİ YOK - ${j?.message || 'Merdiven oluşturulamadı'}`;"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 110,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return `VERİ YOK - ${e?.message || 'Hata'}`;"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 292,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const score = j?.data?.[0]?.d?.[2] ?? '7/9';"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 310,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const score = j?.data?.[0]?.d?.[3] ?? '3.12';"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 349,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return `TCMB Makro Verileri: Politika Faizi: %${j.data.policyRate ?? '50.0'} | Enflasyon: %${j.data.inflationRate ?? '48.6'} | USDEUR: ${j.data.usdTry ?? 'N/A'}`;"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 369,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "return `Finnhub Sentiment (${symbol}): Pozitiflik Oranı: %${(j.data.bullishPercent ?? 68).toFixed(1)} | Jüri Veto Durumu: ${j.data.isVetoed ? 'VETO EDİLDİ' : 'ONAYLANDI'}`;"
+    },
+    {
+      "file": "src/data/commandRegistry.ts",
+      "line": 448,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "return `Audit Trail: Toplam Güvenli Kayıt: ${j?.count ?? 0} adet log | Anomali Durumu: TEMİZ`;"
+    },
+    {
+      "file": "src/utils/ticker.ts",
+      "line": 23,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const code = String(item.name || item.text || item.code || '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/ticker.ts",
+      "line": 58,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const raw = (query || '').trim();"
+    },
+    {
+      "file": "src/utils/ticker.ts",
+      "line": 103,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const t = String(input || \"ASELS\").toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/ticker.ts",
+      "line": 133,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return String(input || \"ASELS\").replace(/\\.IS$/i, \"\").toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/juri.ts",
+      "line": 25,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "provider: options.provider || 'gemini',"
+    },
+    {
+      "file": "src/utils/juri.ts",
+      "line": 28,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "temperature: options.temperature ?? 0.2,"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 72,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "if (Math.abs(llmJson.price - (original.price || 0)) > 0.5) return false;"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 84,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cur = verdict?.currencySymbol || '₺';"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 91,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "`${i + 1}. [${n.publish_time || 'Canlı'}] (${n.ticker}) ${n.title} — Etki: ${"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 212,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return `Sen kıdemli bir Kurumsal Kuant Stratejisti ve Portföy Yöneticisisin. Aşağıda #${verdict?.symbol ?? 'BIST'} (${verdict?.companyName ?? 'VERİ YOK'} - ${verdict?.marketType ??"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 215,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "- Sembol / Pazar: #${verdict?.symbol ?? 'BIST'} (${verdict?.marketType ?? 'BIST'})"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 217,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "- Birleşik Kollektör Skoru: ${finalScoreText} -> Karar: ${verdict?.action ?? 'VERİ YOK'} (Alarm Seviyesi: ${verdict?.alarm ?? 'VERİ_YOK'})"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 218,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "- Tek Cümlelik Teşhis: ${verdict?.reason ?? 'VERİ YOK'}"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 224,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "- 9 Küp Uyum Motoru: Uyum (Coherence) = ${coherenceText}, Çatışma = ${verdict?.engines?.storyCubes?.conflictCount ?? 0}/9, Zehirlenme = ${verdict?.engines?.storyCubes?.is_poisoned "
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 249,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "? cubeList.map((c) => `${c.id}:${c.signal}(${c.score ?? 'NA'})`).join(',')"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 257,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "`\"${d.ticker}|${d.publish_time || 'Canlı'}|${(d.title || '').replace(/\"/g, \"'\").slice(0, 60)}|imp:${d.analysis?.impact_score ?? 'NA'}\"`"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 286,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "@asset{sym:${verdict?.symbol ?? 'NA'};mkt:${verdict?.marketType ?? 'NA'};px:${px};chg:${chg};ts:${verdict?.timestamp ?? Date.now()}}"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 287,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "@verdict{score:${finalScore};act:${verdict?.action ?? 'NA'};alarm:${verdict?.alarm ?? 'NA'};joker_override:${verdict?.engines?.composite?.superCriticalFlag ?? false}}"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 288,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "@reason{\"${verdict?.reason ?? 'VERİ YOK'}\"}"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 293,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "@rss_latest[${Math.min(3, disclosures?.length || 0)}]{${newsCompact || 'NONE'}}`;"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 293,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "@rss_latest[${Math.min(3, disclosures?.length || 0)}]{${newsCompact || 'NONE'}}`;"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 303,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cur = verdict?.currencySymbol || '₺';"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 329,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<span style=\"color:#38bdf8;white-space:nowrap;font-family:monospace;\">${d.publish_time || 'Canlı'} · Etki ${"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 380,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<title>#${verdict?.symbol ?? 'BIST'} — MT16 Tek Sayfa Kuant Raporu</title>"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 459,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<div style=\"font-size:12px;color:#38bdf8;margin-top:3px;\">${verdict?.reason ?? 'VERİ YOK'}</div>"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 461,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<div class=\"badge\">${typeof verdict?.finalScore === 'number' ? `${verdict.finalScore}/100` : 'VERİ YOK'} · ${verdict?.action ?? 'VERİ YOK'} (${verdict?.alarm ?? 'VERİ_YOK'})</div>"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 475,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "${verdict?.naturalLanguageAnalysis ?? 'VERİ YOK'}"
+    },
+    {
+      "file": "src/utils/copyForLLM.ts",
+      "line": 484,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "<div>${rssHtml || '<div style=\"font-size:11px;color:#64748b;\">Canlı bildirim akışı normal seyrediyor.</div>'}</div>"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 54,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 132,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanCode = String(tickerInput || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 281,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 548,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(data?.ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 631,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const volatilityPct = Number(((rangeTL / (close || 1)) * 100).toFixed(2));"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 672,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const totalSpread = periodHigh - periodLow || 1;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 760,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const sum = (uw.sentiment + uw.technical + uw.flow) || 1;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 780,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const sPuan = analysts?.sentiment?.puan ?? 50;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 781,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const tPuan = analysts?.technical?.puan ?? 50;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 782,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const fPuan = analysts?.flow?.puan ?? 50;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 822,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const base = getDefaultMarketData(inputData?.ticker || 'ASELS.IS');"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 989,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "`${data.dominantWallPrice.toFixed(2)} TL kademesinde ${(data.dominantWallLot / 1000).toFixed(0)}k lotluk ${data.dominantWallType === 'ASK' ? 'satış barajı/duvarı' : 'alış kalkanı'}"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1003,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const costDiffPct = (costDiff / (data.bofaAvgCost || 1)) * 100;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1006,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const depthRatio = data.depthBidTotal / (data.depthAskTotal || 1);"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1128,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanCode = String(data.ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1135,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "obi: ((data.depthBidTotal - data.depthAskTotal) / (data.depthBidTotal + data.depthAskTotal || 1)),"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1215,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const base = getDefaultMarketData(inputData?.ticker || 'ASELS.IS');"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1297,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanCode = (ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1346,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "notes: `${cleanCode} Canlı BIST piyasa verisi aktif (${data.source || 'BIST/Yahoo'}).`,"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1474,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanCode = String(ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1477,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "(a) => String(a?.ticker || '').replace(/\\.IS$/i, '').toUpperCase().trim() === cleanCode"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1591,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanCode = String(ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1593,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const filtered = all.filter((a) => String(a?.ticker || '').replace(/\\.IS$/i, '').toUpperCase().trim() !== cleanCode);"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1651,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanCode = String(data?.ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1735,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanCode = String(currentData?.ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1836,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanCode = (ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1848,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const defaultPrice = fallbackPrice || 382.25;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1861,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanCode = String(alert?.ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 1886,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanCode = String(currentData?.ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2123,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim() || 'ASELS';"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2147,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim() || 'ASELS';"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2324,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(juryReport?.ticker || serverData?.meta?.ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2334,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const sentimentPuan = oylar?.sentiment?.puan ?? juryReport?.analystA?.bullPct ?? 50;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2335,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const technicalPuan = oylar?.technical?.puan ?? juryReport?.analystB?.bullPct ?? 35;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2336,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const flowPuan = oylar?.flow?.puan ?? juryReport?.analystC?.bullPct ?? 35;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2338,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const sentimentWeight = modelWeights?.sentiment?.weight ?? 0.25;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2339,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const technicalWeight = modelWeights?.technical?.weight ?? 0.35;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2340,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const flowWeight = modelWeights?.flow?.weight ?? 0.40;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2342,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const finalDecision = serverData?.jury?.karar || juryReport?.finalDecision || 'BEKLE';"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2367,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const rsiVal = Number(techIndicators?.rsi14 ?? techIndicators?.rsi ?? 50);"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2368,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const macdSignal = techIndicators?.macdSignal || techIndicators?.macd?.signal_label || 'NÖTR';"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2369,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const wallType = marketData?.dominantWallType || 'ASK';"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2370,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const wallLot = Number(marketData?.dominantWallLot ?? 0);"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2378,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const bofaNetLot = Number(marketData?.bofaNetLot ?? serverData?.bofaNetLot ?? 0);"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2379,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const citibankChange = Number(marketData?.citibankChange30d ?? serverData?.citibankChange30d ?? 0);"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2388,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const sentimentSource = sentimentOy?.sentimentSource || (juryReport?.sentimentDetails?.source) || 'retail-only';"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2389,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const newsSentimentPct = Number(sentimentOy?.newsSentimentPct ?? juryReport?.sentimentDetails?.newsSentimentPct ?? 50);"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2391,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const sentimentSampleSize = Number(sentimentOy?.sentimentSampleSize ?? juryReport?.sentimentDetails?.sampleSize ?? 0);"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2450,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "value: `${(wallLot / 1000).toFixed(0)}k @ ${(marketData?.dominantWallPrice ?? 0).toFixed(2)} TL`,"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2477,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "value: `%${marketData?.pensionFundSharePct ?? 18.6}`,"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2478,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "positive: (marketData?.pensionFundSharePct ?? 18.6) > 15,"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2539,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const sampleSize = backtest?.totalTrades ?? 0;"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2558,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "priceSource: serverData?.meta?.price_source || 'yahoo',"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2608,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2627,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(record?.ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2652,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/engine.ts",
+      "line": 2690,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(ticker || 'ASELS').replace(/\\.IS$/i, '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/utils/stockRatios.ts",
+      "line": 34,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(ticker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "src/utils/api.ts",
+      "line": 167,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = url.searchParams.get('ticker') || 'ASELS';"
+    },
+    {
+      "file": "src/utils/api.ts",
+      "line": 168,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const market = url.searchParams.get('market_type') || 'BIST';"
+    },
+    {
+      "file": "src/services/execution.ts",
+      "line": 118,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "rationale: jury.rationale || '🛑 CRITICAL HARD-STOP / ACİL ÇIKIŞ: Stop-Loss seviyesi ihlal edildi. Piyasa emriyle acil tasfiye devrede!',"
+    },
+    {
+      "file": "src/services/execution.ts",
+      "line": 142,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "rationale: jury.rationale || '🛡️ ÖN FİLTRE DEVREDE (VETO / NOHOLD): Kök veri kural ihlali nedeniyle işlem durduruldu.',"
+    },
+    {
+      "file": "src/services/portfolioGuard.ts",
+      "line": 155,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "? `İşlem onaylandı. Maksimum korelasyon: ${maxCorr.toFixed(2)} (${correlatedAsset || 'Yok'})`"
+    },
+    {
+      "file": "src/services/quantMind.ts",
+      "line": 206,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = (symbolOrTicker || '').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "src/services/quantMind.ts",
+      "line": 227,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = (symbol || '').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "src/services/quantMind.ts",
+      "line": 239,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const code = foundBist ? foundBist.code : clean || 'ASELS';"
+    },
+    {
+      "file": "src/services/quantMind.ts",
+      "line": 351,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return { score: finalScore, rationale: reasons.join(', ') || 'Dengeli piyasa rejimi' };"
+    },
+    {
+      "file": "src/services/quantMind.ts",
+      "line": 376,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cube = (cognitiveCubeDecision || '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/services/quantMind.ts",
+      "line": 379,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const jury = (juryConsensus || '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/services/quantMind.ts",
+      "line": 511,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "sector: snap.sector || 'Piyasa Geneli',"
+    },
+    {
+      "file": "src/services/quantMind.ts",
+      "line": 530,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "anomalySegment: snap.mtfMatrix?.alignment?.dominantDirection || 'NORMAL',"
+    },
+    {
+      "file": "src/services/quantMind.ts",
+      "line": 531,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "anomalyVerdict: snap.mtfMatrix?.alignment?.alignmentQuality || 'DENGE',"
+    },
+    {
+      "file": "src/services/quantMind.ts",
+      "line": 590,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "Not: ${ctx.decision_envelope.reason || 'Piyasa koşulları stabil.'}`;"
+    },
+    {
+      "file": "src/services/quantMind.ts",
+      "line": 659,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "provider: data.provider || 'Remote AI',"
+    },
+    {
+      "file": "src/services/notificationDaemon.ts",
+      "line": 142,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "}${oco ? ` (OCO: TP: ${oco.takeProfit?.toFixed(2) || '---'} / SL: ${oco.stopLoss?.toFixed(2) || '---'})` : ''}`,"
+    },
+    {
+      "file": "src/services/universalApi.ts",
+      "line": 34,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(ticker || '').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "src/services/universalApi.ts",
+      "line": 107,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanTicker = String(ticker || '').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "src/services/manipulationEngine.ts",
+      "line": 28,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanTicker = (ticker || 'BIST').trim().toUpperCase().replace('.IS', '');"
+    },
+    {
+      "file": "src/services/manipulationEngine.ts",
+      "line": 172,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "`@social{sym:${data.ticker};mentions:${mentions ?? '---'};sentiment:${sentiment !== null ? `${sign}${sentiment.toFixed(2)}` : '---'};risk_score:${score !== null ? `${Math.round(sco"
+    },
+    {
+      "file": "src/services/manipulationEngine.ts",
+      "line": 173,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "`@summary{${data.summary || 'Veri yok'}}`,"
+    },
+    {
+      "file": "src/services/manipulationEngine.ts",
+      "line": 193,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "ticker: rawAkd.ticker || 'ASELS',"
+    },
+    {
+      "file": "src/services/manipulationEngine.ts",
+      "line": 199,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "signalType: rawAkd.signal_type || rawAkd.signalType || 'DENGELI',"
+    },
+    {
+      "file": "src/services/manipulationEngine.ts",
+      "line": 200,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "signalLabel: rawAkd.signal_label || rawAkd.signalLabel || 'Dengeli Kurumsal Akış',"
+    },
+    {
+      "file": "src/services/manipulationEngine.ts",
+      "line": 201,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "summary: rawAkd.summary || 'Veri yok',"
+    },
+    {
+      "file": "src/services/manipulationEngine.ts",
+      "line": 202,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "toon: rawAkd.toon || '',"
+    },
+    {
+      "file": "src/services/manipulationEngine.ts",
+      "line": 226,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "ticker: rawTax.ticker || 'ASELS',"
+    },
+    {
+      "file": "src/services/manipulationEngine.ts",
+      "line": 233,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "taxStatus: tax.tax_status || rawTax.taxStatus || 'EXEMPT_STOPAJ_0',"
+    },
+    {
+      "file": "src/services/manipulationEngine.ts",
+      "line": 234,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "summary: rawTax.summary || 'Veri yok',"
+    },
+    {
+      "file": "src/services/manipulationEngine.ts",
+      "line": 235,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "toon: rawTax.toon || '',"
+    },
+    {
+      "file": "src/services/manipulationEngine.ts",
+      "line": 253,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "guardReason: guard.reason || 'Portföy riski dengeli.',"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 118,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "String(rawItem.source || '').toLowerCase().includes('fallback') ||"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 119,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "String(rawItem.source || '').toLowerCase().includes('mock') ||"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 120,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "String(rawItem.source || '').toLowerCase().includes('sample')"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 148,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const title = String(rawItem.title || rawItem.subject || rawItem.disclosureSummary || '').trim();"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 158,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const body = String(rawItem.body_text || rawItem.summary || '').toLowerCase();"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 185,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "let currency = existingAnalysis?.monetary?.currency ?? 'TL';"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 292,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "? `Bildirimde tespit edilen ₺${extractedMillion.toLocaleString('tr-TR')}M tutar yıllık cironun %${ciroRatioPct ?? '---'} seviyesine karşılık gelmektedir.`"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 345,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const rawTitle = node.querySelector('title')?.textContent?.trim() || '';"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 348,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const link = node.querySelector('link')?.textContent?.trim() || '';"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 413,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const rawLink = String(item.url || item.link || '').trim();"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 420,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "String(item.title || '').split('').reduce((a, c) => (a << 5) - a + c.charCodeAt(0), 0)"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 423,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(item.ticker || item.stockCodes || 'BIST')"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 427,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const title = String(item.title || item.subject || '').trim();"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 431,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const rawType = String(item.disclosure_type || item.disclosureType || item.source || 'Canlı Piyasa & KAP RSS');"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 465,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": ": String(item.publish_time || 'Canlı');"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 478,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "source: String(item.source || 'KAP & Google Finans RSS'),"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 555,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = (ticker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 567,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const targetTicker = (ticker || this.state.activeTicker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 657,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanTicker = (ticker || this.state.activeTicker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "src/services/kapDaemon.ts",
+      "line": 678,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "raw.disclosure_type || 'YENI_IS_ILISKISI',"
+    },
+    {
+      "file": "src/services/absorbanceEngine.ts",
+      "line": 28,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const symbol = snapshot.ticker || 'NVDA';"
+    },
+    {
+      "file": "src/services/icebergDetector.ts",
+      "line": 31,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const symbol = snapshot.ticker || 'NVDA';"
+    },
+    {
+      "file": "src/services/marketGateway.ts",
+      "line": 155,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const safeTicker = String(fallbackTicker || '').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "src/services/marketGateway.ts",
+      "line": 156,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const safeMarket = String(fallbackMarket || 'BIST').toUpperCase().trim();"
+    },
+    {
+      "file": "src/services/marketGateway.ts",
+      "line": 404,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(newTicker || '').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "src/services/marketGateway.ts",
+      "line": 515,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "symbol: String(h.symbol || ''),"
+    },
+    {
+      "file": "src/services/marketGateway.ts",
+      "line": 516,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "market: String(h.asset_class || '').toUpperCase().includes('CRYPTO') ? 'CRYPTO' : 'NASDAQ',"
+    },
+    {
+      "file": "src/services/marketGateway.ts",
+      "line": 517,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "type: String(h.side || 'buy').toUpperCase() === 'SELL' ? 'SELL' : 'BUY',"
+    },
+    {
+      "file": "src/services/marketGateway.ts",
+      "line": 541,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "symbol: String(ex.symbol || 'BTCUSDT'),"
+    },
+    {
+      "file": "src/services/marketGateway.ts",
+      "line": 567,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(ticker || this.snapshot.ticker || '').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "src/services/marketGateway.ts",
+      "line": 704,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "? String(reportRes?.technical?.rsi_status || 'CANLI')"
+    },
+    {
+      "file": "src/services/marketGateway.ts",
+      "line": 713,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const beneishVerdict = isReportLive ? String(reportRes?.temel?.beneish?.verdict || 'Doğrulandı') : STRICT_WAITING_LIVE_DATA_TEXT;"
+    },
+    {
+      "file": "src/services/marketGateway.ts",
+      "line": 834,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = String(initialTicker || this.snapshot.ticker || '').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "src/services/brokerFlowService.ts",
+      "line": 100,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const dominantBroker = top3Brokers[0]?.name || 'Belirsiz';"
+    },
+    {
+      "file": "src/services/smartAlertDaemon.ts",
+      "line": 48,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const reason = `#${symbol} Çoklu Motor Onayı: Jüri %${juryScore ?? '---'}, L2 OBI ${l2Obi !== null ? (l2Obi > 0 ? '+' : '') : ''}${l2Obi ?? '---'}, KAP Etki +${kapCatalystScore ?? "
+    },
+    {
+      "file": "src/services/signalEngine.ts",
+      "line": 151,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "reason: `Kriter karşılanmadı. Jüri: %${confidence ?? '---'} (Eşik %80), Z-Skor: ${zScore !== null ? `${zScore.toFixed(2)}σ` : '---'} (Eşik |Z| >= 2.0σ)`,"
+    },
+    {
+      "file": "src/services/signalEngine.ts",
+      "line": 207,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "`⚡ Kelly Criterion Mult: x${rrDetails.kellyFraction ?? '---'}`,"
+    },
+    {
+      "file": "src/services/signalEngine.ts",
+      "line": 208,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "`🎯 Risk/Reward Ratio: 1:${rrDetails.riskRewardRatio ?? '---'}`,"
+    },
+    {
+      "file": "src/services/signalEngine.ts",
+      "line": 212,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "reasoning: `Otonom Jüri Sinyal Tetikleyici: %${confidence ?? '---'} Jüri Güveni, 1:${rrDetails.riskRewardRatio ?? '---'} Risk/Ödül oranı ve ${zScore !== null ? (zScore >= 0 ? '+' :"
+    },
+    {
+      "file": "src/services/signalEngine.ts",
+      "line": 249,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "reason: `🚀 OTONOM SİNYAL TETİKLENDİ: ${snapshot.ticker} (${side}) - Jüri: %${confidence ?? '---'}, R:R 1:${rrDetails.riskRewardRatio ?? '---'}, Z: ${zScore !== null ? zScore.toFixe"
+    },
+    {
+      "file": "src/services/signalEngine.ts",
+      "line": 281,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "message: resData.message || 'Sinyal başarıyla yayın kuyruğuna alındı.',"
+    },
+    {
+      "file": "src/services/signalEngine.ts",
+      "line": 287,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "message: error.message || 'Ağ bağlantı hatası oluştu.',"
+    },
+    {
+      "file": "src/services/twapExecutor.ts",
+      "line": 40,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const symbol = snapshot.ticker || 'NVDA';"
+    },
+    {
+      "file": "src/services/dataRuleEngine.ts",
+      "line": 99,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const rawSource = String(marketData.dataSource || marketData.source || marketData.provider || '').toUpperCase();"
+    },
+    {
+      "file": "src/services/audioSyntheticDispatcher.ts",
+      "line": 76,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const safeScore = score ?? '---';"
+    },
+    {
+      "file": "src/services/audioSyntheticDispatcher.ts",
+      "line": 93,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const text = `#${symbol} tahtasında ${side} tarafında ${price ?? '---'} seviyesinde yaklaşık ${hiddenLots !== null ? hiddenLots.toLocaleString('tr-TR') : '---'} lot gizli Iceberg s"
+    },
+    {
+      "file": "src/services/audioSyntheticDispatcher.ts",
+      "line": 98,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const text = `#${symbol} için 4 ajanlı jürinin konsensüs kararı yüzde ${confidence ?? '---'} güven oranı ile ${decision} olarak belirlendi.`;"
+    },
+    {
+      "file": "src/services/jury.ts",
+      "line": 222,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "warnings: [effectiveWarning || 'Fiyat verisi eksik.'],"
+    },
+    {
+      "file": "src/services/jury.ts",
+      "line": 523,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "rationale += `Katman Dağılımı: L2 ${l2Score ?? '---'}, Bilanço ${forensicScore}, Hacim ${volumeScore ?? '---'}, NLP ${nlpScore ?? '---'}, Mum ${candlestickScore ?? '---'}.`;"
+    },
+    {
+      "file": "src/services/quantPipelineEnforcer.ts",
+      "line": 197,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const market: QuantMarketType = snapshot.market || 'BIST';"
+    },
+    {
+      "file": "src/services/orderflow.ts",
+      "line": 98,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const brokerName = t.broker ?? 'Piyasa';"
+    },
+    {
+      "file": "src/services/marketProfileEngine.ts",
+      "line": 27,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const symbol = snapshot.ticker || 'NVDA';"
+    },
+    {
+      "file": "src/services/juryEngine.ts",
+      "line": 162,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "? `🚨 VETO DEVREDE: ${data.vetoReason || 'Finnhub sentiment score < 0.35 bozulma tespiti.'}`"
+    },
+    {
+      "file": "src/services/juryEngine.ts",
+      "line": 216,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const market: QuantMarketType = data.market || (data.snapshot as any)?.marketType || 'BIST';"
+    },
+    {
+      "file": "src/services/juryEngine.ts",
+      "line": 242,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "reasoning: `Piotroski F: ${piotroski !== null ? `${piotroski}/9` : '---'}, Beneish M: ${beneish !== null ? beneish.toFixed(2) : '---'}, Anomali: ${compLabel || 'DENGELİ'}${marketSp"
+    },
+    {
+      "file": "src/services/api.ts",
+      "line": 48,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "market: (s.market as 'Yıldız' | 'Ana' | 'Alt') || 'Yıldız',"
+    },
+    {
+      "file": "src/hooks/useMarketData.ts",
+      "line": 56,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const resolvedMarket = (selectedMarket || 'BIST').toUpperCase() as UnifiedMarketType;"
+    },
+    {
+      "file": "src/hooks/useMarketData.ts",
+      "line": 58,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "if (resolvedMarket === 'CRYPTO') return (cryptoPair || 'BTCUSDT').toUpperCase().trim();"
+    },
+    {
+      "file": "src/hooks/useMarketData.ts",
+      "line": 59,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "if (resolvedMarket === 'NASDAQ') return (nasdaqSymbol || 'NVDA').toUpperCase().trim();"
+    },
+    {
+      "file": "src/hooks/useMarketData.ts",
+      "line": 60,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "return (activeTicker || 'THYAO').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "src/core/risk/positionSizer.ts",
+      "line": 251,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "if (resetLossCounter === true && (consecutiveLosses ?? 0) > 0) {"
+    },
+    {
+      "file": "src/core/models/alphaModel.ts",
+      "line": 33,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "symbol: (symbol || 'UNKNOWN').toUpperCase().trim(),"
+    },
+    {
+      "file": "src/core/mechanics/vpinEngine.ts",
+      "line": 41,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "symbol: (symbol || 'UNKNOWN').toUpperCase().trim(),"
+    },
+    {
+      "file": "src/core/mechanics/vpinEngine.ts",
+      "line": 69,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanSym = (symbol || 'THYAO').toUpperCase().trim();"
+    },
+    {
+      "file": "src/core/mechanics/bistMechanics.ts",
+      "line": 59,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "symbol: (symbol || 'UNKNOWN').toUpperCase().trim(),"
+    },
+    {
+      "file": "src/core/mechanics/bistMechanics.ts",
+      "line": 176,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanSym = (symbol || 'ASELS').toUpperCase().trim().replace(/\\.IS$/i, '');"
+    },
+    {
+      "file": "src/core/mechanics/positionSentinel.ts",
+      "line": 50,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "symbol: (symbol || 'UNKNOWN').toUpperCase().trim(),"
+    },
+    {
+      "file": "src/core/collectors/tacticalCollector.ts",
+      "line": 352,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const safeObi = obi ?? 0;"
+    },
+    {
+      "file": "src/core/collectors/tacticalCollector.ts",
+      "line": 353,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const safeLot = wallLot ?? 0;"
+    },
+    {
+      "file": "src/core/collectors/tacticalCollector.ts",
+      "line": 418,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "valueText: input.latestKapTitle || 'VERİ YOK',"
+    },
+    {
+      "file": "src/core/collectors/tacticalCollector.ts",
+      "line": 624,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "primaryDriver = `Çoklu Küp Konsensüsü (${cubes.coherence ?? 0}% Uyum)`;"
+    },
+    {
+      "file": "src/core/collectors/tacticalCollector.ts",
+      "line": 639,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "confidence: cubes.coherence ?? 50,"
+    },
+    {
+      "file": "src/core/collectors/tacticalCollector.ts",
+      "line": 640,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "finalScore: cubes.coherence ?? 50,"
+    },
+    {
+      "file": "src/services/providers/tradingViewScreenerProvider.ts",
+      "line": 33,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const symbol = String(params.symbol || '').toUpperCase().trim();"
+    },
+    {
+      "file": "src/services/providers/yahooProvider.ts",
+      "line": 25,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const symbol = String(params.symbol || '').toUpperCase().trim();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 72,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ua = req.headers['user-agent'] || '';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 87,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const route = (req as any).route?.path || req.path || 'unknown';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 232,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const limit = Number(req.query.limit) || 50;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 457,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "temperature: temperature ?? options?.temperature ?? 0.2,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 458,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "max_tokens: max_tokens ?? options?.maxTokens ?? 1024,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 481,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "model: model || options?.model || 'llama-3.3-70b-versatile',"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 483,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "temperature: temperature ?? options?.temperature ?? 0.2,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 484,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "max_tokens: max_tokens ?? options?.maxTokens ?? 1024,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 508,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "model: model || options?.model || 'meta-llama/llama-3.3-70b-instruct',"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 510,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "temperature: temperature ?? options?.temperature ?? 0.2,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 511,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "max_tokens: max_tokens ?? options?.maxTokens ?? 1024,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 568,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.json({ error: 'Python server 8000 kapalı: ' + (err?.message || ''), data: null, count: 0 });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 574,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = (req.query.ticker as string) || 'THYAO';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 582,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.json({ error: 'Python server kapalı: ' + (err?.message || ''), verdict: 'HOLD', confidenceScore: 0 });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 593,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.json({ error: 'Python server kapalı: ' + (err?.message || ''), data: null });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 600,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const symbol = (req.query.symbol || req.query.ticker || 'THYAO') as string;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 601,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const spotPrice = req.query.spot_price || req.query.price || 'None';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 602,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const obWallPrice = req.query.ob_wall_price || 'None';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 603,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const swingPrice = req.query.swing_level_price || 'None';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 604,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const wallLot = req.query.wall_lot || 'None';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 623,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "error: 'Python ladder engine çalıştırılamadı: ' + (e?.message || '')"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 630,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const symbol = (req.query.symbol || req.query.ticker || 'THYAO') as string;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 631,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const direction = (req.query.direction || 'LONG') as string;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 632,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const capital = req.query.capital || '100000';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 633,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const spotPrice = req.query.spot_price || req.query.price || 'None';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 634,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const obWallPrice = req.query.ob_wall_price || 'None';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 635,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const wallLot = req.query.wall_lot || 'None';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 636,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const atr = req.query.atr || 'None';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 655,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "error: 'Python ladder engine çalıştırılamadı: ' + (e?.message || '')"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 678,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const url = `${PYTHON_KERNEL_URL}/api/memory/lessons?limit=${limit || 10}${target_agent ? `&target_agent=${target_agent}` : ''}`;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 741,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = (req.query.ticker as string) || 'THYAO';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 746,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ error: error.message || 'Analiz hatası' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 753,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const result = await UniversalAnalystEngine.evaluateAsset(ticker || 'THYAO', market, data);"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 756,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ error: error.message || 'Analiz hatası' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 764,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const symbol = String(rawBody.symbol || rawBody.ticker || req.query.symbol || req.query.ticker || 'THYAO').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 765,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const rawMarket = String(rawBody.market || req.query.market || '').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 771,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const zScore = Number(rawBody.zScore) || 0.0;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 772,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const currentDecision = rawBody.currentDecision || 'BEKLE';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 773,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const priceChangePct = Number(rawBody.priceChangePct || rawBody.changePct) || 0;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 776,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "wallLot: Number(rawBody.orderBook?.wallLot) || 25000,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 778,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "burnRatePerMin: Number(rawBody.orderBook?.burnRatePerMin) || 1200,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 779,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "orderCancelCount: Number(rawBody.orderBook?.orderCancelCount) || 15,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 780,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "totalOrderCount: Number(rawBody.orderBook?.totalOrderCount) || 100,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 781,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "bidDepthTotal: Number(rawBody.orderBook?.bidDepthTotal) || 250000,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 782,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "askDepthTotal: Number(rawBody.orderBook?.askDepthTotal) || 240000,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 787,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "bofaNetLot: Number(rawBody.brokerFlow?.bofaNetLot) || 0,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 798,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "portfolioValue: Number(rawBody.riskParams?.portfolioValue) || 100000,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 799,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "winRate: Number(rawBody.riskParams?.winRate) || 0.60,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 800,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "rewardRiskRatio: Number(rawBody.riskParams?.rewardRiskRatio) || 2.2,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 802,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "maxAllowedAllocationPct: Number(rawBody.riskParams?.maxAllowedAllocationPct) || 20.0,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 805,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const latencyMs = Number(rawBody.latencyMs) || 45;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 806,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const currentDrawdownPct = Number(rawBody.currentDrawdownPct) || 1.2;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 837,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "message: payload.safety_reason || 'Acil durum güvenlik zırhı tetiklendi - İşlemler durduruldu.',"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 912,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "aiDiagnosisText = response.response.text()?.trim() || '';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 955,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "error: error.message || 'Quant Pipeline analiz işlemi sırasında beklenmeyen hata oluştu.',"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 963,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const rawMarket = String(req.query.market || (req.body && req.body.market) || 'ALL').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 996,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "error: error.message || 'Piyasa taraması sırasında beklenmeyen bir hata oluştu.',"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1051,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const marketType = String(req.query.market_type || req.query.market || 'BIST').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1052,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.query.ticker || 'THYAO').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1123,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.query.ticker || 'ASELS').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1141,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const marketType = String(req.query.market_type || req.query.market || 'BIST').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1142,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.query.ticker || 'THYAO').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1202,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Failed to fetch Alpaca account' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1211,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Failed to fetch execution history' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1221,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Stock order execution failed' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1231,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Crypto order execution failed' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1241,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Track record generation failed' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1251,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Failed to fetch SaaS plans' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1260,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Failed to fetch user status' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1270,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Failed to update plan' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1281,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Failed to fetch signal bot alerts' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1291,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Failed to broadcast test signal' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1302,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Failed to fetch MAM accounts' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1311,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Failed to add MAM account' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1321,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Master OCO execution failed' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1327,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const portfolioValue = Number(req.query.portfolioValue) || 426800.0;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1331,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Institutional risk calculation failed' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1341,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Failed to fetch white-label config' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1350,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Failed to update white-label config' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1359,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Failed to generate investor whitepaper audit' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1385,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "error: err?.message || 'Audit trail fallback active',"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1396,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'TCMB EVDS veri çekme hatası' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1403,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const symbol = (req.query.symbol as string) || 'NVDA';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1410,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Finnhub Sentiment veri çekme hatası' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1421,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Anomali taraması başarısız' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1428,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const days = Number(req.query.days) || 730;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1432,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Alfa backtest başarısız' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1439,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = req.params.ticker || 'ASELS';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1443,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.status(500).json({ success: false, error: err?.message || 'Takas analizi başarısız' });"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1455,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const assignedRole = (role || 'admin').toLowerCase().trim();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1476,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "user: { email: email || 'operator@mt16.com', subscription_status: 'PREMIUM' }"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1487,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.query.ticker || 'THYAO').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1525,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const sampleContent = Buffer.from(`BistApp Strategy Report for ${ticker || 'ASSET'}\\nFormat: ${format || 'doc'}`);"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1560,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const price = Number(meta.regularMarketPrice) || Number(meta.chartPreviousClose) || 0;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1561,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const rate = Number(meta.regularMarketChangePercent) || 0;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1575,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const price = live?.last_price || FALLBACK_PRICES[cleanTicker] || 100;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1576,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const rate = live?.rate || 0;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1644,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "price: s.price || FALLBACK_PRICES[s.code] || 50,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1645,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "rate: s.rate ?? 0,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1657,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.query.ticker || 'ASELS').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1663,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "last_price: FALLBACK_PRICES[clean] || 100,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1672,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const base = FALLBACK_PRICES[clean] || 100;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1721,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.json(buildMultiTF(String(req.query.ticker || 'ASELS')));"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1725,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "res.json(buildMultiTF(String(req.params.ticker || 'ASELS')));"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1729,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.query.ticker || 'ASELS').toUpperCase().replace('.IS', '');"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1731,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const price = live?.last_price || FALLBACK_PRICES[ticker] || 100;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1732,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const rate = live?.rate || 0;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1771,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.params.ticker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '');"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 1977,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.params.ticker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '');"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2029,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.params.ticker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '');"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2091,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const username = String(req.query.username || 'demo_user');"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2176,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "ticker: (req.body?.ticker || '').toUpperCase() || null,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2183,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "reason: 'Backtest çalıştırılamadı: ' + (err?.message || 'Bilinmeyen hata'),"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2213,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = req.params.ticker || (req.query.ticker as string) || 'ASELS';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2214,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const persona = (req.query.persona as any) || 'STANDARD';"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2239,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanTicker = (ticker || 'ASELS').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2376,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "ticker: req.body?.ticker || 'ASELS',"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2397,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const safeTicker = String(ticker || 'ASELS').trim();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2409,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const safeTicker = String(req.body?.ticker || 'ASELS').trim();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2485,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "scenario: scenario || 'USD_SPIKE',"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2515,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const result = await agentApiClient.evaluateGlobal(symbol, market_regime || 'BULL');"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2524,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const query = String(req.body?.query || req.body?.text || '').trim();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2583,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const orderAmount = Number(order_amount_tl) || (Number(lot) * Number(price)) || 0;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2585,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const effectivePortfolio = Math.max(Number(portfolio_total_tl) || 1000000, 1000);"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2591,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const curPrice = Number(price) || Number(current_price) || 100;"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2782,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "String(ticker), String(title), String(body_text), String(disclosure_type || 'None')"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2790,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "disclosure_type: disclosure_type || 'YENI_IS_ILISKISI',"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2805,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const qTicker = String(req.query.ticker || '').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2814,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const match = feed.filter((item: any) => String(item.ticker || '').toUpperCase().includes(qTicker));"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2850,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "ticker: qTicker || 'ASELS',"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2851,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "title: `${qTicker || 'ASELS'} Şirketi Stratejik Yatırım ve Kapasite Geliştirme Bildirimi`,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2857,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "ticker: qTicker || 'ASELS',"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2858,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "company_name: `${qTicker || 'ASELS'} A.Ş.`,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 2996,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.params.ticker || 'ASELS').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 3065,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "Number(usdt_amount) || 250.0,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 3066,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "Number(tp_pct) || 2.0,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 3067,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "Number(sl_pct) || 1.0,"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 3088,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const pair = String(req.params.pair || 'BTCUSDT').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 3097,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const pair = String(req.params.pair || 'BTCUSDT').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 3122,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const pair = String(req.params.pair || 'BTCUSDT').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 3145,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const symbol = String(req.params.symbol || 'NVDA').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 3154,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const symbol = String(req.params.symbol || 'NVDA').toUpperCase();"
+    },
+    {
+      "file": "server/index.ts",
+      "line": 3184,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const result = runMT16TerminalAnalysis({ ticker: ticker || 'ASELS', initialCapital, riskTolerance });"
+    },
+    {
+      "file": "server/middleware/auth.middleware.ts",
+      "line": 78,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const userRole = String(decoded?.role || decoded?.user?.role || 'user').toLowerCase().trim();"
+    },
+    {
+      "file": "server/publisher/index.ts",
+      "line": 40,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "ticker: String(reqBody.ticker || 'BIST').toUpperCase(),"
+    },
+    {
+      "file": "server/publisher/index.ts",
+      "line": 41,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "verdict: reqBody.verdict || 'HOLD',"
+    },
+    {
+      "file": "server/publisher/index.ts",
+      "line": 42,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "confidenceScore: Number(reqBody.confidenceScore ?? reqBody.confidence_score ?? reqBody.confidence ?? 50),"
+    },
+    {
+      "file": "server/publisher/index.ts",
+      "line": 43,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "entryZone: reqBody.entryZone || reqBody.entry_zone || 'Belirtilmedi',"
+    },
+    {
+      "file": "server/publisher/index.ts",
+      "line": 44,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "targetPrice: reqBody.targetPrice || reqBody.target_price || 'Belirtilmedi',"
+    },
+    {
+      "file": "server/publisher/index.ts",
+      "line": 45,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "stopLoss: reqBody.stopLoss || reqBody.stop_loss || 'Belirtilmedi',"
+    },
+    {
+      "file": "server/publisher/index.ts",
+      "line": 47,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "reasoning: reqBody.reasoning || reqBody.summary || 'Jüri değerlendirmesi tamamlandı.',"
+    },
+    {
+      "file": "server/publisher/index.ts",
+      "line": 61,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "message: error.message || 'Bilinmeyen hata',"
+    },
+    {
+      "file": "server/publisher/formatter.ts",
+      "line": 44,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const safeTicker = this.escapeMarkdown((data.ticker || 'BIST').toUpperCase());"
+    },
+    {
+      "file": "server/publisher/formatter.ts",
+      "line": 48,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const safeReasoning = this.escapeMarkdown(data.reasoning || 'Analiz tamamlandı.');"
+    },
+    {
+      "file": "server/publisher/formatter.ts",
+      "line": 80,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = `#${(payload.ticker || 'BIST').toUpperCase()}`;"
+    },
+    {
+      "file": "server/publisher/formatter.ts",
+      "line": 86,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const reasoning = payload.reasoning || 'Analiz tamamlandı.';"
+    },
+    {
+      "file": "server/data/tickers.ts",
+      "line": 24,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "market: item.market || 'Yıldız Pazar',"
+    },
+    {
+      "file": "server/data/tickers.ts",
+      "line": 25,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "price: item.price || 50,"
+    },
+    {
+      "file": "server/data/tickers.ts",
+      "line": 26,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "rate: item.rate ?? 0"
+    },
+    {
+      "file": "server/utils/ocrAnalyzer.ts",
+      "line": 62,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "totalNetLot: Number(parsed.totalNetLot || 0),"
+    },
+    {
+      "file": "server/utils/ocrAnalyzer.ts",
+      "line": 63,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "bofaNetLot: Number(parsed.bofaNetLot || 0),"
+    },
+    {
+      "file": "server/utils/ocrAnalyzer.ts",
+      "line": 64,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "topBuyerRatio: Number(parsed.topBuyerRatio || 50),"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 40,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const currentPrice = Number(price || marketData.currentPrice || 100.0);"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 53,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "dayChangePct: Number(marketData.dayChangePct ?? 0),"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 54,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "zScore: Number(marketData.zScore ?? 0),"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 55,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "obi: Number(marketData.obi ?? 0.15),"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 56,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "cmf20: Number(marketData.cmf20 ?? 0.12),"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 57,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "obvSlope: Number(marketData.obvSlope ?? 0.08),"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 58,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "spoofingRisk: Number(marketData.spoofingRisk ?? 0),"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 59,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "orderCancelRatePct: Number(marketData.orderCancelRatePct ?? 0),"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 62,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "bofaNetLot: Number(marketData.bofaNetLot ?? 0),"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 63,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "kapSentimentScore: Number(marketData.kapSentimentScore ?? 80),"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 85,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "operator: req.user?.email || req.user?.sub || 'AuthorizedUser'"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 96,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "lots: Number(lots) || 10,"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 97,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "leverage: Number(leverage) || 1,"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 112,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "operator: req.user?.email || req.user?.sub || 'AuthorizedUser'"
+    },
+    {
+      "file": "server/routes/execution.ts",
+      "line": 141,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "error: error?.message || 'Emir yürütme sırasında beklenmeyen bir hata oluştu.'"
+    },
+    {
+      "file": "server/routes/analyze.ts",
+      "line": 40,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const stdLot = Math.sqrt(allLots.reduce((a: number, b: number) => a + (b - meanLot) ** 2, 0) / (allLots.length || 1));"
+    },
+    {
+      "file": "server/routes/analyze.ts",
+      "line": 45,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const currentPrice = topAskPrice || topBidPrice || 0;"
+    },
+    {
+      "file": "server/routes/analyze.ts",
+      "line": 129,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const stdDailyRet = Math.sqrt(dailyReturns.reduce((a, b) => a + (b - meanDailyRet) ** 2, 0) / (dailyReturns.length || 1));"
+    },
+    {
+      "file": "server/routes/analyze.ts",
+      "line": 411,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanSym = String(symbol || 'THYAO').toUpperCase().trim().replace(/\\.IS$/i, '');"
+    },
+    {
+      "file": "server/routes/news.ts",
+      "line": 15,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const limit = Math.min(50, Math.max(1, parseInt(String(req.query.limit || '20'), 10)));"
+    },
+    {
+      "file": "server/routes/news.ts",
+      "line": 31,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "ticker: ticker || 'ALL',"
+    },
+    {
+      "file": "server/routes/news.ts",
+      "line": 46,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "error: error?.message || 'Haberler getirilirken sunucu hatası oluştu.',"
+    },
+    {
+      "file": "server/routes/news.ts",
+      "line": 58,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.params.ticker || '').trim();"
+    },
+    {
+      "file": "server/routes/news.ts",
+      "line": 85,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "error: error?.message || 'Hisseye ait haberler getirilirken hata oluştu.',"
+    },
+    {
+      "file": "server/routes/llmProxy.ts",
+      "line": 48,
+      "rule": "THROW_NEW",
+      "msg": "Kontrolsuz throw new Error yasak",
+      "code": "if (!text) throw new Error('Gemini bos yanit dondurdu.');"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 108,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = (ctx.ticker || 'ASELS').toUpperCase();"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 159,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "(kapInfo.impactScore ?? 0) >= 0 ? '+' : ''"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 160,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "}${kapInfo.impactScore ?? 15}/100 (${kapInfo.sentimentLabel || 'POZİTİF'})** etki skoruyla sınıflandırılmıştır. Yıllık ciroya oranı **%${"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 160,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "}${kapInfo.impactScore ?? 15}/100 (${kapInfo.sentimentLabel || 'POZİTİF'})** etki skoruyla sınıflandırılmıştır. Yıllık ciroya oranı **%${"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 161,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "kapInfo.ciroRatioPct ?? 0"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 163,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "kapInfo.expectedVolatilityPct ?? 1.8"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 164,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "}** ve otonom sinyal yönü **\"${kapInfo.recommendedAction || 'AL'}\"** düzeyindedir.`"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 201,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = (ctx.ticker || 'ASELS').toUpperCase();"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 222,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "? `[${ctx.latestKap.ticker || ticker}] \"${ctx.latestKap.title}\" | Etki Skoru: ${ctx.latestKap.impactScore ?? 15}/100 (${"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 223,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "ctx.latestKap.sentimentLabel || 'POZİTİF'"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 224,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "}) | Ciro Oranı: %${ctx.latestKap.ciroRatioPct ?? 0} | Beklenen Volatilite: ±%${"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 225,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "ctx.latestKap.expectedVolatilityPct ?? 1.8"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 226,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "} | Önerilen Aksiyon: ${ctx.latestKap.recommendedAction || 'AL'}`"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 240,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "- [anomalyScanner] Sanitize Z-Skor: ${zScore >= 0 ? '+' : ''}${zScore}σ | Segment: ${ctx.anomalySegment || 'ALPHA_RADAR'} | Teşhis: ${ctx.anomalyVerdict || 'KURUMSAL_HACIM_KIRILIMI"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 287,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const text = item.content || item.text || '';"
+    },
+    {
+      "file": "server/routes/chat.ts",
+      "line": 325,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "req.body?.message || '',"
+    },
+    {
+      "file": "server/routes/market.ts",
+      "line": 27,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.params.ticker || '').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "server/routes/market.ts",
+      "line": 61,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.params.ticker || '').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "server/routes/market.ts",
+      "line": 95,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.params.ticker || '').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "server/routes/market.ts",
+      "line": 134,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = String(req.params.ticker || '').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "server/routes/market.ts",
+      "line": 143,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "data_source: sentiment.dataSource ?? 'SIMULATED',"
+    },
+    {
+      "file": "server/routes/market.ts",
+      "line": 144,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "simulation_warning: sentiment.simulationWarning ?? '⚠️ Simüle Veri: Canlı X/Twitter veya JIRO bağlantısı bulunamadı.',"
+    },
+    {
+      "file": "server/routes/market.ts",
+      "line": 176,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "error: err?.message || 'AKD OCR analizi sırasında bir hata oluştu.',"
+    },
+    {
+      "file": "server/routes/publisher.ts",
+      "line": 48,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "message: error.message || 'Sunucu içi hata oluştu.',"
+    },
+    {
+      "file": "server/routes/publisher.ts",
+      "line": 49,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "error: error.message || 'Sunucu içi hata oluştu.',"
+    },
+    {
+      "file": "server/services/anomalyScanner.ts",
+      "line": 27,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const last = telegramCooldown.get(ticker) || 0;"
+    },
+    {
+      "file": "server/services/anomalyScanner.ts",
+      "line": 131,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "maliyet: item.takasSummary?.agirlikliOrtalamaMaliyet || 0,"
+    },
+    {
+      "file": "server/services/AkdTakasEngine.ts",
+      "line": 5,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanTicker = (ticker || 'ASELS').toUpperCase();"
+    },
+    {
+      "file": "server/services/AkdTakasEngine.ts",
+      "line": 11,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "netForeignFlow: akdData?.foreignNet || '+15.4M TL',"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 113,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const weight = 0.10 * (selectedPersonaWeights.bull || 1.0) * (regimeWeights.bull || 1.0);"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 150,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const weight = 0.08 * (selectedPersonaWeights.bear || 1.0) * (regimeWeights.bear || 1.0);"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 187,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const weight = 0.07 * (selectedPersonaWeights.neutral || 1.0);"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 224,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "comment: context.preFilterResult?.reason || 'Kök veri kuralları (Hard-stop, Spoofing, Beneish) teyit edildi.'"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 242,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "weight: 0.25 * (selectedPersonaWeights.risk || 1.0),"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 262,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "weight: 0.20 * (selectedPersonaWeights.constraint || 1.0),"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 282,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "weight: 0.15 * (selectedPersonaWeights.timing || 1.0),"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 378,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "role: instance.role || 'Persona',"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 381,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "cognitiveFilter: (instance as any).cognitiveFilter || '',"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 715,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "vetoReason = `İnanç Çelişkisi (Belief Conflict): Geçmişte #${fomoLesson.ticker} üzerinde '${fomoLesson.lesson}' dersini aldık. Kavramsal Kural: '${fomoLesson.conceptual_perspective"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 813,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const bullWeight = analysts.filter(a => a.perspective === 'BULL').reduce((sum, a) => sum + (a.confidence / 100) * (personaWeights.bull || 1.0) * (regimeWeights.bull || 1.0), 0);"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 814,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const bearWeight = analysts.filter(a => a.perspective === 'BEAR').reduce((sum, a) => sum + (a.confidence / 100) * (personaWeights.bear || 1.0) * (regimeWeights.bear || 1.0), 0);"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 815,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const neutralWeight = analysts.filter(a => a.perspective === 'NEUTRAL').reduce((sum, a) => sum + (a.confidence / 100) * (personaWeights.neutral || 1.0), 0);"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 926,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanTicker = (ticker || 'ASELS').toUpperCase();"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 944,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "stopLossPrice: Number(marketPayload?.stopLossPrice || marketPayload?.stopLoss || 0),"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 948,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "obi: Number(marketPayload?.obi ?? 0.15),"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 950,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "obvSlope: Number(marketPayload?.obvSlope ?? 0.08),"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 951,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "spoofingRisk: Number(marketPayload?.spoofingRisk ?? 0),"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 952,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "orderCancelRatePct: Number(marketPayload?.orderCancelRatePct ?? 0),"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 958,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "kapSentimentScore: Number(marketPayload?.kapSentimentScore ?? marketPayload?.kapImpactScore ?? 85),"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 1131,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "dailyRealizedLossPct: Number(marketPayload?.dailyRealizedLossPct ?? 0.0),"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 1136,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "sector: marketPayload?.sector || 'GENEL',"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 1137,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "notionalUsd: Number(marketPayload?.notionalUsd ?? 10000.0)"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 1411,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "? recentLessons.map(l => `[${l.ticker}] ${l.lesson} (Kavramsal: ${l.conceptual_perspective || 'Genel'})`).join(' | ')"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 1468,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const bookImb5 = Number(marketPayload?.bookImb5 ?? 0.28);"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 1469,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const bookImb10 = Number(marketPayload?.bookImb10 ?? 0.18);"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 1470,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const institutionalNet = Number(marketDataForRules.bofaNetLot ?? 0);"
+    },
+    {
+      "file": "server/services/juryDebateEngine.ts",
+      "line": 1526,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": ": (analysts.find(a => a.perspective === 'BULL')?.argument || 'Temel ve kurumsal akış göstergeleri pozitif.')"
+    },
+    {
+      "file": "server/services/dynamicDataEngine.ts",
+      "line": 15,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "marketCap: match.marketCap ?? 100.0,"
+    },
+    {
+      "file": "server/services/dynamicDataEngine.ts",
+      "line": 16,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "pe: match.pe ?? 10.0,"
+    },
+    {
+      "file": "server/services/dynamicDataEngine.ts",
+      "line": 17,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "peg: match.peg ?? 1.0,"
+    },
+    {
+      "file": "server/services/dynamicDataEngine.ts",
+      "line": 18,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "price: match.price ?? 50.0,"
+    },
+    {
+      "file": "server/services/dynamicDataEngine.ts",
+      "line": 19,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "rate: match.rate ?? 1.0,"
+    },
+    {
+      "file": "server/services/dynamicDataEngine.ts",
+      "line": 20,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "fairValue: match.fairValue ?? 60.0,"
+    },
+    {
+      "file": "server/services/dynamicDataEngine.ts",
+      "line": 21,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "fairValuePotentialPct: match.fairValuePotentialPct ?? 20.0,"
+    },
+    {
+      "file": "server/services/dynamicDataEngine.ts",
+      "line": 22,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "analystTarget: match.analystTarget ?? 70.0,"
+    },
+    {
+      "file": "server/services/dynamicDataEngine.ts",
+      "line": 23,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "targetPotentialPct: match.targetPotentialPct ?? 40.0,"
+    },
+    {
+      "file": "server/services/dynamicDataEngine.ts",
+      "line": 24,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "healthScore: match.healthScore ?? 80"
+    },
+    {
+      "file": "server/services/backtestAlphaEngine.ts",
+      "line": 221,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const fVals: number[] = events.map((e) => Number(e.features[key] ?? 0));"
+    },
+    {
+      "file": "server/services/universalAnalystEngine.ts",
+      "line": 68,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const rawTicker = (tickerInput || 'THYAO').trim().toUpperCase();"
+    },
+    {
+      "file": "server/services/universalAnalystEngine.ts",
+      "line": 83,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "currentPrice = ((book.bestBid + book.bestAsk) / 2) || book.microPrice || 65000.0;"
+    },
+    {
+      "file": "server/services/universalAnalystEngine.ts",
+      "line": 106,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "currentPrice = ((book.bestBid + book.bestAsk) / 2) || book.openPrice || 180.0;"
+    },
+    {
+      "file": "server/services/universalAnalystEngine.ts",
+      "line": 129,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "currentPrice = customData?.price || 285.0;"
+    },
+    {
+      "file": "server/services/universalAnalystEngine.ts",
+      "line": 141,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "confidenceScore = Math.round(debateResult?.confidenceScore || 85);"
+    },
+    {
+      "file": "server/services/universalAnalystEngine.ts",
+      "line": 175,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "bullishPoints[0] || 'Genel piyasa dengesi pozitif.'"
+    },
+    {
+      "file": "server/services/alpacaExecutor.ts",
+      "line": 120,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "status: data.status || 'ACTIVE',"
+    },
+    {
+      "file": "server/services/alpacaExecutor.ts",
+      "line": 121,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "currency: data.currency || 'USD',"
+    },
+    {
+      "file": "server/services/alpacaExecutor.ts",
+      "line": 122,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "cash: parseFloat(data.cash || '98450.00'),"
+    },
+    {
+      "file": "server/services/alpacaExecutor.ts",
+      "line": 123,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "portfolioValue: parseFloat(data.portfolio_value || '102500.00'),"
+    },
+    {
+      "file": "server/services/alpacaExecutor.ts",
+      "line": 124,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "buyingPower: parseFloat(data.buying_power || '393800.00'),"
+    },
+    {
+      "file": "server/services/alpacaExecutor.ts",
+      "line": 125,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "equity: parseFloat(data.equity || '102500.00'),"
+    },
+    {
+      "file": "server/services/alpacaExecutor.ts",
+      "line": 126,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "initialMargin: parseFloat(data.initial_margin || '0.00'),"
+    },
+    {
+      "file": "server/services/alpacaExecutor.ts",
+      "line": 127,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "maintenanceMargin: parseFloat(data.maintenance_margin || '0.00'),"
+    },
+    {
+      "file": "server/services/alpacaExecutor.ts",
+      "line": 128,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "daytradeCount: parseInt(data.daytrade_count || '0', 10),"
+    },
+    {
+      "file": "server/services/finnhubService.ts",
+      "line": 71,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "auditId: `AUD-FINN-${Date.now()}-${(this.auditCounter = (this.auditCounter || 0) + 1)}`,"
+    },
+    {
+      "file": "server/services/finnhubService.ts",
+      "line": 94,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanSym = (symbol || 'NVDA').toUpperCase().replace('USDT', '').replace(/[^A-Z]/g, '') || 'NVDA';"
+    },
+    {
+      "file": "server/services/finnhubService.ts",
+      "line": 254,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanSym = (symbol || 'NVDA').toUpperCase().replace(/[^A-Z]/g, '') || 'NVDA';"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 81,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const currentPrice = Number(marketData.currentPrice || marketData.price || 0);"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 82,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const stopLossPrice = Number(marketData.stopLossPrice || marketData.stopLoss || 0);"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 106,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const rawSource = String(marketData.dataSource || marketData.source || marketData.provider || '').toUpperCase();"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 151,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const spoofingRisk = Number(marketData.spoofingRisk ?? 0);"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 152,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const orderCancelRatePct = Number(marketData.orderCancelRatePct ?? 0);"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 171,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const dayChangePct = Number(marketData.dayChangePct ?? marketData.changePct ?? 0);"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 172,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const zScore = Number(marketData.zScore ?? 0);"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 173,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const obi = Number(marketData.obi ?? 0);"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 174,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const cmf20 = Number(marketData.cmf20 ?? 0);"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 198,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const citibankNet = Number(marketData.brokerFlow?.citibankNetLot ?? 0);"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 200,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const kapSentiment = Number(marketData.kapSentimentScore ?? marketData.kapImpactScore ?? 0);"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 209,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "reason: `🛡️ ÖN FİLTRE VETOSU: Katalizör İllüzyonu Engeli - Kurumsal Akış (BofA/Citibank: ${institutionalNetLot.toLocaleString('tr-TR')} lot) net satıştadır. KAP etkisi (+${kapSenti"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 220,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const wallLot = Number(marketData.orderBook?.wallLot ?? 0);"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 221,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const wallPrice = Number(marketData.orderBook?.wallPrice ?? 0);"
+    },
+    {
+      "file": "server/services/dataRuleEngine.ts",
+      "line": 222,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const burnRatePerMin = Number(marketData.orderBook?.burnRatePerMin ?? 1200);"
+    },
+    {
+      "file": "server/services/nasdaqMarketStream.service.ts",
+      "line": 213,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const vol = meta.regularMarketVolume || 35000000;"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 96,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanTicker = (ticker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 102,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "market_regime: options?.regime || 'BULL',"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 107,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "vbts_level: options?.vbtsLevel || 0,"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 151,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanTicker = (ticker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 156,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "market_regime: options?.regime || 'BULL',"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 178,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanTicker = (ticker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 179,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const regime: MarketRegime = options?.regime || 'BULL';"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 180,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const vbtsLevel = Number(options?.vbtsLevel || 0);"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 363,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanTicker = (params?.ticker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '').trim();"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 466,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "ticker: (params.ticker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '').trim(),"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 467,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "days: params.days || 60,"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 468,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "horizon_days: params.horizonDays || 3,"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 469,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "market_regime: params.regime || 'BULL',"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 528,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "action: params.action || 'VETO',"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 562,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "sim_runs: params.simRuns || 1000,"
+    },
+    {
+      "file": "server/services/agentApiClient.ts",
+      "line": 615,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "body: JSON.stringify({ message: params.message, priority: params.priority || 'NORMAL' }),"
+    },
+    {
+      "file": "server/services/kapService.ts",
+      "line": 114,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const rawTitle = block.match(/<title>([\\s\\S]*?)<\\/title>/)?.[1] || '';"
+    },
+    {
+      "file": "server/services/kapService.ts",
+      "line": 115,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const rawLink = block.match(/<link>([\\s\\S]*?)<\\/link>/)?.[1] || '';"
+    },
+    {
+      "file": "server/services/kapService.ts",
+      "line": 116,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const rawPubDate = block.match(/<pubDate>([\\s\\S]*?)<\\/pubDate>/)?.[1] || '';"
+    },
+    {
+      "file": "server/services/kapService.ts",
+      "line": 117,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const rawSource = block.match(/<source[^>]*>([\\s\\S]*?)<\\/source>/)?.[1] || 'Borsa & KAP RSS';"
+    },
+    {
+      "file": "server/services/kapService.ts",
+      "line": 158,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "item.stockCodes || item.ticker || item.code || item.relatedStocks || item.companyCode || ''"
+    },
+    {
+      "file": "server/services/kapService.ts",
+      "line": 166,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "item.title || item.disclosureSummary || item.subject || item.konu || item.header || ''"
+    },
+    {
+      "file": "server/services/kapService.ts",
+      "line": 171,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const disclosureType = String(item.disclosureType || item.type || 'Özel Durum Açıklaması').trim();"
+    },
+    {
+      "file": "server/services/kapService.ts",
+      "line": 176,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "ticker: ticker || 'BIST',"
+    },
+    {
+      "file": "server/services/trackRecordService.ts",
+      "line": 54,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "auditId: `AUD-TRK-${Date.now()}-${(this.auditCounter = (this.auditCounter || 0) + 1)}`,"
+    },
+    {
+      "file": "server/services/trackRecordService.ts",
+      "line": 90,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "symbol: String(item.symbol || 'NVDA'),"
+    },
+    {
+      "file": "server/services/trackRecordService.ts",
+      "line": 91,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "assetType: String(item.assetType || 'STOCK'),"
+    },
+    {
+      "file": "server/services/trackRecordService.ts",
+      "line": 92,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "side: String(item.side || 'buy'),"
+    },
+    {
+      "file": "server/services/trackRecordService.ts",
+      "line": 99,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "timeFormatted: String(item.timeFormatted || 'Anlık'),"
+    },
+    {
+      "file": "server/services/trackRecordService.ts",
+      "line": 117,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "symbol: String(item.symbol || 'BTCUSDT'),"
+    },
+    {
+      "file": "server/services/trackRecordService.ts",
+      "line": 119,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "side: String(item.side || 'BUY'),"
+    },
+    {
+      "file": "server/services/trackRecordService.ts",
+      "line": 128,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "timeFormatted: String(item.timeFormatted || 'Anlık'),"
+    },
+    {
+      "file": "server/services/trackRecordService.ts",
+      "line": 131,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "riskRewardRatio: String(item.accounting?.riskRewardRatio || '1 : 2.0'),"
+    },
+    {
+      "file": "server/services/binanceExecutor.ts",
+      "line": 123,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const zScore = currentBook?.zScore ?? 2.15;"
+    },
+    {
+      "file": "server/services/binanceExecutor.ts",
+      "line": 124,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const obi = currentBook?.obi ?? 0.64;"
+    },
+    {
+      "file": "server/services/binanceExecutor.ts",
+      "line": 211,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "executionId: `EXEC_${now}_${(this.execCounter = (this.execCounter || 0) + 1)}`,"
+    },
+    {
+      "file": "server/services/websocketStream.service.ts",
+      "line": 48,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const clean = (ticker || 'ASELS').toUpperCase().replace(/\\.IS$/i, '');"
+    },
+    {
+      "file": "server/services/signalBotGateway.ts",
+      "line": 62,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "lastBroadcastTime: this.sentAlertsHistory[0]?.timestamp || 'Henüz yok',"
+    },
+    {
+      "file": "server/services/enterpriseAuditEngine.ts",
+      "line": 37,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "auditId: `AUD-ENT-${Date.now()}-${(this.auditCounter = (this.auditCounter || 0) + 1)}`,"
+    },
+    {
+      "file": "server/services/mt16TerminalEngine.ts",
+      "line": 10,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const ticker = (params.ticker || 'ASELS').toUpperCase();"
+    },
+    {
+      "file": "server/services/mt16TerminalEngine.ts",
+      "line": 11,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const capital = params.initialCapital || 100000;"
+    },
+    {
+      "file": "server/services/mt16TerminalEngine.ts",
+      "line": 12,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const risk = params.riskTolerance || 'MODERATE';"
+    },
+    {
+      "file": "server/services/cryptoMarketStream.service.ts",
+      "line": 160,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const vol = parseFloat(t.volume) || 10000;"
+    },
+    {
+      "file": "server/services/cryptoMarketStream.service.ts",
+      "line": 212,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const mid = current ? current.lastPrice : (parseFloat(depthData.bids?.[0]?.[0]) || 0);"
+    },
+    {
+      "file": "server/services/cryptoMarketStream.service.ts",
+      "line": 366,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const volume24h = extra?.volume24h ?? 150000;"
+    },
+    {
+      "file": "server/services/cryptoMarketStream.service.ts",
+      "line": 542,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const classification = current.value_classification || 'Neutral';"
+    },
+    {
+      "file": "server/services/persistence.service.ts",
+      "line": 72,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "symbol: (symbol || 'THYAO').toUpperCase().trim(),"
+    },
+    {
+      "file": "server/services/persistence.service.ts",
+      "line": 73,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "market: (market || 'BIST').toUpperCase().trim(),"
+    },
+    {
+      "file": "server/services/tcmbService.ts",
+      "line": 58,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "auditId: `AUD-TCMB-${Date.now()}-${(this.auditCounter = (this.auditCounter || 0) + 1)}`,"
+    },
+    {
+      "file": "server/services/simulator.ts",
+      "line": 118,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const symbol = context.symbol || 'GENERIC';"
+    },
+    {
+      "file": "server/services/simulator.ts",
+      "line": 376,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "message: guardCheck.reason || 'Permission Denied: Güvenlik filtreleri emri reddetti.'"
+    },
+    {
+      "file": "server/services/orderEmulator.service.ts",
+      "line": 47,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const cleanSym = (symbol || 'THYAO').toUpperCase().trim();"
+    },
+    {
+      "file": "server/bots/YahooPriceBot.ts",
+      "line": 103,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const volume = Number(meta.regularMarketVolume || 1000000);"
+    },
+    {
+      "file": "server/bots/TradingViewScannerBot.ts",
+      "line": 82,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "const rawSymbol = String(item.s || '');"
+    },
+    {
+      "file": "server/bots/TradingViewScannerBot.ts",
+      "line": 132,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const changePct = priceData?.changePct ?? 0.5;"
+    },
+    {
+      "file": "server/bots/XSentimentBot.ts",
+      "line": 84,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const changePct = priceData?.changePct ?? 0;"
+    },
+    {
+      "file": "server/bots/XSentimentBot.ts",
+      "line": 105,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const rawScore = (bullishCount - bearishCount) / (tweetVolume || 1);"
+    },
+    {
+      "file": "server/bots/BotManager.ts",
+      "line": 90,
+      "rule": "FALLBACK_STRING",
+      "msg": "String fallback yasak",
+      "code": "simulationWarnings: simulatedBots.map((b) => `${b.name}: ${b.simulationWarning || 'Simüle Veri'}`),"
+    },
+    {
+      "file": "crypto/cryptoAdapter.ts",
+      "line": 51,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const currentPrice = topAskPrice || topBidPrice || 0;"
+    },
+    {
+      "file": "crypto/cryptoAdapter.ts",
+      "line": 108,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "const stdDailyRet = Math.sqrt(dailyReturns.reduce((a, b) => a + (b - meanDailyRet) ** 2, 0) / (dailyReturns.length || 1));"
+    },
+    {
+      "file": "python/risk_engine.py",
+      "line": 16,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "- Zero fake fallbacks (?? 347, || 50, Math.random KESİNLİKLE YASAKTIR)."
+    },
+    {
+      "file": "python/backtest_engine.py",
+      "line": 12,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "- Zero fake fallbacks (?? 347, || 50, Math.random KESİNLİKLE YASAKTIR)."
+    },
+    {
+      "file": "python/risk/risk_engine.py",
+      "line": 16,
+      "rule": "FALLBACK_NUMERIC",
+      "msg": "Sayisal fallback yasak",
+      "code": "- Zero fake fallbacks (?? 347, || 50, Math.random KESİNLİKLE YASAKTIR)."
+    }
+  ],
+  "summary": {
+    "total_issues": 785,
+    "by_rule": {
+      "FALLBACK_STRING": 461,
+      "FALLBACK_NUMERIC": 323,
+      "THROW_NEW": 1
+    }
+  },
+  "verdict": "FAIL - Qodi ihlali"
+}

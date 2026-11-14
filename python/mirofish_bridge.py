@@ -8,7 +8,7 @@ Bu modül harici kod içermez; JIRO ve EmbeddingEngine kümelerini girdi alarak
 """
 
 from __future__ import annotations
-import random
+import secrets
 from typing import Dict, Any, List, Optional, Union
 
 

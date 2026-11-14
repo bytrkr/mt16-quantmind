@@ -69,6 +69,7 @@ export interface BinanceTradeExecutionResult {
 }
 
 export class BinanceSpotExecutor {
+  private execCounter = 0;
   private apiKey: string;
   private secretKey: string;
   private testnet: boolean;
@@ -207,7 +208,7 @@ export class BinanceSpotExecutor {
     };
 
     return {
-      executionId: `EXEC_${now}_${Math.floor(Math.random() * 8999 + 1000)}`,
+      executionId: `EXEC_${now}_${(this.execCounter = (this.execCounter || 0) + 1)}`,
       symbol,
       orderId: buyOrderId,
       clientOrderId: `buy_mkt_${symbol.toLowerCase()}_${now}`,

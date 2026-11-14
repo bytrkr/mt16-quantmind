@@ -12,9 +12,14 @@ export class GeminiKeyRotator {
     this.keys = apiKeys.filter((k) => k && k.trim() !== '');
   }
 
-  public getActiveKey(): string {
+  /**
+   * Qodi v6.1: throw yerine null döner.
+   * Anahtar yoksa çağıran taraf null kontrolü yapmalıdır.
+   */
+  public getActiveKey(): string | null {
     if (this.keys.length === 0) {
-      throw new Error('Tanımlı Gemini API anahtarı bulunamadı.');
+      console.warn('[GeminiKeyRotator] QODI v6.1: Tanımlı Gemini API anahtarı yok, null döndürüldü.');
+      return null;
     }
     return this.keys[this.currentIndex];
   }

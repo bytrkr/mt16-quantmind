@@ -15,3 +15,9 @@ task_states.json
 600
 vite
 TEST_FILE*.txt
+
+# Qodi: .env yedekleri asla commit edilmemeli
+.env
+.env.*
+*.qodi_bak*
+.qodi_bak*

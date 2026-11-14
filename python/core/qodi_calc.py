@@ -3,7 +3,7 @@ MT16 QuantMind - Qodi Metodolojisi Çoklu Sembol ve Dolgu Duyarlılığı Analiz
 [Policy: Exclusion-Normalization v1.0]
 """
 
-import random
+import secrets
 
 def run_analysis():
     symbols = ["ASELS", "THYAO", "GARAN", "EREGL", "KCHOL"]

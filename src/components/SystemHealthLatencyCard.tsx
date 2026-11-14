@@ -107,10 +107,10 @@ export const SystemHealthLatencyCard: React.FC<SystemHealthLatencyProps> = ({
 
       // Simüle yüksek gecikme aktifse yapay ekleme
       if (simulatedHighLatencyRef.current) {
-        calculatedMs += 280 + Math.floor(Math.random() * 60);
+        calculatedMs += 280 + ((Date.now() % 60)); // Qodi: deterministik jitter
       } else {
         // Doğal ağ dalgalanması
-        calculatedMs = Math.max(12, calculatedMs + Math.floor(Math.random() * 8) - 4);
+        calculatedMs = Math.max(12, calculatedMs + ((Date.now() % 8) - 4)); // Qodi: deterministik jitter
       }
 
       const prevLatency = latencyRef.current;

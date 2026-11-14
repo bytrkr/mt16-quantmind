@@ -10,7 +10,7 @@ Bu betik Qodi'nin 4 kritik kırmızı bayrağını adresler:
 """
 
 import math
-import random
+import secrets
 import json
 from datetime import datetime, timezone
 

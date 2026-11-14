@@ -24,6 +24,7 @@ function sanitizeValuation(val: unknown, fallback: number): number {
 }
 
 export class EnterpriseAuditEngine {
+  private auditCounter = 0;
   private auditTrail: AuditLogEntry[] = [];
 
   constructor() {
@@ -33,7 +34,7 @@ export class EnterpriseAuditEngine {
   private recordAudit(action: string, severity: AuditLogEntry['severity'], details: string): void {
     try {
       this.auditTrail.unshift({
-        auditId: `AUD-ENT-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+        auditId: `AUD-ENT-${Date.now()}-${(this.auditCounter = (this.auditCounter || 0) + 1)}`,
         service: 'EnterpriseAuditEngine',
         action,
         severity,

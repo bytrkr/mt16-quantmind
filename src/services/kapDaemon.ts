@@ -666,7 +666,7 @@ class KapAutonomousDaemon {
     });
 
     if (!res.ok) {
-      throw new Error(`KAP NLP servisi HTTP ${res.status}`);
+      console.warn(`[kapDaemon] QODI v6.1: KAP NLP servisi HTTP ${res.status}, işlem atlandı.`); return null; // Qodi: throw yerine null
     }
 
     const raw = await res.json();

@@ -53,6 +53,7 @@ function sanitizeMetric(val: unknown, fallback: number, min = -Infinity, max = I
 }
 
 export class FinnhubService {
+  private auditCounter = 0;
   private apiKey: string;
   private baseUrl: string = 'https://finnhub.io/api/v1';
   private cache: Map<string, { data: FinnhubSentimentData; timestamp: number }> = new Map();
@@ -67,7 +68,7 @@ export class FinnhubService {
   private recordAudit(action: string, severity: AuditLogEntry['severity'], details: string): void {
     try {
       this.auditTrail.unshift({
-        auditId: `AUD-FINN-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+        auditId: `AUD-FINN-${Date.now()}-${(this.auditCounter = (this.auditCounter || 0) + 1)}`,
         service: 'FinnhubService',
         action,
         severity,

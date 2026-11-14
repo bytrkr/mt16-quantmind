@@ -10,7 +10,7 @@ Qodi 8-Adımlı Test Protokolü:
 """
 
 import math
-import random
+import secrets
 import json
 from datetime import datetime, timezone
 

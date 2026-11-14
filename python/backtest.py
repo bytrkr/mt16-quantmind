@@ -8,7 +8,7 @@ ve Kâr Faktörü (Profit Factor) metriklerini hesaplar.
 
 from __future__ import annotations
 import math
-import random
+import secrets
 from typing import Dict, Any, List, Optional
 
 try:

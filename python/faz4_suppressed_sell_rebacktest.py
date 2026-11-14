@@ -9,7 +9,7 @@ FAZ 4 Amaçları:
 """
 
 import math
-import random
+import secrets
 import json
 from datetime import datetime, timezone
 

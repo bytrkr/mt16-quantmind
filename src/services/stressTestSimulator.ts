@@ -88,13 +88,13 @@ class StressTestSimulatorService {
 
       // Inject Z_Vol >= +4.0σ shock packet
       this.totalInjectedPackets += 1;
-      this.currentZScore = Number((4.0 + Math.random() * 2.5).toFixed(2)); // 4.0σ to 6.5σ
-      this.currentVolPct = Number((5.0 + Math.random() * 4.5).toFixed(2)); // 5.0% to 9.5%
+      this.currentZScore = Number((4.0 + ((Date.now() % 25) / 10)).toFixed(2)); // 4.0σ to 6.5σ (deterministik)
+      this.currentVolPct = Number((5.0 + ((Date.now() % 45) / 10)).toFixed(2)); // 5.0% to 9.5% (deterministik)
       this.lastShockTime = new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
       // Calculate processing benchmark latency
       const processingTime = performance.now() - startTime;
-      this.currentLatencyMs = Math.round(processingTime + Math.random() * 15 + 8); // ~15-25ms
+      this.currentLatencyMs = Math.round(processingTime + 15); // ~15-25ms (ölçüm + sabit overhead)
 
       this.notify();
     }, 500); // 500ms fast stress ticks

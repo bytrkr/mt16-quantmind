@@ -1,0 +1,523 @@
+[
+  {
+    "file": "server/index.ts",
+    "line": 2180,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 200"
+  },
+  {
+    "file": "server/index.ts",
+    "line": 2187,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() - 0.48"
+  },
+  {
+    "file": "server/index.ts",
+    "line": 2194,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() > 0.75"
+  },
+  {
+    "file": "server/index.ts",
+    "line": 2208,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 0.8"
+  },
+  {
+    "file": "server/index.ts",
+    "line": 2209,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 10"
+  },
+  {
+    "file": "server/index.ts",
+    "line": 2227,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 30"
+  },
+  {
+    "file": "server/index.ts",
+    "line": 2887,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 900000"
+  },
+  {
+    "file": "server/index.ts",
+    "line": 3328,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('Controlled test exception');",
+    "in_try_catch": false
+  },
+  {
+    "file": "src/components/DebugConsole.tsx",
+    "line": 73,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() > 0.8"
+  },
+  {
+    "file": "src/components/DebugConsole.tsx",
+    "line": 73,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() > 0.6"
+  },
+  {
+    "file": "src/components/DebugConsole.tsx",
+    "line": 80,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * msgs.length"
+  },
+  {
+    "file": "src/components/Header.tsx",
+    "line": 177,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(errJson.error || `HTTP ${res.status}`);",
+    "in_try_catch": true
+  },
+  {
+    "file": "src/components/Header.tsx",
+    "line": 200,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(errJson.error || `HTTP ${res.status}`);",
+    "in_try_catch": true
+  },
+  {
+    "file": "src/components/NlpSearchPanel.tsx",
+    "line": 136,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`NLP arama motoru yanıt vermedi (HTTP ${response.status})`);",
+    "in_try_catch": true
+  },
+  {
+    "file": "src/components/SearchBar.tsx",
+    "line": 70,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`Arama servisi yanıt vermedi (${res.status})`);",
+    "in_try_catch": true
+  },
+  {
+    "file": "src/components/SystemHealthLatencyCard.tsx",
+    "line": 110,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 60"
+  },
+  {
+    "file": "src/components/SystemHealthLatencyCard.tsx",
+    "line": 113,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 8"
+  },
+  {
+    "file": "src/components/TacticalCard.tsx",
+    "line": 496,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(errData.detail || `Sunucu hatası (${res.status})`);",
+    "in_try_catch": true
+  },
+  {
+    "file": "src/components/TacticalCard.tsx",
+    "line": 940,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('Excel ihrac servisi hatasi');",
+    "in_try_catch": true
+  },
+  {
+    "file": "src/components/TacticalCard.tsx",
+    "line": 991,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('Word ihrac servisi hatasi');",
+    "in_try_catch": true
+  },
+  {
+    "file": "src/services/geminiKeyRotator.ts",
+    "line": 17,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('Tanımlı Gemini API anahtarı bulunamadı.');",
+    "in_try_catch": false
+  },
+  {
+    "file": "src/services/kapDaemon.ts",
+    "line": 669,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`KAP NLP servisi HTTP ${res.status}`);",
+    "in_try_catch": false
+  },
+  {
+    "file": "src/services/orderflow.ts",
+    "line": 190,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() > 0.42"
+  },
+  {
+    "file": "src/services/orderflow.ts",
+    "line": 191,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * brokers.length"
+  },
+  {
+    "file": "src/services/orderflow.ts",
+    "line": 192,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 8000"
+  },
+  {
+    "file": "src/services/orderflow.ts",
+    "line": 193,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() - 0.48"
+  },
+  {
+    "file": "src/services/stressTestSimulator.ts",
+    "line": 91,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 2.5"
+  },
+  {
+    "file": "src/services/stressTestSimulator.ts",
+    "line": 92,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 4.5"
+  },
+  {
+    "file": "src/services/stressTestSimulator.ts",
+    "line": 97,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 15"
+  },
+  {
+    "file": "src/services/twapExecutor.ts",
+    "line": 57,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 2.1"
+  },
+  {
+    "file": "src/services/twapExecutor.ts",
+    "line": 58,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 25"
+  },
+  {
+    "file": "src/services/twapExecutor.ts",
+    "line": 64,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 12.0"
+  },
+  {
+    "file": "src/services/visionService.ts",
+    "line": 32,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`Sunucu hatası (${response.status}): ${errorText}`);",
+    "in_try_catch": true
+  },
+  {
+    "file": "src/utils/api.ts",
+    "line": 53,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('Oturum süresi doldu, lütfen tekrar giriş yapın.');",
+    "in_try_catch": false
+  },
+  {
+    "file": "src/utils/api.ts",
+    "line": 58,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(errorData.detail || `İstek başarısız: ${response.status}`);",
+    "in_try_catch": false
+  },
+  {
+    "file": "src/utils/engine.ts",
+    "line": 1304,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`Canlı veri sunucu yanıtı: ${res.status}`);",
+    "in_try_catch": true
+  },
+  {
+    "file": "server/bots/YahooPriceBot.ts",
+    "line": 120,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() - 0.48"
+  },
+  {
+    "file": "server/bots/YahooPriceBot.ts",
+    "line": 131,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 5000000"
+  },
+  {
+    "file": "server/bots/YahooPriceBot.ts",
+    "line": 89,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`Yahoo HTTP ${response.status}`);",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/bots/YahooPriceBot.ts",
+    "line": 95,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('Geçersiz Yahoo veri yapısı');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/publisher/queue.ts",
+    "line": 28,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random().toString"
+  },
+  {
+    "file": "server/publisher/queue.ts",
+    "line": 63,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('Task returned false status');",
+    "in_try_catch": true
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 36,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('GEMINI_API_KEY tanimli degil.');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 45,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('Gemini bos yanit dondurdu.');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 55,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('DEEPSEEK_API_KEY tanimli degil.');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 71,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`DeepSeek HTTP ${response.status}`);",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 74,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('DeepSeek bos yanit dondurdu.');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 84,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('DASHSCOPE_API_KEY tanimli degil.');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 100,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`Qwen HTTP ${response.status}`);",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 103,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('Qwen bos yanit dondurdu.');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 113,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('GROQ_API_KEY tanimli degil.');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 126,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`Groq HTTP ${response.status}`);",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 129,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('Groq bos yanit dondurdu.');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 139,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('OPENROUTER_API_KEY tanimli degil.');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 152,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`OpenRouter HTTP ${response.status}`);",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/routes/llmProxy.ts",
+    "line": 155,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('OpenRouter bos yanit dondurdu.');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/services/agentApiClient.ts",
+    "line": 79,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`HTTP ${res.status}: ${res.statusText}`);",
+    "in_try_catch": true
+  },
+  {
+    "file": "server/services/agentApiClient.ts",
+    "line": 142,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`Python Logic Error: ${err.message}`);",
+    "in_try_catch": true
+  },
+  {
+    "file": "server/services/agentApiClient.ts",
+    "line": 543,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`Kural Ekleme Hatası (${res.status}): ${errText || res.statusText}`);",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/services/agentApiClient.ts",
+    "line": 577,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`Stres Testi Hatası (${res.status}): ${errText || res.statusText}`);",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/services/agentApiClient.ts",
+    "line": 618,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`Bildirim Testi Hatası (${res.status})`);",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/services/agentApiClient.ts",
+    "line": 634,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`Küresel Varlık Değerlendirme Hatası (${res.status})`);",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/services/alpacaExecutor.ts",
+    "line": 115,
+    "kind": "THROW_NEW",
+    "code": "throw new Error(`Alpaca API error: ${response.status} ${response.statusText}`);",
+    "in_try_catch": true
+  },
+  {
+    "file": "server/services/binanceExecutor.ts",
+    "line": 210,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 8999"
+  },
+  {
+    "file": "server/services/enterpriseAuditEngine.ts",
+    "line": 36,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 1000"
+  },
+  {
+    "file": "server/services/finnhubService.ts",
+    "line": 70,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 1000"
+  },
+  {
+    "file": "server/services/nasdaqMarketStream.service.ts",
+    "line": 112,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 2500"
+  },
+  {
+    "file": "server/services/nasdaqMarketStream.service.ts",
+    "line": 126,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 2400"
+  },
+  {
+    "file": "server/services/selfHealer.ts",
+    "line": 24,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('All AI providers failed');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/services/selfHealer.ts",
+    "line": 45,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('Groq failed');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/services/selfHealer.ts",
+    "line": 62,
+    "kind": "THROW_NEW",
+    "code": "throw new Error('OpenRouter failed');",
+    "in_try_catch": false
+  },
+  {
+    "file": "server/services/signalBotGateway.ts",
+    "line": 37,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 0.3"
+  },
+  {
+    "file": "server/services/signalBotGateway.ts",
+    "line": 38,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 0.8"
+  },
+  {
+    "file": "server/services/signalBotGateway.ts",
+    "line": 39,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 12"
+  },
+  {
+    "file": "server/services/simulator.ts",
+    "line": 154,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random().toString"
+  },
+  {
+    "file": "server/services/simulator.ts",
+    "line": 248,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * sentiment.bull"
+  },
+  {
+    "file": "server/services/simulator.ts",
+    "line": 249,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * sentiment.bear"
+  },
+  {
+    "file": "server/services/tcmbService.ts",
+    "line": 57,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 1000"
+  },
+  {
+    "file": "server/services/trackRecordService.ts",
+    "line": 53,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * 1000"
+  },
+  {
+    "file": "server/utils/apiKeyManager.ts",
+    "line": 17,
+    "kind": "MATH_RANDOM",
+    "code": "Math.random() * keys.length"
+  }
+]

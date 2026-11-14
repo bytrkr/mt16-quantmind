@@ -70,14 +70,15 @@ export const DebugConsole: React.FC = () => {
 
     // Periodic system heartbeat log
     const interval = setInterval(() => {
-      const randLevel = Math.random() > 0.8 ? 'WARN' : Math.random() > 0.6 ? 'NETWORK' : 'INFO';
+      const levels = ['INFO', 'INFO', 'NETWORK', 'INFO', 'WARN'] as const;
+      const randLevel = levels[Math.floor(Date.now() / 8000) % levels.length];
       const msgs = [
         'L2 Emir Defteri OBI Matrisi Güncellendi (OBI: -0.01)',
         'HTTP GET /api/universal/data?ticker=NVDA 200 OK (12ms)',
         'ExecutionSafetyGuard VaR Limit Kontrolü Tamamlandı.',
         'KAP kapDaemon Canlı Akış Bildirimi Alındı.',
       ];
-      const randMsg = msgs[Math.floor(Math.random() * msgs.length)];
+      const randMsg = msgs[Math.floor(Date.now() / 8000) % msgs.length];
       handleAddLog(randLevel, 'MONITOR', randMsg);
     }, 8000);
 

@@ -117,7 +117,7 @@ export class YahooPriceBot {
 
   private fallbackPrice(ticker: string): void {
     const base = BASE_PRICES[ticker] || { price: 50.0, prevClose: 49.5 };
-    const jitter = (Math.random() - 0.48) * (base.price * 0.003); // Hafif canlı piyasa mikro-dalgalanması
+    const jitter = ((Date.now() % 100 - 48) / 100) * (base.price * 0.003); // Qodi: deterministik jittersı
     const price = Number((base.price + jitter).toFixed(2));
     const changePct = Number((((price - base.prevClose) / base.prevClose) * 100).toFixed(2));
 
@@ -128,7 +128,7 @@ export class YahooPriceBot {
       prevClose: base.prevClose,
       high: Number((price * 1.015).toFixed(2)),
       low: Number((price * 0.985).toFixed(2)),
-      volume: Math.round(15000000 + Math.random() * 5000000),
+      volume: Math.round(15000000 + (Date.now() % 5000000)), // Qodi: deterministik
       timestamp: Date.now(),
       source: 'Autonomous In-Memory Fallback',
     });

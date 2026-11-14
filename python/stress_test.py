@@ -7,7 +7,7 @@ hisse senedi ve portföyün dayanıklılığını Monte Carlo yöntemi ile simü
 
 from __future__ import annotations
 import math
-import random
+import secrets
 from typing import Dict, Any, List, Optional
 
 

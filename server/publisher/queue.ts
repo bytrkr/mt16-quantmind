@@ -11,6 +11,8 @@ export interface QueueItem {
   channel: string;
 }
 
+let queueCounter = 0;
+
 export class PublisherQueue {
   private queue: QueueItem[] = [];
   private isProcessing: boolean = false;
@@ -25,7 +27,7 @@ export class PublisherQueue {
    */
   public enqueue(channel: string, task: () => Promise<boolean>, maxRetries: number = 3): void {
     const item: QueueItem = {
-      id: Math.random().toString(36).substring(2, 9),
+      id: `${Date.now()}-${(queueCounter++).toString(36)}`,
       task,
       retries: 0,
       maxRetries,

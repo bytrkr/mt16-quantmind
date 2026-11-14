@@ -41,6 +41,7 @@ function sanitizeFinite(val: unknown, fallback: number): number {
 }
 
 export class TrackRecordService {
+  private auditCounter = 0;
   private auditTrail: AuditLogEntry[] = [];
 
   constructor() {
@@ -50,7 +51,7 @@ export class TrackRecordService {
   private recordAudit(action: string, severity: AuditLogEntry['severity'], details: string): void {
     try {
       this.auditTrail.unshift({
-        auditId: `AUD-TRK-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+        auditId: `AUD-TRK-${Date.now()}-${(this.auditCounter = (this.auditCounter || 0) + 1)}`,
         service: 'TrackRecordService',
         action,
         severity,
