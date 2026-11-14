@@ -15,6 +15,62 @@ export async function analyzeBistSymbol(cleanSym: string) {
   const limits = null;
 
   if (!matriksStatus.hasKey) {
+    // Qodi v6.1: Matriks yoksa Yahoo Finance (gecikmeli) fallback
+    try {
+      const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${cleanSym}.IS?interval=1d&range=1d`;
+      const yahooRes = await fetch(yahooUrl, {
+        headers: { 'User-Agent': 'Mozilla/5.0' },
+        signal: AbortSignal.timeout(8000),
+      });
+      if (yahooRes.ok) {
+        const yahooData: any = await yahooRes.json();
+        const result = yahooData?.chart?.result?.[0];
+        const meta = result?.meta;
+        const price = meta?.regularMarketPrice;
+        if (price !== undefined && price !== null) {
+          return {
+            success: true,
+            symbol: cleanSym,
+            source: "Yahoo Finance (gecikmeli, 15dk)",
+            dataProvider: "YAHOO",
+            matriksKeyStatus: "MATRIKS YOK - YAHOO FALLBACK",
+            price,
+            priceNote: "Yahoo Finance gecikmeli veri (Matriks yok)",
+            bistCheck: {
+              isValid: true,
+              action: "PROCEED",
+              symbol: cleanSym,
+              price,
+              side: "BUY",
+              sessionPhase: sessionStatus.phase,
+              isMarketOpen: sessionStatus.isOpen,
+              limits: null,
+              reason: "Yahoo Finance gecikmeli veri",
+            },
+            vpin: {
+              symbol: cleanSym,
+              vpinScore: null,
+              note: "Yahoo'da VPIN icin trade tick yok",
+              toxicityLevel: "UNKNOWN",
+              isToxic: false,
+              action: "PROCEED",
+              reason: "VPIN hesaplanamadi, VETO yok",
+              bucketSize: 0,
+              analyzedTradesCount: 0,
+            },
+            sentinel: { approved: true, action: "PROCEED", reason: "Yahoo fallback", stockAllocationPct: 10, sectorAllocationPct: 20, dailyLossPct: 0 },
+            alpha: { symbol: cleanSym, direction: "NEUTRAL", confidence: 50, timeHorizon: "1G", sourceModel: "Yahoo-Fallback" },
+            wall: null,
+            portfolio: null,
+            extra: { source: "Yahoo Finance", obi: "VERI YOK", cvd: "VERI YOK", wallZ: "VERI YOK", volatility: "VERI YOK", sharpeRatio: "VERI YOK", beta: "VERI YOK" },
+            finalDecision: { action: "PROCEED", reason: "Yahoo Finance gecikmeli veri ile analiz" }
+          };
+        }
+      }
+    } catch (e) {
+      // Yahoo da basarisiz, VERI YOK don
+    }
+    
     return {
       success: true,
       symbol: cleanSym,
