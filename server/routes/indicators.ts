@@ -8,7 +8,19 @@ router.get('/:symbol', async (req: Request, res: Response) => {
   
   try {
     // Yahoo Finance'ten geçmiş veri çek
-    const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}.IS?interval=1d&range=3mo`;
+    // Qodi v6.1: Sembol turune gore Yahoo sembolu belirle
+    let yahooSymbol = symbol;
+    if (symbol === 'BTCUSDT' || symbol.endsWith('USDT')) {
+      // Binance kripto paritesi -> Yahoo'da BTC-USD formati
+      yahooSymbol = symbol.replace('USDT', '-USD');
+    } else if (['NVDA', 'AAPL', 'MSFT', 'TSLA', 'AMZN', 'GOOGL', 'META'].includes(symbol)) {
+      // NASDAQ hisseleri -> Yahoo'da dogrudan sembol
+      yahooSymbol = symbol;
+    } else {
+      // BIST hisseleri -> .IS ekle
+      yahooSymbol = `${symbol}.IS`;
+    }
+    const url = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooSymbol}?interval=1d&range=3mo`;
     const yRes = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
     if (!yRes.ok) return res.status(503).json({ success: false, error: 'VERİ YOK - Yahoo' });
     
@@ -60,7 +72,34 @@ router.get('/:symbol', async (req: Request, res: Response) => {
       lastPrice: candles[candles.length - 1].close,
     });
   } catch (e: any) {
-    return res.status(500).json({ success: false, error: 'VERİ YOK - ' + (e?.message || 'bilinmeyen') });
+    // Qodi v6.1: Yahoo basarisiz olursa Binance'e fallback (kripto icin)
+    if (symbol.endsWith('USDT')) {
+      try {
+        const binanceUrl = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1d&limit=90`;
+        const bRes = await fetch(binanceUrl);
+        if (bRes.ok) {
+          const bData: any[] = await bRes.json();
+          const candles = bData.map((k: any[]) => ({
+            time: new Date(k[0]).toISOString().split('T')[0],
+            open: parseFloat(k[1]),
+            high: parseFloat(k[2]),
+            low: parseFloat(k[3]),
+            close: parseFloat(k[4]),
+            volume: parseFloat(k[5]),
+          }));
+          if (candles.length >= 30) {
+            return res.json({
+              success: true, symbol, source: 'Binance',
+              candles, rsi: [], macd: [],
+              lastPrice: candles[candles.length - 1].close,
+            });
+          }
+        }
+      } catch (binanceErr) {
+        // Binance de basarisiz, VERI YOK
+      }
+    }
+    return res.status(503).json({ success: false, error: 'VERİ YOK - ' + (e?.message || 'bilinmeyen') });
   }
 });
 

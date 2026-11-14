@@ -269,8 +269,13 @@ export class NotificationDaemon {
       }
     }
 
-    // 6. Durum: Spoofing & Manipülasyon Alarmı
-    if (params.microstructure && (params.microstructure.isSpoofingDetected || params.microstructure.spoofingRisk === 'HIGH' || params.microstructure.spoofingRisk === 'CRITICAL')) {
+    // 6. Durum: Spoofing & Manipülasyon Alarmı (Qodi v6.1: Gerçek veri kontrolü)
+    // Sadece gerçek veri varsa alert fırlat. Mock verilerle 'sürekli anomali' YASAK.
+    if (params.microstructure && 
+        params.microstructure.isSpoofingDetected === true && 
+        params.microstructure.spoofingRisk === 'CRITICAL' &&
+        typeof params.microstructure.cancelRatePct === 'number' &&
+        params.microstructure.cancelRatePct > 0) {
       const key = `${symbol}-SPOOFING_ALERT`;
       const lastTrigger = this.lastTriggeredTimestamps.get(key) ? this.lastTriggeredTimestamps.get(key) : 0;
 

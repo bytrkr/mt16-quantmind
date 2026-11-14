@@ -41,7 +41,8 @@ const HOT_PRESETS: Record<MarketType, string[]> = {
 };
 
 const CEILING_CANDIDATES = ['THYAO', 'BIMAS', 'TUPRS', 'KCHOL', 'GARAN', 'EREGL', 'ASELS', 'AKBNK', 'PETKM', 'SASA', 'CIMSA', 'KONTR'];
-const VOLUME_ANOMALIES = ['THYAO', 'GARAN', 'AKBNK', 'KCHOL', 'ISCTR'];
+// Qodi v6.1: Sabit anomali listesi YASAK. Gercek anomali verisi kullanilmali.
+const VOLUME_ANOMALIES: string[] = []; // Gercek anomali verisi yoksa bos
 const INSTITUTIONAL_BUY = ['BIMAS', 'TUPRS', 'SISE', 'SAHOL', 'FROTO'];
 
 function safeFormat(value: number | null, opts?: Intl.NumberFormatOptions) {
@@ -319,18 +320,21 @@ export const Watchlist: React.FC<WatchlistProps> = ({
             <span>Tavan Adayı</span>
           </button>
 
-          <button
-            type="button"
-            onClick={() => setActiveFilter('VOLUME')}
-            className={`px-2.5 py-1 rounded-xl text-[11px] font-bold font-mono flex items-center gap-1 shrink-0 transition cursor-pointer border ${
-              activeFilter === 'VOLUME'
-                ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/50 shadow-sm'
-                : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-white'
-            }`}
-          >
-            <Zap className="w-3 h-3 text-cyan-400" />
-            <span>Hacim Anomali</span>
-          </button>
+          {/* Qodi v6.1: Sadece gercek anomali verisi varsa goster */}
+          {VOLUME_ANOMALIES.length > 0 && (
+            <button
+              type="button"
+              onClick={() => setActiveFilter('VOLUME')}
+              className={`px-2.5 py-1 rounded-xl text-[11px] font-bold font-mono flex items-center gap-1 shrink-0 transition cursor-pointer border ${
+                activeFilter === 'VOLUME'
+                  ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/50 shadow-sm'
+                  : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-white'
+              }`}
+            >
+              <Zap className="w-3 h-3 text-cyan-400" />
+              <span>Hacim Anomali ({VOLUME_ANOMALIES.length})</span>
+            </button>
+          )}
 
           <button
             type="button"

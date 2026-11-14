@@ -24,6 +24,7 @@ import { executeQuantMindQuery, QUANT_MIND_TITLE } from './services/quantMind';
 import { autoCheckAndRunSystemReset } from './utils/systemReset';
 import CommandBar from './components/CommandBar';
 import DashboardLayout from './components/DashboardLayout';
+import InteractiveChart from './components/InteractiveChart';
 
 const CryptoStreamTab = lazy(() => import('./components/CryptoStreamTab'));
 const NasdaqStreamTab = lazy(() => import('./components/NasdaqStreamTab'));
@@ -453,7 +454,16 @@ export default function App() {
 
       {/* 🚀 ANA İÇERİK KAPSAYICISI (Sürüklenebilir Savaş Odası Pencereleri + Reaktif Katman Görünümü) */}
       <main className="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 space-y-6">
-        {/* 🧭 TAKTİKSEL SÜRÜKLENEBİLİR AÇILIR PENCERE DOCK ÇUBUĞU */}
+      <div className="w-full px-4 pt-3 pb-1">
+        <InteractiveChart 
+          symbol={
+            selectedMarket === 'CRYPTO' ? cryptoPair :
+            selectedMarket === 'NASDAQ' ? nasdaqSymbol :
+            (activeTicker || 'THYAO')
+          } 
+        />
+      </div>
+{/* 🧭 TAKTİKSEL SÜRÜKLENEBİLİR AÇILIR PENCERE DOCK ÇUBUĞU */}
         <div className="bg-slate-900/75 backdrop-blur-xl border border-emerald-500/25 rounded-2xl px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 shadow-[0_8px_28px_rgba(0,0,0,0.65)]">
           <div className="flex items-center gap-2 text-xs">
             <span className="p-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/35 text-emerald-300">
