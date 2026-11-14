@@ -6,6 +6,7 @@
 ./.env.env.qodi_bak7
 ./.env.example
 ./.gitignore
+./2.0
 ./Dockerfile.jiro
 ./Dockerfile.node
 ./Dockerfile.python
@@ -575,4 +576,5 @@
 ./vite.config.ts.timestamp-1794684673414-a1ab4c6eabc5.mjs
 ./vite.config.ts.timestamp-1794685042902-0e0cec1b7d24.mjs
 ./vite.config.ts.timestamp-1794685620713-ad0232c2dac3a.mjs
+./vite.config.ts.timestamp-1794685979327-46c67cd3ad604.mjs
 ```

@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { ALL_BIST_STOCKS } from '../data/bistAllStocks';
 import { useMarketData } from '../hooks/useMarketData';
+import { marketGateway } from '../services/marketGateway';
 import { getYahooDirectPrice } from '../services/yahooDirect';
 import type { MarketType } from '../App';
 
@@ -232,6 +233,9 @@ export const Watchlist: React.FC<WatchlistProps> = ({
   className = ''
 }) => {
   const [activeFilter, setActiveFilter] = useState<WatchlistFilter>('HOT');
+
+  // Qodi v6.1: Gercek anomali listesi (API'den ayrıca çekilecek)
+  const volumeAnomalies: string[] = [];
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -245,14 +249,14 @@ export const Watchlist: React.FC<WatchlistProps> = ({
       case 'CEILING':
         return CEILING_CANDIDATES;
       case 'VOLUME':
-        return VOLUME_ANOMALIES;
+        return volumeAnomalies;
       case 'INSTITUTIONAL':
         return INSTITUTIONAL_BUY;
       case 'HOT':
       default:
         return HOT_PRESETS.BIST;
     }
-  }, [selectedMarket, activeFilter]);
+  }, [selectedMarket, activeFilter, volumeAnomalies]);
 
   // Arama filtresi
   const searchResults = useMemo(() => {
