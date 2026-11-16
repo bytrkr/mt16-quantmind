@@ -1,6 +1,16 @@
 {
-  "toplam_tur": 341,
+  "toplam_tur": 343,
   "kayitlar": [
+    {
+      "zaman": "17:07:11",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "17:02:57",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
     {
       "zaman": "16:58:42",
       "tip": "TUR",
@@ -145,19 +155,9 @@
       "zaman": "15:43:36",
       "tip": "TUR",
       "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:39:21",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:35:06",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
     }
   ],
-  "son_guncelleme": "2026-11-16 16:58:42",
+  "son_guncelleme": "2026-11-16 17:07:11",
   "saglayici_durumu": [
     {
       "ad": "GROQ",
