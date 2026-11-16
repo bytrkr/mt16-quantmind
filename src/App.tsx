@@ -1,3 +1,4 @@
+import { SahibindenVitrin } from './components/SahibindenVitrin';
 import React, { useState, useEffect, useMemo, useCallback, lazy } from 'react';
 import {
   Move,
@@ -56,6 +57,9 @@ export type TabKey =
   | 'chat';
 
 export default function App() {
+  const [vitrinModu, setVitrinModu] = useState(() => localStorage.getItem("eski_mod") !== "1");
+  if (vitrinModu) return <SahibindenVitrin onEskiTerminaleGec={() => { localStorage.setItem("eski_mod", "1"); window.location.reload(); }} />;
+
   // URL hash tab ve pazar senkronizasyonu (KESİNLİKLE KORUNDU)
   const getInitialState = (): { market: MarketType; tab: TabKey } => {
     if (typeof window !== 'undefined') {
@@ -412,6 +416,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-emerald-500 selection:text-slate-950">
+      <button onClick={() => { localStorage.removeItem("eski_mod"); window.location.reload(); }} style={{ position: "fixed", bottom: "16px", right: "16px", zIndex: 99999, background: "#ffe800", color: "#000", border: "2px solid #2c3e50", padding: "10px 16px", borderRadius: "8px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 4px 12px rgba(0,0,0,0.3)" }}>✨ Yeni Vitrine Geç ↗</button>
       {/* 🟢 YEKPARE ÜST KONTROL VE SEKME YÖNLENDİRME ÇUBUĞU (HeaderBar) */}
       <HeaderBar
         user={user}
@@ -651,7 +656,6 @@ export default function App() {
                   <LazyModuleWrapper>
                     <SmartJuryDiagnosisCard
                       compositeAnomaly={null}
-                      fundamentals={fundamentals}
                       marketType={selectedMarket}
                       ticker={activeMarketSymbol}
                       onVetoStatusChange={setIsJuryVetoed}

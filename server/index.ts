@@ -770,6 +770,14 @@ app.use('/api', generalApiLimiter);
 app.use(chatRouter);
 import llmProxyRouter from './routes/llmProxy.js';
 app.use('/api/llm', llmProxyRouter);
+
+app.get('/api/otonom/vitrin', (_req, res) => {
+  try { return res.json(JSON.parse(fs.readFileSync('/home/bytrkr/bistapp/data/hazir_vitrin.json', 'utf-8'))); } catch { return res.json([]); }
+});
+app.get('/api/otonom/rapor', (_req, res) => {
+  try { return res.json(JSON.parse(fs.readFileSync('/home/bytrkr/bistapp/data/otonom_test_raporu.json', 'utf-8'))); } catch { return res.json({}); }
+});
+
 app.use('/api/indicators', indicatorsRoute);
 app.use(llmProxyRouter);
 import newsRouter from './routes/news.js';

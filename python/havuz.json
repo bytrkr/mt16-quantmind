@@ -1,0 +1,1534 @@
+[
+  {
+    "sembol": "THYAO",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Ulaştırma & Havacılık",
+    "nitelik": "Bilanço Zırhlı"
+  },
+  {
+    "sembol": "PGSUS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Ulaştırma & Havacılık",
+    "nitelik": "İhracat Odaklı"
+  },
+  {
+    "sembol": "TAVHL",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Ulaştırma & Havacılık",
+    "nitelik": "Döviz Bazlı Gelir"
+  },
+  {
+    "sembol": "ASELS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Savunma & Teknoloji",
+    "nitelik": "Kurumsal Toplama"
+  },
+  {
+    "sembol": "SDTTR",
+    "piyasa": "BIST",
+    "pazar": "Ana Pazar",
+    "sektor": "Savunma & Teknoloji",
+    "nitelik": "Katılım Endeksi"
+  },
+  {
+    "sembol": "MIATK",
+    "piyasa": "BIST",
+    "pazar": "Ana Pazar",
+    "sektor": "Savunma & Teknoloji",
+    "nitelik": "Agresif Büyüme"
+  },
+  {
+    "sembol": "REEDR",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Savunma & Teknoloji",
+    "nitelik": "Katılım Endeksi"
+  },
+  {
+    "sembol": "TUPRS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Sanayi & Enerji",
+    "nitelik": "Temettü Şampiyonu"
+  },
+  {
+    "sembol": "ASTOR",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Sanayi & Enerji",
+    "nitelik": "Katılım Endeksi"
+  },
+  {
+    "sembol": "EUPWR",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Sanayi & Enerji",
+    "nitelik": "Katılım Endeksi"
+  },
+  {
+    "sembol": "KONTR",
+    "piyasa": "BIST",
+    "pazar": "Ana Pazar",
+    "sektor": "Sanayi & Enerji",
+    "nitelik": "Yıldız Pazar Adayı"
+  },
+  {
+    "sembol": "EREGL",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Sanayi & Enerji",
+    "nitelik": "İhracat Odaklı"
+  },
+  {
+    "sembol": "SISE",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Sanayi & Enerji",
+    "nitelik": "İhracat Odaklı"
+  },
+  {
+    "sembol": "FROTO",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Otomotiv & İhracat",
+    "nitelik": "Temettü Şampiyonu"
+  },
+  {
+    "sembol": "TOASO",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Otomotiv & İhracat",
+    "nitelik": "Temettü Şampiyonu"
+  },
+  {
+    "sembol": "DOAS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Otomotiv & İhracat",
+    "nitelik": "Temettü Şampiyonu"
+  },
+  {
+    "sembol": "KCHOL",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Holding & Finans",
+    "nitelik": "Bilanço Zırhlı"
+  },
+  {
+    "sembol": "SAHOL",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Holding & Finans",
+    "nitelik": "Net Nakit Pozisyonu"
+  },
+  {
+    "sembol": "AKBNK",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Bankacılık",
+    "nitelik": "Kurumsal Toplama"
+  },
+  {
+    "sembol": "YKBNK",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Bankacılık",
+    "nitelik": "Kurumsal Toplama"
+  },
+  {
+    "sembol": "ISCTR",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Bankacılık",
+    "nitelik": "Bilanço Zırhlı"
+  },
+  {
+    "sembol": "GARAN",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Bankacılık",
+    "nitelik": "Kurumsal Toplama"
+  },
+  {
+    "sembol": "BIMAS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Perakende & Gıda",
+    "nitelik": "Katılım Endeksi"
+  },
+  {
+    "sembol": "MGROS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "Perakende & Gıda",
+    "nitelik": "Net Nakit Pozisyonu"
+  },
+  {
+    "sembol": "TCELL",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "İletişim & Telekom",
+    "nitelik": "Bilanço Zırhlı"
+  },
+  {
+    "sembol": "TTKOM",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "İletişim & Telekom",
+    "nitelik": "Kurumsal Toplama"
+  },
+  {
+    "sembol": "EKGYO",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "GYO & İnşaat",
+    "nitelik": "Katılım Endeksi"
+  },
+  {
+    "sembol": "ENKAI",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "GYO & İnşaat",
+    "nitelik": "Döviz Bazlı Gelir"
+  },
+  {
+    "sembol": "NVDA",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "Yapay Zeka & Çip",
+    "nitelik": "Kurumsal Toplama"
+  },
+  {
+    "sembol": "AAPL",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "Tüketici Teknolojisi",
+    "nitelik": "Net Nakit Pozisyonu"
+  },
+  {
+    "sembol": "MSFT",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "Bulut & Yazılım",
+    "nitelik": "Bilanço Zırhlı"
+  },
+  {
+    "sembol": "TSLA",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "Otonom & Enerji",
+    "nitelik": "Yüksek Hacim İvmesi"
+  },
+  {
+    "sembol": "AMZN",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "Bulut & E-Ticaret",
+    "nitelik": "Agresif Büyüme"
+  },
+  {
+    "sembol": "META",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "Yapay Zeka & Medya",
+    "nitelik": "Net Nakit Pozisyonu"
+  },
+  {
+    "sembol": "GOOGL",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "Yapay Zeka & Arama",
+    "nitelik": "Bilanço Zırhlı"
+  },
+  {
+    "sembol": "AMD",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "Yapay Zeka & Çip",
+    "nitelik": "Agresif Büyüme"
+  },
+  {
+    "sembol": "BTCUSDT",
+    "piyasa": "KRIPTO",
+    "pazar": "Major Coin",
+    "sektor": "Layer-1 Ağları",
+    "nitelik": "Balina & Likidasyon"
+  },
+  {
+    "sembol": "ETHUSDT",
+    "piyasa": "KRIPTO",
+    "pazar": "Major Coin",
+    "sektor": "Layer-1 Ağları",
+    "nitelik": "Balina & Likidasyon"
+  },
+  {
+    "sembol": "BNBUSDT",
+    "piyasa": "KRIPTO",
+    "pazar": "Major Coin",
+    "sektor": "Borsa & Ekosistem",
+    "nitelik": "Düşük Volatilite"
+  },
+  {
+    "sembol": "SOLUSDT",
+    "piyasa": "KRIPTO",
+    "pazar": "Altcoin",
+    "sektor": "Layer-1 Ağları",
+    "nitelik": "Yüksek Hacim İvmesi"
+  },
+  {
+    "sembol": "AVAXUSDT",
+    "piyasa": "KRIPTO",
+    "pazar": "Altcoin",
+    "sektor": "Layer-1 Ağları",
+    "nitelik": "Ortalamaya Dönüş"
+  },
+  {
+    "sembol": "XRPUSDT",
+    "piyasa": "KRIPTO",
+    "pazar": "Major Coin",
+    "sektor": "Ödeme Ağları",
+    "nitelik": "Balina & Likidasyon"
+  },
+  {
+    "sembol": "ADAUSDT",
+    "piyasa": "KRIPTO",
+    "pazar": "Altcoin",
+    "sektor": "Layer-1 Ağları",
+    "nitelik": "Ortalamaya Dönüş"
+  },
+  {
+    "sembol": "DOGEUSDT",
+    "piyasa": "KRIPTO",
+    "pazar": "Altcoin",
+    "sektor": "Meme & Topluluk",
+    "nitelik": "Yüksek Hacim İvmesi"
+  },
+  {
+    "sembol": "GC=F",
+    "ad": "ONS ALTIN",
+    "piyasa": "EMTIA",
+    "pazar": "Değerli Madenler",
+    "sektor": "Altın & Gümüş",
+    "nitelik": "Enflasyon Kalkanı"
+  },
+  {
+    "sembol": "SI=F",
+    "ad": "ONS GÜMÜŞ",
+    "piyasa": "EMTIA",
+    "pazar": "Değerli Madenler",
+    "sektor": "Altın & Gümüş",
+    "nitelik": "Yüksek Hacim İvmesi"
+  },
+  {
+    "sembol": "BZ=F",
+    "ad": "BRENT PETROL",
+    "piyasa": "EMTIA",
+    "pazar": "Enerji Emtiası",
+    "sektor": "Petrol & Gaz",
+    "nitelik": "Makro Gösterge"
+  },
+  {
+    "sembol": "USDTRY=X",
+    "ad": "DOLAR / TL",
+    "piyasa": "EMTIA",
+    "pazar": "Döviz Kurları",
+    "sektor": "Majör Pariteler",
+    "nitelik": "Döviz Bazlı Gelir"
+  },
+  {
+    "sembol": "EURTRY=X",
+    "ad": "EURO / TL",
+    "piyasa": "EMTIA",
+    "pazar": "Döviz Kurları",
+    "sektor": "Majör Pariteler",
+    "nitelik": "Döviz Bazlı Gelir"
+  },
+  {
+    "sembol": "EURUSD=X",
+    "ad": "EUR / USD",
+    "piyasa": "EMTIA",
+    "pazar": "Döviz Kurları",
+    "sektor": "Küresel Parite",
+    "nitelik": "Düşük Volatilite"
+  },
+  {
+    "sembol": "AEFES",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "AGHOL",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "AKCNS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "AKFGY",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "AKFYE",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "AKSA",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "AKSEN",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ALARK",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ALBRK",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ALFAS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ALTNY",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ANSGR",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ARCLK",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ARDYZ",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "BERA",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "BIENY",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "BIOEN",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "BOBET",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "BRSAN",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "BRYAT",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "BSOKE",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "BTCIM",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "BUCIM",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "CANTE",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "CCOLA",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "CIMSA",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "CLEBI",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "CWENE",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "DOHOL",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ECILC",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ECZYT",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "EGEEN",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ENERY",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ENJSA",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "EUREN",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "GESAN",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "GOLTS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "GUBRF",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "GWIND",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "HALKB",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "HEKTS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "IPEKE",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ISDMR",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ISGYO",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ISMEN",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "IZENR",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "KAYSE",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "KCAER",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "KLSER",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "KONYA",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "KOZAA",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "KOZAL",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "KRDMD",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "KTLEV",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "LMKDC",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "MAVI",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "MPARK",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "OBAMS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ODAS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "OTKAR",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "OYAKC",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "PASEU",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "PETKM",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "QUAGR",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "RYGYO",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "SASA",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "SAYAS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "SELEC",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "SKBNK",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "SMRTG",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "SOKM",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "TABGD",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "TKFEN",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "TSKB",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "TTRAK",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "TUKAS",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "TURSG",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ULKER",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "VAKBN",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "VESBE",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "VESTL",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "YEOTK",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "YYLGD",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "ZOREN",
+    "piyasa": "BIST",
+    "pazar": "Yıldız Pazar",
+    "sektor": "BIST-100 Endeks",
+    "nitelik": "BIST 100 Ana Liste"
+  },
+  {
+    "sembol": "GOOG",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "AVGO",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "COST",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "NFLX",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ADBE",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "PEP",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "LIN",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "CSCO",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "TMUS",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "INTU",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "QCOM",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "TXN",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "AMGN",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "AMAT",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ISRG",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "HON",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "BKNG",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "VRTX",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "LRCX",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "SBUX",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ADI",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "MU",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "GILD",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "PANW",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "MDLZ",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "KLAC",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "SNPS",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "CDNS",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "MELI",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "CRWD",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "REGN",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "MAR",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "PYPL",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ORLY",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "CTAS",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "CSX",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "NXPI",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ASML",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "WDAY",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "MRVL",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ADSK",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "PCAR",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "MNST",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "CPRT",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ROST",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "AEP",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "FTNT",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ODFL",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "PAYX",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "KDP",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "CHTR",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "DXCM",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "FAST",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "MCHP",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "IDXX",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "EXC",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "EA",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "VRSK",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "BKR",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "CTSH",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "GEHC",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "XEL",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "CCEP",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "CSGP",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ON",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "TEAM",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "FANG",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "DDOG",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ANSS",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "TTWO",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ZS",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "BIIB",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ILMN",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "MDB",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "WBD",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "GFS",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ALGN",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "SIRI",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "LCID",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "RIVN",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "ARM",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "SMCI",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "PLTR",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  },
+  {
+    "sembol": "COIN",
+    "piyasa": "NASDAQ",
+    "pazar": "NASDAQ-100",
+    "sektor": "ABD Teknoloji & Büyüme",
+    "nitelik": "NASDAQ 100 Endeks"
+  }
+]

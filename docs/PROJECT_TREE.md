@@ -40,10 +40,13 @@
 ./crypto/oi.ts
 ./crypto/session.ts
 ./data/forensicToon.json
+./data/hazir_vitrin.json
 ./data/hisseler.js
+./data/otonom_test_raporu.json
 ./data/qodi_audit_report.json
 ./data/qodi_autofix_log.json
 ./data/qodi_ts_ast_report.json
+./data/sanal_portfoy.json
 ./data_audit.log
 ./docker-compose.yml
 ./docs/9-ARAC-OZETI.md
@@ -70,6 +73,7 @@
 ./docs/SYSTEM_AUDIT_REPORT_BOARD.md
 ./docs/superpowers/specs/SPEC_DECISIONS.md
 ./index.html
+./main
 ./metadata.json
 ./multiMarketProvider.ts
 ./nasdaq/alpaca.ts
@@ -90,6 +94,7 @@
 ./public/assets/aistudio/screenshot_1_f20db7e9.png
 ./python/__pycache__/ladder_engine.cpython-312.pyc
 ./python/__pycache__/nlp_query.cpython-312.pyc
+./python/__pycache__/otonom_beyin.cpython-312.pyc
 ./python/__pycache__/riskEngine.cpython-312.pyc
 ./python/__pycache__/tax_engine.cpython-312.pyc
 ./python/advanced_quant_simulation.py
@@ -161,6 +166,7 @@
 ./python/generate_system_audit_report.py
 ./python/go_no_go_audit_engine.py
 ./python/go_no_go_audit_engine.py.qodi_bak
+./python/havuz.json
 ./python/heatmapEngine.py
 ./python/input_engine/__init__.py
 ./python/input_engine/alpaca_connector.py
@@ -185,6 +191,7 @@
 ./python/mt16_users.db
 ./python/nlp_query.py
 ./python/orchestrator.py
+./python/otonom_beyin.py
 ./python/peer_valuation_engine.py
 ./python/portfolioGuard.py
 ./python/post_mortem_engine.py
@@ -400,6 +407,7 @@
 ./src/components/AuthCard.tsx
 ./src/components/AutonomousRiskGuard.tsx
 ./src/components/BacktestPanel.tsx
+./src/components/BesKatmanGrafik.tsx
 ./src/components/BinanceTestnetExecutorCard.tsx
 ./src/components/BistTab.tsx
 ./src/components/CognitiveBarReplay.tsx
@@ -447,6 +455,7 @@
 ./src/components/PortfolioGrowthChart.tsx
 ./src/components/ProjectManagerTerminal.tsx
 ./src/components/SaasSubscriptionModal.tsx
+./src/components/SahibindenVitrin.tsx
 ./src/components/SearchBar.tsx
 ./src/components/SectorLiquidityRotation.tsx
 ./src/components/SignalBotCard.tsx

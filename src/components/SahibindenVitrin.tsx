@@ -1,0 +1,297 @@
+import BesKatmanGrafik from './BesKatmanGrafik';
+import React, { useState, useEffect } from 'react';
+
+export const SahibindenVitrin: React.FC<{ onEskiTerminaleGec: () => void }> = ({ onEskiTerminaleGec }) => {
+  const [ilanlar, setIlanlar] = useState<any[]>([]);
+  const [rapor, setRapor] = useState<any>(null);
+  const [gorunum, setGorunum] = useState<'VITRIN' | 'HARITA' | 'PORTFOY' | 'OTONOM'>('VITRIN');
+  const [piyasa, setPiyasa] = useState('TUMU');
+  const [pazar, setPazar] = useState('TUMU');
+  const [sektor, setSektor] = useState('TUMU');
+  const [nitelik, setNitelik] = useState('TUMU');
+  const [arama, setArama] = useState('');
+  const [secili, setSecili] = useState<any>(null);
+  const [sekme, setSekme] = useState(1);
+  const [agac, setAgac] = useState('HEPSI');
+  const [butce, setButce] = useState<number>(10000);
+  const [elenenler, setElenenler] = useState<string[]>([]);
+  const [portfoy, setPortfoy] = useState<any[]>(() => { try { return JSON.parse(localStorage.getItem('mt16_portfoy') || '[]'); } catch { return []; } });
+
+  useEffect(() => {
+    const cek = () => {
+      fetch('/api/otonom/vitrin').then(r => r.json()).then(d => Array.isArray(d) && setIlanlar(d)).catch(() => {});
+      fetch('/api/otonom/rapor').then(r => r.json()).then(setRapor).catch(() => {});
+    };
+    cek();
+    const t = setInterval(cek, 15000);
+    return () => clearInterval(t);
+  }, []);
+
+  const pazarlar = Array.from(new Set(ilanlar.filter(x => piyasa === 'TUMU' || x.piyasa === piyasa).map(x => x.pazar).filter(Boolean)));
+  const sektorler = Array.from(new Set(ilanlar.filter(x => (piyasa === 'TUMU' || x.piyasa === piyasa) && (pazar === 'TUMU' || x.pazar === pazar)).map(x => x.sektor).filter(Boolean)));
+  const nitelikler = Array.from(new Set(ilanlar.map(x => x.nitelik).filter(Boolean)));
+  const liste = ilanlar.filter(x => !elenenler.includes(x.sembol) && (piyasa === 'TUMU' || x.piyasa === piyasa) && (pazar === 'TUMU' || x.pazar === pazar) && (sektor === 'TUMU' || x.sektor === sektor) && (nitelik === 'TUMU' || x.nitelik === nitelik) && (!arama || x.sembol.toLowerCase().includes(arama.toLowerCase())));
+
+  const portfoyeEkle = (item: any) => {
+    const lot = item.fiyat > 0 ? Math.floor((butce / item.fiyat) * 100) / 100 : 0;
+    const yeni = [...portfoy.filter(p => p.sembol !== item.sembol), { sembol: item.sembol, piyasa: item.piyasa, giris: item.fiyat, lot, butce, tarih: new Date().toLocaleTimeString() }];
+    setPortfoy(yeni);
+    localStorage.setItem('mt16_portfoy', JSON.stringify(yeni));
+  };
+  return (
+    <div style={{ background: '#f4f4f4', minHeight: '100vh', fontFamily: 'Arial, sans-serif', color: '#222' }}>
+      <div style={{ background: '#2c3e50', color: '#fff', padding: '12px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <span onClick={() => setGorunum('VITRIN')} style={{ background: '#ffe800', color: '#000', fontWeight: 'bold', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer' }}>MT16 Menkul Vitrini</span>
+          <input value={arama} onChange={e => setArama(e.target.value)} placeholder="Sembol ara (NVDA, ASELS, BTC)..." style={{ padding: '7px 12px', borderRadius: '4px', border: 'none', color: '#111', width: '220px' }} />
+        </div>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <button onClick={() => setGorunum(gorunum === 'HARITA' ? 'VITRIN' : 'HARITA')} style={{ background: gorunum === 'HARITA' ? '#e67e22' : '#8e44ad', color: '#fff', border: 'none', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>
+            {gorunum === 'HARITA' ? '📋 Liste Görünümü' : '🗺️ Finviz Isı Haritası'}
+          </button>
+          <button onClick={() => setGorunum(gorunum === 'PORTFOY' ? 'VITRIN' : 'PORTFOY')} style={{ background: '#2980b9', color: '#fff', border: 'none', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>
+            💼 Portföyüm ({portfoy.length})
+          </button>
+          <button onClick={() => setGorunum(gorunum === 'OTONOM' ? 'VITRIN' : 'OTONOM')} style={{ background: '#27ae60', color: '#fff', border: 'none', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>
+            🛠️ Otonom Rapor ({rapor?.toplam_tur || 0})
+          </button>
+          <button onClick={onEskiTerminaleGec} style={{ background: '#34495e', color: '#fff', border: '1px solid #7f8c8d', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', fontSize: '12px' }}>Eski Terminale Geç ↗</button>
+        </div>
+      </div>
+
+      {gorunum === 'HARITA' && (
+        <div style={{ maxWidth: '1240px', margin: '20px auto', background: '#fff', border: '1px solid #ddd', borderRadius: '4px', padding: '18px' }}>
+          <h3 style={{ marginTop: 0, borderBottom: '2px solid #ffe800', paddingBottom: '8px' }}>🗺️ Finviz Tarzı Canlı Piyasa Isı Haritası (Tıkla & Ekspertiz Aç)</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(135px, 1fr))', gap: '8px' }}>
+            {liste.map(x => {
+              const d = x.degisim || 0;
+              const bg = d >= 2 ? '#1e8449' : d > 0 ? '#27ae60' : d === 0 ? '#7f8c8d' : d > -2 ? '#c0392b' : '#922b21';
+              return (
+                <div key={x.sembol} onClick={() => { setSecili(x); setGorunum('VITRIN'); }} style={{ background: bg, color: '#fff', padding: '12px', borderRadius: '4px', cursor: 'pointer', textAlign: 'center' }}>
+                  <div style={{ fontWeight: 'bold', fontSize: '14px' }}>{x.sembol}</div>
+                  <div style={{ fontSize: '12px', marginTop: '3px' }}>{d >= 0 ? '+' : ''}{d}%</div>
+                  <div style={{ fontSize: '11px', opacity: 0.9, marginTop: '2px' }}>Skor: {x.skor}/100</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+      {gorunum === 'PORTFOY' && (
+        <div style={{ maxWidth: '1100px', margin: '20px auto', background: '#fff', border: '1px solid #ddd', borderRadius: '4px', padding: '20px' }}>
+          <h3 style={{ marginTop: 0, borderBottom: '2px solid #ffe800', paddingBottom: '8px' }}>💼 Sanal Portföyüm (Canlı Kâr / Zarar Takibi)</h3>
+          {secili?.osint && (
+                      <div style={{ background: '#f4f6f9', border: '1px solid #d5dce6', borderRadius: '4px', padding: '8px 10px', marginBottom: '10px', fontSize: '11px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '4px' }}>
+                          <strong style={{ color: '#1b3a57' }}>🕵️ MT16 Sosyal Medya & OSINT İstihbarat Motoru (Çoklu-Ajan)</strong>
+                          <span>Bahsedilme: <strong>{secili?.osint.mention}</strong> | Duygu Skoru: <strong style={{ color: secili?.osint.duygu_skoru >= 60 ? '#27ae60' : secili?.osint.duygu_skoru <= 40 ? '#e74c3c' : '#555' }}>{secili?.osint.duygu_skoru}/100</strong> (🐂 {secili?.osint.boga_sayac} / 🐻 {secili?.osint.ayi_sayac})</span>
+                        </div>
+                        <div style={{ background: '#fff', border: '1px solid #e1e6ed', borderRadius: '3px', padding: '4px 8px', fontWeight: 'bold', color: '#2c3e50', marginBottom: secili?.osint.reddit_basliklar?.length ? '5px' : '0' }}>
+                          {secili?.osint.ajan_teshis}
+                        </div>
+                        {secili?.osint.reddit_basliklar && secili?.osint.reddit_basliklar.length > 0 && (
+                          <div style={{ color: '#555', fontSize: '10.5px', lineHeight: '1.4' }}>
+                            {secili?.osint.reddit_basliklar.map((b: string, idx: number) => (
+                              <div key={idx}>• [Reddit OSINT] {b}</div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    {secili?.juri_oylar && (
+                      <div style={{ background: secili.veto_nedeni ? '#fdedec' : '#eafaf1', border: `1px solid ${secili.veto_nedeni ? '#e74c3c' : '#27ae60'}`, borderRadius: '4px', padding: '8px 10px', marginBottom: '10px', fontSize: '11px' }}>
+                        <div style={{ fontWeight: 'bold', marginBottom: '4px', color: secili.veto_nedeni ? '#c0392b' : '#1e8449' }}>
+                          ⚖️ Hiyerarşik Jüri Konsensüsü: {secili.veto_nedeni ? `🛑 VETO UYARISI (${secili.veto_nedeni})` : `✅ VETO YOK — KONSENSÜS ONAYLI (${secili.skor}/100)`}
+                        </div>
+                        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                          {secili?.juri_oylar.map((j: any, i: number) => (
+                            <span key={i} style={{ background: '#fff', border: '1px solid #ddd', borderRadius: '3px', padding: '2px 6px' }}>
+                              {j.uzman}: <strong style={{ color: j.oy === 'VETO' ? '#e74c3c' : j.oy === 'ONAY' ? '#27ae60' : '#7f8c8d' }}>{j.oy} ({j.puan})</strong>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+            <thead><tr style={{ background: '#f8f9fa', borderBottom: '2px solid #ddd', textAlign: 'left' }}><th style={{ padding: '9px' }}>Sembol</th><th style={{ padding: '9px' }}>Lot</th><th style={{ padding: '9px' }}>Giriş</th><th style={{ padding: '9px' }}>Güncel</th><th style={{ padding: '9px' }}>Kâr / Zarar</th><th style={{ padding: '9px' }}>İşlem</th></tr></thead>
+            <tbody>
+              {portfoy.map(p => {
+                const canli = ilanlar.find(x => x.sembol === p.sembol)?.fiyat ?? p.giris;
+                const fark = (canli - p.giris) * p.lot;
+                const yuzde = p.giris > 0 ? ((canli - p.giris) / p.giris) * 100 : 0;
+                return (
+                  <tr key={p.sembol} style={{ borderBottom: '1px solid #eee' }}>
+                    <td style={{ padding: '10px', fontWeight: 'bold', color: '#2980b9' }}>{p.sembol}</td>
+                    <td style={{ padding: '10px' }}>{p.lot}</td><td style={{ padding: '10px' }}>{p.giris}</td><td style={{ padding: '10px', fontWeight: 'bold' }}>{canli}</td>
+                    <td style={{ padding: '10px', fontWeight: 'bold', color: fark >= 0 ? '#27ae60' : '#e74c3c' }}>{fark >= 0 ? '+' : ''}{fark.toFixed(2)} ({yuzde.toFixed(2)}%)</td>
+                    <td style={{ padding: '10px' }}><button onClick={() => { const k = portfoy.filter(x => x.sembol !== p.sembol); setPortfoy(k); localStorage.setItem('mt16_portfoy', JSON.stringify(k)); }} style={{ border: '1px solid #ccc', background: '#fff', padding: '4px 8px', borderRadius: '3px', cursor: 'pointer', fontSize: '11px' }}>Kapat</button></td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {gorunum === 'OTONOM' && (
+        <div style={{ maxWidth: '1100px', margin: '20px auto', background: '#fff', border: '1px solid #ddd', borderRadius: '4px', padding: '20px' }}>
+          <h3 style={{ marginTop: 0, borderBottom: '2px solid #ffe800', paddingBottom: '8px' }}>🤖 7/24 Otonom Pro Analiz & Tamir Günlüğü ({rapor?.son_guncelleme || '-'})</h3>
+          {rapor?.yonetici_brifingi && <div style={{ background: '#fef9e7', border: '1px solid #f1c40f', borderRadius: '4px', padding: '14px', marginBottom: '16px', whiteSpace: 'pre-line', fontSize: '13px' }}><strong>📌 Yönetici Brifingi:</strong><br/>{rapor.yonetici_brifingi}</div>}
+          {(rapor?.kayitlar || []).map((k: any, i: number) => (
+            <div key={i} style={{ padding: '8px', borderBottom: '1px solid #eee', fontSize: '13px', display: 'flex', gap: '12px' }}><strong style={{ color: '#2980b9' }}>{k.zaman}</strong><span>{k.mesaj}</span></div>
+          ))}
+        </div>
+      )}
+      {gorunum === 'VITRIN' && (
+        <div style={{ maxWidth: '1280px', margin: '20px auto', display: 'flex', gap: '20px', padding: '0 16px' }}>
+          <div style={{ width: '240px', background: '#fff', border: '1px solid #ddd', borderRadius: '4px', padding: '14px', alignSelf: 'flex-start', fontSize: '13px' }}>
+            <div style={{ fontWeight: 'bold', borderBottom: '2px solid #ffe800', paddingBottom: '5px', marginBottom: '8px' }}>1. Piyasa</div>
+            {[['TUMU', `Tümü (${ilanlar.length})`], ['BIST', '🏛️ BIST Pay'], ['KRIPTO', '🪙 Kripto'], ['NASDAQ', '🇺🇸 NASDAQ'], ['EMTIA', '🏆 Emtia & Döviz']].map(([id, ad]) => (
+              <div key={id} onClick={() => { setPiyasa(id); setPazar('TUMU'); setSektor('TUMU'); }} style={{ padding: '6px', cursor: 'pointer', borderRadius: '4px', background: piyasa === id ? '#eef6fc' : 'transparent', fontWeight: piyasa === id ? 'bold' : 'normal' }}>{ad}</div>
+            ))}
+            <div style={{ fontWeight: 'bold', borderBottom: '2px solid #ffe800', paddingBottom: '5px', margin: '14px 0 8px' }}>2. Pazar</div>
+            <div onClick={() => setPazar('TUMU')} style={{ padding: '4px', cursor: 'pointer', fontWeight: pazar === 'TUMU' ? 'bold' : 'normal' }}>• Tümü</div>
+            {pazarlar.map(p => <div key={p} onClick={() => setPazar(p)} style={{ padding: '4px', cursor: 'pointer', color: pazar === p ? '#2980b9' : '#333', fontWeight: pazar === p ? 'bold' : 'normal' }}>• {p}</div>)}
+            <div style={{ fontWeight: 'bold', borderBottom: '2px solid #ffe800', paddingBottom: '5px', margin: '14px 0 8px' }}>3. Sektör</div>
+            <div onClick={() => setSektor('TUMU')} style={{ padding: '4px', cursor: 'pointer', fontWeight: sektor === 'TUMU' ? 'bold' : 'normal' }}>• Tümü</div>
+            {sektorler.map(s => <div key={s} onClick={() => setSektor(s)} style={{ padding: '4px', cursor: 'pointer', color: sektor === s ? '#2980b9' : '#333', fontWeight: sektor === s ? 'bold' : 'normal' }}>• {s}</div>)}
+            <div style={{ fontWeight: 'bold', borderBottom: '2px solid #ffe800', paddingBottom: '5px', margin: '14px 0 8px' }}>4. DNA Niteliği</div>
+            <div onClick={() => setNitelik('TUMU')} style={{ padding: '4px', cursor: 'pointer', fontWeight: nitelik === 'TUMU' ? 'bold' : 'normal' }}>› Tümü</div>
+            {nitelikler.map(n => <div key={n} onClick={() => setNitelik(n)} style={{ padding: '4px', cursor: 'pointer', background: nitelik === n ? '#fef9e7' : 'transparent', fontWeight: nitelik === n ? 'bold' : 'normal' }}>› {n}</div>)}
+          </div>
+          <div style={{ flex: 1 }}>
+            {ilanlar.filter(x => (x.skor || 0) >= 75).length > 0 && (
+              <div style={{ background: '#eafaf1', border: '1px solid #2ecc71', borderRadius: '4px', padding: '10px 14px', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', fontSize: '12px' }}>
+                <strong style={{ color: '#1e8449' }}>🚨 Canlı Fırsat Radarı (Skor 75+):</strong>
+                {ilanlar.filter(x => (x.skor || 0) >= 75).slice(0, 6).map(f => (
+                  <span key={f.sembol} onClick={() => setSecili(f)} style={{ background: '#27ae60', color: '#fff', padding: '3px 8px', borderRadius: '3px', cursor: 'pointer', fontWeight: 'bold' }}>
+                    {f.ad || f.sembol} ({f.skor}/100)
+                  </span>
+                ))}
+              </div>
+            )}
+            <div style={{ background: '#f4f6f9', border: '1px solid #d5dbdb', borderRadius: '4px', padding: '8px 12px', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', fontSize: '12px' }}>
+              <strong>🌳 Composer Karar Ağaçları:</strong>
+              {[
+                ['HEPSI', '🌐 Tümü'],
+                ['QVM', '🏆 QVM Şampiyonları (Q≥70 & M≥70)'],
+                ['TEPKI', '⚡ Aşırı Satım Tepki (RSI<35 & OBI>0)'],
+                ['HACIM', '🚀 Kurumsal Akış (OBI>15% & Skor≥65)']
+              ].map(([id, ad]) => (
+                <button key={id} onClick={() => setAgac(id)} style={{ padding: '4px 10px', borderRadius: '4px', border: '1px solid #bdc3c7', cursor: 'pointer', background: agac === id ? '#2c3e50' : '#fff', color: agac === id ? '#fff' : '#2c3e50', fontWeight: agac === id ? 'bold' : 'normal', fontSize: '11px' }}>{ad}</button>
+              ))}
+            </div>
+            <div style={{ background: '#fff', border: '1px solid #ddd', borderRadius: '4px', padding: '16px' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+                <thead><tr style={{ background: '#f8f9fa', borderBottom: '2px solid #ddd', textAlign: 'left' }}><th style={{ padding: '9px' }}>Sembol</th><th style={{ padding: '9px' }}>Pazar & Sektör</th><th style={{ padding: '9px' }}>Fiyat & Değişim</th><th style={{ padding: '9px' }}>TradingView & Likidite</th><th style={{ padding: '9px' }}>Jüri Sinyali</th></tr></thead>
+                <tbody>
+                  {liste.map(x => (
+                    <tr key={x.sembol} onClick={() => setSecili(x)} style={{ borderBottom: '1px solid #eee', cursor: 'pointer', background: secili?.sembol === x.sembol ? '#fef9e7' : '#fff' }}>
+                      <td style={{ padding: '10px' }}><strong style={{ color: '#2980b9' }}>{x.ad || x.sembol}</strong><div style={{ fontSize: '11px', color: '#1f618d' }}>{x.nitelik}</div></td>
+                      <td style={{ padding: '10px' }}><div>{x.pazar}</div><div style={{ fontSize: '11px', color: '#777' }}>{x.sektor}</div></td>
+                      <td style={{ padding: '10px', fontWeight: 'bold' }}><div>{x.fiyat} {(x.piyasa === 'BIST' || x.sembol === 'GRAM-ALTIN' || x.sembol.includes('TRY')) ? '₺' : '$'}</div><div style={{ fontSize: '11px', color: (x.degisim || 0) >= 0 ? '#27ae60' : '#e74c3c' }}>1G: {(x.degisim || 0) >= 0 ? '+' : ''}{x.degisim ?? 0}% | 5G: {x.deg5g ?? 0}%</div></td>
+                      <td style={{ padding: '10px', fontSize: '11px' }}><div>RSI: <strong>{x.rsi ?? '-'}</strong> | EMA20: <strong>{x.ort20 ?? '-'}</strong></div><div style={{ color: '#666' }}>{x.likidite || '-'}</div><div style={{ color: '#8e44ad', fontWeight: 'bold', marginTop: '2px' }}>Q:{x.q_sk ?? '-'} V:{x.v_sk ?? '-'} M:{x.m_sk ?? '-'} • QVM:{x.qvm ?? '-'}</div></td>
+                      <td style={{ padding: '10px' }}><span style={{ padding: '4px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 'bold', background: x.karar === 'PROCEED' ? '#d4edda' : x.karar === 'IZLE' ? '#e8f4f8' : '#f8d7da', color: x.karar === 'PROCEED' ? '#155724' : x.karar === 'IZLE' ? '#0c5460' : '#721c24' }}>{x.skor ?? 50}/100 • {x.sinyal || x.karar}</span></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {secili && (
+              <div onClick={() => setSecili(null)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.55)', zIndex: 9998, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+              <div onClick={(e) => e.stopPropagation()} style={{ width: '100%', maxWidth: '880px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 10px 30px rgba(0,0,0,0.4)' }}>
+              <div style={{ marginTop: '16px', background: '#fff', border: '1px solid #ccc', borderRadius: '4px', padding: '16px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                  <strong>📋 {secili.sembol} — 5 Katmanlı Pro Ekspertiz ({secili.sinyal || secili.karar})</strong>
+                  <button onClick={() => setSecili(null)} style={{ border: 'none', background: 'none', cursor: 'pointer', fontWeight: 'bold' }}>✕ Kapat</button>
+                </div>
+                <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
+                  <div style={{ width: '230px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    {[
+                      ['1', '📊 1. Temel & Adli Analiz'],
+                      ['2', '🔬 2. Mikroyapı & L2'],
+                      ['3', '🏦 3. Takas & Kurumsal (AKD)'],
+                      ['4', '📈 4. Teknik & Rejim'],
+                      ['5', '📰 5. Katalizör, NLP & Makro']
+                    ].map(([id, ad]) => (
+                      <button key={id} onClick={() => setSekme(Number(id))} style={{ textAlign: 'left', padding: '9px 12px', borderRadius: '4px', border: '1px solid #ddd', cursor: 'pointer', background: sekme === Number(id) ? '#2c3e50' : '#f8f9fa', color: sekme === Number(id) ? '#fff' : '#222', fontWeight: sekme === Number(id) ? 'bold' : 'normal', fontSize: '12px' }}>
+                        {ad}
+                      </button>
+                    ))}
+                  </div>
+                  <div style={{ flex: 1, minWidth: '300px', background: '#f9f9f9', padding: '12px', borderRadius: '4px', border: '1px solid #eee' }}>
+                    {secili.ohlc && secili.ohlc.length > 2 && <BesKatmanGrafik item={secili} />}
+                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center', background: '#fff', border: '1px solid #e5e5e5', padding: '8px 12px', borderRadius: '4px', marginBottom: '10px', flexWrap: 'wrap' }}>
+                      {secili.radar && secili.radar.length === 5 && (() => {
+                        const r = secili.radar;
+                        const pts = r.map((val: number, i: number) => {
+                          const ang = (Math.PI * 2 * i) / 5 - Math.PI / 2;
+                          const rad = (val / 100) * 34;
+                          return `${45 + rad * Math.cos(ang)},${45 + rad * Math.sin(ang)}`;
+                        }).join(' ');
+                        return (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <svg width="90" height="90">
+                              <circle cx="45" cy="45" r="34" fill="none" stroke="#eee" />
+                              <circle cx="45" cy="45" r="17" fill="none" stroke="#eee" />
+                              <polygon points={pts} fill="rgba(46, 204, 113, 0.35)" stroke="#27ae60" strokeWidth="2" />
+                            </svg>
+                            <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
+                              <strong>❄️ Snowflake Ekspertiz Özeti</strong><br/>
+                              Kalite: {r.at(0)} | L2: {r.at(1)} | Takas: {r.at(2)}<br/>
+                              Teknik: {r.at(3)} | Makro: {r.at(4)} • <strong>QVM: {secili.qvm ?? '-'}</strong>
+                            </div>
+                          </div>
+                        );
+                      })()}
+                      <div style={{ flex: 1, minWidth: '180px', fontSize: '11px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3px' }}>
+                          <strong>📊 ATAS Kümülatif Net Delta (Alıcı vs Satıcı)</strong>
+                          <span>%{secili.obi ?? 0}</span>
+                        </div>
+                        <div style={{ height: '10px', background: '#fadbd8', borderRadius: '5px', overflow: 'hidden' }}>
+                          <div style={{ width: `${Math.min(100, Math.max(5, 50 + (secili.obi || 0) / 2))}%`, height: '100%', background: '#27ae60' }} />
+                        </div>
+                      </div>
+                    </div>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', background: '#fff', border: '1px solid #e5e5e5' }}>
+                      <thead>
+                        <tr style={{ background: '#eef2f5', borderBottom: '1px solid #ddd', textAlign: 'left' }}>
+                          <th style={{ padding: '7px 9px' }}>2. Alt Kontrol Noktası</th>
+                          <th style={{ padding: '7px 9px' }}>3. MT16 Motor / Metrik</th>
+                          <th style={{ padding: '7px 9px' }}>Ekspertiz Sonucu</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {(secili.ekspertiz?.[String(sekme)] || []).map((row: any, idx: number) => (
+                          <tr key={idx} style={{ borderBottom: '1px solid #f0f0f0' }}>
+                            <td style={{ padding: '8px 9px', fontWeight: 'bold', color: '#2c3e50' }}>• {row.dal}</td>
+                            <td style={{ padding: '8px 9px', color: '#666' }}>{row.metrik}</td>
+                            <td style={{ padding: '8px 9px', fontWeight: 'bold', color: '#1f618d' }}>{row.sonuc}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid #ddd', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px' }}>
+                    <strong>💰 Bütçe:</strong>
+                    <input type="number" value={butce} onChange={e => setButce(Number(e.target.value) || 0)} style={{ width: '100px', padding: '5px', border: '1px solid #ccc', borderRadius: '4px' }} />
+                    <span>{secili.piyasa === 'BIST' ? '₺' : '$'} ➔ <strong>{secili.fiyat > 0 ? Math.floor((butce / secili.fiyat) * 100) / 100 : 0} Lot / Adet</strong></span>
+                  </div>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <button onClick={() => portfoyeEkle(secili)} style={{ background: '#27ae60', color: '#fff', border: 'none', padding: '7px 14px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '12px' }}>✅ ONAYLA (Portföye Ekle)</button>
+                    <button onClick={() => { setElenenler([...elenenler, secili.sembol]); setSecili(null); }} style={{ background: '#e74c3c', color: '#fff', border: 'none', padding: '7px 14px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '12px' }}>❌ ELE</button>
+                  </div>
+                </div>
+              </div>
+              </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
