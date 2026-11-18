@@ -27,3 +27,6 @@ TEST_FILE*.txt
 .env.*
 *.qodi_bak*
 .qodi_bak*
+uploads/
+*.termix_bak
+*.ai_bak

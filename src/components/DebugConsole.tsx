@@ -25,77 +25,26 @@ export const DebugConsole: React.FC = () => {
   const [logLevelFilter, setLogLevelFilter] = useState<LogLevel>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [copied, setCopied] = useState<boolean>(false);
-  const [logs, setLogs] = useState<DebugLogEntry[]>([
-    {
-      id: 'INIT-01',
-      timestamp: new Date().toLocaleTimeString('tr-TR'),
-      level: 'INFO',
-      category: 'SYSTEM',
-      message: 'MT16 QuantMind v3.4 Canlı Veri Zırhı Başlatıldı.',
-    },
-    {
-      id: 'INIT-02',
-      timestamp: new Date().toLocaleTimeString('tr-TR'),
-      level: 'NETWORK',
-      category: 'WEBSOCKET',
-      message: 'WS Bağlantısı /api/feed/live-orderbook kuruldu (Gecikme: 14ms).',
-    },
-    {
-      id: 'INIT-03',
-      timestamp: new Date().toLocaleTimeString('tr-TR'),
-      level: 'WARN',
-      category: 'Z_SCORE',
-      message: 'NVDA Hacim Anomali Eşiği Yükseldi (Z-Skor: +1.93σ).',
-    },
-    {
-      id: 'INIT-04',
-      timestamp: new Date().toLocaleTimeString('tr-TR'),
-      level: 'INFO',
-      category: 'JURY_ENGINE',
-      message: '6 Ajanlı Jüri Konsensüsü %74.3 (BEKLE) Kararı Üretti.',
-    },
-  ]);
+  const [logs, setLogs] = useState<DebugLogEntry[]>([]);
 
   // Hook into console logs safely to capture runtime events
   useEffect(() => {
-    const handleAddLog = (level: 'INFO' | 'WARN' | 'ERROR' | 'NETWORK', category: string, message: string) => {
-      const entry: DebugLogEntry = {
-        id: `DBG-${Date.now().toString().slice(-5)}`,
-        timestamp: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
-        level,
-        category,
-        message,
-      };
-      setLogs((prev) => [entry, ...prev.slice(0, 99)]);
+    const es = new EventSource('/api/logs/stream');
+    es.onmessage = (e) => {
+      try {
+        const data = JSON.parse(e.data);
+        const entry: DebugLogEntry = {
+          id: `LIVE-${Date.now()}`,
+          timestamp: new Date().toLocaleTimeString('tr-TR'),
+          level: (data.level || 'INFO') as any,
+          category: data.category || 'SYSTEM',
+          message: data.message,
+        };
+        setLogs(prev => [entry, ...prev.slice(0, 99)]);
+      } catch (err) {}
     };
-
-    // Periodic system heartbeat log
-    const interval = setInterval(() => {
-      const levels = ['INFO', 'INFO', 'NETWORK', 'INFO', 'WARN'] as const;
-      const randLevel = levels[Math.floor(Date.now() / 8000) % levels.length];
-      const msgs = [
-        'L2 Emir Defteri OBI Matrisi Güncellendi (OBI: -0.01)',
-        'HTTP GET /api/universal/data?ticker=NVDA 200 OK (12ms)',
-        'ExecutionSafetyGuard VaR Limit Kontrolü Tamamlandı.',
-        'KAP kapDaemon Canlı Akış Bildirimi Alındı.',
-      ];
-      const randMsg = msgs[Math.floor(Date.now() / 8000) % msgs.length];
-      handleAddLog(randLevel, 'MONITOR', randMsg);
-    }, 8000);
-
-    return () => clearInterval(interval);
+    return () => es.close();
   }, []);
-
-  const filteredLogs = useMemo(() => {
-    return logs.filter((log) => {
-      const matchesLevel = logLevelFilter === 'ALL' || log.level === logLevelFilter;
-      const matchesSearch =
-        searchQuery.trim() === '' ||
-        log.message.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        log.category.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesLevel && matchesSearch;
-    });
-  }, [logs, logLevelFilter, searchQuery]);
 
   const handleClear = () => {
     setLogs([]);

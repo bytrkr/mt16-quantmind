@@ -23,3 +23,86 @@ function dosyaYukle(inp){
   };
   r.readAsDataURL(f);
 }
+
+let hamLogMetni = '';
+function filtreleLog(){
+  const q = (document.getElementById('logFiltre')?.value || '').toLowerCase();
+  const pane = document.getElementById('livePane');
+  if(!q){ pane.textContent = hamLogMetni; return; }
+  pane.textContent = hamLogMetni.split('\n').filter(s => s.toLowerCase().includes(q)).join('\n') || 'Eslesen log bulunamadi.';
+}
+setInterval(() => {
+  fetch('/api/observability').then(r=>r.json()).then(d=>{
+    const el = document.getElementById('tel');
+    if(el && d.disk && !el.textContent.includes('Disk:')) el.textContent += ' | Disk: ' + d.disk;
+    fetch('/api/live').then(r=>r.text()).then(pf=>{
+      hamLogMetni = pf + '\n\n=== LOKI CANLI PM2 LOG AKIŞI ===\n' + (d.logs || '');
+      filtreleLog();
+    });
+  }).catch(()=>{});
+}, 8000);
+document.addEventListener('dblclick', (e) => {
+  if(e.target && e.target.textContent && e.target.textContent.startsWith('📄 ')){
+    const yol = e.target.textContent.replace('📄 ', '').trim();
+    fetch('/api/readfile?p=' + encodeURIComponent(yol)).then(r=>r.text()).then(txt=>{
+      document.getElementById('out').textContent = '=== TERMIX DOSYA ONIZLEME: ' + yol + ' ===\n\n' + txt;
+    });
+  }
+});
+
+let aktifDosyaYolu = '';
+function temizleAnsi(t){ return (t||'').replace(/\x1b\[[0-9;]*m/g, ''); }
+const eskiFiltrele = filtreleLog;
+filtreleLog = function(){
+  hamLogMetni = temizleAnsi(hamLogMetni);
+  const hataSayisi = (hamLogMetni.match(/Error|Traceback|Exception|VETO/gi) || []).length;
+  const ab = document.getElementById('alarmBadge');
+  if(ab){
+    ab.textContent = hataSayisi > 0 ? ('🚨 ' + hataSayisi + ' Alarm') : '🛡️ 0 Alarm';
+    ab.style.color = hataSayisi > 0 ? '#ff7b72' : '#7ee787';
+  }
+  eskiFiltrele();
+};
+document.addEventListener('dblclick', (e) => {
+  if(e.target && e.target.textContent && e.target.textContent.startsWith('📄 ')){
+    aktifDosyaYolu = e.target.textContent.replace('📄 ', '').trim();
+    fetch('/api/readfile?p=' + encodeURIComponent(aktifDosyaYolu)).then(r=>r.text()).then(txt=>{
+      const o = document.getElementById('out');
+      o.contentEditable = 'true';
+      o.textContent = txt;
+      document.getElementById('saveFileBtn').style.display = 'inline-block';
+    });
+  }
+});
+function dosyaKaydet(){
+  if(!aktifDosyaYolu) return;
+  const icerik = document.getElementById('out').textContent;
+  fetch('/api/savefile',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({yol:aktifDosyaYolu,icerik,pin:document.getElementById('pin').value})})
+    .then(r=>r.json()).then(d=>{ alert(d.msg); document.getElementById('out').contentEditable='false'; document.getElementById('saveFileBtn').style.display='none'; });
+}
+
+const eskiRun = run;
+run = function(c){
+  const sel = document.getElementById('cmdHist');
+  if(sel && c && ![...sel.options].some(o=>o.value===c)){
+    const opt = document.createElement('option'); opt.value = c; opt.textContent = c.slice(0, 28);
+    sel.insertBefore(opt, sel.options[1] || null);
+  }
+  eskiRun(c);
+};
+document.addEventListener('dblclick', (e) => {
+  if(e.target && e.target.textContent && e.target.textContent.startsWith('📄 ')){
+    document.getElementById('dlFileBtn').style.display = 'inline-block';
+    document.getElementById('rstFileBtn').style.display = 'inline-block';
+  }
+});
+function dosyaIndir(){
+  if(!aktifDosyaYolu) return;
+  const blob = new Blob([document.getElementById('out').textContent], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = aktifDosyaYolu.split('/').pop(); a.click();
+}
+function dosyaGeriAl(){
+  if(!aktifDosyaYolu || !confirm(aktifDosyaYolu + ' yedekten geri yüklensin mi?')) return;
+  fetch('/api/restore',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({yol:aktifDosyaYolu,pin:document.getElementById('pin').value})})
+    .then(r=>r.json()).then(d=>{ alert(d.msg); });
+}

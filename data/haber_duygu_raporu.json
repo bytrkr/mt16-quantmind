@@ -1,0 +1,53 @@
+{
+  "zaman": "2026-11-18 23:13:49",
+  "haberler": [
+    {
+      "sembol": "ASELS",
+      "duygu_skoru": 0.0,
+      "durum": "NOTR_AKIS",
+      "son_baslik": "Guncel haber yok"
+    },
+    {
+      "sembol": "MIATK",
+      "duygu_skoru": 0.0,
+      "durum": "NOTR_AKIS",
+      "son_baslik": "Guncel haber yok"
+    },
+    {
+      "sembol": "TOASO",
+      "duygu_skoru": 0.0,
+      "durum": "NOTR_AKIS",
+      "son_baslik": "Guncel haber yok"
+    },
+    {
+      "sembol": "CANTE",
+      "duygu_skoru": 0.0,
+      "durum": "NOTR_AKIS",
+      "son_baslik": "Guncel haber yok"
+    },
+    {
+      "sembol": "CWENE",
+      "duygu_skoru": 0.0,
+      "durum": "NOTR_AKIS",
+      "son_baslik": "Guncel haber yok"
+    },
+    {
+      "sembol": "EUREN",
+      "duygu_skoru": 0.0,
+      "durum": "NOTR_AKIS",
+      "son_baslik": "Guncel haber yok"
+    },
+    {
+      "sembol": "IZENR",
+      "duygu_skoru": 0.0,
+      "durum": "NOTR_AKIS",
+      "son_baslik": "Guncel haber yok"
+    },
+    {
+      "sembol": "BIMAS",
+      "duygu_skoru": 0.0,
+      "durum": "NOTR_AKIS",
+      "son_baslik": "Guncel haber yok"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "zaman": "2026-11-18 23:21:56",
+  "taranan_depo_katmanlari": {
+    "ts_contracts": 6,
+    "design_components": 32,
+    "story_chapters": 107,
+    "ask_pipeline": 0,
+    "tests": 0,
+    "docs": 0
+  },
+  "piyasa_rejimi": "AYI_SAVUNMA",
+  "toplam_net_kz_tl": -2219.5,
+  "walk_forward_win_rate": 50.0,
+  "atr_lot_carpanlari": {
+    "ASELS": 1.25,
+    "MIATK": 0.5,
+    "TOASO": 1.25,
+    "CANTE": 0.5,
+    "CWENE": 1.21,
+    "EUREN": 0.7,
+    "IZENR": 1.25,
+    "BIMAS": 1.25
+  },
+  "story_timeline": [
+    {
+      "sembol": "IZENR",
+      "pct": 1.78,
+      "net_tl": 137.79,
+      "durum": "POZITIF"
+    },
+    {
+      "sembol": "ASELS",
+      "pct": -0.51,
+      "net_tl": -87.6,
+      "durum": "NEGATIF"
+    },
+    {
+      "sembol": "BIMAS",
+      "pct": -1.2,
+      "net_tl": -157.96,
+      "durum": "NEGATIF"
+    },
+    {
+      "sembol": "TOASO",
+      "pct": -1.75,
+      "net_tl": -216.29,
+      "durum": "NEGATIF"
+    },
+    {
+      "sembol": "CWENE",
+      "pct": -2.07,
+      "net_tl": -246.25,
+      "durum": "NEGATIF"
+    },
+    {
+      "sembol": "EUREN",
+      "pct": -3.57,
+      "net_tl": -396.4,
+      "durum": "NEGATIF"
+    },
+    {
+      "sembol": "MIATK",
+      "pct": -5.81,
+      "net_tl": -619.91,
+      "durum": "NEGATIF"
+    },
+    {
+      "sembol": "CANTE",
+      "pct": -5.94,
+      "net_tl": -632.87,
+      "durum": "NEGATIF"
+    }
+  ],
+  "web_saglik": {
+    "Port_3000": 200,
+    "Port_3001": "timed out",
+    "Port_3001_API": "<urlopen error [Errno 111] Connection refused>"
+  }
+}
