@@ -1,3 +1,4 @@
+import { copyText } from "../utils/clipboard";
 // src/components/cubes.tsx
 /**
  * MT16 Kuant Terminali - 6 Temel Bilişsel Karar Küpü (Cognitive Cubes) Bileşeni
@@ -306,7 +307,7 @@ export const Cubes: React.FC<CubesProps> = ({
   }, [symbol, marketType, currentPrice, cubes, isHardStop, isDistributionLock, isJuryWait, isActionable, dominantBroker, brokerNet, microstructureMetrics, obi, spoofingRisk, juryScore, juryVerdict, tpPrice, slPrice]);
 
   const handleCopyJson = () => {
-    navigator.clipboard.writeText(JSON.stringify(pureJsonOutput, null, 2));
+    copyText(JSON.stringify(pureJsonOutput, null, 2));
     setCopiedJson(true);
     setTimeout(() => setCopiedJson(false), 2000);
   };

@@ -1,3 +1,4 @@
+import random
 """
 MT16 QuantMind - Gerçekçi Backtest Motoru ve Sharpe Kalibrasyonu
 [Policy: Minimal-Intervention Offset v1.0 & Realistic Execution Friction]

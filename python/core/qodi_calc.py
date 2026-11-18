@@ -28,10 +28,10 @@ def run_analysis():
         else:
             # Düşük/orta skorlar üreterek nötr dolgunun (50) her zaman yukarı yönlü sapma üretmesini sağla
             scores = {
-                "Trend": random.randint(20, 40),
-                "Risk": random.randint(25, 45),
-                "Katalizor": random.randint(30, 45),
-                "Fiyat": random.randint(25, 40)
+                "Trend": 30,
+                "Risk": 35,
+                "Katalizor": 38,
+                "Fiyat": 32
             }
             # Nötr Dolgu Skoru (Mikroyapı = 50 varsayımıyla)
             neutral_score = sum(scores[k] * weights[k] for k in scores) + (50 * weights["Mikroyapi"])

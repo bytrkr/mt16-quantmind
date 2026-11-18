@@ -1,8 +1,24 @@
+import { AiKokpitModal } from "./AiKokpitModal";
+import { ModulGalerisiModal } from "./ModulGalerisiModal";
 import BesKatmanGrafik from './BesKatmanGrafik';
 import React, { useState, useEffect } from 'react';
 
 export const SahibindenVitrin: React.FC<{ onEskiTerminaleGec: () => void }> = ({ onEskiTerminaleGec }) => {
   const [ilanlar, setIlanlar] = useState<any[]>([]);
+  const bildirimTest=()=>{if("Notification" in window)Notification.requestPermission().then(r=>{if(r==="granted")new Notification("🚨 MT16 Radar",{body:"Canli bildirim aktif!"})});alert("🔔 Bildirim izni istendi!")};
+  const [galeriAcik, setGaleriAcik] = useState(false);
+
+  useEffect(() => {
+    const yuklePf = () => fetch('/api/sanal-portfoy').then(r => r.json()).then(d => {
+      if (Array.isArray(d?.pozisyonlar) && d.pozisyonlar.length > 0) setPortfoy(d.pozisyonlar);
+    }).catch(() => {});
+    yuklePf();
+    const t = setInterval(yuklePf, 15000);
+    return () => clearInterval(t);
+  }, []);
+
+  const [onarimAcik, setOnarimAcik] = useState(() => localStorage.getItem('mt16_cmd_open') === '1');
+  const acKapatOnarim = (d: boolean) => { setOnarimAcik(d); localStorage.setItem('mt16_cmd_open', d ? '1' : '0'); };
   const [rapor, setRapor] = useState<any>(null);
   const [gorunum, setGorunum] = useState<'VITRIN' | 'HARITA' | 'PORTFOY' | 'OTONOM'>('VITRIN');
   const [piyasa, setPiyasa] = useState('TUMU');
@@ -15,6 +31,8 @@ export const SahibindenVitrin: React.FC<{ onEskiTerminaleGec: () => void }> = ({
   const [agac, setAgac] = useState('HEPSI');
   const [butce, setButce] = useState<number>(10000);
   const [elenenler, setElenenler] = useState<string[]>([]);
+  useEffect(()=>{fetch("/api/sanal-portfoy").then(r=>r.json()).then(d=>{if(Array.isArray(d?.pozisyonlar)&&d.pozisyonlar.length)setPortfoy(d.pozisyonlar);if(Array.isArray(d?.equity))setEquityData(d.equity)}).catch(()=>{})},[]);
+  const [equityData, setEquityData] = useState<{ zaman: string; kz: number }[]>([]);
   const [portfoy, setPortfoy] = useState<any[]>(() => { try { return JSON.parse(localStorage.getItem('mt16_portfoy') || '[]'); } catch { return []; } });
 
   useEffect(() => {
@@ -51,7 +69,7 @@ export const SahibindenVitrin: React.FC<{ onEskiTerminaleGec: () => void }> = ({
           </button>
           <button onClick={() => setGorunum(gorunum === 'PORTFOY' ? 'VITRIN' : 'PORTFOY')} style={{ background: '#2980b9', color: '#fff', border: 'none', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>
             💼 Portföyüm ({portfoy.length})
-          </button>
+          </button> <button type="button" onClick={() => acKapatOnarim(true)} style={{ background: "#1b5e20", color: "#fff", border: "none", borderRadius: "4px", padding: "5px 10px", fontSize: "12px", fontWeight: "bold", cursor: "pointer" }}>🩺 Otonom Tamir</button> <button type="button" onClick={bildirimTest} style={{background:"#b45309",color:"#fff",border:"none",borderRadius:"4px",padding:"5px 10px",fontSize:"12px",fontWeight:"bold",cursor:"pointer"}}>🔔 Bildirim Aç</button><button type="button" onClick={() => setGaleriAcik(true)} style={{ background: "#1a237e", color: "#fff", border: "none", borderRadius: "4px", padding: "5px 10px", fontSize: "12px", fontWeight: "bold", cursor: "pointer" }}>🧩 Modül Galerisi</button>
           <button onClick={() => setGorunum(gorunum === 'OTONOM' ? 'VITRIN' : 'OTONOM')} style={{ background: '#27ae60', color: '#fff', border: 'none', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>
             🛠️ Otonom Rapor ({rapor?.toplam_tur || 0})
           </button>
@@ -79,7 +97,15 @@ export const SahibindenVitrin: React.FC<{ onEskiTerminaleGec: () => void }> = ({
       )}
       {gorunum === 'PORTFOY' && (
         <div style={{ maxWidth: '1100px', margin: '20px auto', background: '#fff', border: '1px solid #ddd', borderRadius: '4px', padding: '20px' }}>
-          <h3 style={{ marginTop: 0, borderBottom: '2px solid #ffe800', paddingBottom: '8px' }}>💼 Sanal Portföyüm (Canlı Kâr / Zarar Takibi)</h3>
+          <h3 style={{ marginTop: 0, borderBottom: '2px solid #ffe800', paddingBottom: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span>💼 Sanal Portföyüm (Canlı Kâr / Zarar Takibi)</span>
+              <span style={{ fontSize: "12px", fontWeight: "bold", padding: "3px 8px", borderRadius: "4px", background: "#eef6ff", color: "#0b57d0" }}>
+                Açık: {portfoy.filter((p: any) => p.durum !== 'KAPALI').length} | Toplam K/Z: {(() => {
+                  const kz = portfoy.reduce((acc: number, p: any) => acc + ((Number(p.guncel || p.giris || 0) - Number(p.giris || 0)) * Number(p.lot || 0)), 0);
+                  return (kz >= 0 ? "+" : "") + kz.toFixed(2) + " ₺";
+                })()}
+              </span>
+            </h3>
           {secili?.osint && (
                       <div style={{ background: '#f4f6f9', border: '1px solid #d5dce6', borderRadius: '4px', padding: '8px 10px', marginBottom: '10px', fontSize: '11px' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '4px' }}>
@@ -292,6 +318,9 @@ export const SahibindenVitrin: React.FC<{ onEskiTerminaleGec: () => void }> = ({
           </div>
         </div>
       )}
+    
+      {galeriAcik && <ModulGalerisiModal onClose={() => setGaleriAcik(false)} />}
+      {onarimAcik && <AiKokpitModal onClose={() => acKapatOnarim(false)} />}
     </div>
   );
 }

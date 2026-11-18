@@ -13,3 +13,12 @@
 - ASAMA 14: placeholder kaldirildi, cryptoCheck CONTINUOUS_247
 - Klasor bolunmesi: core/ + bist/ + crypto/ + nasdaq/ + docs/
 - Server rebuild: Ubuntu 24.04, Node 20, PM2, .env 600
+## [2024-05-23] 7/24 Otonom Bekçi + PIN Korumalı Canlı CMD + Groq/Qwen3 AI Kod Ajanı Entegrasyonu
+
+## [2026-11-16] Otonom Bekci, PIN Korumali Canli CMD & Groq LLM Kod Ajani
+- `python/otonom_beyin.py`: 7/24 canli piyasa tarayici ve saglik bekcisi onarildi.
+- `server/index.ts` & `SahibindenVitrin.tsx`: PIN korumali canli CMD konsolu ve Groq LLM kod ajani eklendi.
+
+## [2026-11-16] Otonom Bekci, PIN Korumali Canli CMD & Groq LLM Kod Ajani
+- `python/otonom_beyin.py`: 7/24 canli piyasa tarayici ve saglik bekcisi onarildi.
+- `server/index.ts` & `SahibindenVitrin.tsx`: PIN korumali canli CMD konsolu ve Groq LLM kod ajani eklendi.

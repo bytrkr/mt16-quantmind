@@ -1,3 +1,4 @@
+import { copyText } from "../utils/clipboard";
 // src/components/ArchitectureMap.tsx
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import {
@@ -206,7 +207,7 @@ export const ArchitectureMap: React.FC<ArchitectureMapProps> = ({ className = ''
   }, [renderMermaidDiagram]);
 
   const handleCopyCode = () => {
-    navigator.clipboard.writeText(MERMAID_DIAGRAM_DEFINITION);
+    copyText(MERMAID_DIAGRAM_DEFINITION);
     setCopiedCode(true);
     setTimeout(() => setCopiedCode(false), 2000);
   };

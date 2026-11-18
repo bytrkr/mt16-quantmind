@@ -8,3 +8,6 @@
 - Seans 09:40-18:10.
 - Duvar = 3 kat lot (ortalama hacmin veya kademe ortalamasının 3 katı).
 - Qodi v6.1: 0 fallback (?? yok), 0 Math.random, 0 throw, veri yoksa VERİ YOK yaz.
+- 7/24 Otonom Bekçi modülü aktif edildi.
+- PIN korumalı Canlı CMD terminali eklendi.
+- Groq/Qwen3 AI Kod Ajanı entegrasyonu tamamlandı.

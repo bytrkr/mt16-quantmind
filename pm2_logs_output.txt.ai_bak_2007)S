@@ -1,0 +1,110 @@
+[1m[90m[TAILING] Tailing last 25 lines for [all] processes (change the value with --lines option)[39m[22m
+[90m/root/.pm2/pm2.log last 25 lines:[39m
+[34mPM2        | [39m2026-11-16T19:35:57: PM2 log: App [otonom-beyin:5] exited with code [0] via signal [SIGINT]
+[34mPM2        | [39m2026-11-16T19:35:57: PM2 log: pid=210687 msg=process tree killed (1 pids)
+[34mPM2        | [39m2026-11-16T19:35:57: PM2 log: App [otonom-beyin:5] starting in -fork mode-
+[34mPM2        | [39m2026-11-16T19:35:57: PM2 log: App [otonom-beyin:5] online
+[34mPM2        | [39m2026-11-16T19:57:00: PM2 log: Stopping app:bistapp id:0
+[34mPM2        | [39m2026-11-16T19:57:00: PM2 log: pid=209998 msg=failed to kill - retrying in 100ms
+[34mPM2        | [39m2026-11-16T19:57:00: PM2 log: App [bistapp:0] exited with code [0] via signal [SIGINT]
+[34mPM2        | [39m2026-11-16T19:57:00: PM2 log: pid=209998 msg=process tree killed (14 pids)
+[34mPM2        | [39m2026-11-16T19:57:00: PM2 log: App [bistapp:0] starting in -fork mode-
+[34mPM2        | [39m2026-11-16T19:57:00: PM2 log: App [bistapp:0] online
+[34mPM2        | [39m2026-11-16T20:00:58: PM2 log: Stopping app:bistapp id:0
+[34mPM2        | [39m2026-11-16T20:00:58: PM2 log: App [bistapp:0] exited with code [0] via signal [SIGINT]
+[34mPM2        | [39m2026-11-16T20:00:58: PM2 log: pid=211594 msg=process tree killed (5 pids)
+[34mPM2        | [39m2026-11-16T20:00:58: PM2 log: App [bistapp:0] starting in -fork mode-
+[34mPM2        | [39m2026-11-16T20:00:58: PM2 log: App [bistapp:0] online
+[34mPM2        | [39m2026-11-16T20:01:32: PM2 log: Stopping app:bistapp id:0
+[34mPM2        | [39m2026-11-16T20:01:32: PM2 log: App [bistapp:0] exited with code [0] via signal [SIGINT]
+[34mPM2        | [39m2026-11-16T20:01:33: PM2 log: pid=211819 msg=process tree killed (5 pids)
+[34mPM2        | [39m2026-11-16T20:01:33: PM2 log: App [bistapp:0] starting in -fork mode-
+[34mPM2        | [39m2026-11-16T20:01:33: PM2 log: App [bistapp:0] online
+[34mPM2        | [39m2026-11-16T20:07:05: PM2 log: Stopping app:bistapp id:0
+[34mPM2        | [39m2026-11-16T20:07:05: PM2 log: App [bistapp:0] exited with code [0] via signal [SIGINT]
+[34mPM2        | [39m2026-11-16T20:07:05: PM2 log: pid=211879 msg=process tree killed (5 pids)
+[34mPM2        | [39m2026-11-16T20:07:05: PM2 log: App [bistapp:0] starting in -fork mode-
+[34mPM2        | [39m2026-11-16T20:07:05: PM2 log: App [bistapp:0] online
+
+[90m/root/.pm2/logs/otonom-beyin-out.log last 25 lines:[39m
+[90m/root/.pm2/logs/bistapp-error.log last 25 lines:[39m
+[31m0|bistapp  | [39m324|              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #eee", paddingBottom: "8px", marginBottom: "10px" }}>
+[31m0|bistapp  | [39m325|                <strong style={{ fontSize: "14px", color: "#1b5e20" }}>🩺 MT16 Otonom Python Tamir & Sağlık Bekçisi (7/24)</strong>
+[31m0|bistapp  | [39m
+[31m0|bistapp  | [39m  Plugin: vite:esbuild
+[31m0|bistapp  | [39m  File: /home/bytrkr/bistapp/src/components/SahibindenVitrin.tsx
+[31m0|bistapp  | [39m6:52:05 PM [vite] warning: Duplicate key "width" in object literal
+[31m0|bistapp  | [39m321|            {onarimAcik && (
+[31m0|bistapp  | [39m322|          <div onClick={() => acKapatOnarim(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px" }}>
+[31m0|bistapp  | [39m323|            <div onClick={(e) => e.stopPropagation()} style={{ background: "#fff", borderRadius: "6px", width: "100%", width: "94vw", maxWidth: "1200px", height: "85vh", maxHeight: "85vh", display: "flex", flexDirection: "column", overflowY: "auto", padding: "16px" }}>
+[31m0|bistapp  | [39m   |                                                                                                                       ^
+[31m0|bistapp  | [39m324|              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #eee", paddingBottom: "8px", marginBottom: "10px" }}>
+[31m0|bistapp  | [39m325|                <strong style={{ fontSize: "14px", color: "#1b5e20" }}>🩺 MT16 Otonom Python Tamir & Sağlık Bekçisi (7/24)</strong>
+[31m0|bistapp  | [39m
+[31m0|bistapp  | [39m  Plugin: vite:esbuild
+[31m0|bistapp  | [39m  File: /home/bytrkr/bistapp/src/components/SahibindenVitrin.tsx
+[31m0|bistapp  | [39m7:28:20 PM [vite] warning: Duplicate key "width" in object literal
+[31m0|bistapp  | [39m326|            {onarimAcik && (
+[31m0|bistapp  | [39m327|          <div onClick={() => acKapatOnarim(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px" }}>
+[31m0|bistapp  | [39m328|            <div onClick={(e) => e.stopPropagation()} style={{ background: "#fff", borderRadius: "6px", width: "100%", width: "94vw", maxWidth: "1200px", height: "85vh", maxHeight: "85vh", display: "flex", flexDirection: "column", overflowY: "auto", padding: "16px" }}>
+[31m0|bistapp  | [39m   |                                                                                                                       ^
+[31m0|bistapp  | [39m329|              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #eee", paddingBottom: "8px", marginBottom: "10px" }}>
+[31m0|bistapp  | [39m330|                <strong style={{ fontSize: "14px", color: "#1b5e20" }}>🩺 MT16 Otonom Python Tamir & Sağlık Bekçisi (7/24)</strong>
+[31m0|bistapp  | [39m
+[31m0|bistapp  | [39m  Plugin: vite:esbuild
+[31m0|bistapp  | [39m  File: /home/bytrkr/bistapp/src/components/SahibindenVitrin.tsx
+
+[90m/root/.pm2/logs/otonom-beyin-error.log last 25 lines:[39m
+[31m5|otonom-b | [39m    self._condition.wait(timeout)
+[31m5|otonom-b | [39m  File "/usr/lib/python3.12/threading.py", line 355, in wait
+[31m5|otonom-b | [39m    waiter.acquire()
+[31m5|otonom-b | [39mKeyboardInterrupt
+[31m5|otonom-b | [39mTraceback (most recent call last):
+[31m5|otonom-b | [39m  File "/home/bytrkr/bistapp/python/otonom_beyin.py", line 180, in <module>
+[31m5|otonom-b | [39m    test_turu()
+[31m5|otonom-b | [39m  File "/home/bytrkr/bistapp/python/otonom_beyin.py", line 135, in test_turu
+[31m5|otonom-b | [39m    vitrin = [r for r in ex.map(islem, havuz) if r]
+[31m5|otonom-b | [39m             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[31m5|otonom-b | [39m  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+[31m5|otonom-b | [39m    yield _result_or_cancel(fs.pop())
+[31m5|otonom-b | [39m          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[31m5|otonom-b | [39m  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+[31m5|otonom-b | [39m    return fut.result(timeout)
+[31m5|otonom-b | [39m           ^^^^^^^^^^^^^^^^^^^
+[31m5|otonom-b | [39m  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 451, in result
+[31m5|otonom-b | [39m    self._condition.wait(timeout)
+[31m5|otonom-b | [39m  File "/usr/lib/python3.12/threading.py", line 355, in wait
+[31m5|otonom-b | [39m    waiter.acquire()
+[31m5|otonom-b | [39mKeyboardInterrupt
+[31m5|otonom-b | [39mTraceback (most recent call last):
+[31m5|otonom-b | [39m  File "/home/bytrkr/bistapp/python/otonom_beyin.py", line 181, in <module>
+[31m5|otonom-b | [39m    time.sleep(240)
+[31m5|otonom-b | [39mKeyboardInterrupt
+
+[90m/root/.pm2/logs/bistapp-out.log last 25 lines:[39m
+[32m0|bistapp  | [39m
+[32m0|bistapp  | [39m🚀 [AutonomousLoop] Otonom Karar Döngüsü Başlatıldı. Tarama Aralığı: 5 Dakika.
+[32m0|bistapp  | [39m🛑 [AutonomousLoop] Seans Kapalı, tarama durduruldu.
+[32m0|bistapp  | [39m⚡ [Binance Boot] Gerçek spot fiyatlar başarıyla yüklendi.
+[32m0|bistapp  | [39m⚡ [Binance WS] Canlı derinlik akışı aktif (wss://stream.binance.com:9443/stream).
+[32m0|bistapp  | [39mDEV: Vite middleware aktif.
+[32m0|bistapp  | [39mWebSocketStreamService: Resilient WebSocket sunucusu baglandi.
+[32m0|bistapp  | [39mServer running on port 3000
+[32m0|bistapp  | [39m===========================================
+[32m0|bistapp  | [39mSunucu 0.0.0.0:3000 uzerinde dinlemede!
+[32m0|bistapp  | [39m🩺 Health Check: /health
+[32m0|bistapp  | [39m⚡ WebSocket Stream: /ws/live-orderbook
+[32m0|bistapp  | [39m📄 HTML: /api/export/html/ASELS
+[32m0|bistapp  | [39m📄 TOON: /api/export/toon/ASELS
+[32m0|bistapp  | [39m💾 JSON: /api/export/json/ASELS
+[32m0|bistapp  | [39m===========================================
+[32m0|bistapp  | [39m🚀 [BotManager] Tüm 5 otonom veri toplayıcı bot başlatılıyor...
+[32m0|bistapp  | [39m🤖 [YahooPriceBot] Başlatıldı (Periyot: 10000ms)
+[32m0|bistapp  | [39m🤖 [GoogleFinanceBot] Başlatıldı (Periyot: 30000ms, Format: IST:SYMBOL)
+[32m0|bistapp  | [39m🤖 [TradingViewScannerBot] Başlatıldı (Periyot: 25000ms)
+[32m0|bistapp  | [39m🤖 [KapRadarBot] Başlatıldı (Periyot: 30000ms)
+[32m0|bistapp  | [39m🤖 [XSentimentBot] Başlatıldı (Periyot: 60000ms)
+[32m0|bistapp  | [39m✅ [BotManager] 5 otonom bot arka planda aktif (Yahoo, GoogleFinance, TradingView, KAP, XSentiment).
+[32m0|bistapp  | [39mMT16 Database & Price Cache Initialization starting...
+[32m0|bistapp  | [39m[MT16 DB] Node environment detected; using pure in-memory price cache.
+

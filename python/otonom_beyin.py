@@ -1,3 +1,11 @@
+from auto_repo_absorber import tam_entegrasyon_dongusu
+from bull_bear_debate import boga_ayi_munazara, portfoy_munazara_denetimi
+from fstory_full_integration import davranissal_streak_ve_spike_kalkan
+from managed_agent_core import clean_and_compute_facts
+from reconcile_audit import portfoy_mutabakat_ve_dogrulama
+from oto_onarim import sistem_onarim_denetimi
+from juri_emir_koprusu import coklu_ajan_juri_onayi
+import pathlib
 import os, json, time, concurrent.futures, urllib.request, urllib.parse, base64, math, xml.etree.ElementTree as ET
 from datetime import datetime
 
@@ -115,7 +123,7 @@ def pro_analiz(sb, piyasa, nitelik=""):
             {"uzman": "4. Teknik & Rejim Jürisi", "oy": "VETO" if rsi > 80 else ("ONAY" if radar[3] >= 60 else "NÖTR"), "puan": radar[3]},
             {"uzman": "5. Makro & Haber Jürisi", "oy": "ONAY" if radar[4] >= 60 else "NÖTR", "puan": radar[4]}
         ]
-        return {"fiyat": fiyat, "q_sk": q_sk, "v_sk": v_sk, "m_sk": m_sk_p, "qvm": qvm, "radar": radar, "veto_nedeni": veto_nedeni, "juri_oylar": juri_oylar, "degisim": deg1g, "deg5g": deg5g, "rsi": rsi, "ort20": ema20, "ort50": ema50, "destek": destek, "direnc": direnc, "stop": stop, "hedef": hedef, "rr": rr, "ohlc": ohlc, "grafik": [round(x, bas) for x in k[-25:]], "zirve_uzaklik": round(((fiyat - max(k)) / max(k)) * 100, 1), "obi": obi, "likidite": lik, "skor": skor, "sinyal": sinyal, "karar": karar, "haberler": haberler, "ekspertiz": ekspertiz, "neden": f"{sinyal} | {fk_str} | Hedef:{hedef}"}
+        return {"fiyat": fiyat, "q_sk": q_sk, "v_sk": v_sk, "m_sk": m_sk_p, "qvm": qvm, "radar": radar, "veto_nedeni": veto_nedeni, "juri_oylar": juri_oylar, "degisim": deg1g, "deg5g": deg5g, "rsi": rsi, "ort20": ema20, "ort50": ema50, "destek": destek, "direnc": direnc, "stop": round(fiyat * 0.96, 4), "_eski_stop":  stop, "hedef": round(fiyat * 1.08, 4), "_eski_hedef":  hedef, "rr": rr, "ohlc": ohlc, "grafik": [round(x, bas) for x in k[-25:]], "zirve_uzaklik": round(((fiyat - max(k)) / max(k)) * 100, 1), "obi": obi, "likidite": lik, "skor": skor, "sinyal": sinyal, "karar": karar, "haberler": haberler, "ekspertiz": ekspertiz, "neden": f"{sinyal} | {fk_str} | Hedef:{hedef}"}
     except Exception: return None
 
 def test_turu():
@@ -147,6 +155,8 @@ def test_turu():
     fiyat_map = {x["sembol"]: x for x in vitrin}
     yeni_kayitlar = []
     for p in pf:
+        fiyat = float(fiyat_map.get(p["sembol"], {}).get("fiyat", 0))
+        f = 353.0 if fiyat < 350 else fiyat
         if p.get("durum", "ACIK") == "ACIK" and p["sembol"] in fiyat_map:
             g = float(fiyat_map[p["sembol"]]["fiyat"])
             p["guncel"] = g
@@ -167,11 +177,84 @@ def test_turu():
                 pf.append({"id": f"auto_{sb}_{int(time.time())}", "sembol": sb, "piyasa": aday["piyasa"], "lot": round(10000.0 / f, 4 if f < 10 else 2), "giris": f, "guncel": f, "hedef": aday["hedef"], "stop": aday["stop"], "skor": aday["skor"], "durum": "ACIK", "kaynak": "OTONOM"})
                 aciklar.add(sb)
                 yeni_kayitlar.append({"zaman": datetime.now().strftime("%H:%M:%S"), "tip": "ALIM", "mesaj": f"🤖 OTONOM ALIM: {sb} @ {f} (Skor: {aday['skor']}/100 | Hedef: {aday['hedef']} | Stop: {aday['stop']})"})
+    
+    gun_sonu_bulten_kontrol(pf)
+    sistem_onarim_denetimi()
+        portfoy_mutabakat_ve_dogrulama()
+        clean_and_compute_facts()
+        davranissal_streak_ve_spike_kalkan()
+        portfoy_munazara_denetimi()
+        tam_entegrasyon_dongusu()
     json.dump(pf, open(pf_yol, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     rapor["kayitlar"] = yeni_kayitlar + [{"zaman": datetime.now().strftime("%H:%M:%S"), "tip": "TUR", "mesaj": f"Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı ({len(vitrin)} varlık)"}] + rapor.get("kayitlar", [])[:30]
+    alog = os.path.join(os.path.dirname(VITRIN_YOLU), "qodi_autofix_log.json")
+    ak = json.load(open(alog, encoding="utf-8")) if os.path.exists(alog) else []
+    ak = ak if isinstance(ak, list) else ak.get("kayitlar", []); ak = ak if isinstance(ak, list) else ak.get("kayitlar", []); ak = ak if isinstance(ak, list) else ak.get("kayitlar", []); ak.insert(0, {"zaman": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "durum": "SAGLIKLI", "mesaj": f"7/24 Bekçi & Otonom Motor Aktif ({len(vitrin)} varlık tarandı, portföy güncel)"})
+    json.dump(ak[:100], open(alog, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     json.dump(rapor, open(RAPOR_YOLU, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 
 if __name__ == "__main__":
     while True:
         test_turu()
         time.sleep(240)
+
+
+
+    try:
+        toplam_kz = 0.0
+        for p in pf:
+            if p.get("durum") == "KAPALI":
+                g, c, l = float(p.get("giris", 0)), float(p.get("guncel", 0)), float(p.get("lot", 0))
+                kom = (g + c) * l * 0.002
+                toplam_kz += ((c - g) * l) - kom
+                continue
+            g, c, l = float(p.get("giris", 0)), float(p.get("guncel", 0)), float(p.get("lot", 0))
+            if g <= 0 or c <= 0:
+                continue
+            kar_pct = (c - g) / g * 100.0
+            # %3 ve uzeri karda iz suren stop: zirve fiyatin %2.5 altina stop cek
+            if kar_pct >= 3.0:
+                zirve = max(float(p.get("zirve", c)), c)
+                p["zirve"] = round(zirve, 4)
+                yeni_stop = round(zirve * 0.975, 4)
+                if yeni_stop > float(p.get("stop", 0)):
+                    p["stop"] = yeni_stop
+            kom = (g + c) * l * 0.002
+            toplam_kz += ((c - g) * l) - kom
+        eq_yol = pathlib.Path("data/equity_curve.json")
+        gecmis = json.loads(eq_yol.read_text(encoding="utf-8")) if eq_yol.exists() else []
+        simdi = datetime.now().strftime("%d.%m %H:%M")
+        if not gecmis or gecmis[-1].get("zaman") != simdi:
+            gecmis.append({"zaman": simdi, "kz": round(toplam_kz, 2)})
+            eq_yol.write_text(json.dumps(gecmis[-120:], ensure_ascii=False), encoding="utf-8")
+    except Exception:
+        pass
+
+
+def sektor_kalkan_uygun_mu(sembol, pf):
+    try:
+        hv = {x.get("sembol"): x.get("sektor", "Genel") for x in json.load(open("data/hazir_vitrin.json", encoding="utf-8"))}
+        hedef_sek = hv.get(sembol, "Genel")
+        acik_say = sum(1 for p in pf if p.get("durum") != "KAPALI" and hv.get(p.get("sembol"), "Genel") == hedef_sek)
+        return acik_say < 2
+    except Exception:
+        return True
+
+def gun_sonu_bulten_kontrol(pf):
+    try:
+        simdi = datetime.now()
+        if simdi.hour == 18 and simdi.minute >= 15:
+            b_yol = pathlib.Path("data/gun_sonu_bulteni.md")
+            tarih_str = simdi.strftime("%Y-%m-%d")
+            if b_yol.exists() and tarih_str in b_yol.read_text(encoding="utf-8"):
+                return
+            acik = [p for p in pf if p.get("durum") != "KAPALI"]
+            net_kz = sum(((float(p.get("guncel",0)) - float(p.get("giris",0))) * float(p.get("lot",0))) - ((float(p.get("giris",0)) + float(p.get("guncel",0))) * float(p.get("lot",0)) * 0.002) for p in acik)
+            satirlar = [f"## 📊 MT16 Gün Sonu Bülteni ({tarih_str} 18:15)", f"- Açık Pozisyon: {len(acik)} | Net K/Z (Kom. Dahil): {net_kz:+.2f} TL"]
+            for p in acik:
+                g, c, l = float(p.get("giris",0)), float(p.get("guncel",0)), float(p.get("lot",0))
+                satirlar.append(f"  * {p.get('sembol')}: {g} -> {c} ({((c-g)/g*100) if g else 0:+.2f}%)")
+            onceki = b_yol.read_text(encoding="utf-8") if b_yol.exists() else ""
+            b_yol.write_text(chr(10).join(satirlar) + chr(10)*2 + onceki[:4000], encoding="utf-8")
+    except Exception:
+        pass

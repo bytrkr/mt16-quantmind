@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import dotenv from 'dotenv';
 dotenv.config();
 import express, { Request, Response, NextFunction } from 'express';
@@ -3269,6 +3270,35 @@ async function startServer() {
   wsStreamService.attachServer(httpServer);
 
   // 🚀 Sunucu HTTP dinlemeye veritabanı bağlantısını beklemeden anında başlar
+
+app.use(express.json());
+app.get('/api/sanal-portfoy',(_req,res)=>{try{res.json({ok:true,pozisyonlar:JSON.parse(fs.readFileSync(path.join(process.cwd(),'data','sanal_portfoy.json'),'utf-8')),equity:(()=>{try{return JSON.parse(fs.readFileSync(path.join(process.cwd(),'data','equity_curve.json'),'utf-8'))}catch{return []}})()})}catch{res.json({ok:true,pozisyonlar:[]})}});
+app.post('/api/cmd', async (req, res) => {
+  try {
+    const rawCmd = String(req.body?.cmd || '');
+    const chk = execFileSync('python3', ['python/security_hooks.py', rawCmd], { cwd: process.cwd(), encoding: 'utf-8' }).trim();
+    if (chk.startsWith('BLOCKED|')) return res.json({ ok: false, out: '🛡️ ' + chk.split('|').slice(1).join('|') });
+  } catch (hkErr: any) {
+    const outMsg = String(hkErr?.stdout || hkErr?.message || 'Guvenlik kancasi engelledi');
+    return res.json({ ok: false, out: '🛡️ ' + outMsg.replace(/^BLOCKED\|/, '') });
+  }
+
+  if ((req.headers['x-cmd-pin'] || req.body?.pin) !== (process.env.MT16_CMD_PIN || '1616')) return res.status(401).json({ out: '⛔ YETKISIZ ERISIM: Gecersiz CMD PIN!' });
+  const { exec } = await import('node:child_process');
+  const c = (req.body && req.body.cmd) ? String(req.body.cmd) : 'pm2 list';
+  exec(c, { cwd: '/home/bytrkr/bistapp', timeout: 30000 }, (_err, stdout, stderr) => {
+    res.json({ out: ((stdout || '') + (stderr || '')).trim() || 'Komut tamamlandi.' });
+  });
+});
+app.get('/api/onarim', async (_req, res) => {
+  try {
+    const fs = await import('node:fs');
+    res.json(JSON.parse(fs.readFileSync('/home/bytrkr/bistapp/data/qodi_autofix_log.json', 'utf8')));
+  } catch {
+    res.json([]);
+  }
+});
+
   httpServer.listen(PORT, '0.0.0.0', () => {
     console.log('Server running on port', PORT);
     console.log('===========================================');

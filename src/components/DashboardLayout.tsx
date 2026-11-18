@@ -1,3 +1,4 @@
+import { copyText } from "../utils/clipboard";
 // src/components/DashboardLayout.tsx
 /**
  * MT16 BistApp Kuant Terminali - 3 Sütunlu Profesyonel Terminal Grid Mimarisi
@@ -397,7 +398,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   const handleCopy = async (type: 'PROMPT' | 'TOON') => {
     const text = type === 'PROMPT' ? llmPromptText : toonPayloadText;
     try {
-      await navigator.clipboard.writeText(text);
+      await copyText(text);
       setCopiedType(type);
       setTimeout(() => setCopiedType(null), 2000);
     } catch {}

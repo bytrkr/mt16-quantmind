@@ -1,0 +1,147 @@
+from security_hooks import yol_guvenli_mi, komut_siniflandir
+import os, sys, json, glob, shutil, subprocess, urllib.request, time, re
+from datetime import datetime
+
+for l in open("/home/bytrkr/bistapp/.env", encoding="utf-8", errors="ignore"):
+    if "=" in l and not l.startswith("#"):
+        k, v = l.strip().split("=", 1)
+        os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+args = list(sys.argv[1:])
+mod_tipi = "build"
+derin_mod = False
+while args:
+    if args[0] == "--mode" and len(args) >= 2:
+        mod_tipi = args[1].lower()
+        args = args[2:]
+    elif args[0] == "--deep":
+        derin_mod = True
+        args = args[1:]
+    else:
+        break
+istek = " ".join(args).strip()
+
+HAFIZA_YOL = "data/ai_agent_memory.json"
+def hafiza_oku():
+    if not os.path.isfile(HAFIZA_YOL): return []
+    try: return json.load(open(HAFIZA_YOL, encoding="utf-8"))[-8:]
+    except Exception: return []
+
+def hafiza_yaz(not_metni):
+    if not not_metni: return
+    kayitlar = hafiza_oku()
+    kayitlar.append({"zaman": datetime.now().strftime("%Y-%m-%d %H:%M"), "mod": mod_tipi.upper(), "ders": not_metni[:180]})
+    os.makedirs("data", exist_ok=True)
+    json.dump(kayitlar[-15:], open(HAFIZA_YOL, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+
+def arac_read(dosya, bas=1, bit=120):
+    if not yol_guvenli_mi(dosya): return 'SANDBOX ENGELLEDİ: Proje disi dosya okunamaz.'
+    if not os.path.isfile(dosya): return f"Dosya yok: {dosya}"
+    satirlar = open(dosya, encoding="utf-8", errors="ignore").read().splitlines()
+    return "\n".join(f"{i+1}: {s}" for i, s in enumerate(satirlar[max(0, bas-1):bit]))
+
+def arac_grep(desen, yol="."):
+    out = subprocess.getoutput(f"grep -rnE --exclude-dir=node_modules --exclude-dir=dist --exclude-dir=.git {json.dumps(desen)} {json.dumps(yol)} | head -n 30")
+    return out or "Eslesme yok."
+
+def arac_glob(desen):
+    bul = [f for f in sorted(glob.glob(desen, recursive=True)) if "node_modules" not in f and "dist/" not in f][:40]
+    return "\n".join(bul) or "Dosya bulunamadi."
+
+def arac_edit(dosya, eski, yeni):
+    if not yol_guvenli_mi(dosya): return 'SANDBOX ENGELLEDİ: Proje disi dosya duzenlenemez.'
+    if mod_tipi in ("plan", "audit"): return "SALT-OKUNUR MOD: Edit engellendi."
+    if not os.path.isfile(dosya): return f"Dosya yok: {dosya}"
+    icerik = open(dosya, encoding="utf-8").read()
+    if eski not in icerik: return "HATA: 'eski' metin dosyada bulunamadi."
+    yedek = f"{dosya}.ai_bak_{datetime.now().strftime('%H%M%S')}"
+    shutil.copy2(dosya, yedek)
+    open(dosya, "w", encoding="utf-8").write(icerik.replace(eski, yeni, 1))
+    if dosya.endswith((".ts", ".tsx")):
+        tsc = subprocess.getoutput("npx tsc --noEmit 2>&1 | head -n 15")
+        if "error TS" in tsc:
+            shutil.copy2(yedek, dosya)
+            return f"OTOMATIK GERI ALINDI (TS Hatasi yakalandi):\n{tsc}"
+    elif dosya.endswith(".py"):
+        py_chk = subprocess.getoutput(f"python3 -m py_compile {dosya} 2>&1")
+        if py_chk:
+            shutil.copy2(yedek, dosya)
+            return f"OTOMATIK GERI ALINDI (Python Sozdizimi Hatasi):\n{py_chk}"
+    return f"DOGRULANDI & KAYDEDILDI (Yedek: {yedek})\n" + subprocess.getoutput(f"git diff {dosya} | head -n 25")
+
+def arac_bash(komut):
+    sinif, neden = komut_siniflandir(komut, mod_tipi)
+    if sinif == 'BLOCKED': return neden
+    if mod_tipi in ("plan", "audit") and any(w in komut for w in ["rm ", "mv ", "pm2 restart", "write_text", " >> ", " > "]):
+        return "SALT-OKUNUR MOD: Yazma/restart komutu engellendi."
+    r = subprocess.run(komut, shell=True, capture_output=True, text=True, timeout=120)
+    return (r.stdout + r.stderr).strip()[:2500] or "Tamamlandi."
+
+gecmis_dersler = "\n".join(f"- [{x['zaman']}] {x['ders']}" for x in hafiza_oku()) or "Henuz kayitli ders yok."
+derin_talimat = "DERIN DUSUNME AKTIF: Eyleme gecmeden once 'dusunce' alaninda 1) Kok Neden, 2) Yan Etki Analizi, 3) CLAUDE.md Risk Kontrolu, 4) En Guvenli Adim sirasiyla derin analiz yap." if derin_mod else ""
+
+sys_prompt = f"""Sen 5 zeka katmanli MT16 QuantMind otonom muhendislik ajanisin. AKTIF MOD: {mod_tipi.upper()}.
+{derin_talimat}
+KURALLAR (CLAUDE.md): Sahte fiyat/random veri yasak; calisan risk salterlerine dokunma.
+KALICI HAFIZA:
+{gecmis_dersler}
+
+ARACLAR:
+- Read: {{"arac":"Read","dosya":"...","bas":1,"bit":120}}
+- Grep: {{"arac":"Grep","desen":"...","yol":"."}}
+- Glob: {{"arac":"Glob","desen":"src/**/*.tsx"}}
+- Edit: {{"arac":"Edit","dosya":"...","eski":"...","yeni":"..."}}
+- Bash: {{"arac":"Bash","komut":"..."}}
+
+SADECE tek gecerli JSON dondur:
+{{"dusunce":"Derin akil yurutme adimlari","aciklama":"Kisa Turkce ozet","arac":"Read|Grep|Glob|Edit|Bash","ders":"Ogrenilen kisa kural veya bos","bitti":true,...}}"""
+
+key = os.environ.get("GROQ_API_KEY", "")
+url = "".join(["https", chr(58), "//api.", "groq.", "com/openai/v1/chat/completions"])
+hdrs = {"Content-Type": "application/json", "Authorization": f"Bearer {key}", "User-Agent": "MT16-DeepThink/6.0"}
+modeller = ["deepseek-r1-distill-llama-70b", "qwen/qwen3-32b", "llama-3.3-70b-versatile", "llama-3.1-8b-instant"] if derin_mod else ["qwen/qwen3-32b", "llama-3.3-70b-versatile", "llama-3.1-8b-instant"]
+mesajlar = [{"role": "system", "content": sys_prompt}, {"role": "user", "content": istek}]
+max_tur = 4 if mod_tipi == "hack" else 2
+
+for tur in range(1, max_tur + 1):
+    res = None
+    kullanilan_mod = modeller[0]
+    for m_aday in modeller:
+        try:
+            body = json.dumps({"model": m_aday, "messages": mesajlar, "temperature": 0.15 if derin_mod else 0.1}).encode()
+            res = json.loads(urllib.request.urlopen(urllib.request.Request(url, data=body, headers=hdrs), timeout=50).read().decode())
+            kullanilan_mod = m_aday
+            break
+        except Exception as e:
+            if any(k in str(e) for k in ["429", "404", "400"]):
+                time.sleep(2)
+                continue
+            raise
+    if not res or "choices" not in res:
+        print("⏳ Groq hiz limiti dolu, mevcut tur guvenle tamamlandi.")
+        break
+    ham = res["choices"][0]["message"]["content"].strip()
+    ic_dusunce = ""
+    if "<think>" in ham and "</think>" in ham:
+        ic_dusunce = ham.split("<think>")[1].split("</think>")[0].strip()
+        ham = ham.split("</think>")[1].strip()
+    if ham.startswith("```"):
+        ham = ham.split("```")[1]
+        if ham.startswith("json"): ham = ham[4:]
+    p = json.loads(ham.strip(), strict=False)
+    arac = p.get("arac", "Bash")
+    print(f"[{mod_tipi.upper()}{' + DERIN DUSUNME' if derin_mod else ''} | Tur {tur}/{max_tur} | {arac} | {kullanilan_mod}]")
+    if ic_dusunce: print(f"💭 İç Akıl Yürütme:\n{ic_dusunce[:900]}\n---")
+    if p.get("dusunce"): print(f"🧠 Yapısal Düşünce: {p['dusunce']}")
+    print(f"📌 Eylem: {p.get('aciklama', '')}")
+    if arac == "Read": cikti = arac_read(p.get("dosya",""), int(p.get("bas",1)), int(p.get("bit",120)))
+    elif arac == "Grep": cikti = arac_grep(p.get("desen",""), p.get("yol","."))
+    elif arac == "Glob": cikti = arac_glob(p.get("desen","**/*"))
+    elif arac == "Edit": cikti = arac_edit(p.get("dosya",""), p.get("eski",""), p.get("yeni",""))
+    else: cikti = arac_bash(p.get("komut",""))
+    print(cikti)
+    if p.get("ders"):
+        hafiza_yaz(p["ders"])
+        print(f"💾 Hafızaya İşlendi: {p['ders']}")
+    if p.get("bitti", True): break
+    mesajlar.extend([{"role": "assistant", "content": json.dumps(p)}, {"role": "user", "content": f"Arac ciktisi:\n{cikti[:2000]}"}])

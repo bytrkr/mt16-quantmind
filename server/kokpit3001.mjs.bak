@@ -1,0 +1,64 @@
+import http from 'node:http';
+import fs from 'node:fs';
+import { execSync, execFileSync } from 'node:child_process';
+
+const PIN = process.env.CMD_PIN || '1616';
+const HTML = `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MT16 AI Studio Kokpit (3001)</title></head>
+<body style="margin:0;background:#0d1117;color:#c9d1d9;font-family:sans-serif;padding:14px">
+<div style="max-width:1280px;margin:auto">
+  <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #30363d;padding-bottom:8px;margin-bottom:10px;flex-wrap:wrap;gap:6px">
+    <strong style="color:#58a6ff;font-size:15px">⚡ MT16 Bağımsız AI Studio & Otonom CMD (Port 3001)</strong>
+    <div style="display:flex;gap:6px;align-items:center">
+      <button onclick="run('pm2 status')" style="background:#21262d;color:#fff;border:1px solid #30363d;padding:5px 9px;border-radius:4px;cursor:pointer">📊 PM2</button>
+      <button onclick="run('git status -s && git diff --stat')" style="background:#21262d;color:#7ee787;border:1px solid #30363d;padding:5px 9px;border-radius:4px;cursor:pointer">🐙 GitHub</button>
+      <button onclick="run('cat data/sanal_portfoy.json')" style="background:#21262d;color:#79c0ff;border:1px solid #30363d;padding:5px 9px;border-radius:4px;cursor:pointer">💰 Portföy</button>
+      <button onclick="run('cat data/ai_agent_memory.json 2>/dev/null || echo Hafiza_bos')" style="background:#21262d;color:#d2a8ff;border:1px solid #30363d;padding:5px 9px;border-radius:4px;cursor:pointer">🧬 Hafıza</button>
+      <button onclick="run('npm run build && pm2 restart bistapp')" style="background:#1f6feb;color:#fff;border:none;padding:5px 10px;border-radius:4px;font-weight:bold;cursor:pointer">🔨 3000 Build & Restart</button>
+      <input id="pin" type="password" value="1616" style="width:55px;background:#161b22;color:#fff;border:1px solid #30363d;padding:4px 6px;border-radius:4px">
+    </div>
+  </div>
+  <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">
+    <select id="mod" style="background:#161b22;color:#fff;border:1px solid #30363d;padding:6px;border-radius:4px;font-weight:bold">
+      <option value="plan">🛡️ PLAN (Salt-Okunur)</option>
+      <option value="build" selected>🛠️ BUILD (Yedekli Düzenle)</option>
+      <option value="hack">⚡ HACK (4 Tur Otonom)</option>
+      <option value="audit">🔒 AUDIT (Güvenlik Denetimi)</option>
+    </select>
+    <label style="display:flex;align-items:center;gap:4px;background:#161b22;border:1px solid #30363d;padding:4px 10px;border-radius:4px;font-size:12px"><input id="deep" type="checkbox" checked> 🧠 Derin Düşünme</label>
+    <button onclick="document.getElementById('out').textContent=''" style="margin-left:auto;background:#21262d;color:#8b949e;border:1px solid #30363d;padding:4px 10px;border-radius:4px;cursor:pointer">🧹 Temizle</button>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:10px">
+    <textarea id="cmd" rows="3" placeholder="Türkçe talimat veya Bash komutu yazın..." style="flex:1;background:#010409;color:#7ee787;border:1px solid #30363d;padding:8px;border-radius:4px;font-family:monospace;font-size:13px">pm2 status</textarea>
+    <button onclick="ai()" style="background:#6e40c9;color:#fff;border:none;padding:0 16px;border-radius:4px;font-weight:bold;cursor:pointer">🤖 AI Çalıştır</button>
+    <button onclick="run(document.getElementById('cmd').value)" style="background:#238636;color:#fff;border:none;padding:0 16px;border-radius:4px;font-weight:bold;cursor:pointer">Çalıştır ↵</button>
+  </div>
+  <pre id="out" style="background:#010409;border:1px solid #30363d;padding:12px;border-radius:6px;white-space:pre-wrap;font-size:12.5px;min-height:420px;overflow:auto">⚡ Port 3001 Bağımsız AI Kokpit Hazır (6/6 Güvenlik Katmanı Aktif).</pre>
+</div>
+<script>
+function run(c){const o=document.getElementById('out'),p=document.getElementById('pin').value;o.textContent='⏳ Çalışıyor...\\n$ '+c;fetch('/api/cmd',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({cmd:c,pin:p})}).then(r=>r.json()).then(d=>o.textContent='$ '+c+'\\n\\n'+(d.out||'Tamamlandı.')).catch(e=>o.textContent='Hata: '+e);}
+function ai(){const q=document.getElementById('cmd').value.replace(/'/g,"'\\\\''"),m=document.getElementById('mod').value,dp=document.getElementById('deep').checked?' --deep':'';run("python3 python/ai_coder_agent.py --mode "+m+dp+" '"+q+"'");}
+</script></body></html>`;
+
+http.createServer((req, res) => {
+  if (req.method === 'GET') {
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    return res.end(HTML);
+  }
+  if (req.method === 'POST' && req.url === '/api/cmd') {
+    let body = '';
+    req.on('data', c => body += c);
+    req.on('end', () => {
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      try {
+        const { cmd, pin } = JSON.parse(body || '{}');
+        if (String(pin) !== String(PIN)) return res.end(JSON.stringify({ ok: false, out: '🔒 Geçersiz PIN!' }));
+        const chk = execFileSync('python3', ['python/security_hooks.py', String(cmd || '')], { cwd: process.cwd(), encoding: 'utf-8' }).trim();
+        if (chk.startsWith('BLOCKED|')) return res.end(JSON.stringify({ ok: false, out: '🛡️ ' + chk.split('|').slice(1).join('|') }));
+        const out = execSync(String(cmd), { cwd: process.cwd(), encoding: 'utf-8', timeout: 120000, maxBuffer: 1024 * 1024 * 4 });
+        res.end(JSON.stringify({ ok: true, out: out || 'Tamamlandı.' }));
+      } catch (e) {
+        res.end(JSON.stringify({ ok: false, out: String(e?.stdout || e?.stderr || e?.message || e) }));
+      }
+    });
+  }
+}).listen(3001, '0.0.0.0', () => console.log('KOKPIT_3001_AKTIF'));

@@ -1,0 +1,91 @@
+import React, { useState, Suspense } from "react";
+
+const KATEGORILER: Record<string, string[]> = {
+  "🏆 Kurumsal & Performans": [
+    "TrackRecordPanel", "MamPropDashboardCard", "PortfolioGrowthChart",
+    "PortfolioCorrelationCard", "TacticalPortfolioManager", "AllBistStocksModal"
+  ],
+  "🐋 Balina & Emir Defteri": [
+    "DarkPoolWhaleRadar", "IcebergDetectorCard", "InstitutionalFlowMeter",
+    "SectorLiquidityRotation", "OrderBookHeatmapVisualizer", "OrderflowDeltaCard",
+    "LightweightOrderBookChart", "LiquidityAbsorbanceCard", "IsometricDepthTopography"
+  ],
+  "🤖 AI, Jüri & Simülasyon": [
+    "WarrenAiChat", "LiveJuryBoard", "BacktestPanel", "MonteCarloBacktester",
+    "CognitiveBarReplay", "CognitiveVolumeProfile", "ForensicRedFlagCard"
+  ],
+  "🛡️ İstihbarat & Risk": [
+    "AnomalyRadarCard", "AnomalyBubbleChartCard", "CrossMarketCorrelationMatrix",
+    "MarketLiquidityHeatmap", "AutonomousRiskGuard", "VolatileCircuitBreakerCard",
+    "SystemHealthLatencyCard", "EconomicCalendarPanel", "CryptoDerivativesIntelligenceCard",
+    "AlpacaExecutorCard", "BinanceTestnetExecutorCard", "DynamicPresetScreener"
+  ]
+};
+
+const tumModuller = import.meta.glob("./*.tsx");
+
+class ModulKoruma extends React.Component<{ ad: string; children: React.ReactNode }, { hata: string | null }> {
+  constructor(props: any) { super(props); this.state = { hata: null }; }
+  static getDerivedStateFromError(err: any) { return { hata: String(err?.message || err) }; }
+  render() {
+    if (this.state.hata) {
+      return <div style={{ padding: "16px", background: "#fff8e1", border: "1px solid #ffe082", borderRadius: "6px", color: "#5d4037", fontSize: "13px" }}>
+        <strong>⚠️ {this.props.ad}</strong> canlı veri akışı veya özel sembol bağlamı bekliyor.<br/>
+        <span style={{ fontSize: "11px", opacity: 0.8 }}>{this.state.hata}</span>
+      </div>;
+    }
+    return this.props.children;
+  }
+}
+
+export const ModulGalerisiModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  const katAdlari = Object.keys(KATEGORILER);
+  const [aktifKat, setAktifKat] = useState(katAdlari);
+  const [seciliMod, setSeciliMod] = useState("TrackRecordPanel");
+
+  const DinamikBilesen = React.useMemo(() => {
+    const yol = `./${seciliMod}.tsx`;
+    const yukleyici = tumModuller[yol];
+    if (!yukleyici) return () => <div>Modül bulunamadı: {seciliMod}</div>;
+    return React.lazy(async () => {
+      const m: any = await yukleyici();
+      const Comp = m.default || m[seciliMod] || Object.values(m).find((v: any) => typeof v === "function");
+      return { default: Comp || (() => <div>Bileşen dışa aktarılmamış</div>) };
+    });
+  }, [seciliMod]);
+
+  return (
+    <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)", zIndex: 9998, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px" }}>
+      <div onClick={(e) => e.stopPropagation()} style={{ background: "#f8f9fa", borderRadius: "8px", width: "95vw", maxWidth: "1320px", height: "88vh", display: "flex", flexDirection: "column", overflow: "hidden", boxShadow: "0 12px 40px rgba(0,0,0,0.35)" }}>
+        <div style={{ background: "#1a237e", color: "#fff", padding: "10px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <strong style={{ fontSize: "14px" }}>🧩 MT16 QuantMind — Hazır Modül Galerisi (4 Kategori / 34+ Canlı Araç)</strong>
+          <button onClick={onClose} style={{ background: "#c62828", color: "#fff", border: "none", borderRadius: "4px", padding: "4px 10px", cursor: "pointer", fontWeight: "bold" }}>Kapat ✕</button>
+        </div>
+        <div style={{ display: "flex", gap: "6px", padding: "8px 14px", background: "#e8eaf6", borderBottom: "1px solid #c5cae9", flexWrap: "wrap" }}>
+          {katAdlari.map((k) => (
+            <button key={k} onClick={() => { setAktifKat(k); setSeciliMod(KATEGORILER[k]); }} style={{ background: aktifKat === k ? "#1a237e" : "#fff", color: aktifKat === k ? "#fff" : "#1a237e", border: "1px solid #9fa8da", borderRadius: "4px", padding: "5px 12px", fontSize: "12px", fontWeight: "bold", cursor: "pointer" }}>{k}</button>
+          ))}
+        </div>
+        <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
+          <div style={{ width: "250px", background: "#fff", borderRight: "1px solid #ddd", overflowY: "auto", padding: "8px" }}>
+            {KATEGORILER[aktifKat].map((m) => (
+              <div key={m} onClick={() => setSeciliMod(m)} style={{ padding: "8px 10px", marginBottom: "4px", borderRadius: "4px", cursor: "pointer", fontSize: "12px", fontWeight: seciliMod === m ? "bold" : "normal", background: seciliMod === m ? "#e8eaf6" : "transparent", color: seciliMod === m ? "#1a237e" : "#333", borderLeft: seciliMod === m ? "3px solid #1a237e" : "3px solid transparent" }}>
+                {m}
+              </div>
+            ))}
+          </div>
+          <div style={{ flex: 1, overflowY: "auto", padding: "16px", background: "#fff" }}>
+            <div style={{ fontSize: "12px", color: "#666", marginBottom: "10px", borderBottom: "1px solid #eee", paddingBottom: "6px" }}>
+              Aktif Modül: <strong style={{ color: "#1a237e" }}>{seciliMod}</strong>
+            </div>
+            <ModulKoruma key={seciliMod} ad={seciliMod}>
+              <Suspense fallback={<div style={{ padding: "20px", color: "#666" }}>⏳ {seciliMod} yükleniyor...</div>}>
+                <DinamikBilesen symbol="ASELS" ticker="ASELS" market="BIST" isOpen={true} onClose={() => {}} />
+              </Suspense>
+            </ModulKoruma>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

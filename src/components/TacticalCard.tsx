@@ -1,3 +1,4 @@
+import { copyText } from "../utils/clipboard";
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import {
   ChevronDown,
@@ -544,7 +545,7 @@ export const TacticalCard: React.FC<TacticalCardProps> = ({
   const handleCopy = async (type: 'PROMPT' | 'TOON') => {
     const text = type === 'PROMPT' ? llmPromptText : toonPayloadText;
     try {
-      await navigator.clipboard.writeText(text);
+      await copyText(text);
       setCopiedType(type);
       setTimeout(() => setCopiedType(null), 2200);
     } catch {

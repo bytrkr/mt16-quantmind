@@ -13,7 +13,7 @@ export interface MarketTick {
 
 export class MultiMarketProvider {
   public static async fetchCryptoTick(symbol: string): Promise<MarketTick> {
-    const mock20dVol = Array.from({length: 20}, () => Math.floor(Math.random() * 500000) + 100000);
+    const mock20dVol = Array(20).fill(0);
     return {
       symbol: symbol,
       market: 'CRYPTO',

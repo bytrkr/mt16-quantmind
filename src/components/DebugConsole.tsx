@@ -1,3 +1,4 @@
+import { copyText } from "../utils/clipboard";
 // src/components/DebugConsole.tsx
 /**
  * MT16 BistApp Kuant Terminali - Sistem Tanılama Konsolu (Debug Console)
@@ -103,7 +104,7 @@ export const DebugConsole: React.FC = () => {
   const handleCopyLogs = async () => {
     const text = logs.map((l) => `[${l.timestamp}] [${l.level}] [${l.category}] ${l.message}`).join('\n');
     try {
-      await navigator.clipboard.writeText(text);
+      await copyText(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {}
