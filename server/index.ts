@@ -77,6 +77,10 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
+app.get('/api/quant-hud', (_q, r) => { const o = (f:string) => { try { return JSON.parse(fs.readFileSync(f,'utf-8')); } catch { return null; } }; r.json({ sistem:o('data/tam_sistem_entegrasyon.json'), var_rapor:o('data/monte_carlo_var.json'), munazara:o('data/bull_bear_raporu.json'), haber:o('data/haber_duygu_raporu.json'), davranis:o('data/fstory_behavior.json') }); });
+app.get('/api/quant-hud', (_q, r) => { const o = (f:string) => { try { return JSON.parse(fs.readFileSync(f,'utf-8')); } catch { return null; } }; r.json({ sistem:o('data/tam_sistem_entegrasyon.json'), var_rapor:o('data/monte_carlo_var.json'), munazara:o('data/bull_bear_raporu.json'), haber:o('data/haber_duygu_raporu.json'), davranis:o('data/fstory_behavior.json') }); });
+app.get('/api/quant-hud', (_q, r) => { const o = (f:string) => { try { return JSON.parse(fs.readFileSync(f,'utf-8')); } catch { return null; } }; r.json({ sistem:o('data/tam_sistem_entegrasyon.json'), var_rapor:o('data/monte_carlo_var.json'), munazara:o('data/bull_bear_raporu.json'), haber:o('data/haber_duygu_raporu.json'), davranis:o('data/fstory_behavior.json') }); });
+app.get('/api/quant-hud', (_q, r) => { const o = (f:string) => { try { return JSON.parse(fs.readFileSync(f,'utf-8')); } catch { return null; } }; r.json({ sistem:o('data/tam_sistem_entegrasyon.json'), var_rapor:o('data/monte_carlo_var.json'), munazara:o('data/bull_bear_raporu.json'), haber:o('data/haber_duygu_raporu.json'), davranis:o('data/fstory_behavior.json') }); });
 app.use(cors());
 app.use(express.json({ limit: '5mb' }));
 

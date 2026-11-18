@@ -56,7 +56,9 @@ export type TabKey =
   | 'kap'
   | 'chat';
 
-export default function App() {
+export default 
+
+function App() {
   const [vitrinModu, setVitrinModu] = useState(() => localStorage.getItem("eski_mod") !== "1");
   if (vitrinModu) return <SahibindenVitrin onEskiTerminaleGec={() => { localStorage.setItem("eski_mod", "1"); window.location.reload(); }} />;
 

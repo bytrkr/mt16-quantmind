@@ -1,3 +1,5 @@
+from news_sentiment_engine import hisse_haber_duygu_tara
+from monte_carlo_var import monte_carlo_var_simulasyonu
 from auto_repo_absorber import tam_entegrasyon_dongusu
 from bull_bear_debate import boga_ayi_munazara, portfoy_munazara_denetimi
 from fstory_full_integration import davranissal_streak_ve_spike_kalkan
@@ -185,6 +187,8 @@ def test_turu():
         davranissal_streak_ve_spike_kalkan()
         portfoy_munazara_denetimi()
         tam_entegrasyon_dongusu()
+        hisse_haber_duygu_tara()
+        monte_carlo_var_simulasyonu()
     json.dump(pf, open(pf_yol, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     rapor["kayitlar"] = yeni_kayitlar + [{"zaman": datetime.now().strftime("%H:%M:%S"), "tip": "TUR", "mesaj": f"Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı ({len(vitrin)} varlık)"}] + rapor.get("kayitlar", [])[:30]
     alog = os.path.join(os.path.dirname(VITRIN_YOLU), "qodi_autofix_log.json")

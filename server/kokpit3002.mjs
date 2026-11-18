@@ -84,6 +84,7 @@ telGuncelle(); setInterval(telGuncelle, 5000);
 </script></body></html>`;
 
 http.createServer((req, res) => {
+  if (req.url === '/api/quant-hud') { const oku = (x) => { try { return JSON.parse(fs.readFileSync(x, 'utf-8')); } catch { return null; } }; res.writeHead(200, {'Content-Type':'application/json'}); return res.end(JSON.stringify({ sistem: oku('data/tam_sistem_entegrasyon.json'), var_rapor: oku('data/monte_carlo_var.json'), munazara: oku('data/bull_bear_raporu.json'), haber: oku('data/haber_duygu_raporu.json'), davranis: oku('data/fstory_behavior.json') })); }
   if (req.method === 'GET' && req.url === '/api/telemetry') {
     const tot = os.totalmem(), free = os.freemem();
     const ram = (((tot - free) / tot) * 100).toFixed(1) + '%';
