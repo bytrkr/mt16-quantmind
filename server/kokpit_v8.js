@@ -106,3 +106,10 @@ function dosyaGeriAl(){
   fetch('/api/restore',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({yol:aktifDosyaYolu,pin:document.getElementById('pin').value})})
     .then(r=>r.json()).then(d=>{ alert(d.msg); });
 }
+
+function formatDonustur(fmt){
+  if(!fmt) return;
+  const hedefDosya = (aktifDosyaYolu && aktifDosyaYolu.endsWith('.json')) ? aktifDosyaYolu : 'data/sanal_portfoy.json';
+  run('python3 python/format_bridge.py ' + fmt + ' ' + hedefDosya);
+  document.getElementById('fmtSecici').value = '';
+}
