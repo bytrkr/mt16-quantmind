@@ -1,13 +1,24 @@
 #!/usr/bin/env bash
 set -euo pipefail
-echo "=== MT16 SISTEM & PORT SAGLIK TARAMASI ==="
-date
-ss -tulpn | grep -E "3000|3001|8001" || true
-pm2 jlist 2>/dev/null | head -c 1200 || pm2 status
+echo "=================================================="
+echo "MT16 CANLI PORT & SERVIS SAGLIK MATRISI"
+echo "Tarih (UTC): $(date -u '+%Y-%m-%d %H:%M:%S')"
+echo "=================================================="
+for p in 3000 3001 8001; do
+  t_start=$(date +%s%3N)
+  code=$(curl -sS -m 4 -o /dev/null -w "%{http_code}" "http://127.0.0.1:${p}/" 2>/dev/null || echo "000")
+  t_end=$(date +%s%3N)
+  ms=$((t_end - t_start))
+  if [ "$code" != "000" ]; then
+    echo "[OK]   Port ${p} -> HTTP ${code} (${ms} ms)"
+  else
+    echo "[WARN] Port ${p} -> HTTP Yanit Yok (${ms} ms)"
+  fi
+done
 echo ""
-echo "--- 8001 /api/track-record ---"
-curl -sS -m 5 http://127.0.0.1:8001/api/track-record | head -c 800 || echo "8001 yanit vermedi"
+echo "--- 8001 /api/track-record Ozeti ---"
+curl -sS -m 5 http://127.0.0.1:8001/api/track-record 2>/dev/null | head -c 500 || echo "8001 API erisilemedi"
 echo ""
-echo "--- 3000 & 3001 HTTP ---"
-curl -sS -m 5 -o /dev/null -w "Port 3000 HTTP: %{http_code} | Sure: %{time_total}s\n" http://127.0.0.1:3000/ || true
-curl -sS -m 5 -o /dev/null -w "Port 3001 HTTP: %{http_code} | Sure: %{time_total}s\n" http://127.0.0.1:3001/ || true
+echo ""
+echo "--- PM2 Surec Durumu ---"
+pm2 status || true

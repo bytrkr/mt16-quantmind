@@ -427,361 +427,304 @@ window.addEventListener("DOMContentLoaded", function() {
   }
 });
 </script><script>
-(function initMt16ExcelRibbon() {
-  function mount() {
-    if (document.getElementById("mt16-excel-ribbon")) return;
+(function initMt16Features123() {
+  function boot() {
+    if (document.getElementById("mt16-f123-bar")) return;
     var cmdEl = document.getElementById("cmd");
     var outEl = document.getElementById("out");
     var mainGrid = document.getElementById("main-grid");
-    if (!cmdEl || !outEl || !mainGrid) return setTimeout(mount, 150);
+    if (!cmdEl || !outEl || !mainGrid) return setTimeout(boot, 150);
 
-    // Eski daginik buton satirlarini gizle (sadece en ust baslik kalsin)
-    var topWrap = mainGrid.parentElement;
-    Array.from(topWrap.children).forEach(function(el, i) {
-      if (i > 0 && el !== mainGrid && el.id !== "mt16-excel-ribbon") el.style.display = "none";
-    });
-    var parentCol = cmdEl.parentElement.parentElement;
-    Array.from(parentCol.children).forEach(function(ch) {
-      if (ch !== cmdEl.parentElement && ch !== outEl) ch.style.display = "none";
-    });
+    var bar = document.createElement("div");
+    bar.id = "mt16-f123-bar";
+    bar.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;padding:6px 10px;margin-bottom:8px;background:#0d1117;border:1px solid #30363d;border-radius:6px;align-items:center;font-family:Segoe UI,sans-serif;";
 
-    var ribbon = document.createElement("div");
-    ribbon.id = "mt16-excel-ribbon";
-    ribbon.style.cssText = "background:#161b22;border:1px solid #30363d;border-radius:6px;margin-bottom:8px;overflow:hidden;font-family:Segoe UI,sans-serif;box-shadow:0 3px 10px rgba(0,0,0,0.4);";
-
-    var tabBar = document.createElement("div");
-    tabBar.style.cssText = "display:flex;background:#010409;border-bottom:1px solid #30363d;padding:0 6px;gap:2px;flex-wrap:wrap;";
-
-    var panel = document.createElement("div");
-    panel.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px;background:#161b22;align-items:center;min-height:38px;";
-
-    var menus = [
-      {
-        name: "📁 Dosya",
-        accent: "#238636",
-        items: [
-          { label: "💾 Manuel Yedek Al", cmd: "bash /home/bytrkr/bistapp/scripts/backup_data.sh" },
-          { label: "📂 Yedek Arşivleri", cmd: "ls -lh /home/bytrkr/bistapp/backups/" },
-          { label: "📜 Kullanım & Bakım Kılavuzu", cmd: "cat docs/KOKPIT_KULLANIM_KILAVUZU.md" },
-          { label: "⬇️ Çıktıyı .txt İndir", action: "download" }
-        ]
-      },
-      {
-        name: "🏠 Giriş",
-        accent: "#1f6feb",
-        items: [
-          { label: "📊 PM2 Durum", cmd: "pm2 status" },
-          { label: "📋 Çıktıyı Kopyala", action: "copy" },
-          { label: "🧹 Çıktıyı Temizle", action: "clear" },
-          { label: "🔄 Servisleri Yenile (3000+8001)", cmd: "pm2 restart bistapp bistapp-api otonom-beyin && pm2 status" },
-          { label: "⚡ Tümünü Yeniden Başlat", cmd: "pm2 restart all && pm2 status" }
-        ]
-      },
-      {
-        name: "➕ Ekle",
-        accent: "#8957e5",
-        items: [
-          { label: "📎 @Dosya Bağlamı Ekle", action: "mention" },
-          { label: "📝 Görev Notu Ekle", prefix: "# GÖREV NOTU: " },
-          { label: "🔗 API Uç Noktalarını Listele", cmd: "grep -n "@app\." python/api_server.py" }
-        ]
-      },
-      {
-        name: "📊 Veri",
-        accent: "#d29922",
-        items: [
-          { label: "📈 Canlı Track Record", cmd: "curl -s http://127.0.0.1:8001/api/track-record" },
-          { label: "💼 Sanal Portföy", cmd: "cat data/sanal_portfoy.json 2>/dev/null || cat python/sanal_portfoy.json" },
-          { label: "⚖️ Ajan Ağırlıkları", cmd: "cat python/agent_weights.json 2>/dev/null || echo Varsayilan agirliklar" },
-          { label: "💻 Sunucu Kaynakları", cmd: "uptime && free -h && df -h /" }
-        ]
-      },
-      {
-        name: "🛡️ Gözden Geçir",
-        accent: "#da3633",
-        items: [
-          { label: "🔍 Git Diff İncele", cmd: "git diff --stat && git diff -U2 | head -n 80" },
-          { label: "🩺 API Sağlık Kontrolü", cmd: "curl -s http://127.0.0.1:8001/health || curl -s http://127.0.0.1:8001/api/track-record" },
-          { label: "🧹 Hata Loglarını Temizle", cmd: "pm2 flush && pm2 status" },
-          { label: "⏪ Değişiklikleri Geri Al", action: "undo" }
-        ]
-      },
-      {
-        name: "👁️ Görünüm",
-        accent: "#388bfd",
-        items: [
-          { label: "📁 Dosya Ağacı Aç/Kapat", action: "toggleTree" },
-          { label: "📡 Canlı Akış Aç/Kapat", action: "toggleLive" }
-        ]
-      },
-      {
-        name: "🤖 Geliştirici",
-        accent: "#a371f7",
-        items: [
-          { label: "🗺️ Antigravity Plan→Uygula", prefix: "[ANTIGRAVITY WORKFLOW: 1-PLAN çıkar, 2-YEDEK AL ve UYGULA, 3-SYNTAX & PM2 DOĞRULA]\n" },
-          { label: "⚡ Claude Hızlı Uygula", prefix: "[AGENT MODU - Yedek al, uygula, syntax test et ve PM2 yeniden başlat]\n" },
-          { label: "🔍 Cursor Kod Denetimi", prefix: "[CURSOR REVIEW - Güvenlik, performans ve hata kontrolü yap]\n" },
-          { label: "📜 Anayasa Dosyaları (.md)", cmd: "head -n 25 CLAUDE.md GEMINI.md .cursorrules .antigravity/rules.md" },
-          { label: "☁️ GitHub Push", cmd: "git status -s && git push origin HEAD" }
-        ]
-      }
-    ];
-
-    function selectTab(idx) {
-      Array.from(tabBar.children).forEach(function(b, i) {
-        if (i === idx) {
-          b.style.background = "#161b22";
-          b.style.color = "#ffffff";
-          b.style.borderTop = "2px solid " + menus[idx].accent;
-          b.style.fontWeight = "600";
-        } else {
-          b.style.background = "transparent";
-          b.style.color = "#8b949e";
-          b.style.borderTop = "2px solid transparent";
-          b.style.fontWeight = "400";
-        }
-      });
-
-      panel.innerHTML = "";
-      menus[idx].items.forEach(function(it) {
-        var btn = document.createElement("button");
-        btn.textContent = it.label;
-        btn.style.cssText = "background:#21262d;color:#e6edf3;border:1px solid #30363d;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;transition:all 0.12s;";
-        btn.onmouseover = function() { btn.style.background = "#30363d"; btn.style.borderColor = menus[idx].accent; };
-        btn.onmouseout = function() { btn.style.background = "#21262d"; btn.style.borderColor = "#30363d"; };
-
-        btn.onclick = function() {
-          if (it.action === "copy") {
-            navigator.clipboard.writeText(outEl.innerText || "");
-            btn.textContent = "✅ Kopyalandı";
-            setTimeout(function(){ btn.textContent = it.label; }, 1400);
-          } else if (it.action === "clear") {
-            outEl.textContent = "";
-          } else if (it.action === "download") {
-            var blob = new Blob([outEl.innerText || ""], { type: "text/plain;charset=utf-8" });
-            var a = document.createElement("a");
-            a.href = URL.createObjectURL(blob);
-            a.download = "mt16_cikti_" + Date.now() + ".txt";
-            a.click();
-          } else if (it.action === "mention") {
-            var f = prompt("Bağlama eklenecek dosya yolu (örnek: python/api_server.py veya src/App.tsx):", "python/api_server.py");
-            if (f && f.trim()) { cmdEl.value = "@" + f.trim() + " " + cmdEl.value; cmdEl.focus(); }
-          } else if (it.action === "undo") {
-            if (confirm("Commit edilmemiş değişiklikler geri alınsın mı?")) {
-              cmdEl.value = "git checkout -- . && git status -s";
-              if (typeof window.run === "function") window.run(cmdEl.value);
-            }
-          } else if (it.action === "toggleTree") {
-            var t = mainGrid.children[0];
-            if (t) t.style.display = (t.style.display === "none") ? "" : "none";
-          } else if (it.action === "toggleLive") {
-            var l = mainGrid.children[2];
-            if (l) l.style.display = (l.style.display === "none") ? "" : "none";
-          } else if (it.prefix) {
-            if (cmdEl.value.indexOf(it.prefix) === -1) cmdEl.value = it.prefix + cmdEl.value;
-            cmdEl.focus();
-          } else if (it.cmd) {
-            cmdEl.value = it.cmd;
-            if (typeof window.run === "function") window.run(it.cmd);
-          }
-        };
-        panel.appendChild(btn);
-      });
-    }
-
-    menus.forEach(function(m, idx) {
-      var tb = document.createElement("button");
-      tb.textContent = m.name;
-      tb.style.cssText = "border:none;padding:7px 13px;font-size:12px;cursor:pointer;border-radius:4px 4px 0 0;";
-      tb.onclick = function() { selectTab(idx); };
-      tabBar.appendChild(tb);
-    });
-
-    ribbon.appendChild(tabBar);
-    ribbon.appendChild(panel);
-    topWrap.insertBefore(ribbon, mainGrid);
-    selectTab(1); // Varsayilan olarak "Giris" sekmesi acik gelsin
-  }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
-  else mount();
-})();
-</script><script>
-(function initMt16Suite1To17() {
-  function mount() {
-    if (document.getElementById("mt16-suite-1-17")) return;
-    var cmdEl = document.getElementById("cmd");
-    var outEl = document.getElementById("out");
-    var mainGrid = document.getElementById("main-grid");
-    if (!cmdEl || !outEl || !mainGrid) return setTimeout(mount, 150);
-
-    var oldRibbon = document.getElementById("mt16-excel-ribbon");
-    if (oldRibbon) oldRibbon.style.display = "none";
-
-    var wrap = document.createElement("div");
-    wrap.id = "mt16-suite-1-17";
-    wrap.style.cssText = "background:#161b22;border:1px solid #30363d;border-radius:6px;margin-bottom:8px;overflow:hidden;font-family:Segoe UI,sans-serif;";
-
-    var tabBar = document.createElement("div");
-    tabBar.style.cssText = "display:flex;background:#010409;border-bottom:1px solid #30363d;padding:0 6px;gap:2px;flex-wrap:wrap;";
-
-    var bodyPanel = document.createElement("div");
-    bodyPanel.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px;background:#161b22;align-items:center;";
-
-    var sections = [
-      {
-        name: "⚙️ 1-5 Sistem & Bakım",
-        color: "#1f6feb",
-        btns: [
-          { label: "🩺 1. Sağlık Matrisi", cmd: "bash scripts/health_check.sh" },
-          { label: "🚨 2. Hata Tara", action: "scanErr" },
-          { label: "💾 3. Yedek Al & Listele", cmd: "bash scripts/backup_data.sh && ls -lh backups/ | tail -n 8" },
-          { label: "🧹 4. Log & Disk Temizle", cmd: "bash scripts/clean_logs.sh && free -h" },
-          { label: "⏰ 5. Cron Görevleri", cmd: "crontab -l" }
-        ]
-      },
-      {
-        name: "🧠 6-10 AI IDE & Kurallar",
-        color: "#8957e5",
-        btns: [
-          { label: "📎 6. @Dosya Ekle", action: "atFile" },
-          { label: "⚔️ 7. 3-Ajan Münazara", prefix: "[3-AJAN MUNAZARA: 1-Antigravity Plan | 2-Claude Uygulama | 3-Cursor Guvenlik/Hata Denetimi]\n" },
-          { label: "🔍 8. Diff Gate İncele", cmd: "git diff --stat && git diff -U2 | head -n 90" },
-          { label: "📜 9. Anayasa (.md) Oku", cmd: "head -n 25 CLAUDE.md GEMINI.md .cursorrules .antigravity/rules.md" },
-          { label: "🧩 10. Hata Kök Neden Şablonu", prefix: "[KOK NEDEN ANALIZI: Logdaki hatanin kaynagini bul, en guvenli yamayi oner ve test komutunu yaz]\n" }
-        ]
-      },
-      {
-        name: "📈 11-15 BIST & Kantitatif",
-        color: "#238636",
-        btns: [
-          { label: "📊 11. Track Record", cmd: "curl -s http://127.0.0.1:8001/api/track-record" },
-          { label: "💼 12. Sanal Portföy", cmd: "cat data/sanal_portfoy.json 2>/dev/null || cat python/sanal_portfoy.json" },
-          { label: "⚖️ 13. Ajan Ağırlıkları", cmd: "cat python/agent_weights.json 2>/dev/null || echo Varsayilan agirliklar" },
-          { label: "🔬 14. Hisse Röntgen", action: "tickerScan" },
-          { label: "🛡️ 15. SPK & Risk Kontrol", cmd: "grep -rn "SPK" python/api_server.py src/App.tsx 2>/dev/null | head -n 12" }
-        ]
-      },
-      {
-        name: "🛠️ 16-17 Betik, Geçmiş & Dışa Aktar",
-        color: "#d29922",
-        btns: [
-          { label: "🔄 16. Git Sync & Push", cmd: "bash scripts/git_sync.sh status" },
-          { label: "🔎 17a. Geçmişte Ara (Ctrl+R)", action: "searchHist" },
-          { label: "⭐ 17b. Favori Komutlar", action: "favCmd" },
-          { label: "⬇️ 17c. .txt İndir", action: "dlTxt" },
-          { label: "📦 17d. .json İndir", action: "dlJson" }
-        ]
-      }
-    ];
-
-    function getHist() { return JSON.parse(localStorage.getItem("mt16_cmd_hist") || "[]"); }
-    function pushHist(v) {
-      v = (v || "").trim();
-      if (!v) return;
-      var h = getHist();
-      if (h[h.length - 1] !== v) { h.push(v); if (h.length > 50) h.shift(); localStorage.setItem("mt16_cmd_hist", JSON.stringify(h)); }
-    }
-
-    function runNow(c) {
-      pushHist(c);
+    function execCmd(c) {
       cmdEl.value = c;
       if (typeof window.run === "function") window.run(c);
     }
 
-    function selectSec(idx) {
-      Array.from(tabBar.children).forEach(function(tb, i) {
-        tb.style.background = i === idx ? "#161b22" : "transparent";
-        tb.style.color = i === idx ? "#fff" : "#8b949e";
-        tb.style.borderTop = i === idx ? ("2px solid " + sections[idx].color) : "2px solid transparent";
+    // 1. Canli Port & Servis Saglik Matrisi
+    var bHealth = document.createElement("button");
+    bHealth.textContent = "🩺 1. Sağlık Matrisi";
+    bHealth.style.cssText = "background:#1f6feb;color:#fff;border:none;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;";
+    bHealth.onclick = function() { execCmd("bash scripts/health_check.sh"); };
+
+    // 2. Otomatik Hata Izleyici & Alarm Rozeti
+    var bAlarm = document.createElement("button");
+    bAlarm.id = "mt16-err-alarm-btn";
+    bAlarm.textContent = "🚨 2. Hata İzleyici (0)";
+    bAlarm.style.cssText = "background:#21262d;color:#e6edf3;border:1px solid #30363d;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;";
+
+    function collectErrors() {
+      var liveEl = document.getElementById("livePane");
+      var combined = (outEl.innerText || "") + "\n" + (liveEl ? liveEl.innerText : "");
+      return combined.split("\n").filter(function(line) {
+        return /Traceback|ModuleNotFoundError|Exception|ECONNREFUSED|FAILED|VETO/i.test(line);
       });
-      bodyPanel.innerHTML = "";
-      sections[idx].btns.forEach(function(bSpec) {
-        var b = document.createElement("button");
-        b.textContent = bSpec.label;
-        b.style.cssText = "background:#21262d;color:#e6edf3;border:1px solid #30363d;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;";
-        b.onclick = function() {
-          if (bSpec.cmd) runNow(bSpec.cmd);
-          else if (bSpec.prefix) { if (cmdEl.value.indexOf(bSpec.prefix) === -1) cmdEl.value = bSpec.prefix + cmdEl.value; cmdEl.focus(); }
-          else if (bSpec.action === "scanErr") {
-            var txt = (outEl.innerText || "") + "
-" + ((document.getElementById("livePane") && document.getElementById("livePane").innerText) || "");
-            var lines = txt.split("
-").filter(function(l){ return /Error|Traceback|Exception|VETO|FAILED|ModuleNotFoundError/i.test(l); });
-            cmdEl.value = "Su hatalari incele ve cozum oner:
-" + (lines.slice(-20).join("
-") || "Belirgin hata satiri bulunamadi, son loglari kontrol et.");
-            if (typeof window.ai === "function") window.ai();
-          } else if (bSpec.action === "atFile") {
-            var f = prompt("Dosya yolu (orn: python/api_server.py veya src/App.tsx):", "python/api_server.py");
-            if (f && f.trim()) {
-              var cleanF = f.trim().replace(/^@/, "");
-              runNow("head -n 80 " + cleanF + " 2>/dev/null || echo Dosya bulunamadi: " + cleanF);
-            }
-          } else if (bSpec.action === "tickerScan") {
-            var tk = prompt("BIST Hisse Kodu (orn: ASELS, THYAO, BIMAS):", "ASELS");
-            if (tk && tk.trim()) {
-              var u = tk.trim().toUpperCase();
-              runNow("grep -rn "" + u + "" data/ python/ 2>/dev/null | head -n 25 || echo Kayit bulunamadi");
-            }
-          } else if (bSpec.action === "searchHist") {
-            var q = prompt("Komut gecmisinde ara:", "");
-            if (q !== null) {
-              var matches = getHist().filter(function(x){ return x.toLowerCase().indexOf(q.toLowerCase()) !== -1; });
-              outEl.textContent = "=== KOMUT GECMISI ESLESMELERI ===
-" + (matches.join("
-") || "Eslesme yok");
-              if (matches.length) cmdEl.value = matches[matches.length - 1];
-            }
-          } else if (bSpec.action === "favCmd") {
-            var favs = ["bash scripts/health_check.sh", "bash scripts/backup_data.sh", "curl -s http://127.0.0.1:8001/api/track-record", "git status -s && git log -n 3 --oneline"];
-            var pick = prompt("Favori sec (0-3):
+    }
+
+    function refreshAlarm() {
+      var errs = collectErrors();
+      var cnt = errs.length;
+      bAlarm.textContent = (cnt > 0 ? "🚨 2. Hata Alarmı (" + cnt + ")" : "✅ 2. Hata İzleyici (0)");
+      bAlarm.style.background = cnt > 0 ? "#6e1a1a" : "#21262d";
+      bAlarm.style.borderColor = cnt > 0 ? "#f85149" : "#30363d";
+    }
+
+    bAlarm.onclick = function() {
+      var errs = collectErrors().slice(-20);
+      if (!errs.length) {
+        execCmd("pm2 logs --lines 25 --nostream");
+        return;
+      }
+      cmdEl.value = "Su sistem/log hatalarini analiz et, kok nedenini bul ve guvenli cozum adimlarini yaz:\n" + errs.join("\n");
+      if (typeof window.ai === "function") window.ai();
+      else cmdEl.focus();
+    };
+    setInterval(refreshAlarm, 4000);
+    setTimeout(refreshAlarm, 800);
+
+    // 3. Tek Tikla Yedek Yoneticisi (Listele / Al / Geri Yukle)
+    var bBackupList = document.createElement("button");
+    bBackupList.textContent = "📂 3a. Yedekleri Listele";
+    bBackupList.style.cssText = "background:#21262d;color:#e6edf3;border:1px solid #30363d;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;";
+    bBackupList.onclick = function() { execCmd("bash scripts/backup_manager.sh list"); };
+
+    var bBackupNew = document.createElement("button");
+    bBackupNew.textContent = "💾 3b. Yeni Yedek Al";
+    bBackupNew.style.cssText = "background:#238636;color:#fff;border:none;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;";
+    bBackupNew.onclick = function() { execCmd("bash scripts/backup_manager.sh create"); };
+
+    var bRestore = document.createElement("button");
+    bRestore.textContent = "⏪ 3c. Yedek Geri Yükle";
+    bRestore.style.cssText = "background:#9e6a03;color:#fff;border:none;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;";
+    bRestore.onclick = function() {
+      var path = prompt("Geri yüklenecek .tar.gz yedek dosyasının tam yolu:", "/home/bytrkr/bistapp/backups/latest_ports_bundle.tar.gz");
+      if (path && path.trim()) {
+        execCmd("bash scripts/backup_manager.sh restore "" + path.trim() + """);
+      }
+    };
+
+    bar.appendChild(bHealth);
+    bar.appendChild(bAlarm);
+    bar.appendChild(bBackupList);
+    bar.appendChild(bBackupNew);
+    bar.appendChild(bRestore);
+    mainGrid.parentElement.insertBefore(bar, mainGrid);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
+</script><script>
+(function initMt16Features4To10() {
+  function boot() {
+    if (document.getElementById("mt16-f4-10-bar")) return;
+    var cmdEl = document.getElementById("cmd");
+    var outEl = document.getElementById("out");
+    var mainGrid = document.getElementById("main-grid");
+    if (!cmdEl || !outEl || !mainGrid) return setTimeout(boot, 150);
+
+    var bar = document.createElement("div");
+    bar.id = "mt16-f4-10-bar";
+    bar.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;padding:6px 10px;margin-bottom:8px;background:#0d1117;border:1px solid #30363d;border-radius:6px;align-items:center;font-family:Segoe UI,sans-serif;";
+
+    function runShell(c) {
+      cmdEl.value = c;
+      if (typeof window.run === "function") window.run(c);
+    }
+
+    var items = [
+      {
+        label: "🧹 4. Disk/RAM/Log Temizle",
+        bg: "#238636",
+        fn: function() { runShell("bash scripts/sys_maintain_4_5.sh clean"); }
+      },
+      {
+        label: "⏰ 5. Cron Görevleri",
+        bg: "#21262d",
+        fn: function() { runShell("bash scripts/sys_maintain_4_5.sh status"); }
+      },
+      {
+        label: "📎 6. @Dosya Oku",
+        bg: "#21262d",
+        fn: function() {
+          var f = prompt("Okunacak dosya yolu:", "python/api_server.py");
+          if (f && f.trim()) {
+            var clean = f.trim().replace(/^@/, "");
+            runShell("nl -ba " + clean + " 2>/dev/null | head -n 120 || echo Dosya bulunamadi: " + clean);
+          }
+        }
+      },
+      {
+        label: "⚔️ 7. 3-Ajan Münazara",
+        bg: "#6e40c9",
+        fn: function() {
+          var prefix = "[3-AJAN MUNAZARA: 1-Antigravity Plan | 2-Claude Uygulama | 3-Cursor Guvenlik/Hata Denetimi]\n";
+          if (cmdEl.value.indexOf(prefix) === -1) cmdEl.value = prefix + cmdEl.value;
+          cmdEl.focus();
+        }
+      },
+      {
+        label: "🔍 8. Diff Gate",
+        bg: "#21262d",
+        fn: function() { runShell("git status -s && git diff --stat && git diff -U2 | head -n 100"); }
+      },
+      {
+        label: "📜 9. Anayasa Kuralları",
+        bg: "#21262d",
+        fn: function() { runShell("head -n 30 CLAUDE.md GEMINI.md .cursorrules .antigravity/rules.md 2>/dev/null"); }
+      },
+      {
+        label: "🧩 10. Kök Neden / Prompt Şablonu",
+        bg: "#9e6a03",
+        fn: function() {
+          var tpl = "[KOK NEDEN ANALIZI]\n1. Hata/Darbogaz Kaynagi:\n2. En Guvenli Yama:\n3. Dogrulama Komutu:\n" + (cmdEl.value || "");
+          cmdEl.value = tpl;
+          cmdEl.focus();
+        }
+      }
+    ];
+
+    items.forEach(function(it) {
+      var b = document.createElement("button");
+      b.textContent = it.label;
+      b.style.cssText = "background:" + it.bg + ";color:#fff;border:1px solid #30363d;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;";
+      b.onclick = it.fn;
+      bar.appendChild(b);
+    });
+
+    mainGrid.parentElement.insertBefore(bar, mainGrid);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
+</script><script>
+(function initMt16Features11To17() {
+  function boot() {
+    if (document.getElementById("mt16-f11-17-bar")) return;
+    var cmdEl = document.getElementById("cmd");
+    var outEl = document.getElementById("out");
+    var mainGrid = document.getElementById("main-grid");
+    if (!cmdEl || !outEl || !mainGrid) return setTimeout(boot, 150);
+
+    var bar = document.createElement("div");
+    bar.id = "mt16-f11-17-bar";
+    bar.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;padding:6px 10px;margin-bottom:8px;background:#0d1117;border:1px solid #30363d;border-radius:6px;align-items:center;font-family:Segoe UI,sans-serif;";
+
+    function getHist() { return JSON.parse(localStorage.getItem("mt16_hist_17") || "[]"); }
+    function saveHist(v) {
+      v = (v || "").trim();
+      if (!v) return;
+      var h = getHist();
+      if (h[h.length - 1] !== v) { h.push(v); if (h.length > 60) h.shift(); localStorage.setItem("mt16_hist_17", JSON.stringify(h)); }
+    }
+    function runShell(c) {
+      saveHist(c);
+      cmdEl.value = c;
+      if (typeof window.run === "function") window.run(c);
+    }
+
+    var btns = [
+      { label: "📊 11. Track Record", bg: "#238636", fn: function() { runShell("curl -sS http://127.0.0.1:8001/api/track-record"); } },
+      { label: "💼 12. Sanal Portföy", bg: "#21262d", fn: function() { runShell("cat data/sanal_portfoy.json 2>/dev/null || cat python/sanal_portfoy.json 2>/dev/null || echo Portfoy dosyasi bulunamadi"); } },
+      { label: "⚖️ 13. Ajan Ağırlıkları", bg: "#21262d", fn: function() { runShell("cat python/agent_weights.json 2>/dev/null || find . -maxdepth 3 -name "*weight*" 2>/dev/null"); } },
+      {
+        label: "🔬 14. Hisse Röntgen",
+        bg: "#1f6feb",
+        fn: function() {
+          var tk = prompt("BIST Hisse Kodu (orn: ASELS, THYAO, BIMAS, TOASO):", "ASELS");
+          if (tk && tk.trim()) {
+            var u = tk.trim().toUpperCase();
+            runShell("echo "=== " + u + " RONTGEN ===" && grep -rn "" + u + "" data/ python/ 2>/dev/null | head -n 30");
+          }
+        }
+      },
+      { label: "🛡️ 15. SPK & Risk Kontrol", bg: "#21262d", fn: function() { runShell("curl -sS http://127.0.0.1:8001/api/track-record | grep -o ".*regulatory_compliance.*" || grep -rn "SPK" python/ server/ 2>/dev/null | head -n 15"); } },
+      { label: "🔄 16. Git Sync", bg: "#6e40c9", fn: function() { runShell("bash scripts/git_sync.sh status"); } },
+      {
+        label: "🔎 17a. Geçmiş Ara (Ctrl+R)",
+        bg: "#21262d",
+        fn: function() {
+          var q = prompt("Komut gecmisinde ara:", "");
+          if (q !== null) {
+            var res = getHist().filter(function(x){ return x.toLowerCase().indexOf(q.toLowerCase()) !== -1; });
+            outEl.textContent = "=== GECMIS ARAMA (" + q + ") ===
+" + (res.join("
+") || "Kayit yok");
+            if (res.length) cmdEl.value = res[res.length - 1];
+          }
+        }
+      },
+      {
+        label: "⭐ 17b. Favoriler",
+        bg: "#9e6a03",
+        fn: function() {
+          var favs = [
+            "bash scripts/health_check.sh",
+            "bash scripts/sys_maintain_4_5.sh status",
+            "curl -sS http://127.0.0.1:8001/api/track-record",
+            "bash scripts/git_sync.sh status"
+          ];
+          var pick = prompt("Favori komut sec (0-3):
 0: " + favs[0] + "
 1: " + favs[1] + "
 2: " + favs[2] + "
 3: " + favs[3], "0");
-            if (pick !== null && favs[Number(pick)]) runNow(favs[Number(pick)]);
-          } else if (bSpec.action === "dlTxt") {
-            var blob = new Blob([outEl.innerText || ""], { type: "text/plain;charset=utf-8" });
-            var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "mt16_rapor_" + Date.now() + ".txt"; a.click();
-          } else if (bSpec.action === "dlJson") {
-            var payload = JSON.stringify({ timestamp: new Date().toISOString(), command: cmdEl.value, output: outEl.innerText || "" }, null, 2);
-            var b2 = new Blob([payload], { type: "application/json;charset=utf-8" });
-            var a2 = document.createElement("a"); a2.href = URL.createObjectURL(b2); a2.download = "mt16_rapor_" + Date.now() + ".json"; a2.click();
-          }
-        };
-        bodyPanel.appendChild(b);
-      });
-    }
+          if (pick !== null && favs[Number(pick)]) runShell(favs[Number(pick)]);
+        }
+      },
+      {
+        label: "⬇️ 17c. .txt İndir",
+        bg: "#21262d",
+        fn: function() {
+          var blob = new Blob([outEl.innerText || ""], { type: "text/plain;charset=utf-8" });
+          var a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = "mt16_cikti_" + Date.now() + ".txt";
+          a.click();
+        }
+      },
+      {
+        label: "📦 17d. .json İndir",
+        bg: "#21262d",
+        fn: function() {
+          var data = JSON.stringify({ exported_at: new Date().toISOString(), command: cmdEl.value, output: outEl.innerText || "" }, null, 2);
+          var blob = new Blob([data], { type: "application/json;charset=utf-8" });
+          var a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = "mt16_cikti_" + Date.now() + ".json";
+          a.click();
+        }
+      }
+    ];
 
-    sections.forEach(function(sec, idx) {
-      var tb = document.createElement("button");
-      tb.textContent = sec.name;
-      tb.style.cssText = "border:none;padding:7px 12px;font-size:12px;cursor:pointer;border-radius:4px 4px 0 0;";
-      tb.onclick = function() { selectSec(idx); };
-      tabBar.appendChild(tb);
+    btns.forEach(function(item) {
+      var b = document.createElement("button");
+      b.textContent = item.label;
+      b.style.cssText = "background:" + item.bg + ";color:#fff;border:1px solid #30363d;padding:5px 9px;border-radius:4px;font-size:11.5px;cursor:pointer;";
+      b.onclick = item.fn;
+      bar.appendChild(b);
     });
 
     cmdEl.addEventListener("keydown", function(e) {
-      if (e.key === "Enter" && e.ctrlKey) { e.preventDefault(); runNow(cmdEl.value); }
-      else if (e.key === "Enter" && e.shiftKey) { e.preventDefault(); pushHist(cmdEl.value); if (typeof window.ai === "function") window.ai(); }
-      else if (e.key === "r" && e.ctrlKey) {
+      if (e.key === "r" && e.ctrlKey) {
         e.preventDefault();
         var h = getHist();
-        if (h.length) { cmdEl.value = h[h.length - 1]; }
+        if (h.length) cmdEl.value = h[h.length - 1];
       }
     });
 
-    wrap.appendChild(tabBar);
-    wrap.appendChild(bodyPanel);
-    mainGrid.parentElement.insertBefore(wrap, mainGrid);
-    selectSec(0);
+    mainGrid.parentElement.insertBefore(bar, mainGrid);
   }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
-  else mount();
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
 })();
 </script></body></html>`;
 
 http.createServer((req, res) => {
+if (req.url && req.url.split("?")[0] === "/download-bundle") { const f = "/home/bytrkr/bistapp/backups/latest_ports_bundle.tar.gz"; if (fs.existsSync(f)) { const st = fs.statSync(f); res.writeHead(200, { "Content-Type": "application/gzip", "Content-Disposition": "attachment; filename=\"mt16_full_ports_bundle.tar.gz\"", "Content-Length": st.size }); return fs.createReadStream(f).pipe(res); } }
+
   if (req.url === '/api/quant-hud') { const oku = (x) => { try { return JSON.parse(fs.readFileSync(x, 'utf-8')); } catch { return null; } }; res.writeHead(200, {'Content-Type':'application/json'}); return res.end(JSON.stringify({ sistem: oku('data/tam_sistem_entegrasyon.json'), var_rapor: oku('data/monte_carlo_var.json'), munazara: oku('data/bull_bear_raporu.json'), haber: oku('data/haber_duygu_raporu.json'), davranis: oku('data/fstory_behavior.json') })); }
   if (req.url === '/yedek-indir') { res.writeHead(200, {'Content-Type':'application/gzip','Content-Disposition':'attachment; filename=bistapp_tam_yedek.tar.gz'}); return res.end(fs.readFileSync('/tmp/bistapp_tam_yedek.tar.gz')); }
   if (req.url === '/app.js') { res.writeHead(200, {'Content-Type':'application/javascript; charset=utf-8'}); return res.end(fs.readFileSync('/home/bytrkr/bistapp/server/kokpit_v8.js','utf-8')); }
