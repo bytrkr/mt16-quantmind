@@ -729,6 +729,38 @@ function App() {
       </main>
 
       {/* FOOTER */}
+            <section id="mt16-live-track-record" className="mx-4 mt-4 rounded-xl border border-slate-800 bg-slate-900/80 p-3 text-xs text-slate-200 shadow-lg">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <span className="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-semibold text-emerald-300">Canlı Doğrulanmış Performans Karnesi (Track Record)</span>
+          </div>
+          <button
+            type="button"
+            onClick={async () => {
+              const el = document.getElementById("mt16-tr-body");
+              if (!el) return;
+              el.textContent = "Yükleniyor...";
+              try {
+                const r = await fetch("/api/track-record");
+                const d = await r.json();
+                const pf = d.portfolio_performance || {};
+                const tr = d.track_record || {};
+                el.textContent = `Açık Pozisyon: ${pf.open_positions ?? 0} | Kapalı: ${pf.closed_positions ?? 0} ert{} Gerçekleşmemiş PnL: ${pf.unrealized_pnl_try ?? 0} TL | Gerçekleşen PnL: ${pf.realized_pnl_try ?? 0} TL | Denetlenen Karar: ${tr.total_decisions ?? 0} ert{} Başarı Oranı: ${tr.win_rate_pct !== null && tr.win_rate_pct !== undefined ? tr.win_rate_pct + "%" : "Henüz Kapanan Karar Yok"}`;
+              } catch {
+                el.textContent = "Track record verisi alınamadı.";
+              }
+            }}
+            className="rounded-md bg-emerald-600/20 border border-emerald-500/40 px-2.5 py-1 text-[11px] font-medium text-emerald-300 hover:bg-emerald-600/30"
+          >
+            ↻ Canlı Veriyi Çek
+          </button>
+        </div>
+        <div id="mt16-tr-body" className="mt-2 font-mono text-[11px] text-slate-300">
+          Canlı portföy ve denetim izi verilerini görüntülemek için "Canlı Veriyi Çek" butonuna basın.
+        </div>
+      </section>
+
       <footer className="bg-slate-900 border-t border-slate-800 px-4 py-4 text-center text-xs text-slate-500 mt-auto">
         <p>© 2026 MT16 Bistapp Kuant Terminali (v3.0-quant-mind-deploy). MT16 QuantMind (Kıdemli Kuant Stratejisti) &amp; Çift Yollu Gerçek Akış.</p>
       </footer>

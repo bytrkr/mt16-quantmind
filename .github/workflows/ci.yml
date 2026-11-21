@@ -1,0 +1,23 @@
+name: MT16 QuantMind CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Python Syntax & Core Check
+        run: |
+          python -m py_compile python/api_server.py python/otonom_beyin.py python/backtest_engine.py python/post_mortem_engine.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Node Cockpits & Scripts Syntax Check
+        run: |
+          node --check server/kokpit3001.mjs
