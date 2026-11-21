@@ -100,6 +100,24 @@ services:
     networks:
       - bistapp-network
 
+  otonom-beyin:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    container_name: bistapp-otonom-beyin
+    command: ["python", "-m", "python.otonom_beyin"]
+    volumes:
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONPATH=/app
+    depends_on:
+      python-backend:
+        condition: service_healthy
+    restart: always
+    networks:
+      - bistapp-network
+
 networks:
   bistapp-network:
     driver: bridge

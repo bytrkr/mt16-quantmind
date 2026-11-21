@@ -184,15 +184,21 @@ def test_turu():
                 aciklar.add(sb)
                 yeni_kayitlar.append({"zaman": datetime.now().strftime("%H:%M:%S"), "tip": "ALIM", "mesaj": f"🤖 OTONOM ALIM: {sb} @ {f} (Skor: {aday['skor']}/100 | Hedef: {aday['hedef']} | Stop: {aday['stop']})"})
     
-    gun_sonu_bulten_kontrol(pf)
-    sistem_onarim_denetimi()
-    portfoy_mutabakat_ve_dogrulama()
-    clean_and_compute_facts()
-    davranissal_streak_ve_spike_kalkan()
-    portfoy_munazara_denetimi()
-    tam_entegrasyon_dongusu()
-    hisse_haber_duygu_tara()
-    monte_carlo_var_simulasyonu()
+    for _fn in (
+        lambda: gun_sonu_bulten_kontrol(pf),
+        sistem_onarim_denetimi,
+        portfoy_mutabakat_ve_dogrulama,
+        clean_and_compute_facts,
+        davranissal_streak_ve_spike_kalkan,
+        portfoy_munazara_denetimi,
+        tam_entegrasyon_dongusu,
+        hisse_haber_duygu_tara,
+        monte_carlo_var_simulasyonu,
+    ):
+        try:
+            _fn()
+        except Exception as _sub_err:
+            print(f"[OTONOM-UYARI] {_sub_err}", flush=True)
     json.dump(pf, open(pf_yol, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     rapor["kayitlar"] = yeni_kayitlar + [{"zaman": datetime.now().strftime("%H:%M:%S"), "tip": "TUR", "mesaj": f"Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı ({len(vitrin)} varlık)"}] + rapor.get("kayitlar", [])[:30]
     alog = os.path.join(os.path.dirname(VITRIN_YOLU), "qodi_autofix_log.json")
@@ -203,7 +209,15 @@ def test_turu():
 
 if __name__ == "__main__":
     while True:
-        test_turu()
+        try:
+            test_turu()
+        except KeyboardInterrupt:
+            print("[OTONOM] Durdurma sinyali alindi.", flush=True)
+            break
+        except Exception as e:
+            print(f"[OTONOM-HATA] Tur hatasi yakalandi, 60sn sonra tekrar denenecek: {e}", flush=True)
+            time.sleep(60)
+            continue
         time.sleep(240)
 
 
