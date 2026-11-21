@@ -226,6 +226,81 @@ window.addEventListener("DOMContentLoaded", function() {
     document.body.appendChild(micBtn);
   }
 });
+</script><script>
+window.addEventListener("DOMContentLoaded", function() {
+  if (window.__mt16CockpitPowerLoaded) return;
+  window.__mt16CockpitPowerLoaded = true;
+
+  var cmdEl = document.getElementById("cmd");
+  var outEl = document.getElementById("out");
+  if (!cmdEl || !outEl) return;
+
+  // 1. Hizli Islem Cubugu (Quick Action Bar)
+  var bar = document.createElement("div");
+  bar.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;align-items:center;";
+  var actions = [
+    { label: "📊 PM2 Durum", cmd: "pm2 status", color: "#1f6feb" },
+    { label: "💾 Yedek Al", cmd: "bash /home/bytrkr/bistapp/scripts/backup_data.sh", color: "#238636" },
+    { label: "📈 Track Record", cmd: "curl -s http://127.0.0.1:8001/api/track-record", color: "#8957e5" },
+    { label: "🔄 Servis Yenile", cmd: "pm2 restart bistapp bistapp-api otonom-beyin && pm2 status", color: "#d29922" },
+    { label: "🚀 Git Durum", cmd: "git status -s && git log -n 2 --oneline", color: "#30363d" },
+    { label: "📋 Çıktıyı Kopyala", copy: true, color: "#21262d" }
+  ];
+
+  actions.forEach(function(act) {
+    var b = document.createElement("button");
+    b.textContent = act.label;
+    b.style.cssText = "background:" + act.color + ";color:#fff;border:1px solid rgba(255,255,255,0.15);padding:4px 9px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;";
+    b.onclick = function() {
+      if (act.copy) {
+        navigator.clipboard.writeText(outEl.innerText || "");
+        b.textContent = "✅ Kopyalandı!";
+        setTimeout(function(){ b.textContent = act.label; }, 1500);
+        return;
+      }
+      cmdEl.value = act.cmd;
+      if (typeof window.run === "function") window.run(act.cmd);
+    };
+    bar.appendChild(b);
+  });
+
+  cmdEl.parentElement.parentElement.insertBefore(bar, cmdEl.parentElement);
+
+  // 2. Komut Gecmisi (LocalStorage) & Klavye Kisayollari
+  var hist = JSON.parse(localStorage.getItem("mt16_cmd_hist") || "[]");
+  var histIdx = hist.length;
+  function saveHist(c) {
+    c = (c || "").trim();
+    if (!c) return;
+    if (hist[hist.length - 1] !== c) {
+      hist.push(c);
+      if (hist.length > 30) hist.shift();
+      localStorage.setItem("mt16_cmd_hist", JSON.stringify(hist));
+    }
+    histIdx = hist.length;
+  }
+
+  cmdEl.placeholder = "Komut veya Türkçe istek yazın... (Ctrl+Enter: Çalıştır | Shift+Enter: AI Ajanı | ↑↓: Geçmiş)";
+  cmdEl.addEventListener("keydown", function(e) {
+    if (e.key === "Enter" && e.ctrlKey) {
+      e.preventDefault();
+      saveHist(cmdEl.value);
+      if (typeof window.run === "function") window.run(cmdEl.value);
+    } else if (e.key === "Enter" && e.shiftKey) {
+      e.preventDefault();
+      saveHist(cmdEl.value);
+      if (typeof window.ai === "function") window.ai();
+    } else if (e.key === "ArrowUp" && cmdEl.selectionStart === 0 && hist.length > 0) {
+      e.preventDefault();
+      histIdx = Math.max(0, histIdx - 1);
+      cmdEl.value = hist[histIdx] || "";
+    } else if (e.key === "ArrowDown" && cmdEl.selectionEnd === cmdEl.value.length && hist.length > 0) {
+      e.preventDefault();
+      histIdx = Math.min(hist.length, histIdx + 1);
+      cmdEl.value = hist[histIdx] || "";
+    }
+  });
+});
 </script></body></html>`;
 
 http.createServer((req, res) => {
