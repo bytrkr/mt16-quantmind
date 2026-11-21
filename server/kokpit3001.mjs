@@ -339,6 +339,93 @@ window.addEventListener("DOMContentLoaded", function() {
 
   cmdEl.parentElement.parentElement.insertBefore(ideBar, cmdEl.parentElement);
 });
+</script><script>
+window.addEventListener("DOMContentLoaded", function() {
+  if (window.__mt16FullIdeEngine) return;
+  window.__mt16FullIdeEngine = true;
+
+  var cmdEl = document.getElementById("cmd");
+  var outEl = document.getElementById("out");
+  if (!cmdEl || !outEl) return;
+
+  // 1. Gelişmiş Multi-IDE Araç Çubuğu
+  var bar = document.createElement("div");
+  bar.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;align-items:center;background:#161b22;padding:6px;border-radius:6px;border:1px solid #30363d;";
+
+  var title = document.createElement("span");
+  title.textContent = "🧠 AI IDE:";
+  title.style.cssText = "font-size:11px;font-weight:bold;color:#a371f7;margin-right:2px;";
+  bar.appendChild(title);
+
+  var tools = [
+    {
+      label: "📎 @Dosya Bağlamı",
+      color: "#1f6feb",
+      fn: function() {
+        var f = prompt("Bağlama eklenecek dosya yolu (örnek: python/api_server.py veya src/App.tsx):", "python/api_server.py");
+        if (f && f.trim()) {
+          cmdEl.value = "@" + f.trim() + " " + cmdEl.value;
+          cmdEl.focus();
+        }
+      }
+    },
+    {
+      label: "🗺️ Antigravity Döngüsü",
+      color: "#8957e5",
+      fn: function() {
+        var pfx = "[ANTIGRAVITY WORKFLOW: 1-PLAN çıkar, 2-YEDEK AL ve UYGULA, 3-SYNTAX & PM2 DOĞRULA]\n";
+        if (cmdEl.value.indexOf("[ANTIGRAVITY") === -1) cmdEl.value = pfx + cmdEl.value;
+        cmdEl.focus();
+      }
+    },
+    {
+      label: "🔍 Git Diff İncele",
+      color: "#238636",
+      fn: function() {
+        cmdEl.value = "git diff --stat && git diff -U2 | head -n 80";
+        if (typeof window.run === "function") window.run(cmdEl.value);
+      }
+    },
+    {
+      label: "⏪ Son Değişikliği Geri Al",
+      color: "#da3633",
+      fn: function() {
+        if (confirm("Son commit edilmemiş değişiklikler geri alınsın mı? (git checkout -- .)")) {
+          cmdEl.value = "git checkout -- . && git status -s";
+          if (typeof window.run === "function") window.run(cmdEl.value);
+        }
+      }
+    }
+  ];
+
+  tools.forEach(function(t) {
+    var b = document.createElement("button");
+    b.textContent = t.label;
+    b.style.cssText = "background:" + t.color + ";color:#fff;border:none;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;";
+    b.onclick = t.fn;
+    bar.appendChild(b);
+  });
+
+  cmdEl.parentElement.parentElement.insertBefore(bar, cmdEl.parentElement);
+
+  // 2. window.ai() Sarmalayıcı: Otomatik Anayasa & @dosya Bağlam Çözücü
+  if (typeof window.ai === "function" && !window.ai.__wrapped) {
+    var origAi = window.ai;
+    window.ai = function() {
+      var raw = cmdEl.value || "";
+      var mentions = raw.match(/@([a-zA-Z0-9_\.\/-]+)/g) || [];
+      var ctxPrefix = "[SİSTEM ANAYASASI: CLAUDE.md, GEMINI.md, .cursorrules ve .antigravity/rules.md kurallarına kesin uy. Python için .venv/bin/python kullan, SPK uyumluluğunu ve data/ dizinini koru.]\n";
+      if (mentions.length > 0) {
+        ctxPrefix += "[BAĞLAM DOSYALARI: " + mentions.join(", ") + " - Önce bu dosyaların ilgili satırlarını okuyarak işlem yap]\n";
+      }
+      if (raw.indexOf("[SİSTEM ANAYASASI:") === -1) {
+        cmdEl.value = ctxPrefix + raw;
+      }
+      return origAi.apply(this, arguments);
+    };
+    window.ai.__wrapped = true;
+  }
+});
 </script></body></html>`;
 
 http.createServer((req, res) => {
