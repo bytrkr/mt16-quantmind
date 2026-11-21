@@ -3360,3 +3360,15 @@ app.use(errorLogger);
 
 process.on('SIGTERM', () => process.exit(0));
 process.on('SIGINT', () => process.exit(0));
+
+
+app.get('/api/track-record', async (_req, res) => {
+  try {
+    const pyUrl = process.env.PYTHON_BACKEND_URL || 'http://127.0.0.1:8001';
+    const r = await fetch(`${pyUrl}/api/track-record`);
+    const data = await r.json();
+    res.json(data);
+  } catch (err: any) {
+    res.status(502).json({ error: 'Track record servisi erişilemiyor', detail: err?.message });
+  }
+});

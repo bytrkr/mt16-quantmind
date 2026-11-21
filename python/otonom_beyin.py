@@ -1,3 +1,6 @@
+import sys, os
+if "/home/bytrkr/bistapp" not in sys.path:
+    sys.path.insert(0, "/home/bytrkr/bistapp")
 from python.news_sentiment_engine import hisse_haber_duygu_tara
 from python.monte_carlo_var import monte_carlo_var_simulasyonu
 from python.auto_repo_absorber import tam_entegrasyon_dongusu

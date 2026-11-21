@@ -767,6 +767,14 @@ function App() {
           />
         </LazyModuleWrapper>
       )}
-    </div>
+          <footer className="mt-6 border-t border-slate-800 bg-slate-950/90 px-4 py-3 text-[11px] text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div>
+          <span className="font-semibold text-emerald-400">MT16 QuantMind</span> • Yapay Zeka Destekli Kantitatif Araştırma, Risk Analizi ve Karar Destek Terminali
+        </div>
+        <div className="text-slate-500 text-center sm:text-right">
+          SPK Seri:V No:55 Uyarınca Yatırım Danışmanlığı Kapsamında Değildir • Doğrulanmış Denetim İzi: <a href="/api/track-record" target="_blank" rel="noreferrer" className="underline text-sky-400 hover:text-sky-300">Track Record JSON</a>
+        </div>
+      </footer>
+</div>
   );
 }

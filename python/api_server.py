@@ -2524,6 +2524,77 @@ def sorusturma(payload: dict = None):
 
 
 
+
+@app.get("/api/track-record")
+def get_verified_track_record():
+    import sqlite3
+    from pathlib import Path
+    base_dir = Path(__file__).resolve().parent
+    root_dir = base_dir.parent
+    weights_file = base_dir / "agent_weights.json"
+    db_file = base_dir / "decision_logs.db"
+    pf_file = root_dir / "data" / "sanal_portfoy.json"
+
+    weights = {}
+    if weights_file.exists():
+        try:
+            weights = json.loads(weights_file.read_text(encoding="utf-8"))
+        except Exception:
+            weights = {}
+
+    audit_summary = {"total_decisions": 0, "evaluated_decisions": 0, "win_rate_pct": None, "recent_decisions": []}
+    if db_file.exists():
+        try:
+            conn = sqlite3.connect(str(db_file), timeout=5.0)
+            conn.row_factory = sqlite3.Row
+            cur = conn.cursor()
+            cur.execute("SELECT COUNT(*) as c FROM decision_logs")
+            audit_summary["total_decisions"] = int(cur.fetchone()["c"])
+            cur.execute("SELECT COUNT(*) as c FROM decision_logs WHERE outcome IS NOT NULL AND outcome != 'PENDING'")
+            eval_cnt = int(cur.fetchone()["c"])
+            audit_summary["evaluated_decisions"] = eval_cnt
+            if eval_cnt > 0:
+                cur.execute("SELECT COUNT(*) as c FROM decision_logs WHERE outcome = 'WIN'")
+                win_cnt = int(cur.fetchone()["c"])
+                audit_summary["win_rate_pct"] = round((win_cnt / eval_cnt) * 100, 2)
+            cur.execute("SELECT symbol, decision, confidence, outcome, created_at FROM decision_logs ORDER BY id DESC LIMIT 10")
+            audit_summary["recent_decisions"] = [dict(r) for r in cur.fetchall()]
+            conn.close()
+        except Exception:
+            pass
+
+    portfolio_metrics = {"open_positions": 0, "closed_positions": 0, "realized_pnl_try": 0.0, "unrealized_pnl_try": 0.0}
+    if pf_file.exists():
+        try:
+            pf = json.loads(pf_file.read_text(encoding="utf-8"))
+            if isinstance(pf, list):
+                for item in pf:
+                    g = float(item.get("giris") or 0)
+                    c = float(item.get("guncel") or g)
+                    l = float(item.get("lot") or 0)
+                    pnl = (c - g) * l
+                    if str(item.get("durum", "ACIK")).startswith("KAPALI"):
+                        portfolio_metrics["closed_positions"] += 1
+                        portfolio_metrics["realized_pnl_try"] = round(portfolio_metrics["realized_pnl_try"] + pnl, 2)
+                    else:
+                        portfolio_metrics["open_positions"] += 1
+                        portfolio_metrics["unrealized_pnl_try"] = round(portfolio_metrics["unrealized_pnl_try"] + pnl, 2)
+        except Exception:
+            pass
+
+    return {
+        "status": "ok",
+        "track_record": audit_summary,
+        "portfolio_performance": portfolio_metrics,
+        "agent_weights": weights,
+        "regulatory_compliance": {
+            "jurisdiction": "TR-SPK",
+            "classification": "Yapay Zeka Destekli Kantitatif Arastirma, Risk Analizi ve Karar Destek Terminali",
+            "disclaimer": "Burada yer alan algoritmik skorlar, münazara çıktıları ve simülasyon verileri SPK Seri:V No:55 kapsamında Yatırım Danışmanlığı niteliği taşımaz; nihai yatırım kararı kullanıcıya aittir."
+        }
+    }
+
+
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PYTHON_KERNEL_PORT", 8001))
