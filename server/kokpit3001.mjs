@@ -6,7 +6,17 @@ import path from 'node:path';
 import { execSync, execFileSync } from 'node:child_process';
 
 const GIZLI_KOD = '1616';
-const HTML = `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MT16 AI Studio v8.0 (Port 3001)</title></head>
+const HTML = `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MT16 AI Studio v8.0 (Port 3001)</title>
+<style>
+  body { overflow-y: auto !important; }
+  #main-grid { display: flex !important; flex-wrap: wrap !important; gap: 10px !important; height: auto !important; min-height: 76vh !important; }
+  #main-grid > div:nth-child(1) { flex: 0 0 210px; max-height: 76vh; }
+  #main-grid > div:nth-child(2) { flex: 1 1 460px !important; min-width: 320px !important; display: flex !important; flex-direction: column !important; }
+  #main-grid > div:nth-child(3) { flex: 1 1 340px !important; min-width: 300px !important; max-height: 76vh; }
+  #cmd { min-height: 64px !important; font-size: 13px !important; }
+  #out, #livePane { min-height: 300px !important; max-height: 64vh !important; overflow-y: auto !important; }
+</style>
+</head>
 <body style="margin:0;background:#0d1117;color:#c9d1d9;font-family:sans-serif;padding:10px">
 <div style="max-width:1540px;margin:auto">
   <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #30363d;padding-bottom:7px;margin-bottom:7px;flex-wrap:wrap;gap:5px">
@@ -169,7 +179,54 @@ window.addEventListener("DOMContentLoaded",()=>{
       });
     }, 1500);
   });
-})();</script><script>(function(){window.addEventListener("DOMContentLoaded",function(){var g=document.getElementById("main-grid");var b=document.getElementById("mt16-toggle-left-btn")||document.createElement("button");b.id="mt16-toggle-left-btn";b.textContent="📁 Dosyalar Aç/Kapat";b.style.cssText="position:fixed;bottom:10px;left:10px;z-index:99999;background:#2563eb;color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:700;font-size:12px;cursor:pointer";if(!b.parentNode)document.body.appendChild(b);var open=false;function apply(){if(!g)return;var l=g.children[0],m=g.children[1],r=g.children[2];if(l)l.style.display=open?"":"none";if(m){m.style.display="block";m.style.minWidth="220px";}if(r)r.style.minWidth="180px";g.style.gridTemplateColumns=open?"180px minmax(220px,1fr) 200px":"0px minmax(220px,1fr) 200px";}b.onclick=function(){open=!open;apply();};apply();});})();</script></body></html>`;
+})();</script><script>(function(){window.addEventListener("DOMContentLoaded",function(){var g=document.getElementById("main-grid");var b=document.getElementById("mt16-toggle-left-btn")||document.createElement("button");b.id="mt16-toggle-left-btn";b.textContent="📁 Dosyalar Aç/Kapat";b.style.cssText="position:fixed;bottom:10px;left:10px;z-index:99999;background:#2563eb;color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:700;font-size:12px;cursor:pointer";if(!b.parentNode)document.body.appendChild(b);var open=false;function apply(){if(!g)return;var l=g.children[0],m=g.children[1],r=g.children[2];if(l)l.style.display=open?"":"none";if(m){m.style.display="block";m.style.minWidth="220px";}if(r)r.style.minWidth="180px";g.style.gridTemplateColumns=open?"180px minmax(220px,1fr) 200px":"0px minmax(220px,1fr) 200px";}b.onclick=function(){open=!open;apply();};apply();});})();</script><script>
+window.addEventListener("DOMContentLoaded", function() {
+  var ansiRe = new RegExp("\\x1b\\[[0-9;]*m|\\[[0-9;]*m", "g");
+  var obs = new MutationObserver(function() {
+    document.querySelectorAll("pre, code, div").forEach(function(el) {
+      if (el.children.length === 0 && el.textContent && (el.textContent.indexOf("[39m") !== -1 || el.textContent.indexOf("[22m") !== -1)) {
+        el.textContent = el.textContent.replace(ansiRe, "");
+      }
+    });
+  });
+  obs.observe(document.body, { childList: true, subtree: true });
+
+  var fixBtn = document.createElement("button");
+  fixBtn.textContent = "🩺 Son Hatayı AI ile Çöz";
+  fixBtn.style.cssText = "position:fixed;bottom:12px;right:12px;z-index:9999;background:#dc2626;color:#fff;border:none;padding:9px 14px;border-radius:10px;font-weight:bold;font-size:12px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.5);";
+  fixBtn.onclick = function() {
+    var logs = Array.from(document.querySelectorAll("pre, div")).map(function(e){ return e.innerText; }).find(function(t){ return t && (t.indexOf("LOKI CANLI PM2") !== -1 || t.indexOf("Traceback") !== -1 || t.indexOf("Error") !== -1); });
+    var lastLines = logs ? logs.split("\n").slice(-25).join(" ") : "Son loglardaki hatalari kontrol et";
+    var ta = document.querySelector("textarea, input[type=text]");
+    var aiBtn = Array.from(document.querySelectorAll("button")).find(function(b){ return b.innerText && b.innerText.trim().indexOf("AI") !== -1; });
+    if (ta && aiBtn) {
+      ta.value = "Su log hatasini analiz et ve duzelt: " + lastLines.split(String.fromCharCode(34)).join(" ").split(String.fromCharCode(39)).join(" ").split(String.fromCharCode(96)).join(" ");
+      aiBtn.click();
+    }
+  };
+  document.body.appendChild(fixBtn);
+
+  var SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (SpeechRec) {
+    var micBtn = document.createElement("button");
+    micBtn.textContent = "🎤 Sesli Komut";
+    micBtn.style.cssText = "position:fixed;bottom:12px;right:195px;z-index:9999;background:#2563eb;color:#fff;border:none;padding:9px 14px;border-radius:10px;font-weight:bold;font-size:12px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.5);";
+    var rec = new SpeechRec();
+    rec.lang = "tr-TR";
+    rec.interimResults = false;
+    micBtn.onclick = function() { micBtn.textContent = "🔴 Dinleniyor..."; rec.start(); };
+    rec.onresult = function(ev) {
+      var text = ev.results[0][0].transcript;
+      var ta = document.querySelector("textarea, input[type=text]");
+      if (ta) ta.value = (ta.value ? ta.value + " " : "") + text;
+      micBtn.textContent = "🎤 Sesli Komut";
+    };
+    rec.onerror = function() { micBtn.textContent = "🎤 Sesli Komut"; };
+    rec.onend = function() { micBtn.textContent = "🎤 Sesli Komut"; };
+    document.body.appendChild(micBtn);
+  }
+});
+</script></body></html>`;
 
 http.createServer((req, res) => {
   if (req.url === '/api/quant-hud') { const oku = (x) => { try { return JSON.parse(fs.readFileSync(x, 'utf-8')); } catch { return null; } }; res.writeHead(200, {'Content-Type':'application/json'}); return res.end(JSON.stringify({ sistem: oku('data/tam_sistem_entegrasyon.json'), var_rapor: oku('data/monte_carlo_var.json'), munazara: oku('data/bull_bear_raporu.json'), haber: oku('data/haber_duygu_raporu.json'), davranis: oku('data/fstory_behavior.json') })); }
