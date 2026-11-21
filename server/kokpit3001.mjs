@@ -605,6 +605,180 @@ window.addEventListener("DOMContentLoaded", function() {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
   else mount();
 })();
+</script><script>
+(function initMt16Suite1To17() {
+  function mount() {
+    if (document.getElementById("mt16-suite-1-17")) return;
+    var cmdEl = document.getElementById("cmd");
+    var outEl = document.getElementById("out");
+    var mainGrid = document.getElementById("main-grid");
+    if (!cmdEl || !outEl || !mainGrid) return setTimeout(mount, 150);
+
+    var oldRibbon = document.getElementById("mt16-excel-ribbon");
+    if (oldRibbon) oldRibbon.style.display = "none";
+
+    var wrap = document.createElement("div");
+    wrap.id = "mt16-suite-1-17";
+    wrap.style.cssText = "background:#161b22;border:1px solid #30363d;border-radius:6px;margin-bottom:8px;overflow:hidden;font-family:Segoe UI,sans-serif;";
+
+    var tabBar = document.createElement("div");
+    tabBar.style.cssText = "display:flex;background:#010409;border-bottom:1px solid #30363d;padding:0 6px;gap:2px;flex-wrap:wrap;";
+
+    var bodyPanel = document.createElement("div");
+    bodyPanel.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px;background:#161b22;align-items:center;";
+
+    var sections = [
+      {
+        name: "⚙️ 1-5 Sistem & Bakım",
+        color: "#1f6feb",
+        btns: [
+          { label: "🩺 1. Sağlık Matrisi", cmd: "bash scripts/health_check.sh" },
+          { label: "🚨 2. Hata Tara", action: "scanErr" },
+          { label: "💾 3. Yedek Al & Listele", cmd: "bash scripts/backup_data.sh && ls -lh backups/ | tail -n 8" },
+          { label: "🧹 4. Log & Disk Temizle", cmd: "bash scripts/clean_logs.sh && free -h" },
+          { label: "⏰ 5. Cron Görevleri", cmd: "crontab -l" }
+        ]
+      },
+      {
+        name: "🧠 6-10 AI IDE & Kurallar",
+        color: "#8957e5",
+        btns: [
+          { label: "📎 6. @Dosya Ekle", action: "atFile" },
+          { label: "⚔️ 7. 3-Ajan Münazara", prefix: "[3-AJAN MUNAZARA: 1-Antigravity Plan | 2-Claude Uygulama | 3-Cursor Guvenlik/Hata Denetimi]\n" },
+          { label: "🔍 8. Diff Gate İncele", cmd: "git diff --stat && git diff -U2 | head -n 90" },
+          { label: "📜 9. Anayasa (.md) Oku", cmd: "head -n 25 CLAUDE.md GEMINI.md .cursorrules .antigravity/rules.md" },
+          { label: "🧩 10. Hata Kök Neden Şablonu", prefix: "[KOK NEDEN ANALIZI: Logdaki hatanin kaynagini bul, en guvenli yamayi oner ve test komutunu yaz]\n" }
+        ]
+      },
+      {
+        name: "📈 11-15 BIST & Kantitatif",
+        color: "#238636",
+        btns: [
+          { label: "📊 11. Track Record", cmd: "curl -s http://127.0.0.1:8001/api/track-record" },
+          { label: "💼 12. Sanal Portföy", cmd: "cat data/sanal_portfoy.json 2>/dev/null || cat python/sanal_portfoy.json" },
+          { label: "⚖️ 13. Ajan Ağırlıkları", cmd: "cat python/agent_weights.json 2>/dev/null || echo Varsayilan agirliklar" },
+          { label: "🔬 14. Hisse Röntgen", action: "tickerScan" },
+          { label: "🛡️ 15. SPK & Risk Kontrol", cmd: "grep -rn "SPK" python/api_server.py src/App.tsx 2>/dev/null | head -n 12" }
+        ]
+      },
+      {
+        name: "🛠️ 16-17 Betik, Geçmiş & Dışa Aktar",
+        color: "#d29922",
+        btns: [
+          { label: "🔄 16. Git Sync & Push", cmd: "bash scripts/git_sync.sh status" },
+          { label: "🔎 17a. Geçmişte Ara (Ctrl+R)", action: "searchHist" },
+          { label: "⭐ 17b. Favori Komutlar", action: "favCmd" },
+          { label: "⬇️ 17c. .txt İndir", action: "dlTxt" },
+          { label: "📦 17d. .json İndir", action: "dlJson" }
+        ]
+      }
+    ];
+
+    function getHist() { return JSON.parse(localStorage.getItem("mt16_cmd_hist") || "[]"); }
+    function pushHist(v) {
+      v = (v || "").trim();
+      if (!v) return;
+      var h = getHist();
+      if (h[h.length - 1] !== v) { h.push(v); if (h.length > 50) h.shift(); localStorage.setItem("mt16_cmd_hist", JSON.stringify(h)); }
+    }
+
+    function runNow(c) {
+      pushHist(c);
+      cmdEl.value = c;
+      if (typeof window.run === "function") window.run(c);
+    }
+
+    function selectSec(idx) {
+      Array.from(tabBar.children).forEach(function(tb, i) {
+        tb.style.background = i === idx ? "#161b22" : "transparent";
+        tb.style.color = i === idx ? "#fff" : "#8b949e";
+        tb.style.borderTop = i === idx ? ("2px solid " + sections[idx].color) : "2px solid transparent";
+      });
+      bodyPanel.innerHTML = "";
+      sections[idx].btns.forEach(function(bSpec) {
+        var b = document.createElement("button");
+        b.textContent = bSpec.label;
+        b.style.cssText = "background:#21262d;color:#e6edf3;border:1px solid #30363d;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;";
+        b.onclick = function() {
+          if (bSpec.cmd) runNow(bSpec.cmd);
+          else if (bSpec.prefix) { if (cmdEl.value.indexOf(bSpec.prefix) === -1) cmdEl.value = bSpec.prefix + cmdEl.value; cmdEl.focus(); }
+          else if (bSpec.action === "scanErr") {
+            var txt = (outEl.innerText || "") + "
+" + ((document.getElementById("livePane") && document.getElementById("livePane").innerText) || "");
+            var lines = txt.split("
+").filter(function(l){ return /Error|Traceback|Exception|VETO|FAILED|ModuleNotFoundError/i.test(l); });
+            cmdEl.value = "Su hatalari incele ve cozum oner:
+" + (lines.slice(-20).join("
+") || "Belirgin hata satiri bulunamadi, son loglari kontrol et.");
+            if (typeof window.ai === "function") window.ai();
+          } else if (bSpec.action === "atFile") {
+            var f = prompt("Dosya yolu (orn: python/api_server.py veya src/App.tsx):", "python/api_server.py");
+            if (f && f.trim()) {
+              var cleanF = f.trim().replace(/^@/, "");
+              runNow("head -n 80 " + cleanF + " 2>/dev/null || echo Dosya bulunamadi: " + cleanF);
+            }
+          } else if (bSpec.action === "tickerScan") {
+            var tk = prompt("BIST Hisse Kodu (orn: ASELS, THYAO, BIMAS):", "ASELS");
+            if (tk && tk.trim()) {
+              var u = tk.trim().toUpperCase();
+              runNow("grep -rn "" + u + "" data/ python/ 2>/dev/null | head -n 25 || echo Kayit bulunamadi");
+            }
+          } else if (bSpec.action === "searchHist") {
+            var q = prompt("Komut gecmisinde ara:", "");
+            if (q !== null) {
+              var matches = getHist().filter(function(x){ return x.toLowerCase().indexOf(q.toLowerCase()) !== -1; });
+              outEl.textContent = "=== KOMUT GECMISI ESLESMELERI ===
+" + (matches.join("
+") || "Eslesme yok");
+              if (matches.length) cmdEl.value = matches[matches.length - 1];
+            }
+          } else if (bSpec.action === "favCmd") {
+            var favs = ["bash scripts/health_check.sh", "bash scripts/backup_data.sh", "curl -s http://127.0.0.1:8001/api/track-record", "git status -s && git log -n 3 --oneline"];
+            var pick = prompt("Favori sec (0-3):
+0: " + favs[0] + "
+1: " + favs[1] + "
+2: " + favs[2] + "
+3: " + favs[3], "0");
+            if (pick !== null && favs[Number(pick)]) runNow(favs[Number(pick)]);
+          } else if (bSpec.action === "dlTxt") {
+            var blob = new Blob([outEl.innerText || ""], { type: "text/plain;charset=utf-8" });
+            var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "mt16_rapor_" + Date.now() + ".txt"; a.click();
+          } else if (bSpec.action === "dlJson") {
+            var payload = JSON.stringify({ timestamp: new Date().toISOString(), command: cmdEl.value, output: outEl.innerText || "" }, null, 2);
+            var b2 = new Blob([payload], { type: "application/json;charset=utf-8" });
+            var a2 = document.createElement("a"); a2.href = URL.createObjectURL(b2); a2.download = "mt16_rapor_" + Date.now() + ".json"; a2.click();
+          }
+        };
+        bodyPanel.appendChild(b);
+      });
+    }
+
+    sections.forEach(function(sec, idx) {
+      var tb = document.createElement("button");
+      tb.textContent = sec.name;
+      tb.style.cssText = "border:none;padding:7px 12px;font-size:12px;cursor:pointer;border-radius:4px 4px 0 0;";
+      tb.onclick = function() { selectSec(idx); };
+      tabBar.appendChild(tb);
+    });
+
+    cmdEl.addEventListener("keydown", function(e) {
+      if (e.key === "Enter" && e.ctrlKey) { e.preventDefault(); runNow(cmdEl.value); }
+      else if (e.key === "Enter" && e.shiftKey) { e.preventDefault(); pushHist(cmdEl.value); if (typeof window.ai === "function") window.ai(); }
+      else if (e.key === "r" && e.ctrlKey) {
+        e.preventDefault();
+        var h = getHist();
+        if (h.length) { cmdEl.value = h[h.length - 1]; }
+      }
+    });
+
+    wrap.appendChild(tabBar);
+    wrap.appendChild(bodyPanel);
+    mainGrid.parentElement.insertBefore(wrap, mainGrid);
+    selectSec(0);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
+  else mount();
+})();
 </script></body></html>`;
 
 http.createServer((req, res) => {
