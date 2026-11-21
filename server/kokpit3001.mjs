@@ -5,6 +5,87 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execSync, execFileSync } from 'node:child_process';
 
+
+import fsSync from "node:fs";
+import pathMod from "node:path";
+import { execSync as mt16Exec } from "node:child_process";
+
+const MT16_ROOT = "/home/bytrkr/bistapp";
+const MT16_BACKUP_DIR = pathMod.join(MT16_ROOT, "backups");
+const MT16_LATEST = pathMod.join(MT16_BACKUP_DIR, "latest_ports_bundle.tar.gz");
+
+function mt16EnsureBundle() {
+  fsSync.mkdirSync(MT16_BACKUP_DIR, { recursive: true });
+  const list = fsSync.readdirSync(MT16_BACKUP_DIR)
+    .filter((f) => f.endsWith(".tar.gz") && f !== "latest_ports_bundle.tar.gz")
+    .map((f) => ({ full: pathMod.join(MT16_BACKUP_DIR, f), t: fsSync.statSync(pathMod.join(MT16_BACKUP_DIR, f)).mtimeMs }))
+    .sort((a, b) => b.t - a.t);
+  let target = list.length ? list[0].full : "";
+  if (!target || !fsSync.existsSync(target)) {
+    const stamp = new Date().toISOString().replace(/[-:T]/g, "").slice(0, 14);
+    target = pathMod.join(MT16_BACKUP_DIR, "mt16_full_ports_bundle_" + stamp + ".tar.gz");
+    mt16Exec(`tar --exclude="node_modules" --exclude=".venv" --exclude="backups/*.tar.gz" -czf "${target}" -C "${MT16_ROOT}" .`, { stdio: "ignore" });
+  }
+  try {
+    if (fsSync.existsSync(MT16_LATEST) || fsSync.lstatSync(MT16_LATEST)) fsSync.unlinkSync(MT16_LATEST);
+  } catch (_) {}
+  fsSync.symlinkSync(target, MT16_LATEST);
+  return MT16_LATEST;
+}
+
+function mt16SpecialRoute(req, res) {
+  if (!req || !req.url) return false;
+  const u = new URL(req.url, "http://127.0.0.1:3001");
+  if (u.pathname === "/api/read-file") {
+    const raw = (u.searchParams.get("path") || "").replace(/^@+/, "").trim();
+    const maxL = Math.min(Math.max(parseInt(u.searchParams.get("lines") || "160", 10) || 160, 10), 600);
+    if (!raw) {
+      res.writeHead(400, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({ ok: false, error: "path gerekli" }));
+      return true;
+    }
+    const resolved = pathMod.resolve(MT16_ROOT, raw);
+    if (!resolved.startsWith(MT16_ROOT + pathMod.sep) && resolved !== MT16_ROOT) {
+      res.writeHead(403, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({ ok: false, error: "Erisim engellendi" }));
+      return true;
+    }
+    if (!fsSync.existsSync(resolved) || !fsSync.statSync(resolved).isFile()) {
+      res.writeHead(404, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({ ok: false, error: "Dosya bulunamadi", path: raw }));
+      return true;
+    }
+    const st = fsSync.statSync(resolved);
+    if (st.size > 1024 * 1024) {
+      res.writeHead(413, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({ ok: false, error: "Dosya 1MB ustunde" }));
+      return true;
+    }
+    const allLines = fsSync.readFileSync(resolved, "utf8").split("\n");
+    const body = allLines.slice(0, maxL).map((line, i) => String(i + 1).padStart(4, " ") + " | " + line).join("\n");
+    res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
+    res.end(JSON.stringify({ ok: true, path: pathMod.relative(MT16_ROOT, resolved), total_lines: allLines.length, shown_lines: Math.min(allLines.length, maxL), content: body }));
+    return true;
+  }
+  if (u.pathname === "/download-bundle") {
+    try {
+      const f = mt16EnsureBundle();
+      const st = fsSync.statSync(f);
+      res.writeHead(200, {
+        "Content-Type": "application/gzip",
+        "Content-Disposition": "attachment; filename=\"mt16_full_ports_bundle.tar.gz\"",
+        "Content-Length": st.size
+      });
+      fsSync.createReadStream(f).pipe(res);
+    } catch (e) {
+      res.writeHead(500, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({ ok: false, error: String(e) }));
+    }
+    return true;
+  }
+  return false;
+}
+
 const GIZLI_KOD = '1616';
 const HTML = `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MT16 AI Studio v8.0 (Port 3001)</title>
 <style>
@@ -720,9 +801,11 @@ window.addEventListener("DOMContentLoaded", function() {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 })();
-</script></body></html>`;
+</script><script>(function(){if(document.getElementById("mt16-f-bar"))return;function init(){var c=document.getElementById("cmd"),o=document.getElementById("out"),g=document.getElementById("main-grid");if(!c||!o||!g)return setTimeout(init,150);var d=document.createElement("div");d.id="mt16-f-bar";d.style.cssText="display:flex;flex-wrap:wrap;gap:6px;padding:6px 10px;margin-bottom:8px;background:#111827;border:1px solid #374151;border-radius:6px;";var b=document.createElement("button");b.textContent="📎 @Dosya İçerik Oku";b.style.cssText="background:#2563eb;color:#fff;border:none;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;";b.onclick=function(){var m=(c.value||"").match(/@([A-Za-z0-9_./-]+)/);var t=m?m[1]:prompt("Dosya yolu:","server/kokpit3001.mjs");if(!t)return;fetch("/api/read-file?path="+encodeURIComponent(t)+"&lines=140").then(function(r){return r.json();}).then(function(j){o.textContent=j.ok?("=== "+j.path+" ("+j.shown_lines+"/"+j.total_lines+") ===\n"+j.content):("[HATA] "+j.error);});};var a=document.createElement("a");a.href="/download-bundle";a.download="mt16_full_ports_bundle.tar.gz";a.textContent="⬇️ Tam Paket İndir (.tar.gz)";a.style.cssText="background:#059669;color:#fff;padding:5px 10px;border-radius:4px;font-size:11.5px;text-decoration:none;";d.appendChild(b);d.appendChild(a);g.parentElement.insertBefore(d,g);}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();})();</script></body></html>`;
 
 http.createServer((req, res) => {
+  if (mt16SpecialRoute(req, res)) return;
+  if (mt16SpecialRoute(req, res)) return;
 if (req.url && req.url.split("?")[0] === "/download-bundle") { const f = "/home/bytrkr/bistapp/backups/latest_ports_bundle.tar.gz"; if (fs.existsSync(f)) { const st = fs.statSync(f); res.writeHead(200, { "Content-Type": "application/gzip", "Content-Disposition": "attachment; filename=\"mt16_full_ports_bundle.tar.gz\"", "Content-Length": st.size }); return fs.createReadStream(f).pipe(res); } }
 
   if (req.url === '/api/quant-hud') { const oku = (x) => { try { return JSON.parse(fs.readFileSync(x, 'utf-8')); } catch { return null; } }; res.writeHead(200, {'Content-Type':'application/json'}); return res.end(JSON.stringify({ sistem: oku('data/tam_sistem_entegrasyon.json'), var_rapor: oku('data/monte_carlo_var.json'), munazara: oku('data/bull_bear_raporu.json'), haber: oku('data/haber_duygu_raporu.json'), davranis: oku('data/fstory_behavior.json') })); }
