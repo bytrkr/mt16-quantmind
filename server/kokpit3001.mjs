@@ -427,153 +427,184 @@ window.addEventListener("DOMContentLoaded", function() {
   }
 });
 </script><script>
-window.addEventListener("DOMContentLoaded", function() {
-  if (window.__mt16RibbonMenuLoaded) return;
-  window.__mt16RibbonMenuLoaded = true;
+(function initMt16ExcelRibbon() {
+  function mount() {
+    if (document.getElementById("mt16-excel-ribbon")) return;
+    var cmdEl = document.getElementById("cmd");
+    var outEl = document.getElementById("out");
+    var mainGrid = document.getElementById("main-grid");
+    if (!cmdEl || !outEl || !mainGrid) return setTimeout(mount, 150);
 
-  var cmdEl = document.getElementById("cmd");
-  var outEl = document.getElementById("out");
-  if (!cmdEl || !outEl) return;
+    // Eski daginik buton satirlarini gizle (sadece en ust baslik kalsin)
+    var topWrap = mainGrid.parentElement;
+    Array.from(topWrap.children).forEach(function(el, i) {
+      if (i > 0 && el !== mainGrid && el.id !== "mt16-excel-ribbon") el.style.display = "none";
+    });
+    var parentCol = cmdEl.parentElement.parentElement;
+    Array.from(parentCol.children).forEach(function(ch) {
+      if (ch !== cmdEl.parentElement && ch !== outEl) ch.style.display = "none";
+    });
 
-  // Onceki daginik ek cubuklari temizle (varsa)
-  var parentCol = cmdEl.parentElement.parentElement;
-  Array.from(parentCol.children).forEach(function(ch) {
-    if (ch !== cmdEl.parentElement && ch !== outEl) ch.style.display = "none";
-  });
+    var ribbon = document.createElement("div");
+    ribbon.id = "mt16-excel-ribbon";
+    ribbon.style.cssText = "background:#161b22;border:1px solid #30363d;border-radius:6px;margin-bottom:8px;overflow:hidden;font-family:Segoe UI,sans-serif;box-shadow:0 3px 10px rgba(0,0,0,0.4);";
 
-  // Ustteki eski kalabalik buton satirlarini daralt/gizle
-  var topContainer = document.querySelector("body > div");
-  if (topContainer && topContainer.children.length >= 3) {
-    if (topContainer.children[1]) topContainer.children[1].style.display = "none";
-    if (topContainer.children[2] && topContainer.children[2].id !== "main-grid") topContainer.children[2].style.display = "none";
-  }
+    var tabBar = document.createElement("div");
+    tabBar.style.cssText = "display:flex;background:#010409;border-bottom:1px solid #30363d;padding:0 6px;gap:2px;flex-wrap:wrap;";
 
-  // Windows Office / Excel Tarzi Serit Menu (Ribbon)
-  var ribbon = document.createElement("div");
-  ribbon.id = "mt16-office-ribbon";
-  ribbon.style.cssText = "background:#161b22;border:1px solid #30363d;border-radius:6px;margin-bottom:8px;overflow:hidden;font-family:Segoe UI,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.35);";
+    var panel = document.createElement("div");
+    panel.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px;background:#161b22;align-items:center;min-height:38px;";
 
-  var tabHeader = document.createElement("div");
-  tabHeader.style.cssText = "display:flex;background:#0d1117;border-bottom:1px solid #30363d;padding:0 6px;gap:2px;flex-wrap:wrap;";
-
-  var ribbonBody = document.createElement("div");
-  ribbonBody.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;padding:7px 10px;background:#161b22;align-items:center;min-height:36px;";
-
-  var tabs = [
-    {
-      name: "📁 Dosya & Yedek",
-      items: [
-        { label: "💾 Manuel Yedek Al", cmd: "bash /home/bytrkr/bistapp/scripts/backup_data.sh" },
-        { label: "📂 Yedekleri Listele", cmd: "ls -lh /home/bytrkr/bistapp/backups/" },
-        { label: "📋 Çıktıyı Kopyala", action: "copy" },
-        { label: "🧹 Çıktıyı Temizle", action: "clear" },
-        { label: "📜 Bakım Kılavuzu", cmd: "cat docs/KOKPIT_KULLANIM_KILAVUZU.md" }
-      ]
-    },
-    {
-      name: "⚙️ Sistem & PM2",
-      items: [
-        { label: "📊 PM2 Durum", cmd: "pm2 status" },
-        { label: "🔄 Servisleri Yenile", cmd: "pm2 restart bistapp bistapp-api otonom-beyin && pm2 status" },
-        { label: "⚡ Tümünü Yeniden Başlat", cmd: "pm2 restart all && pm2 status" },
-        { label: "🧹 Hata Loglarını Temizle", cmd: "pm2 flush && pm2 status" },
-        { label: "💻 CPU / RAM / Disk", cmd: "uptime && free -h && df -h /" }
-      ]
-    },
-    {
-      name: "📈 BIST & Kantitatif",
-      items: [
-        { label: "📈 Track Record JSON", cmd: "curl -s http://127.0.0.1:8001/api/track-record" },
-        { label: "💼 Sanal Portföy", cmd: "cat data/sanal_portfoy.json 2>/dev/null || cat python/sanal_portfoy.json" },
-        { label: "⚖️ Ajan Ağırlıkları", cmd: "cat python/agent_weights.json 2>/dev/null || echo Ajan agirliklari varsayilan" },
-        { label: "🩺 API Sağlık Kontrolü", cmd: "curl -s http://127.0.0.1:8001/health || curl -s http://127.0.0.1:8001/api/track-record" }
-      ]
-    },
-    {
-      name: "🧠 AI IDE (Cursor/Claude)",
-      items: [
-        { label: "📎 @Dosya Bağlamı", action: "mention" },
-        { label: "🗺️ Antigravity Plan→Uygula", prefix: "[ANTIGRAVITY WORKFLOW: 1-PLAN çıkar, 2-YEDEK AL ve UYGULA, 3-SYNTAX & PM2 DOĞRULA]\n" },
-        { label: "⚡ Claude Hızlı Uygula", prefix: "[AGENT MODU - Yedek al, uygula, syntax test et ve PM2 yeniden başlat]\n" },
-        { label: "🔍 Cursor Kod Denetimi", prefix: "[CURSOR REVIEW - Güvenlik, performans ve hata kontrolü yap]\n" },
-        { label: "📜 Anayasa Dosyaları", cmd: "head -n 25 CLAUDE.md GEMINI.md .cursorrules .antigravity/rules.md" }
-      ]
-    },
-    {
-      name: "🔀 Git & Sürüm",
-      items: [
-        { label: "🚀 Git Durum & Log", cmd: "git status -s && git log -n 4 --oneline" },
-        { label: "🔍 Git Diff İncele", cmd: "git diff --stat && git diff -U2 | head -n 80" },
-        { label: "⏪ Değişiklikleri Geri Al", action: "undo" },
-        { label: "☁️ GitHub Push", cmd: "git push origin HEAD" }
-      ]
-    }
-  ];
-
-  function renderTab(idx) {
-    Array.from(tabHeader.children).forEach(function(tEl, i) {
-      if (i === idx) {
-        tEl.style.background = "#161b22";
-        tEl.style.color = "#58a6ff";
-        tEl.style.borderTop = "2px solid #1f6feb";
-        tEl.style.fontWeight = "600";
-      } else {
-        tEl.style.background = "transparent";
-        tEl.style.color = "#8b949e";
-        tEl.style.borderTop = "2px solid transparent";
-        tEl.style.fontWeight = "400";
+    var menus = [
+      {
+        name: "📁 Dosya",
+        accent: "#238636",
+        items: [
+          { label: "💾 Manuel Yedek Al", cmd: "bash /home/bytrkr/bistapp/scripts/backup_data.sh" },
+          { label: "📂 Yedek Arşivleri", cmd: "ls -lh /home/bytrkr/bistapp/backups/" },
+          { label: "📜 Kullanım & Bakım Kılavuzu", cmd: "cat docs/KOKPIT_KULLANIM_KILAVUZU.md" },
+          { label: "⬇️ Çıktıyı .txt İndir", action: "download" }
+        ]
+      },
+      {
+        name: "🏠 Giriş",
+        accent: "#1f6feb",
+        items: [
+          { label: "📊 PM2 Durum", cmd: "pm2 status" },
+          { label: "📋 Çıktıyı Kopyala", action: "copy" },
+          { label: "🧹 Çıktıyı Temizle", action: "clear" },
+          { label: "🔄 Servisleri Yenile (3000+8001)", cmd: "pm2 restart bistapp bistapp-api otonom-beyin && pm2 status" },
+          { label: "⚡ Tümünü Yeniden Başlat", cmd: "pm2 restart all && pm2 status" }
+        ]
+      },
+      {
+        name: "➕ Ekle",
+        accent: "#8957e5",
+        items: [
+          { label: "📎 @Dosya Bağlamı Ekle", action: "mention" },
+          { label: "📝 Görev Notu Ekle", prefix: "# GÖREV NOTU: " },
+          { label: "🔗 API Uç Noktalarını Listele", cmd: "grep -n "@app\." python/api_server.py" }
+        ]
+      },
+      {
+        name: "📊 Veri",
+        accent: "#d29922",
+        items: [
+          { label: "📈 Canlı Track Record", cmd: "curl -s http://127.0.0.1:8001/api/track-record" },
+          { label: "💼 Sanal Portföy", cmd: "cat data/sanal_portfoy.json 2>/dev/null || cat python/sanal_portfoy.json" },
+          { label: "⚖️ Ajan Ağırlıkları", cmd: "cat python/agent_weights.json 2>/dev/null || echo Varsayilan agirliklar" },
+          { label: "💻 Sunucu Kaynakları", cmd: "uptime && free -h && df -h /" }
+        ]
+      },
+      {
+        name: "🛡️ Gözden Geçir",
+        accent: "#da3633",
+        items: [
+          { label: "🔍 Git Diff İncele", cmd: "git diff --stat && git diff -U2 | head -n 80" },
+          { label: "🩺 API Sağlık Kontrolü", cmd: "curl -s http://127.0.0.1:8001/health || curl -s http://127.0.0.1:8001/api/track-record" },
+          { label: "🧹 Hata Loglarını Temizle", cmd: "pm2 flush && pm2 status" },
+          { label: "⏪ Değişiklikleri Geri Al", action: "undo" }
+        ]
+      },
+      {
+        name: "👁️ Görünüm",
+        accent: "#388bfd",
+        items: [
+          { label: "📁 Dosya Ağacı Aç/Kapat", action: "toggleTree" },
+          { label: "📡 Canlı Akış Aç/Kapat", action: "toggleLive" }
+        ]
+      },
+      {
+        name: "🤖 Geliştirici",
+        accent: "#a371f7",
+        items: [
+          { label: "🗺️ Antigravity Plan→Uygula", prefix: "[ANTIGRAVITY WORKFLOW: 1-PLAN çıkar, 2-YEDEK AL ve UYGULA, 3-SYNTAX & PM2 DOĞRULA]\n" },
+          { label: "⚡ Claude Hızlı Uygula", prefix: "[AGENT MODU - Yedek al, uygula, syntax test et ve PM2 yeniden başlat]\n" },
+          { label: "🔍 Cursor Kod Denetimi", prefix: "[CURSOR REVIEW - Güvenlik, performans ve hata kontrolü yap]\n" },
+          { label: "📜 Anayasa Dosyaları (.md)", cmd: "head -n 25 CLAUDE.md GEMINI.md .cursorrules .antigravity/rules.md" },
+          { label: "☁️ GitHub Push", cmd: "git status -s && git push origin HEAD" }
+        ]
       }
-    });
+    ];
 
-    ribbonBody.innerHTML = "";
-    tabs[idx].items.forEach(function(it) {
-      var btn = document.createElement("button");
-      btn.textContent = it.label;
-      btn.style.cssText = "background:#21262d;color:#e6edf3;border:1px solid #30363d;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:all 0.15s;";
-      btn.onmouseover = function() { btn.style.background = "#30363d"; btn.style.borderColor = "#58a6ff"; };
-      btn.onmouseout = function() { btn.style.background = "#21262d"; btn.style.borderColor = "#30363d"; };
-
-      btn.onclick = function() {
-        if (it.action === "copy") {
-          navigator.clipboard.writeText(outEl.innerText || "");
-          btn.textContent = "✅ Kopyalandı";
-          setTimeout(function(){ btn.textContent = it.label; }, 1400);
-        } else if (it.action === "clear") {
-          outEl.textContent = "";
-        } else if (it.action === "mention") {
-          var f = prompt("Bağlama eklenecek dosya yolu (örnek: python/api_server.py veya src/App.tsx):", "python/api_server.py");
-          if (f && f.trim()) { cmdEl.value = "@" + f.trim() + " " + cmdEl.value; cmdEl.focus(); }
-        } else if (it.action === "undo") {
-          if (confirm("Commit edilmemiş değişiklikler geri alınsın mı?")) {
-            cmdEl.value = "git checkout -- . && git status -s";
-            if (typeof window.run === "function") window.run(cmdEl.value);
-          }
-        } else if (it.prefix) {
-          if (cmdEl.value.indexOf(it.prefix) === -1) cmdEl.value = it.prefix + cmdEl.value;
-          cmdEl.focus();
-        } else if (it.cmd) {
-          cmdEl.value = it.cmd;
-          if (typeof window.run === "function") window.run(it.cmd);
+    function selectTab(idx) {
+      Array.from(tabBar.children).forEach(function(b, i) {
+        if (i === idx) {
+          b.style.background = "#161b22";
+          b.style.color = "#ffffff";
+          b.style.borderTop = "2px solid " + menus[idx].accent;
+          b.style.fontWeight = "600";
+        } else {
+          b.style.background = "transparent";
+          b.style.color = "#8b949e";
+          b.style.borderTop = "2px solid transparent";
+          b.style.fontWeight = "400";
         }
-      };
-      ribbonBody.appendChild(btn);
+      });
+
+      panel.innerHTML = "";
+      menus[idx].items.forEach(function(it) {
+        var btn = document.createElement("button");
+        btn.textContent = it.label;
+        btn.style.cssText = "background:#21262d;color:#e6edf3;border:1px solid #30363d;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;transition:all 0.12s;";
+        btn.onmouseover = function() { btn.style.background = "#30363d"; btn.style.borderColor = menus[idx].accent; };
+        btn.onmouseout = function() { btn.style.background = "#21262d"; btn.style.borderColor = "#30363d"; };
+
+        btn.onclick = function() {
+          if (it.action === "copy") {
+            navigator.clipboard.writeText(outEl.innerText || "");
+            btn.textContent = "✅ Kopyalandı";
+            setTimeout(function(){ btn.textContent = it.label; }, 1400);
+          } else if (it.action === "clear") {
+            outEl.textContent = "";
+          } else if (it.action === "download") {
+            var blob = new Blob([outEl.innerText || ""], { type: "text/plain;charset=utf-8" });
+            var a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "mt16_cikti_" + Date.now() + ".txt";
+            a.click();
+          } else if (it.action === "mention") {
+            var f = prompt("Bağlama eklenecek dosya yolu (örnek: python/api_server.py veya src/App.tsx):", "python/api_server.py");
+            if (f && f.trim()) { cmdEl.value = "@" + f.trim() + " " + cmdEl.value; cmdEl.focus(); }
+          } else if (it.action === "undo") {
+            if (confirm("Commit edilmemiş değişiklikler geri alınsın mı?")) {
+              cmdEl.value = "git checkout -- . && git status -s";
+              if (typeof window.run === "function") window.run(cmdEl.value);
+            }
+          } else if (it.action === "toggleTree") {
+            var t = mainGrid.children[0];
+            if (t) t.style.display = (t.style.display === "none") ? "" : "none";
+          } else if (it.action === "toggleLive") {
+            var l = mainGrid.children[2];
+            if (l) l.style.display = (l.style.display === "none") ? "" : "none";
+          } else if (it.prefix) {
+            if (cmdEl.value.indexOf(it.prefix) === -1) cmdEl.value = it.prefix + cmdEl.value;
+            cmdEl.focus();
+          } else if (it.cmd) {
+            cmdEl.value = it.cmd;
+            if (typeof window.run === "function") window.run(it.cmd);
+          }
+        };
+        panel.appendChild(btn);
+      });
+    }
+
+    menus.forEach(function(m, idx) {
+      var tb = document.createElement("button");
+      tb.textContent = m.name;
+      tb.style.cssText = "border:none;padding:7px 13px;font-size:12px;cursor:pointer;border-radius:4px 4px 0 0;";
+      tb.onclick = function() { selectTab(idx); };
+      tabBar.appendChild(tb);
     });
+
+    ribbon.appendChild(tabBar);
+    ribbon.appendChild(panel);
+    topWrap.insertBefore(ribbon, mainGrid);
+    selectTab(1); // Varsayilan olarak "Giris" sekmesi acik gelsin
   }
-
-  tabs.forEach(function(tab, idx) {
-    var tBtn = document.createElement("button");
-    tBtn.textContent = tab.name;
-    tBtn.style.cssText = "border:none;padding:6px 12px;font-size:12px;cursor:pointer;border-radius:4px 4px 0 0;transition:all 0.15s;";
-    tBtn.onclick = function() { renderTab(idx); };
-    tabHeader.appendChild(tBtn);
-  });
-
-  ribbon.appendChild(tabHeader);
-  ribbon.appendChild(ribbonBody);
-  var mainGrid = document.getElementById("main-grid");
-  if (mainGrid) mainGrid.parentElement.insertBefore(ribbon, mainGrid);
-  renderTab(1); // Varsayilan olarak Sistem & PM2 sekmesi acik gelsin
-});
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
+  else mount();
+})();
 </script></body></html>`;
 
 http.createServer((req, res) => {
