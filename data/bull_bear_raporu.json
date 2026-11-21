@@ -1,0 +1,115 @@
+{
+  "zaman": "2026-11-21 17:17:25",
+  "munazaralar": [
+    {
+      "sembol": "ASELS",
+      "karar": "VETO_AYI_BASKIN",
+      "boga_puan": 62.0,
+      "ayi_puan": 80.0,
+      "net_ustunluk": -18.0,
+      "boga_tezler": [
+        "RSI (48.6) ideal yukselis bolgesinde"
+      ],
+      "ayi_tezler": [
+        "5 gunluk satici baskisi (%-5.35)",
+        "Fiyat 20-gunluk ortalamanin altinda direnc goruyor"
+      ]
+    },
+    {
+      "sembol": "MIATK",
+      "karar": "VETO_AYI_BASKIN",
+      "boga_puan": 62.0,
+      "ayi_puan": 80.0,
+      "net_ustunluk": -18.0,
+      "boga_tezler": [
+        "RSI (46.0) ideal yukselis bolgesinde"
+      ],
+      "ayi_tezler": [
+        "5 gunluk satici baskisi (%-8.04)",
+        "Fiyat 20-gunluk ortalamanin altinda direnc goruyor"
+      ]
+    },
+    {
+      "sembol": "TOASO",
+      "karar": "ONAY_BOGA_USTUN",
+      "boga_puan": 88.0,
+      "ayi_puan": 50.0,
+      "net_ustunluk": 38.0,
+      "boga_tezler": [
+        "Fiyat 20-gunluk EMA uzerinde trend destegi aliyor",
+        "Orta vadeli 50-gunluk ortalama yukari yonlu",
+        "RSI (54.2) ideal yukselis bolgesinde"
+      ],
+      "ayi_tezler": []
+    },
+    {
+      "sembol": "CANTE",
+      "karar": "VETO_AYI_BASKIN",
+      "boga_puan": 62.0,
+      "ayi_puan": 80.0,
+      "net_ustunluk": -18.0,
+      "boga_tezler": [
+        "RSI (46.1) ideal yukselis bolgesinde"
+      ],
+      "ayi_tezler": [
+        "5 gunluk satici baskisi (%-7.92)",
+        "Fiyat 20-gunluk ortalamanin altinda direnc goruyor"
+      ]
+    },
+    {
+      "sembol": "CWENE",
+      "karar": "VETO_AYI_BASKIN",
+      "boga_puan": 62.0,
+      "ayi_puan": 64.0,
+      "net_ustunluk": -2.0,
+      "boga_tezler": [
+        "RSI (49.9) ideal yukselis bolgesinde"
+      ],
+      "ayi_tezler": [
+        "Fiyat 20-gunluk ortalamanin altinda direnc goruyor"
+      ]
+    },
+    {
+      "sembol": "EUREN",
+      "karar": "VETO_AYI_BASKIN",
+      "boga_puan": 62.0,
+      "ayi_puan": 80.0,
+      "net_ustunluk": -18.0,
+      "boga_tezler": [
+        "RSI (47.3) ideal yukselis bolgesinde"
+      ],
+      "ayi_tezler": [
+        "5 gunluk satici baskisi (%-6.75)",
+        "Fiyat 20-gunluk ortalamanin altinda direnc goruyor"
+      ]
+    },
+    {
+      "sembol": "IZENR",
+      "karar": "ONAY_BOGA_USTUN",
+      "boga_puan": 74.0,
+      "ayi_puan": 64.0,
+      "net_ustunluk": 10.0,
+      "boga_tezler": [
+        "Orta vadeli 50-gunluk ortalama yukari yonlu",
+        "RSI (51.7) ideal yukselis bolgesinde"
+      ],
+      "ayi_tezler": [
+        "Fiyat 20-gunluk ortalamanin altinda direnc goruyor"
+      ]
+    },
+    {
+      "sembol": "BIMAS",
+      "karar": "VETO_AYI_BASKIN",
+      "boga_puan": 62.0,
+      "ayi_puan": 80.0,
+      "net_ustunluk": -18.0,
+      "boga_tezler": [
+        "RSI (48.9) ideal yukselis bolgesinde"
+      ],
+      "ayi_tezler": [
+        "5 gunluk satici baskisi (%-5.13)",
+        "Fiyat 20-gunluk ortalamanin altinda direnc goruyor"
+      ]
+    }
+  ]
+}

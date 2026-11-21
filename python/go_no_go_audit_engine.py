@@ -1,3 +1,4 @@
+import random
 """
 MT16 QuantMind - Yönetim Kurulu Go/No-Go Kuant Denetim Motoru
 [Policy: Minimal-Intervention Offset v1.0 & Realistic Friction]

@@ -1,0 +1,41 @@
+{
+  "zaman": "2026-11-21 17:17:25",
+  "profil": "Savunmaci Risk Kalkanli",
+  "max_kazanma_serisi": 1,
+  "max_kaybetme_serisi": 5,
+  "spike_karantina": 0,
+  "pozisyonlar": [
+    [
+      "ASELS",
+      -5.35
+    ],
+    [
+      "MIATK",
+      -8.04
+    ],
+    [
+      "TOASO",
+      0.2
+    ],
+    [
+      "CANTE",
+      -7.92
+    ],
+    [
+      "CWENE",
+      -4.13
+    ],
+    [
+      "EUREN",
+      -6.75
+    ],
+    [
+      "IZENR",
+      -2.29
+    ],
+    [
+      "BIMAS",
+      -5.13
+    ]
+  ]
+}

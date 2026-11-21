@@ -1,9 +1,9 @@
 {
-  "zaman": "2026-11-18 23:20:27",
+  "zaman": "2026-11-21 17:17:28",
   "simulasyon": 1000,
-  "portfoy_degeri_tl": 77721.5,
-  "gunluk_var_95_tl": 1291.01,
-  "gunluk_var_95_pct": 1.66,
-  "en_kotu_cvar_99_tl": 2111.77,
+  "portfoy_degeri_tl": 75709.62,
+  "gunluk_var_95_tl": 1732.21,
+  "gunluk_var_95_pct": 2.29,
+  "en_kotu_cvar_99_tl": 2746.98,
   "risk_seviyesi": "DUSUK_KONTROLLU"
 }

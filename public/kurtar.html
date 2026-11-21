@@ -1,7 +1,7 @@
 <!doctype html><html lang="tr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <body style="margin:0;background:#0d1117;color:#c9d1d9;font-family:sans-serif;padding:12px">
 <h3 style="margin:0 0 8px;color:#58a6ff">🚑 MT16 Mobil Acil Kurtarma & AI CMD</h3>
-<input id="p" type="password" value="1616" style="width:60px;padding:6px">
+<input id="p" type="password" placeholder="PIN" style="width:60px;padding:6px">
 <button onclick="r('npm run build && pm2 restart bistapp')" style="padding:6px 10px">🔨 Build & Restart</button>
 <textarea id="c" rows="3" placeholder="Hata veya komut..." style="width:100%;margin:8px 0;background:#010409;color:#7ee787;padding:8px"></textarea>
 <button onclick="r('python3 python/ai_coder_agent.py --mode hack --deep '+JSON.stringify(c.value))" style="padding:8px 12px;background:#b62324;color:#fff;border:none">⚡ AI HACK</button>

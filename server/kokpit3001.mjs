@@ -41,7 +41,7 @@ const HTML = `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta n
     <button id="healBtn" onclick="selfHeal()" style="display:none;background:#da3633;color:#fff;border:none;padding:4px 9px;border-radius:4px;font-size:11px;font-weight:bold;cursor:pointer">🩺 Self-Heal Onar</button>
     <button onclick="document.getElementById('out').textContent=''" style="margin-left:auto;background:#21262d;color:#8b949e;border:1px solid #30363d;padding:3px 7px;border-radius:4px;font-size:11px;cursor:pointer">🧹 Temizle</button>
   </div>
-  <div style="display:grid;grid-template-columns:220px 1fr 380px;gap:8px;height:78vh">
+  <div id="main-grid" style="display:grid;grid-template-columns:220px 1fr 380px;gap:8px;height:78vh">
     <div style="background:#161b22;border:1px solid #30363d;border-radius:6px;padding:8px;overflow:auto;font-size:11.5px"><div style="font-weight:bold;color:#58a6ff;margin-bottom:6px">📁 Bağlam Dosya Ağacı</div><div id="tree">Yükleniyor...</div></div>
     <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
       <div style="display:flex;gap:6px"><textarea id="cmd" rows="3" style="flex:1;background:#010409;color:#7ee787;border:1px solid #30363d;padding:8px;border-radius:4px;font-family:monospace;font-size:12px">pm2 status</textarea><button onclick="ai()" style="background:#6e40c9;color:#fff;border:none;padding:0 12px;border-radius:4px;font-weight:bold;cursor:pointer">🤖 AI</button><button onclick="run(document.getElementById('cmd').value)" style="background:#238636;color:#fff;border:none;padding:0 12px;border-radius:4px;font-weight:bold;cursor:pointer">Çalıştır ↵</button></div>
@@ -52,7 +52,124 @@ const HTML = `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta n
       <pre id="livePane" style="flex:1;margin:0;white-space:pre-wrap;font-size:11px;color:#8b949e;overflow:auto">Canlı akış bağlanıyor...</pre>
     </div>
   </div>
-</div><script src="/app.js"></script></body></html>`;
+</div><script src="/app.js"></script><style>#tree-panel.hidden-panel{display:none!important;}</style>
+<script>
+window.addEventListener("DOMContentLoaded",()=>{
+  const bar=document.querySelector(".top-bar")||document.body;
+  const btn=document.createElement("button");
+  btn.textContent="📁 Dosyalar Aç/Kapat";
+  btn.style.cssText="position:fixed;bottom:10px;left:10px;z-index:9999;background:#2563eb;color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:bold;box-shadow:0 2px 8px rgba(0,0,0,0.5);";
+  btn.onclick=()=>{
+    const left=Array.from(document.querySelectorAll("div,aside")).find(el=>el.innerText&&el.innerText.includes("Bağlam Dosya Ağacı")&&el.offsetWidth<400);
+    if(left) left.style.display = left.style.display==="none" ? "" : "none";
+  };
+  document.body.appendChild(btn);
+});
+</script><script>(function(){
+  if(window.__mt16SafePatch) return; window.__mt16SafePatch = true;
+  const cleanAnsi = s => String(s||"").replace(/\x1b\[[0-9;]*[a-zA-Z]|\[[0-9;]{1,6}m/g, "");
+  function makeBtn(label, bg, bottomPx, rightPx, onClick){
+    const b = document.createElement("button");
+    b.textContent = label;
+    b.style.cssText = "position:fixed;bottom:"+bottomPx+"px;"+(rightPx!=null?"right:"+rightPx+"px":"left:10px")+";z-index:9999;background:"+bg+";color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:700;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,0.45);cursor:pointer;";
+    b.onclick = onClick;
+    document.body.appendChild(b);
+    return b;
+  }
+  window.addEventListener("DOMContentLoaded", function(){
+    makeBtn("📁 Dosyalar Aç/Kapat", "#2563eb", 10, null, function(){
+      const el = Array.from(document.querySelectorAll("div,aside")).find(d => d.innerText && d.innerText.includes("Bağlam Dosya Ağacı") && d.offsetWidth > 0 && d.offsetWidth < 450);
+      if(el) el.style.display = (el.style.display === "none") ? "" : "none";
+    });
+    makeBtn("🩺 Son Hatayı Çöz", "#dc2626", 10, 10, function(){
+      const boxes = Array.from(document.querySelectorAll("pre,code,div")).filter(d => d.innerText && /Error|Traceback|Exception|FAILED|Alarm/i.test(d.innerText) && d.innerText.length < 15000);
+      const lastErr = boxes.length ? cleanAnsi(boxes[boxes.length - 1].innerText).trim().slice(-1200) : "Son hata logunu incele ve coz";
+      const ta = document.querySelector("textarea,input[type=text]");
+      if(ta){ ta.value = "Su hatayi incele ve coz:\n" + lastErr; ta.dispatchEvent(new Event("input",{bubbles:true})); }
+      const aiBtn = Array.from(document.querySelectorAll("button")).find(btn => /AI/i.test(btn.textContent));
+      if(aiBtn) aiBtn.click();
+    });
+    setInterval(function(){
+      document.querySelectorAll("pre,code").forEach(n => {
+        if(/\x1b\[|\[[0-9;]{1,6}m/.test(n.textContent)) n.textContent = cleanAnsi(n.textContent);
+      });
+    }, 1500);
+  });
+})();</script><script>(function(){
+  if(window.__mt16FullWidthPatch) return; window.__mt16FullWidthPatch = true;
+  const stripAnsi = t => String(t||"").replace(/\x1b\[[0-9;]*[a-zA-Z]|\[[0-9;]{1,6}m|\[1m|\[22m|\[39m|\[32m|\[36m|\[30m|\[2m/g, "");
+  function findLeftPanel(){
+    return Array.from(document.querySelectorAll("div,aside,section")).find(el =>
+      el.innerText && el.innerText.includes("Bağlam Dosya Ağacı") && el.offsetWidth > 0 && el.offsetWidth < 500
+    );
+  }
+  function applyLayout(closed){
+    const left = findLeftPanel();
+    if(left){
+      left.style.display = closed ? "none" : "";
+      const parent = left.parentElement;
+      if(parent){
+        const cs = getComputedStyle(parent);
+        if(cs.display.includes("grid")){
+          parent.dataset.prevGrid = parent.dataset.prevGrid || cs.gridTemplateColumns;
+          parent.style.gridTemplateColumns = closed ? "1fr" : parent.dataset.prevGrid;
+        } else if(cs.display.includes("flex")){
+          parent.style.width = "100%";
+        }
+      }
+    }
+    document.querySelectorAll("div,section,main").forEach(box => {
+      if(closed && box !== left && box.offsetWidth > 0 && box.offsetWidth < window.innerWidth && getComputedStyle(box).flex !== "none"){
+        box.style.flex = "1 1 0%";
+        box.style.maxWidth = "100%";
+      }
+    });
+  }
+  window.addEventListener("DOMContentLoaded", function(){
+    let isClosed = false;
+    let btn = document.getElementById("mt16-toggle-left-btn");
+    if(!btn){
+      btn = document.createElement("button");
+      btn.id = "mt16-toggle-left-btn";
+      btn.textContent = "📁 Dosyalar Aç/Kapat";
+      btn.style.cssText = "position:fixed;bottom:10px;left:10px;z-index:99999;background:#2563eb;color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:700;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,0.5);cursor:pointer;";
+      btn.onclick = function(){ isClosed = !isClosed; applyLayout(isClosed); };
+      document.body.appendChild(btn);
+    }
+    setInterval(function(){
+      document.querySelectorAll("pre,code").forEach(n => {
+        if(/\x1b\[|\[[0-9;]{1,6}m/.test(n.textContent)) n.textContent = stripAnsi(n.textContent);
+      });
+    }, 1500);
+  });
+})();</script><script>(function(){
+  if(window.__mt16GridFix) return; window.__mt16GridFix = true;
+  const reAnsi = /\x1b\[[0-9;]*[a-zA-Z]|\[[0-9;]{1,6}m/g;
+  function toggleTree(){
+    const g = document.getElementById("main-grid");
+    const left = g && g.firstElementChild;
+    if(!g || !left) return;
+    const hide = left.style.display !== "none";
+    left.style.display = hide ? "none" : "";
+    g.style.gridTemplateColumns = hide ? "0px 1fr 380px" : "220px 1fr 380px";
+  }
+  window.addEventListener("DOMContentLoaded", function(){
+    let btn = document.getElementById("mt16-toggle-left-btn");
+    if(!btn){
+      btn = document.createElement("button");
+      btn.id = "mt16-toggle-left-btn";
+      btn.textContent = "📁 Dosyalar Aç/Kapat";
+      btn.style.cssText = "position:fixed;bottom:10px;left:10px;z-index:99999;background:#2563eb;color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:700;font-size:12px;cursor:pointer;";
+      document.body.appendChild(btn);
+    }
+    btn.onclick = toggleTree;
+    setInterval(function(){
+      document.querySelectorAll("pre,code").forEach(n => {
+        if(reAnsi.test(n.textContent)) n.textContent = n.textContent.replace(reAnsi, "");
+      });
+    }, 1500);
+  });
+})();</script><script>(function(){window.addEventListener("DOMContentLoaded",function(){var g=document.getElementById("main-grid");var b=document.getElementById("mt16-toggle-left-btn")||document.createElement("button");b.id="mt16-toggle-left-btn";b.textContent="📁 Dosyalar Aç/Kapat";b.style.cssText="position:fixed;bottom:10px;left:10px;z-index:99999;background:#2563eb;color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:700;font-size:12px;cursor:pointer";if(!b.parentNode)document.body.appendChild(b);var open=false;function apply(){if(!g)return;var l=g.children[0],m=g.children[1],r=g.children[2];if(l)l.style.display=open?"":"none";if(m){m.style.display="block";m.style.minWidth="220px";}if(r)r.style.minWidth="180px";g.style.gridTemplateColumns=open?"180px minmax(220px,1fr) 200px":"0px minmax(220px,1fr) 200px";}b.onclick=function(){open=!open;apply();};apply();});})();</script></body></html>`;
 
 http.createServer((req, res) => {
   if (req.url === '/api/quant-hud') { const oku = (x) => { try { return JSON.parse(fs.readFileSync(x, 'utf-8')); } catch { return null; } }; res.writeHead(200, {'Content-Type':'application/json'}); return res.end(JSON.stringify({ sistem: oku('data/tam_sistem_entegrasyon.json'), var_rapor: oku('data/monte_carlo_var.json'), munazara: oku('data/bull_bear_raporu.json'), haber: oku('data/haber_duygu_raporu.json'), davranis: oku('data/fstory_behavior.json') })); }

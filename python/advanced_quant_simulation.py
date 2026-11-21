@@ -1,3 +1,4 @@
+import random
 """
 MT16 QuantMind - Gelişmiş Çoklu Sembol ve Dolgu Duyarlılığı Simülasyonu
 [Policy: Exclusion-Normalization v1.0]

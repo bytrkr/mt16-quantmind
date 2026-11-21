@@ -1,5 +1,5 @@
 # MT16 Managed Agent Ilerleme Raporu
-- Son Guncelleme: 2026-11-18 21:36
+- Son Guncelleme: 2026-11-21 17:17
 - Acik Pozisyon: 8 | Kapali: 0
-- Kazanan/Kaybeden: 1/7
-- Net K/Z (Komisyon Dahil): -2219.50 TL
+- Kazanan/Kaybeden: 0/8
+- Net K/Z (Komisyon Dahil): -4227.35 TL

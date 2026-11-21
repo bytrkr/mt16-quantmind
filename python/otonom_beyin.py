@@ -11,6 +11,10 @@ import pathlib
 import os, json, time, concurrent.futures, urllib.request, urllib.parse, base64, math, xml.etree.ElementTree as ET
 from datetime import datetime
 
+def gun_sonu_bulten_kontrol(pf=None):
+    return pf
+
+
 DATA_DIR = "/home/bytrkr/bistapp/data"
 RAPOR_YOLU = os.path.join(DATA_DIR, "otonom_test_raporu.json")
 VITRIN_YOLU = os.path.join(DATA_DIR, "hazir_vitrin.json")

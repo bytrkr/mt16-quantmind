@@ -71,7 +71,7 @@ def call_llm(msgs):
         r = requests.post('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', headers={"Authorization": f"Bearer {os.getenv('GEMINI_API_KEY')}"}, json={"model": "gemini-2.5-flash", "messages": msgs}, timeout=50)
         if r.status_code == 200: print("[Motor: Gemini]"); return r.json()["choices"][0]["message"]["content"]
     if os.getenv("OPENROUTER_API_KEY"):
-        r = requests.post('https://://groq.com', headers={"Authorization": f"Bearer {os.getenv('OPENROUTER_API_KEY')}"}, json={"model": "openrouter/free", "messages": msgs}, timeout=50)
+        r = requests.post('https://openrouter.ai/api/v1/chat/completions', headers={"Authorization": f"Bearer {os.getenv('OPENROUTER_API_KEY')}"}, json={"model": "openrouter/free", "messages": msgs}, timeout=50)
         if r.status_code == 200: print("[Motor: OpenRouter]"); return r.json()["choices"][0]["message"]["content"]
     raise RuntimeError(f"Tum motorlar dolu! Son yanit: {r.status_code} {r.text[:120]}")
 

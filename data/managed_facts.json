@@ -1,17 +1,17 @@
 {
   "acik": 8,
   "kapali": 0,
-  "kazanan": 1,
-  "kaybeden": 7,
-  "net_kz": -2219.5,
+  "kazanan": 0,
+  "kaybeden": 8,
+  "net_kz": -4227.35,
   "en_iyi": [
-    "IZENR",
-    1.78,
-    137.79
+    "TOASO",
+    0.2,
+    -19.88
   ],
   "en_kotu": [
-    "CANTE",
-    -5.94,
-    -632.87
+    "MIATK",
+    -8.04,
+    -842.34
   ]
 }

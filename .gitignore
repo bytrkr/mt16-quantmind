@@ -30,3 +30,15 @@ TEST_FILE*.txt
 uploads/
 *.termix_bak
 *.ai_bak
+_temizlik_yedek/
+_arsiv_cift_kopyalar/
+_pipeline_backups/
+_fix_step2_backups/
+_fix_step4_backups/
+_fix_step5_backups/
+_fix_step6_backups/
+_fix_step7_backups/
+_fix_step8_backups/
+_fix_step9_backups/
+*_rapor.txt
+pipeline_rapor.txt

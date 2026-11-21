@@ -8,3 +8,4 @@ function filtrele(){const q=document.getElementById('fSearch').value.toLowerCase
 fetch('/api/files').then(r=>r.json()).then(l=>{tum=l;filtrele();});
 function guncelle(){fetch('/api/telemetry').then(r=>r.json()).then(t=>document.getElementById('tel').textContent='CPU: '+t.cpu+' | RAM: '+t.ram);fetch('/api/live').then(r=>r.text()).then(t=>document.getElementById('livePane').textContent=t);}
 guncelle();setInterval(guncelle,5000);
+<button id='auto-fix'>Hatayi Otomatik Coz</button>
