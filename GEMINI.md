@@ -1,16 +1,9 @@
-# GEMINI.md
-
-## Kurallar ve İşleyiş
-1. Önce hafızayı oku (BISTAPP-HAFIZA.md).
-2. Sonra ilgili skill kullan.
-3. Kod yazmadan önce mutlaka kullanıcıya sor.
-4. Onay almadan görevi bitirme.
-
-## Temel Kısıtlar ve Kurallar
-- Matriks API yok.
-- Veri Yahoo gecikmeli.
-- Tavan %10, Taban %10.
-- Devre kesici %6.
-- Seans 09:40-18:10.
-- Qodi v6.1: 0 fallback, 0 Math.random, 0 throw, veri yoksa VERİ YOK yaz.
-- Her işe başlamadan önce docs/PROJECT_TREE.md dosyasını oku, dosyayı yanlış yere koyma.
+# CLAUDE.md — MT16 QuantMind & AI Studio v8.0 Otonom Ajan Anayasası
+- Proje Kök Dizini: `/home/bytrkr/bistapp`
+- Aktif Servisler (PM2): `bistapp` (3000), `ai-studio-v8` (3001), `bistapp-api` (8001), `otonom-beyin`
+- Python Ortamı: Daima `/home/bytrkr/bistapp/.venv/bin/python` kullan.
+- Kritik Kurallar:
+  1. Herhangi bir dosyayı değiştirmeden önce mutlaka yedek al veya Git durumunu koru.
+  2. Değişiklik sonrası Python için `py_compile`, Node/JS için `node --check` doğrula.
+  3. SPK Seri:V No:55 Karar Destek Terminali uyumluluk metinlerini asla silme.
+  4. `data/`, `decision_logs.db` ve `sanal_portfoy.json` dosyalarına zarar verecek sıfırlama yapma.

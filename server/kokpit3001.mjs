@@ -301,6 +301,44 @@ window.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
+</script><script>
+window.addEventListener("DOMContentLoaded", function() {
+  if (window.__mt16IdeBridgeLoaded) return;
+  window.__mt16IdeBridgeLoaded = true;
+
+  var cmdEl = document.getElementById("cmd");
+  if (!cmdEl) return;
+
+  var ideBar = document.createElement("div");
+  ideBar.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;align-items:center;";
+
+  var presets = [
+    { label: "📐 Plan Önce (Antigravity)", prefix: "[PLAN MODU - Önce mimari planı yaz, onay almadan dosya bozma]\n" },
+    { label: "⚡ Hızlı Uygula (Claude Code)", prefix: "[AGENT MODU - Yedek al, uygula, syntax test et ve PM2 yeniden başlat]\n" },
+    { label: "🔍 Kod Denetimi (Cursor)", prefix: "[CURSOR REVIEW - Güvenlik, performans ve hata kontrolü yap]\n" },
+    { label: "📜 Kural Dosyalarını Oku", cmd: "head -n 20 CLAUDE.md GEMINI.md .cursorrules .antigravity/rules.md" }
+  ];
+
+  presets.forEach(function(item) {
+    var btn = document.createElement("button");
+    btn.textContent = item.label;
+    btn.style.cssText = "background:#161b22;color:#58a6ff;border:1px solid #30363d;padding:3px 8px;border-radius:5px;font-size:11px;cursor:pointer;";
+    btn.onclick = function() {
+      if (item.cmd) {
+        cmdEl.value = item.cmd;
+        if (typeof window.run === "function") window.run(item.cmd);
+      } else if (item.prefix) {
+        if (cmdEl.value.indexOf(item.prefix) === -1) {
+          cmdEl.value = item.prefix + cmdEl.value;
+        }
+        cmdEl.focus();
+      }
+    };
+    ideBar.appendChild(btn);
+  });
+
+  cmdEl.parentElement.parentElement.insertBefore(ideBar, cmdEl.parentElement);
+});
 </script></body></html>`;
 
 http.createServer((req, res) => {
