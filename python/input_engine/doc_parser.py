@@ -33,7 +33,7 @@ except ImportError:
 
 # Önbellek Yöneticisi
 try:
-    from input_engine.cache_manager import get_cached_data, save_to_cache
+    from python.input_engine.cache_manager import get_cached_data, save_to_cache
 except ImportError:
     try:
         from cache_manager import get_cached_data, save_to_cache

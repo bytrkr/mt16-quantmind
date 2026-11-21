@@ -81,7 +81,7 @@ def get_universal_market_data(market_type: str, ticker: str):
         # BIST için BISTDataProvider kullan
         if market_type == "BIST":
             try:
-                from fetchers import BISTDataProvider
+                from python.fetchers import BISTDataProvider
                 bist_prov = BISTDataProvider()
                 res = bist_prov.get_data(ticker)
                 p = res.get("price")

@@ -1,2 +1,2 @@
 # Otomatik Tek-Kaynak Koprusu
-from engines.liquidity_engine import *
+from python.engines.liquidity_engine import *

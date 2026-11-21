@@ -1,12 +1,12 @@
-from news_sentiment_engine import hisse_haber_duygu_tara
-from monte_carlo_var import monte_carlo_var_simulasyonu
-from auto_repo_absorber import tam_entegrasyon_dongusu
-from bull_bear_debate import boga_ayi_munazara, portfoy_munazara_denetimi
-from fstory_full_integration import davranissal_streak_ve_spike_kalkan
-from managed_agent_core import clean_and_compute_facts
-from reconcile_audit import portfoy_mutabakat_ve_dogrulama
-from oto_onarim import sistem_onarim_denetimi
-from juri_emir_koprusu import coklu_ajan_juri_onayi
+from python.news_sentiment_engine import hisse_haber_duygu_tara
+from python.monte_carlo_var import monte_carlo_var_simulasyonu
+from python.auto_repo_absorber import tam_entegrasyon_dongusu
+from python.bull_bear_debate import boga_ayi_munazara, portfoy_munazara_denetimi
+from python.fstory_full_integration import davranissal_streak_ve_spike_kalkan
+from python.managed_agent_core import clean_and_compute_facts
+from python.reconcile_audit import portfoy_mutabakat_ve_dogrulama
+from python.oto_onarim import sistem_onarim_denetimi
+from python.juri_emir_koprusu import coklu_ajan_juri_onayi
 import pathlib
 import os, json, time, concurrent.futures, urllib.request, urllib.parse, base64, math, xml.etree.ElementTree as ET
 from datetime import datetime

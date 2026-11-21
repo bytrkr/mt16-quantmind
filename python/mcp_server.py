@@ -16,7 +16,7 @@ try:
 except ImportError:
     FastMCP = None
 
-from market_gateway import GLOBAL_REGISTRY, get_universal_market_data
+from python.market_gateway import GLOBAL_REGISTRY, get_universal_market_data
 
 # FastMCP Sunucusu Tanımı
 mcp = FastMCP("MT16 QuantMind Quantitative Terminal") if FastMCP else None

@@ -16,7 +16,7 @@ import math
 import time
 import re
 from typing import Dict, Any, List, Optional, Tuple, Callable
-from memory import global_agent_memory
+from python.memory import global_agent_memory
 
 # Kütüphane Yolları (Success Library & Failure Library)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

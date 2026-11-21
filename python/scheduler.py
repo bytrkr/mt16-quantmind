@@ -23,8 +23,8 @@ except ImportError:
     BackgroundScheduler = None
     _HAS_APSCHEDULER = False
 
-from telegram_bot import send_telegram_alert, default_telegram_engine
-from input_engine.social_intel import analyze_social_manipulation
+from python.telegram_bot import send_telegram_alert, default_telegram_engine
+from python.input_engine.social_intel import analyze_social_manipulation
 
 DEFAULT_WATCH_TICKERS: List[str] = [
     "ASELS",

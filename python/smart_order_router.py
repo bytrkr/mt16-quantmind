@@ -11,7 +11,7 @@ import math
 from typing import Dict, Any, List, Optional
 
 try:
-    from liquidity_engine import LiquidityEngine
+    from python.liquidity_engine import LiquidityEngine
 except ImportError:
     class LiquidityEngine:
         @staticmethod

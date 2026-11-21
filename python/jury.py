@@ -1,2 +1,2 @@
 # Otomatik Tek-Kaynak Koprusu
-from core.jury import *
+from python.core.jury import *

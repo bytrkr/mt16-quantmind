@@ -1,2 +1,2 @@
 # Otomatik Tek-Kaynak Koprusu
-from core.orchestrator import *
+from python.core.orchestrator import *

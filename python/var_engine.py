@@ -1,2 +1,2 @@
 # Otomatik Tek-Kaynak Koprusu
-from risk.var_engine import *
+from python.risk.var_engine import *

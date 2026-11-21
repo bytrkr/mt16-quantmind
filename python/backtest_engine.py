@@ -24,7 +24,7 @@ from typing import Dict, Any, List, Optional
 # ladder_engine.py'deki build_ladder_v5 fonksiyonunu doğrudan bağla (Aynı fonksiyon canlı + backtest)
 sys.path.insert(0, os.path.dirname(__file__))
 try:
-    from ladder_engine import LadderEngineV5
+    from python.ladder_engine import LadderEngineV5
 except ImportError:
     from python.ladder_engine import LadderEngineV5
 

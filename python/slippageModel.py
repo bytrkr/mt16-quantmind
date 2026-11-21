@@ -1,2 +1,2 @@
 # Otomatik Tek-Kaynak Koprusu
-from engines.slippageModel import *
+from python.engines.slippageModel import *

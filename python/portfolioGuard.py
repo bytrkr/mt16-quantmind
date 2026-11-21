@@ -1,2 +1,2 @@
 # Otomatik Tek-Kaynak Koprusu
-from risk.portfolioGuard import *
+from python.risk.portfolioGuard import *

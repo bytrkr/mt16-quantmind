@@ -1,2 +1,2 @@
 # Otomatik Tek-Kaynak Koprusu
-from core.debate import *
+from python.core.debate import *

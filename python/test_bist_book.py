@@ -1,6 +1,6 @@
 
-from pylimitbook_bist import BistLimitBook
-from pylimitbook.tick import Bid, Ask
+from python.pylimitbook_bist import BistLimitBook
+from python.pylimitbook.tick import Bid, Ask
 import time
 
 def test_asels():

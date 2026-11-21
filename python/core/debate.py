@@ -12,7 +12,7 @@ from typing import Dict, List
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 try:
-    from schemas import (
+    from python.schemas import (
         UnifiedContext,
         AgentResponse,
         SignalType,
@@ -29,7 +29,7 @@ except ImportError:
     )
 
 try:
-    from liquidity_engine import LiquidityEngine
+    from python.liquidity_engine import LiquidityEngine
 except ImportError:
     class LiquidityEngine:
         @staticmethod
@@ -37,7 +37,7 @@ except ImportError:
             return {"is_thin_book": False, "estimated_slippage_pct": 0.5}
 
 try:
-    from social_illusion_engine import SocialIllusionEngine
+    from python.social_illusion_engine import SocialIllusionEngine
 except ImportError:
     class SocialIllusionEngine:
         @staticmethod
@@ -45,7 +45,7 @@ except ImportError:
             return {"botnet_risk_score": 0.0, "is_botnet_detected": False}
 
 try:
-    from valuation_engine import ValuationEngine
+    from python.valuation_engine import ValuationEngine
 except ImportError:
     class ValuationEngine:
         @staticmethod
@@ -53,7 +53,7 @@ except ImportError:
             return {"is_overvalued": False, "status": "DENGELI"}
 
 try:
-    from macro_shock_engine import MacroShockEngine
+    from python.macro_shock_engine import MacroShockEngine
 except ImportError:
     class MacroShockEngine:
         @staticmethod
@@ -64,7 +64,7 @@ except ImportError:
             return {"max_vulnerability_score": 40.0, "is_any_high_risk": False}
 
 try:
-    from var_engine import VaREngine
+    from python.var_engine import VaREngine
 except ImportError:
     class VaREngine:
         @staticmethod
@@ -72,7 +72,7 @@ except ImportError:
             return {"is_excessive_risk": False, "var_increase_pct": 5.0}
 
 try:
-    from watermark_tracker import WatermarkTracker
+    from python.watermark_tracker import WatermarkTracker
 except ImportError:
     class WatermarkTracker:
         @classmethod

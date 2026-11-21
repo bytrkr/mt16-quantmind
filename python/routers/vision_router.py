@@ -8,29 +8,29 @@ from fastapi import APIRouter, HTTPException, File, UploadFile, Form, Background
 from python.schemas import FinalDecision, MarketRegime, NewsData, TrendData
 from python.schemas.requests import AnalyzeRequest
 from python.utils.context_builder import build_default_context
-from orchestrator import run_multi_agent_pipeline
-from input_engine.doc_parser import parse_document
-from input_engine.vision_ocr import analyze_image_with_llm
-from input_engine.alpaca_connector import get_stock_snapshot, get_crypto_snapshot
-from trend_agent import get_trend_momentum
+from python.orchestrator import run_multi_agent_pipeline
+from python.input_engine.doc_parser import parse_document
+from python.input_engine.vision_ocr import analyze_image_with_llm
+from python.input_engine.alpaca_connector import get_stock_snapshot, get_crypto_snapshot
+from python.trend_agent import get_trend_momentum
 
 # Dynamic imports to avoid issues with missing dependencies in some environments
 try:
-    from riskEngine import RiskEngine
+    from python.riskEngine import RiskEngine
 except ImportError:
     class RiskEngine:
         @staticmethod
         def calculate_position_size(*args, **kwargs): return {}
 
 try:
-    from post_mortem_engine import PostMortemEngine
+    from python.post_mortem_engine import PostMortemEngine
 except ImportError:
     class PostMortemEngine:
         @staticmethod
         def log_decision(*args, **kwargs): return 1
 
 try:
-    from rag_engine import RagEngine
+    from python.rag_engine import RagEngine
 except ImportError:
     class RagEngine:
         @staticmethod
@@ -39,7 +39,7 @@ except ImportError:
         def build_context(query, top_k=3): return ""
 
 try:
-    from sandbox import Sandbox
+    from python.sandbox import Sandbox
 except ImportError:
     class Sandbox:
         @staticmethod

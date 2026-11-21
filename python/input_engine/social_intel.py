@@ -31,7 +31,7 @@ except ImportError:
     _HAS_REQUESTS = False
 
 try:
-    from schemas import SocialData
+    from python.schemas import SocialData
 except (ImportError, ValueError):
     try:
         from ..schemas import SocialData
@@ -64,7 +64,7 @@ except (ImportError, ValueError):
                 self.simulation_warning = simulation_warning
 
 try:
-    from social_illusion_engine import SocialIllusionEngine
+    from python.social_illusion_engine import SocialIllusionEngine
 except ImportError:
     try:
         from ..social_illusion_engine import SocialIllusionEngine
@@ -75,7 +75,7 @@ except ImportError:
                 return {"botnet_risk_score": 0.0, "is_botnet_detected": False}
 
 try:
-    from anonymizer import Anonymizer
+    from python.anonymizer import Anonymizer
 except ImportError:
     try:
         from ..anonymizer import Anonymizer
@@ -91,7 +91,7 @@ except ImportError:
             def anonymize_mentions(cls, mentions): return mentions or []
 
 try:
-    from watermark_tracker import WatermarkTracker
+    from python.watermark_tracker import WatermarkTracker
 except ImportError:
     try:
         from ..watermark_tracker import WatermarkTracker
@@ -110,7 +110,7 @@ except ImportError:
                 }
 
 try:
-    from embedding_engine import EmbeddingEngine
+    from python.embedding_engine import EmbeddingEngine
 except ImportError:
     try:
         from ..embedding_engine import EmbeddingEngine
@@ -120,7 +120,7 @@ except ImportError:
             def cluster_mentions(cls, *args, **kwargs): return []
 
 try:
-    from mirofish_bridge import MiroFishBridge
+    from python.mirofish_bridge import MiroFishBridge
 except ImportError:
     try:
         from ..mirofish_bridge import MiroFishBridge

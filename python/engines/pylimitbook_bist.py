@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-from pylimitbook.book import Book
-from pylimitbook.tick import Bid, Ask, Trade
-from pylimitbook.orderList import OrderList
+from python.pylimitbook.book import Book
+from python.pylimitbook.tick import Bid, Ask, Trade
+from python.pylimitbook.orderList import OrderList
 from six.moves import cStringIO as StringIO
 
 # BIST constants

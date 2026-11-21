@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from doc_parser import parse_document
 
 try:
-    from input_engine.cache_manager import get_cached_data, save_to_cache
+    from python.input_engine.cache_manager import get_cached_data, save_to_cache
 except ImportError:
     try:
         from cache_manager import get_cached_data, save_to_cache

@@ -17,7 +17,7 @@ try:
 except ImportError:
     requests = None
 
-from schemas import (
+from python.schemas import (
     UnifiedContext,
     AgentResponse,
     SignalType,
@@ -25,15 +25,15 @@ from schemas import (
     MarketRegime,
     SocialData,
 )
-from debate import DebateEngine
+from python.debate import DebateEngine
 
 try:
-    from input_engine.social_intel import analyze_social_manipulation
+    from python.input_engine.social_intel import analyze_social_manipulation
 except ImportError:
     analyze_social_manipulation = None
 
 try:
-    from valuation_engine import ValuationEngine
+    from python.valuation_engine import ValuationEngine
 except ImportError:
     class ValuationEngine:
         @staticmethod
@@ -44,7 +44,7 @@ except ImportError:
             return {"weighted_discount_pct": 0.0, "status": "DENGELI", "summary": "Çarpan analizi dengeli."}
 
 try:
-    from post_mortem_engine import PostMortemEngine
+    from python.post_mortem_engine import PostMortemEngine
 except ImportError:
     class PostMortemEngine:
         @staticmethod
@@ -61,7 +61,7 @@ except ImportError:
             }
 
 try:
-    from analyst_consensus_engine import AnalystConsensusEngine
+    from python.analyst_consensus_engine import AnalystConsensusEngine
 except ImportError:
     class AnalystConsensusEngine:
         @staticmethod
@@ -72,7 +72,7 @@ except ImportError:
             return {"signal": "BEKLENTİYE_PARALEL", "surprise_pct": 0.0, "summary": "Beklentiye paralel."}
 
 try:
-    from factor_risk_engine import FactorRiskEngine
+    from python.factor_risk_engine import FactorRiskEngine
 except ImportError:
     class FactorRiskEngine:
         @staticmethod
@@ -80,7 +80,7 @@ except ImportError:
             return {"beta": 1.0, "alpha_annualized_pct": 0.0, "crisis_resilience_score": 50.0}
 
 try:
-    from macro_shock_engine import MacroShockEngine
+    from python.macro_shock_engine import MacroShockEngine
 except ImportError:
     class MacroShockEngine:
         @staticmethod
@@ -88,7 +88,7 @@ except ImportError:
             return {"is_any_high_risk": False}
 
 try:
-    from peer_valuation_engine import PeerValuationEngine
+    from python.peer_valuation_engine import PeerValuationEngine
 except ImportError:
     class PeerValuationEngine:
         @staticmethod
@@ -96,7 +96,7 @@ except ImportError:
             return {"valuation_status": "SEKTÖRLE_PARALEL", "composite_z_score": 0.0, "summary": ""}
 
 try:
-    from durable_executor import DurableExecutor
+    from python.durable_executor import DurableExecutor
 except ImportError:
     class DurableExecutor:
         @staticmethod
@@ -104,7 +104,7 @@ except ImportError:
             return task_func(*args, **kwargs)
 
 try:
-    from data_quality_gate import DataQualityGate
+    from python.data_quality_gate import DataQualityGate
 except ImportError:
     class DataQualityGate:
         @staticmethod
@@ -115,7 +115,7 @@ except ImportError:
         def validate_social_data(data): return True, ""
 
 try:
-    from factor_attribution_engine import FactorAttributionEngine
+    from python.factor_attribution_engine import FactorAttributionEngine
 except ImportError:
     class FactorAttributionEngine:
         @staticmethod
@@ -123,7 +123,7 @@ except ImportError:
             return {"is_beta_driven": False, "market_component_pct": 5.0, "alpha_component_pct": 3.0}
 
 try:
-    from feature_importance_engine import FeatureImportanceEngine
+    from python.feature_importance_engine import FeatureImportanceEngine
 except ImportError:
     class FeatureImportanceEngine:
         @staticmethod

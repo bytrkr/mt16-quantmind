@@ -6,7 +6,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Run bootstrap
-import bootstrap
+import python.bootstrap
 
 # Now try to import and run FastAPI
 try:

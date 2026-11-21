@@ -222,7 +222,7 @@ class FinalDecision(BaseModel):
         formatına dönüştürür.
         """
         try:
-            from schemas.jury_contract import JuryDecisionPayload, JuryVerdict
+            from python.schemas.jury_contract import JuryDecisionPayload, JuryVerdict
         except ImportError:
             # Fallback if package structure differs
             try:

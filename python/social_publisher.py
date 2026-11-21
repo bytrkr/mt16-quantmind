@@ -13,7 +13,7 @@ import urllib.error
 from typing import Dict, Any, Optional, List
 
 try:
-    from content_generator import ContentGenerator
+    from python.content_generator import ContentGenerator
 except ImportError:
     class ContentGenerator:
         @staticmethod

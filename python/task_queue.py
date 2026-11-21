@@ -55,8 +55,8 @@ class TaskQueue:
                     ticker = payload.get("ticker", "ASELS")
                     # Analiz motorunu asenkron olarak çalıştır
                     try:
-                        from orchestrator import MultiAgentPipeline
-                        from schemas import UnifiedContext, MarketData
+                        from python.orchestrator import MultiAgentPipeline
+                        from python.schemas import UnifiedContext, MarketData
 
                         ctx = UnifiedContext(
                             ticker=ticker,

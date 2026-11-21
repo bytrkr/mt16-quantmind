@@ -85,7 +85,7 @@ class CodiAssistant:
         # 1. BofA / AKD Sorgusu
         if "bofa" in text or "akd" in text or "kim alıyor" in text:
             # Tool calling simülasyonu
-            from fetchers import bist_data_provider
+            from python.fetchers import bist_data_provider
             akd = bist_data_provider.get_akd_data(ticker or "ASELS")
             response_text = f"Codi: #{ticker} tahtasında bugün BofA net lot: {akd['bofa_net']}. En büyük alıcı: {akd['top_buyer']}."
             tools_used.append("get_bist_akd")

@@ -32,7 +32,7 @@ DEFAULT_WEIGHTS = {
 }
 
 try:
-    from regime_backtest_engine import RegimeBacktestEngine
+    from python.regime_backtest_engine import RegimeBacktestEngine
 except ImportError:
     class RegimeBacktestEngine:
         @staticmethod

@@ -13,7 +13,7 @@ import secrets
 from typing import Dict, Any, List, Optional
 
 try:
-    from backtestEngine import BacktestEngine as CoreBacktestEngine
+    from python.backtestEngine import BacktestEngine as CoreBacktestEngine
 except ImportError:
     CoreBacktestEngine = None
 

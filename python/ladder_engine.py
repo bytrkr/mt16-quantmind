@@ -1,2 +1,2 @@
 # Otomatik Tek-Kaynak Koprusu
-from engines.ladder_engine import *
+from python.engines.ladder_engine import *

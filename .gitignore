@@ -42,3 +42,9 @@ _fix_step8_backups/
 _fix_step9_backups/
 *_rapor.txt
 pipeline_rapor.txt
+
+# Sanal ortam ve son bakim yedekleri
+.venv/
+*.bak_*
+_shadow_backups/
+*.tar.gz

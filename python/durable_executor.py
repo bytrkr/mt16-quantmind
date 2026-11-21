@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Callable, Any, Dict, Optional
 
 try:
-    from agent_telemetry import AgentTelemetry
+    from python.agent_telemetry import AgentTelemetry
 except ImportError:
     class AgentTelemetry:
         @staticmethod
@@ -147,7 +147,7 @@ class DurableExecutor:
 
         # Güvenli fallback üret (eğer AgentResponse bekleniyorsa)
         try:
-            from schemas import AgentResponse, SignalType
+            from python.schemas import AgentResponse, SignalType
             return AgentResponse(
                 agent_id=agent_id,
                 agent_name=f"{agent_id.capitalize()} Ajanı (Kurtarma Modu)",

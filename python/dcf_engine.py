@@ -9,7 +9,7 @@ maliyeti (WACC / discount_rate) ve Gordon Büyüme Modeli ile iskonto ederek
 from __future__ import annotations
 from typing import Dict, Any, List, Optional
 try:
-    from valuation_engine import ValuationEngine
+    from python.valuation_engine import ValuationEngine
 except ImportError:
     ValuationEngine = None
 

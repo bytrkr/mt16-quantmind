@@ -5,7 +5,7 @@ Ajan orkestrasyonunu, debate protokolunu ve juri ictihadini REST API uzerinden d
 
 from __future__ import annotations
 try:
-    import bootstrap
+    import python.bootstrap
 except ImportError:
     pass
 import collections
@@ -19,7 +19,7 @@ import uuid
 from pathlib import Path
 from typing import Optional, List, Dict, Any
 try:
-    from bist_analyst import analyze_bist_stock
+    from python.bist_analyst import analyze_bist_stock
 except ImportError:
     def analyze_bist_stock(*args, **kwargs):
         return {"error": "bist_analyst dependencies missing"}
@@ -91,11 +91,11 @@ except ImportError:
 # Modul import yolu
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from input_engine.doc_parser import parse_document, to_toon_text
-from input_engine.vision_ocr import analyze_image_with_llm, extract_text_from_image
-from export_engine import export_to_excel, export_to_word
-from input_engine.mail_reader import check_and_process_emails
-from auth import (
+from python.input_engine.doc_parser import parse_document, to_toon_text
+from python.input_engine.vision_ocr import analyze_image_with_llm, extract_text_from_image
+from python.export_engine import export_to_excel, export_to_word
+from python.input_engine.mail_reader import check_and_process_emails
+from python.auth import (
     get_password_hash,
     verify_password,
     create_access_token,
@@ -106,10 +106,10 @@ from auth import (
     update_user_billing,
     create_test_user,
 )
-from ladder_engine import LadderEngineV5
+from python.ladder_engine import LadderEngineV5
 
 try:
-    from telegram_bot import send_telegram_alert, TelegramRiskEngine
+    from python.telegram_bot import send_telegram_alert, TelegramRiskEngine
 except ImportError:
     async def send_telegram_alert(message: str, priority: str = "NORMAL"):
         return True
@@ -117,7 +117,7 @@ except ImportError:
         pass
 
 try:
-    from scheduler import (
+    from python.scheduler import (
         start_scheduler,
         stop_scheduler,
         get_scheduler_status,
@@ -139,7 +139,7 @@ except ImportError:
     BackgroundScheduler = None
 
 try:
-    from akd_takas_engine import AkdTakasEngine
+    from python.akd_takas_engine import AkdTakasEngine
 except ImportError:
     class AkdTakasEngine:
         @staticmethod
@@ -147,13 +147,13 @@ except ImportError:
             return {"ticker": ticker, "signal_type": "NEUTRAL", "toon": "MOCK_AKD"}
 
 try:
-    from riskEngine import RiskEngine
-    from backtestEngine import BacktestEngine
-    from portfolioGuard import PortfolioGuard
-    from heatmapEngine import HeatmapEngine
-    from slippageModel import SlippageAccountant
-    from systemHealth import SystemHealthMonitor
-    from rag_engine import RagEngine
+    from python.riskEngine import RiskEngine
+    from python.backtestEngine import BacktestEngine
+    from python.portfolioGuard import PortfolioGuard
+    from python.heatmapEngine import HeatmapEngine
+    from python.slippageModel import SlippageAccountant
+    from python.systemHealth import SystemHealthMonitor
+    from python.rag_engine import RagEngine
 except ImportError:
     class RiskEngine:
         @staticmethod
@@ -184,7 +184,7 @@ except ImportError:
         def build_context(query, top_k=3): return ""
 
 try:
-    from post_mortem_engine import PostMortemEngine
+    from python.post_mortem_engine import PostMortemEngine
 except ImportError:
     class PostMortemEngine:
         @staticmethod
@@ -197,7 +197,7 @@ except ImportError:
         def get_audit_trail(*args, **kwargs): return {"records": [], "win_rate_pct": 0.0}
 
 try:
-    from macro_shock_engine import MacroShockEngine
+    from python.macro_shock_engine import MacroShockEngine
 except ImportError:
     class MacroShockEngine:
         @staticmethod
@@ -208,7 +208,7 @@ except ImportError:
             return {"ticker": ticker, "max_vulnerability_score": 40.0, "scenarios": {}}
 
 try:
-    from behavioral_guard import BehavioralGuard
+    from python.behavioral_guard import BehavioralGuard
 except ImportError:
     class BehavioralGuard:
         @staticmethod
@@ -216,7 +216,7 @@ except ImportError:
             return {"approval_status": "APPROVED", "reason": "Psikoloji denetimi onaylandı.", "detected_bias": None}
 
 try:
-    from smart_order_router import SmartOrderRouter
+    from python.smart_order_router import SmartOrderRouter
 except ImportError:
     class SmartOrderRouter:
         @staticmethod
@@ -224,7 +224,7 @@ except ImportError:
             return {"execution_strategy": "DIRECT_EXECUTION", "slices": []}
 
 try:
-    from analyst_consensus_engine import AnalystConsensusEngine
+    from python.analyst_consensus_engine import AnalystConsensusEngine
 except ImportError:
     class AnalystConsensusEngine:
         @staticmethod
@@ -235,7 +235,7 @@ except ImportError:
             return {"signal": "BEKLENTİYE_PARALEL", "surprise_pct": 0.0, "summary": "Beklentiye paralel."}
 
 try:
-    from factor_risk_engine import FactorRiskEngine
+    from python.factor_risk_engine import FactorRiskEngine
 except ImportError:
     class FactorRiskEngine:
         @staticmethod
@@ -243,7 +243,7 @@ except ImportError:
             return {"beta": 1.0, "alpha_annualized_pct": 0.0, "crisis_resilience_score": 50.0}
 
 try:
-    from peer_valuation_engine import PeerValuationEngine
+    from python.peer_valuation_engine import PeerValuationEngine
 except ImportError:
     class PeerValuationEngine:
         @staticmethod
@@ -251,7 +251,7 @@ except ImportError:
             return {"valuation_status": "SEKTÖRLE_PARALEL", "composite_z_score": 0.0, "summary": ""}
 
 try:
-    from content_generator import ContentGenerator
+    from python.content_generator import ContentGenerator
 except ImportError:
     class ContentGenerator:
         @staticmethod
@@ -260,7 +260,7 @@ except ImportError:
         def generate_all_formats(*args, **kwargs): return {"telegram": "", "twitter": ""}
 
 try:
-    from social_publisher import SocialPublisher
+    from python.social_publisher import SocialPublisher
 except ImportError:
     class SocialPublisher:
         @staticmethod
@@ -271,7 +271,7 @@ except ImportError:
         def publish_auto(*args, **kwargs): return {"results": {}}
 
 try:
-    from agent_telemetry import AgentTelemetry
+    from python.agent_telemetry import AgentTelemetry
 except ImportError:
     class AgentTelemetry:
         @staticmethod
@@ -280,14 +280,14 @@ except ImportError:
         def get_system_health(*args, **kwargs): return {"status": "HEALTHY"}
 
 try:
-    from durable_executor import DurableExecutor
+    from python.durable_executor import DurableExecutor
 except ImportError:
     class DurableExecutor:
         @staticmethod
         def execute_with_recovery(task_id, task_func, *args, **kwargs): return task_func(*args, **kwargs)
 
 try:
-    from mcp_server import BistappMcpServer
+    from python.mcp_server import BistappMcpServer
 except ImportError:
     class BistappMcpServer:
         @staticmethod
@@ -298,7 +298,7 @@ except ImportError:
         async def handle_jsonrpc(*args, **kwargs): return {}
 
 try:
-    from data_quality_gate import DataQualityGate
+    from python.data_quality_gate import DataQualityGate
 except ImportError:
     class DataQualityGate:
         @staticmethod
@@ -307,7 +307,7 @@ except ImportError:
         def validate_social_data(*args, **kwargs): return True, ""
 
 try:
-    from sandbox import Sandbox
+    from python.sandbox import Sandbox
 except ImportError:
     class Sandbox:
         @staticmethod
@@ -315,7 +315,7 @@ except ImportError:
             return {"is_safe": True, "isolated_path": str(file_path)}
 
 try:
-    from task_queue import TaskQueue
+    from python.task_queue import TaskQueue
 except ImportError:
     class TaskQueue:
         @staticmethod
@@ -324,7 +324,7 @@ except ImportError:
         def get_task_status(task_id): return {"task_id": task_id, "status": "BEKLIYOR"}
 
 try:
-    from var_engine import VaREngine
+    from python.var_engine import VaREngine
 except ImportError:
     class VaREngine:
         @staticmethod
@@ -333,7 +333,7 @@ except ImportError:
         def calculate_marginal_var(*args, **kwargs): return {"marginal_var_tl": 0.0, "is_excessive_risk": False}
 
 try:
-    from factor_attribution_engine import FactorAttributionEngine
+    from python.factor_attribution_engine import FactorAttributionEngine
 except ImportError:
     class FactorAttributionEngine:
         @staticmethod
@@ -341,7 +341,7 @@ except ImportError:
             return {"is_beta_driven": False, "market_component_pct": 5.0, "alpha_component_pct": 3.0}
 
 try:
-    from regime_backtest_engine import RegimeBacktestEngine
+    from python.regime_backtest_engine import RegimeBacktestEngine
 except ImportError:
     class RegimeBacktestEngine:
         @staticmethod
@@ -349,7 +349,7 @@ except ImportError:
             return {"robustness_score": 50.0, "rating": "ORTA"}
 
 try:
-    from feature_importance_engine import FeatureImportanceEngine
+    from python.feature_importance_engine import FeatureImportanceEngine
 except ImportError:
     class FeatureImportanceEngine:
         @staticmethod
@@ -357,7 +357,7 @@ except ImportError:
             return {"dominant_factor": "Takas/Derinlik", "weights_pct": {"depth": 35.0, "technical": 25.0, "fundamental": 20.0, "sentiment": 20.0}}
 
 try:
-    from schemas import (
+    from python.schemas import (
         UnifiedContext,
         MarketData,
         DepthData,
@@ -388,13 +388,13 @@ except ImportError:
     class TrendData(BaseModel): pass
 
 try:
-    from orchestrator import run_multi_agent_pipeline
+    from python.orchestrator import run_multi_agent_pipeline
 except ImportError:
     async def run_multi_agent_pipeline(ctx):
         return {"status": "PIPELINE_PENDING", "ctx": str(ctx)}
 
 try:
-    from backtest import BacktestEngine
+    from python.backtest import BacktestEngine
 except ImportError:
     class BacktestEngine:
         @staticmethod
@@ -402,7 +402,7 @@ except ImportError:
             return {"status": "BACKTEST_PENDING"}
 
 try:
-    from memory import global_agent_memory
+    from python.memory import global_agent_memory
 except ImportError:
     class MockMemory:
         def get_all_profiles(self):
@@ -426,7 +426,7 @@ app.add_middleware(
 
 # 🌐 Evrensel Varlık Kayıt Defteri ve Piyasa Ağ Geçidi (BIST, NASDAQ, CRYPTO, FOREX)
 try:
-    from market_gateway import router as universal_market_router, GLOBAL_REGISTRY
+    from python.market_gateway import router as universal_market_router, GLOBAL_REGISTRY
     app.include_router(universal_market_router)
     app.include_router(vision_router.router, prefix="/api")
     print("✅ [KERNEL] Evrensel Piyasa Ağ Geçidi (market_gateway) başarıyla bağlandı.")
@@ -436,7 +436,7 @@ except Exception as e:
 
 # 🤖 FastMCP Server Layer Entegrasyonu
 try:
-    import mcp_server
+    import python.mcp_server
     @app.get("/api/mcp/status")
     def get_mcp_status():
         return {
@@ -952,7 +952,7 @@ async def get_system_audit_trail(limit: int = 50, evaluate: bool = True):
 async def get_license_status():
     """Matriks Stream Server lisans ve abonelik durumunu döner."""
     try:
-        from fetchers import bist_data_provider
+        from python.fetchers import bist_data_provider
         return bist_data_provider.get_license_status()
     except Exception as e:
         return {"is_live": False, "license_active": False, "error": str(e)}
@@ -971,7 +971,7 @@ async def trigger_adjust_weights():
 async def codi_query(query: str = Body(..., embed=True), ticker: Optional[str] = Body(None, embed=True)):
     """Matriks Codi ilhamlı doğal dil asistanı sorgu ucu."""
     try:
-        from nlp_query import CodiAssistant
+        from python.nlp_query import CodiAssistant
         return await CodiAssistant.process_assistant_query(query, ticker)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -981,7 +981,7 @@ async def codi_query(query: str = Body(..., embed=True), ticker: Optional[str] =
 async def backtest_what_if(ticker: str = Query(...), date: str = Query(...)):
     """İdeal Data 'Sistem Tester' ilhamlı What-If simülasyonu."""
     try:
-        from backtestEngine import BacktestEngine
+        from python.backtestEngine import BacktestEngine
         return BacktestEngine.run_what_if_simulation(ticker, date)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -1082,7 +1082,7 @@ async def get_screener_opportunities():
     [PHASE 9] İsnad Tarayıcı Entegrasyonu:
     BIST hisselerini BofA maliyet sapması, duvar yakma hızı ve HHI katsayısı ile tarayıp sıralar.
     """
-    from screener import IsnadScreener
+    from python.screener import IsnadScreener
     screener = IsnadScreener()
     try:
         opportunities = await screener.scan_market()
@@ -1119,7 +1119,7 @@ async def run_backtest_endpoint(req: BacktestRequest):
             import traceback
             print("BACKTEST INNER EXCEPTION:", traceback.format_exc())
             # Fallback basic dummy backtest result if simulation fails
-            from schemas import BacktestMetrics, BacktestResult
+            from python.schemas import BacktestMetrics, BacktestResult
             fallback_metrics = BacktestMetrics(
                 total_signals=days - horizon_days,
                 active_trades=int((days - horizon_days) * 0.7),
@@ -1201,7 +1201,7 @@ async def log_lesson_endpoint(req: LessonLogRequest):
 async def register_factor_endpoint(req: FactorRegisterRequest):
     """Custom Factor Builder: Yeni bir otonom/kullanıcı faktörünü FactorRegistry'ye kaydeder."""
     try:
-        from agents import factor_registry
+        from python.agents import factor_registry
         # FactorRegistry'ye kaydet
         factor_registry.register(
             name=req.factor_name,
@@ -1231,7 +1231,7 @@ async def register_factor_endpoint(req: FactorRegisterRequest):
 async def get_factor_registry_endpoint():
     """Factor Registry'deki tüm kayıtlı formülleri ve CoSTEER kütüphane özetini döner."""
     try:
-        from agents import factor_registry, costeer_engine
+        from python.agents import factor_registry, costeer_engine
         return {
             "status": "ok",
             "total_factors": len(factor_registry.get_all()),
@@ -1261,7 +1261,7 @@ async def get_similar_episodes_endpoint(
     BECERİ 3: Metrik Benzerliği (%65) + Bağlam Benzerliği (%35) ile kombine arama.
     """
     try:
-        from memory import episodic_memory
+        from python.memory import episodic_memory
         current_vector = [rsi, obi, z_score, volatility, piotroski, spread_pct]
         episodes = episodic_memory.get_similar_episodes(
             current_vector,
@@ -1292,7 +1292,7 @@ async def discover_factors_endpoint(ticker: str = "ASELS", rsi: float = 55.0, ob
     Microsoft Qlib / RD-Agent ilhamlı Otonom Faktör Keşfi Endpoint'i.
     """
     try:
-        from agents import factor_discovery_agent
+        from python.agents import factor_discovery_agent
         result = factor_discovery_agent.discover_factors(ticker, {"rsi": rsi, "obi": obi, "z_score": z_score})
         return {"status": "ok", "data": result}
     except Exception as e:
@@ -1317,7 +1317,7 @@ async def get_openbb_data_endpoint(symbol: str = "ASELS", asset_class: str = "BI
     OpenBB SDK tabanlı birleşik veri çekme endpoint'i.
     """
     try:
-        from fetchers import openbb_data_provider
+        from python.fetchers import openbb_data_provider
         data = openbb_data_provider.fetch_market_data(symbol, asset_class=asset_class, provider=provider)
         return {"status": "ok", "data": data}
     except Exception as e:
@@ -1331,7 +1331,7 @@ async def create_custom_rule(req: CustomRuleRequest):
     Kullanıcının dinamik olarak jüriye yeni veto kuralları eklemesini sağlar.
     """
     try:
-        from jury import add_custom_rule
+        from python.jury import add_custom_rule
         rule_dict = {
             "name": req.name,
             "action": req.action
@@ -1358,7 +1358,7 @@ async def run_portfolio_stress_test(req: StressTestRequest):
     BIST portföyü üzerinde kur, faiz ve jeopolitik kriz senaryolarını simüle eder.
     """
     try:
-        from stress_test import MonteCarloStressTester
+        from python.stress_test import MonteCarloStressTester
         results = MonteCarloStressTester.simulate_macro_scenario(
             tickers=req.tickers,
             scenario=req.scenario,
@@ -1521,7 +1521,7 @@ async def nlp_market_search(req: NlpSearchRequest):
     ilgili hisse sembollerine dönüştürür.
     """
     try:
-        from nlp_query import BistQueryEngine
+        from python.nlp_query import BistQueryEngine
         query_text = (req.query or req.text or "").strip()
         engine = BistQueryEngine()
         result = engine.parse_query(query_text)
@@ -1580,7 +1580,7 @@ async def validate_order_psychology(req: ValidatePsychologyRequest):
         # 2. Geriye uyumluluk için PsychologyAgent
         agent_result = {}
         try:
-            from agents import PsychologyAgent
+            from python.agents import PsychologyAgent
             agent_result = PsychologyAgent.evaluate_order(
                 ticker=req.ticker,
                 side=req.side,
@@ -1613,7 +1613,7 @@ async def validate_order_psychology(req: ValidatePsychologyRequest):
 async def calculate_tax_and_real_pnl(req: TaxCalculateRequest):
     """TCMB USD/TRY kuru ile reel getiri ve Türk Vergi Mevzuatı matrah hesabı yapar."""
     try:
-        from tax_engine import TaxCurrencyEngine
+        from python.tax_engine import TaxCurrencyEngine
         result = TaxCurrencyEngine.compute_tax_and_real_pnl(
             ticker=req.ticker,
             asset_type=req.asset_type,
@@ -1907,7 +1907,7 @@ async def get_social_intel_status():
     JIRO mikroservisinin ve sosyal medya veri akışının canlı mı yoksa simüle mi olduğunu doğrular.
     """
     try:
-        from social_intel import verify_social_live_connection
+        from python.social_intel import verify_social_live_connection
         return verify_social_live_connection()
     except Exception as e:
         return {
@@ -2052,7 +2052,7 @@ async def submit_gamification_quiz(req: QuizSubmitRequest):
 async def save_telegram_config(req: TelegramConfigRequest):
     """Telegram bildirim ayarlarını günceller."""
     try:
-        from telegram_bot import TelegramRiskEngine
+        from python.telegram_bot import TelegramRiskEngine
         new_conf = TelegramRiskEngine.update_config(req.model_dump())
         return {"success": True, "config": new_conf}
     except Exception as e:
@@ -2063,7 +2063,7 @@ async def save_telegram_config(req: TelegramConfigRequest):
 async def get_telegram_config():
     """Mevcut Telegram ayarlarını döner."""
     try:
-        from telegram_bot import TelegramRiskEngine
+        from python.telegram_bot import TelegramRiskEngine
         return TelegramRiskEngine.get_config()
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Ayarlar alınamadı: {str(e)}")
@@ -2073,7 +2073,7 @@ async def get_telegram_config():
 async def test_telegram_alert(req: TelegramTestRequest):
     """Telegram botu üzerinden anlık test mesajı fırlatır."""
     try:
-        from telegram_bot import TelegramRiskEngine
+        from python.telegram_bot import TelegramRiskEngine
         success = await TelegramRiskEngine.send_message_async(req.message)
         return {"success": success, "message": "Test mesajı iletildi" if success else "Gönderim başarısız"}
     except Exception as e:
@@ -2090,7 +2090,7 @@ async def test_telegram_alert(req: TelegramTestRequest):
 async def run_vectorized_backtest(req: BacktestRunRequest):
     """Vectorized matrix math ile strateji simülasyonunu ve Monte Carlo gelecek projeksiyonunu koşturur."""
     try:
-        from backtest_engine import VectorizedBacktestEngine
+        from python.backtest_engine import VectorizedBacktestEngine
         result = VectorizedBacktestEngine.run_simulation(
             ticker=req.ticker,
             period_years=req.period_years,
@@ -2156,8 +2156,8 @@ async def fix_status():
 # ALPACA GLOBAL DATA & TREND FOMO AGENT ENDPOINTS
 # ============================================================================
 
-from input_engine.alpaca_connector import get_stock_snapshot, get_crypto_snapshot
-from trend_agent import get_trend_momentum
+from python.input_engine.alpaca_connector import get_stock_snapshot, get_crypto_snapshot
+from python.trend_agent import get_trend_momentum
 
 
 @app.get("/api/alpaca/global_data")
@@ -2249,7 +2249,7 @@ async def get_akd_analyze(
 async def discover_factors_endpoint(req: FactorDiscoveryRequest):
     """Alpha-GPT İlhamı: Otonom faktör keşfi ve Sharpe bazlı filtreleme."""
     try:
-        from agents import factor_discovery_agent
+        from python.agents import factor_discovery_agent
         # Determine asset class from ticker if not provided
         asset_class = "BIST"
         if any(c in req.ticker for c in ["BTC", "ETH", "SOL", "/"]):
@@ -2324,7 +2324,7 @@ async def get_prediction_market_data(asset_class: str = "BIST"):
     Makro senaryolar için beklenti ve olasılık dağılımını döner.
     """
     try:
-        from fetchers import prediction_market_fetcher
+        from python.fetchers import prediction_market_fetcher
         result = await prediction_market_fetcher.fetch_macro_probabilities(asset_class)
         return {"status": "ok", "data": result}
     except Exception as e:
@@ -2346,7 +2346,7 @@ except Exception as e:
 @app.get('/api/screener/top_opportunities')
 def top_opportunities():
     try:
-        from orchestrator import Orchestrator
+        from python.orchestrator import Orchestrator
         orchestrator = Orchestrator()
         result = orchestrator.run_screener(filter_type='top_opportunities')
         count = 0
@@ -2361,7 +2361,7 @@ def top_opportunities():
 @app.post('/api/jury/decide')
 def jury_decide(ticker: str = 'THYAO'):
     try:
-        from jury import Jury
+        from python.jury import Jury
         jury = Jury()
         decision = jury.decide(ticker)
         if not isinstance(decision, dict):
@@ -2528,6 +2528,6 @@ if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PYTHON_KERNEL_PORT", 8001))
     print(f"Kernel binding to 0.0.0.0:{port}")
-    uvicorn.run("server:app", host="0.0.0.0", port=port, log_level="info")
+    uvicorn.run("python.api_server:app", host="0.0.0.0", port=port, log_level="info")
 
 
