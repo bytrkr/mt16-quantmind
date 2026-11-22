@@ -179,30 +179,32 @@ const server = http.createServer(async (req, res) => {
   const url = new URL(req.url || "/", `http://127.0.0.1:${PORT}`);
 
   if (url.pathname === "/api/quant-grid") {
-    try {
-      const out = execFile(PY_BIN, ["-c", "import sys,json; sys.path.insert(0,'/home/bytrkr/bistapp/python'); from quant_grid_service import build_quant_grid_payload; print(json.dumps(build_quant_grid_payload(), ensure_ascii=False))"], { maxBuffer: 10 * 1024 * 1024 });
-      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
-      res.end(out);
-    } catch (err) {
-      res.writeHead(500, { "Content-Type": "application/json; charset=utf-8" });
-      res.end(JSON.stringify({ ok: false, error: String(err) }));
-    }
+    execFile(PY_BIN, ["-c", "import sys,json; sys.path.insert(0,'/home/bytrkr/bistapp/python'); from quant_grid_service import build_quant_grid_payload; print(json.dumps(build_quant_grid_payload(), ensure_ascii=False))"], { maxBuffer: 10 * 1024 * 1024, timeout: 8000 }, (err, stdout) => {
+      if (err) {
+        res.writeHead(500, { "Content-Type": "application/json; charset=utf-8" });
+        res.end(JSON.stringify({ ok: false, error: String(err) }));
+        return;
+      }
+      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+      res.end(stdout);
+    });
     return;
   }
 
   if (url.pathname === "/api/export-excel") {
-    try {
-      const buf = execFile(PY_BIN, ["-c", "import sys; sys.path.insert(0,'/home/bytrkr/bistapp/python'); from quant_grid_service import build_excel_bytes; sys.stdout.buffer.write(build_excel_bytes())"], { maxBuffer: 20 * 1024 * 1024 });
+    execFile(PY_BIN, ["-c", "import sys; sys.path.insert(0,'/home/bytrkr/bistapp/python'); from quant_grid_service import build_excel_bytes; sys.stdout.buffer.write(build_excel_bytes())"], { encoding: "buffer", maxBuffer: 20 * 1024 * 1024, timeout: 10000 }, (err, stdout) => {
+      if (err) {
+        res.writeHead(500, { "Content-Type": "application/json; charset=utf-8" });
+        res.end(JSON.stringify({ ok: false, error: String(err) }));
+        return;
+      }
       res.writeHead(200, {
         "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         "Content-Disposition": "attachment; filename=\"MT16_QuantMind_Rapor.xlsx\"",
-        "Content-Length": buf.length
+        "Content-Length": stdout.length
       });
-      res.end(buf);
-    } catch (err) {
-      res.writeHead(500, { "Content-Type": "application/json; charset=utf-8" });
-      res.end(JSON.stringify({ ok: false, error: String(err) }));
-    }
+      res.end(stdout);
+    });
     return;
   }
 
