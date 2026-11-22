@@ -811,50 +811,89 @@ window.addEventListener("DOMContentLoaded", function() {
 
 
 
+
+
+
 <script>
-(function(){
-  function showFixedMM(){
-    if(document.getElementById("mt16-mm-fixed")) return;
-    var b = document.createElement("div");
-    b.id = "mt16-mm-fixed";
-    b.style.cssText = "position:fixed;bottom:14px;right:14px;z-index:999999;display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px;background:#161b22;border:2px solid #58a6ff;border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,0.65);align-items:center;";
-    b.innerHTML = "<span style=\"font-size:12px;color:#58a6ff;font-weight:700;\">✨ Stüdyo:</span>";
-    [["image","🖼️ Görüntü","#2563eb"],["video","🎬 Video","#db2777"],["music","🎵 Müzik","#059669"],["canvas","📝 Canvas","#d97706"]].forEach(function(t){
-      var x = document.createElement("button");
-      x.type = "button";
-      x.textContent = t[1];
-      x.style.cssText = "background:"+t[2]+";color:#fff;border:none;padding:6px 10px;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer;";
-      x.onclick = function(){
-        var q = prompt(t[1] + " için isteminizi yazın:");
-        if(!q) return;
-        var modal = document.getElementById("mt16-mm-modal") || document.createElement("div");
-        modal.id = "mt16-mm-modal";
-        modal.style.cssText = "position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1000000;max-width:90vw;max-height:85vh;overflow:auto;padding:16px;background:#0d1117;border:2px solid #58a6ff;border-radius:10px;color:#e6edf3;box-shadow:0 12px 40px rgba(0,0,0,0.85);";
-        modal.innerHTML = "<div style=\"margin-bottom:8px;\">⏳ " + t[1] + " üretiliyor...</div><button type=\"button\" onclick=\"this.parentElement.remove()\" style=\"background:#30363d;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;\">Kapat</button>";
-        document.body.appendChild(modal);
+window.addEventListener("DOMContentLoaded", function() {
+  if (document.getElementById("mt16-mm-clean")) return;
+  var box = document.createElement("div");
+  box.id = "mt16-mm-clean";
+  box.style.cssText = "position:fixed;bottom:14px;right:14px;z-index:2147483647;display:flex;gap:6px;padding:8px 10px;background:#161b22;border:2px solid #58a6ff;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,0.7);";
+  var lbl = document.createElement("span");
+  lbl.textContent = "✨ Stüdyo:";
+  lbl.style.cssText = "color:#58a6ff;font-weight:700;font-size:12px;align-self:center;margin-right:2px;";
+  box.appendChild(lbl);
+  var items = [["image","🖼️ Görüntü","#2563eb"],["video","🎬 Video","#db2777"],["music","🎵 Müzik","#059669"],["canvas","📝 Canvas","#d97706"]];
+  for (var i = 0; i < items.length; i++) {
+    (function(it) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = it[1];
+      btn.style.cssText = "background:"+it[2]+";color:#fff;border:none;padding:6px 10px;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer;";
+      btn.addEventListener("click", function() {
+        var q = prompt(it[1] + " için istem yazın:");
+        if (!q) return;
+        var out = document.getElementById("mt16-mm-res");
+        if (!out) {
+          out = document.createElement("div");
+          out.id = "mt16-mm-res";
+          out.style.cssText = "position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2147483647;max-width:90vw;max-height:85vh;overflow:auto;padding:16px;background:#0d1117;border:2px solid #58a6ff;border-radius:10px;color:#e6edf3;box-shadow:0 12px 36px rgba(0,0,0,0.85);";
+          document.body.appendChild(out);
+        }
+        out.textContent = "⏳ " + it[1] + " üretiliyor...";
         fetch("/api/multimodal", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({mode: t[0], prompt: q, title: q.slice(0, 24)})
+          body: JSON.stringify({mode: it[0], prompt: q, title: q.slice(0, 24)})
         }).then(function(r){ return r.json(); }).then(function(d){
-          var h = "<div style=\"display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;\"><strong>✅ " + t[1] + " Çıktısı</strong><button type=\"button\" onclick=\"this.parentElement.parentElement.remove()\" style=\"background:#da3633;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;\">Kapat ✕</button></div>";
-          if(d.media_url){
-            h += "<div style=\"margin-bottom:10px;\"><a href=\""+d.media_url+"\" download style=\"color:#58a6ff;font-weight:bold;\">⬇️ Dosyayı İndir ("+d.file+")</a></div>";
-            if(d.mode === "image") h += "<img src=\""+d.media_url+"\" style=\"max-width:100%;max-height:55vh;border-radius:6px;\">";
-            if(d.mode === "video") h += "<video src=\""+d.media_url+"\" controls autoplay style=\"max-width:100%;max-height:55vh;border-radius:6px;\"></video>";
-            if(d.mode === "music") h += "<audio src=\""+d.media_url+"\" controls autoplay style=\"width:100%;\"></audio>";
+          out.innerHTML = "";
+          var closeBtn = document.createElement("button");
+          closeBtn.type = "button";
+          closeBtn.textContent = "Kapat ✕";
+          closeBtn.style.cssText = "float:right;background:#da3633;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;";
+          closeBtn.onclick = function(){ out.remove(); };
+          out.appendChild(closeBtn);
+          if (d.media_url) {
+            var lnk = document.createElement("a");
+            lnk.href = d.media_url;
+            lnk.download = "";
+            lnk.textContent = "⬇️ Dosyayı İndir (" + d.file + ")";
+            lnk.style.cssText = "display:inline-block;margin:8px 0;color:#58a6ff;font-weight:bold;";
+            out.appendChild(lnk);
+            out.appendChild(document.createElement("br"));
+            if (d.mode === "image") {
+              var im = document.createElement("img");
+              im.src = d.media_url;
+              im.style.cssText = "max-width:100%;max-height:55vh;border-radius:6px;";
+              out.appendChild(im);
+            } else if (d.mode === "video") {
+              var vd = document.createElement("video");
+              vd.src = d.media_url;
+              vd.controls = true;
+              vd.autoplay = true;
+              vd.style.cssText = "max-width:100%;max-height:55vh;border-radius:6px;";
+              out.appendChild(vd);
+            } else if (d.mode === "music") {
+              var au = document.createElement("audio");
+              au.src = d.media_url;
+              au.controls = true;
+              au.autoplay = true;
+              au.style.cssText = "width:100%;";
+              out.appendChild(au);
+            }
           }
-          h += "<pre style=\"margin-top:10px;white-space:pre-wrap;font-size:12px;color:#c9d1d9;\">" + (d.preview || d.error || "Tamam").replace(/</g,"&lt;") + "</pre>";
-          modal.innerHTML = h;
-        }).catch(function(e){ modal.innerHTML = "Hata: " + e + " <button onclick=\"this.parentElement.remove()\">Kapat</button>"; });
-      };
-      b.appendChild(x);
-    });
-    document.body.appendChild(b);
+          var pr = document.createElement("pre");
+          pr.textContent = d.preview || d.error || "Tamam";
+          pr.style.cssText = "margin-top:10px;white-space:pre-wrap;font-size:12px;color:#c9d1d9;";
+          out.appendChild(pr);
+        }).catch(function(e){ out.textContent = "Hata: " + e; });
+      });
+      box.appendChild(btn);
+    })(items[i]);
   }
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", showFixedMM);
-  else showFixedMM();
-})();
+  document.body.appendChild(box);
+});
 </script>
 
 </body></html>`;
