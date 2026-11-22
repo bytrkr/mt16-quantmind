@@ -50,7 +50,7 @@ const HTML = `<!doctype html>
     </div>
     <div class="controls">
       <input id="searchBox" placeholder="🔍 Hücre, Hisse veya Karar ara...">
-      <button onclick="loadGrid()">↻ Yenile</button>
+      <button onclick="loadGrid()">↻ Yenile</button><button id="btnSaveGrid" onclick="saveGridChanges()" style="display:none;background:#7c3aed;border:none;color:#fff;padding:6px 12px;border-radius:5px;cursor:pointer;font-weight:600;">💾 Değişiklikleri Kaydet</button>
       <button onclick="window.open('http://136.144.200.54:3000','_blank')">🌐 3000 Ana Ekran</button>
       <button onclick="window.open('http://136.144.200.54:3001','_blank')">⚡ 3001 Kokpit</button>
       <a class="btn" href="/api/export-excel" download="MT16_QuantMind_Rapor.xlsx">📥 8 Sayfa .xlsx İndir</a>
@@ -177,6 +177,18 @@ const HTML = `<!doctype html>
 
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url || "/", `http://127.0.0.1:${PORT}`);
+
+    if (url.pathname === "/api/quant-grid/save" && req.method === "POST") {
+    let body = "";
+    req.on("data", c => { body += c; if (body.length > 2 * 1024 * 1024) req.destroy(); });
+    req.on("end", () => {
+      execFile(PY_BIN, ["-c", "import sys,json; sys.path.insert(0,'/home/bytrkr/bistapp/python'); from quant_grid_service import save_quant_grid_edits; p=json.loads(sys.stdin.read()); print(json.dumps(save_quant_grid_edits(p.get('sheet',''), p.get('rows',[])), ensure_ascii=False))"], { input: body, timeout: 8000 }, (err, stdout) => {
+        res.writeHead(err ? 500 : 200, { "Content-Type": "application/json; charset=utf-8" });
+        res.end(err ? JSON.stringify({ ok: false, error: String(err) }) : stdout);
+      });
+    });
+    return;
+  }
 
   if (url.pathname === "/api/quant-grid") {
     execFile(PY_BIN, ["-c", "import sys,json; sys.path.insert(0,'/home/bytrkr/bistapp/python'); from quant_grid_service import build_quant_grid_payload; print(json.dumps(build_quant_grid_payload(), ensure_ascii=False))"], { maxBuffer: 10 * 1024 * 1024, timeout: 8000 }, (err, stdout) => {

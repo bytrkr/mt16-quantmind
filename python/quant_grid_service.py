@@ -155,3 +155,111 @@ def build_excel_bytes() -> bytes:
     buf = io.BytesIO()
     wb.save(buf)
     return buf.getvalue()
+
+def save_quant_grid_edits(sheet_key: str, rows: List[Dict[str, Any]]) -> Dict[str, Any]:
+    if sheet_key == "08_Sistem_Kokpit_Ayarlar":
+        new_weights = {}
+        for r in rows:
+            cat = str(r.get("Kategori") or "")
+            name = str(r.get("Bilesen_Ajan") or "").strip()
+            if "Ajan" in cat and name and not name.startswith("Port "):
+                val = _num(r.get("Agirlik_Deger"), 0.0)
+                if val > 0:
+                    new_weights[name] = val
+        if not new_weights:
+            return {"ok": False, "error": "Gecerli ajan agirligi bulunamadi"}
+        w_sum = sum(new_weights.values()) or 1.0
+        norm = {k: round(v / w_sum, 4) for k, v in new_weights.items()}
+        wp = ROOT_DIR / "python/agent_weights.json"
+        if wp.exists():
+            wp.with_suffix(".json.bak_grid").write_text(wp.read_text(encoding="utf-8"), encoding="utf-8")
+        wp.write_text(json.dumps(norm, indent=2, ensure_ascii=False), encoding="utf-8")
+        dbp = ROOT_DIR / "python/agent_memory.db"
+        if dbp.exists():
+            try:
+                conn = sqlite3.connect(str(dbp))
+                for k, v in norm.items():
+                    conn.execute("UPDATE agent_profiles SET weight = ? WHERE agent_name = ?", (v, k))
+                conn.commit()
+                conn.close()
+            except Exception:
+                pass
+        return {"ok": True, "message": f"{len(norm)} ajan agirligi normalize edilerek kaydedildi", "weights": norm}
+
+    if sheet_key == "03_Aktif_Portfoy":
+        pf_path = ROOT_DIR / "data/sanal_portfoy.json"
+        raw_pf = _read_json_path("data/sanal_portfoy.json", [])
+        if not isinstance(raw_pf, list):
+            return {"ok": False, "error": "sanal_portfoy.json liste formatinda degil"}
+        edits = {str(r.get("Hisse") or "").upper(): r for r in rows if r.get("Hisse")}
+        updated = 0
+        for item in raw_pf:
+            if not isinstance(item, dict):
+                continue
+            sym = str(item.get("sembol") or item.get("symbol") or "").upper()
+            if sym in edits and str(item.get("durum") or "ACIK").upper() == "ACIK":
+                ed = edits[sym]
+                if "Hedef" in ed: item["hedef"] = round(_num(ed["Hedef"], _num(item.get("hedef"))), 2)
+                if "Stop" in ed: item["stop"] = round(_num(ed["Stop"], _num(item.get("stop"))), 2)
+                if "Lot" in ed and _num(ed["Lot"]) > 0: item["lot"] = _num(ed["Lot"])
+                updated += 1
+        if pf_path.exists():
+            pf_path.with_suffix(".json.bak_grid").write_text(pf_path.read_text(encoding="utf-8"), encoding="utf-8")
+        pf_path.write_text(json.dumps(raw_pf, indent=2, ensure_ascii=False), encoding="utf-8")
+        return {"ok": True, "message": f"{updated} acik pozisyon (Hedef/Stop/Lot) guncellendi"}
+
+    return {"ok": False, "error": "Bu sekme salt-okunur denetim defteridir"}
+
+def save_quant_grid_edits(sheet_key: str, rows: List[Dict[str, Any]]) -> Dict[str, Any]:
+    if sheet_key == "08_Sistem_Kokpit_Ayarlar":
+        new_weights = {}
+        for r in rows:
+            cat = str(r.get("Kategori") or "")
+            name = str(r.get("Bilesen_Ajan") or "").strip()
+            if "Ajan" in cat and name and not name.startswith("Port "):
+                val = _num(r.get("Agirlik_Deger"), 0.0)
+                if val > 0:
+                    new_weights[name] = val
+        if not new_weights:
+            return {"ok": False, "error": "Gecerli ajan agirligi bulunamadi"}
+        w_sum = sum(new_weights.values()) or 1.0
+        norm = {k: round(v / w_sum, 4) for k, v in new_weights.items()}
+        wp = ROOT_DIR / "python/agent_weights.json"
+        if wp.exists():
+            wp.with_suffix(".json.bak_grid").write_text(wp.read_text(encoding="utf-8"), encoding="utf-8")
+        wp.write_text(json.dumps(norm, indent=2, ensure_ascii=False), encoding="utf-8")
+        dbp = ROOT_DIR / "python/agent_memory.db"
+        if dbp.exists():
+            try:
+                conn = sqlite3.connect(str(dbp))
+                for k, v in norm.items():
+                    conn.execute("UPDATE agent_profiles SET weight = ? WHERE agent_name = ?", (v, k))
+                conn.commit()
+                conn.close()
+            except Exception:
+                pass
+        return {"ok": True, "message": f"{len(norm)} ajan agirligi normalize edilerek kaydedildi", "weights": norm}
+
+    if sheet_key == "03_Aktif_Portfoy":
+        pf_path = ROOT_DIR / "data/sanal_portfoy.json"
+        raw_pf = _read_json_path("data/sanal_portfoy.json", [])
+        if not isinstance(raw_pf, list):
+            return {"ok": False, "error": "sanal_portfoy.json liste formatinda degil"}
+        edits = {str(r.get("Hisse") or "").upper(): r for r in rows if r.get("Hisse")}
+        updated = 0
+        for item in raw_pf:
+            if not isinstance(item, dict):
+                continue
+            sym = str(item.get("sembol") or item.get("symbol") or "").upper()
+            if sym in edits and str(item.get("durum") or "ACIK").upper() == "ACIK":
+                ed = edits[sym]
+                if "Hedef" in ed: item["hedef"] = round(_num(ed["Hedef"], _num(item.get("hedef"))), 2)
+                if "Stop" in ed: item["stop"] = round(_num(ed["Stop"], _num(item.get("stop"))), 2)
+                if "Lot" in ed and _num(ed["Lot"]) > 0: item["lot"] = _num(ed["Lot"])
+                updated += 1
+        if pf_path.exists():
+            pf_path.with_suffix(".json.bak_grid").write_text(pf_path.read_text(encoding="utf-8"), encoding="utf-8")
+        pf_path.write_text(json.dumps(raw_pf, indent=2, ensure_ascii=False), encoding="utf-8")
+        return {"ok": True, "message": f"{updated} acik pozisyon (Hedef/Stop/Lot) guncellendi"}
+
+    return {"ok": False, "error": "Bu sekme salt-okunur denetim defteridir"}
