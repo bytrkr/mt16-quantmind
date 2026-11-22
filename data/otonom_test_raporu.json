@@ -1,6 +1,11 @@
 {
-  "toplam_tur": 1127,
+  "toplam_tur": 1128,
   "kayitlar": [
+    {
+      "zaman": "17:33:34",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
     {
       "zaman": "17:29:20",
       "tip": "TUR",
@@ -150,14 +155,9 @@
       "zaman": "15:28:56",
       "tip": "TUR",
       "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:24:41",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
     }
   ],
-  "son_guncelleme": "2026-11-22 17:29:20",
+  "son_guncelleme": "2026-11-22 17:33:34",
   "saglayici_durumu": [
     {
       "ad": "GROQ",
