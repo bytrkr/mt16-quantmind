@@ -188,7 +188,8 @@ def build_excel_bytes() -> bytes:
                 ws.conditional_formatting.add(rng, CellIsRule(operator="greaterThan", formula=["0"], fill=pos_fill, font=pos_font))
                 ws.conditional_formatting.add(rng, CellIsRule(operator="lessThan", formula=["0"], fill=neg_fill, font=neg_font))
 
-    if "03_Aktif_Portfoy" in wb.sheetnames and ws_pf := wb["03_Aktif_Portfoy"]:
+    if "03_Aktif_Portfoy" in wb.sheetnames:
+        ws_pf = wb["03_Aktif_Portfoy"]
         pf_cols = {ws_pf.cell(row=1, column=i).value: get_column_letter(i) for i in range(1, ws_pf.max_column + 1)}
         if ws_pf.max_row >= 2 and {"Lot", "Giris_Fiyati", "Guncel_Fiyat", "Maliyet_TL", "Piyasa_Degeri_TL", "Kar_Zarar_TL", "Getiri_Yuzde"}.issubset(pf_cols.keys()):
             for r in range(2, ws_pf.max_row + 1):
