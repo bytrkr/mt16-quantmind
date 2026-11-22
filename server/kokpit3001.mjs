@@ -849,7 +849,48 @@ window.addEventListener("DOMContentLoaded", function() {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
   else mount();
 })();
-</script><script>setTimeout(()=>{var o=document.getElementById("out"),g=document.getElementById("main-grid"),b=document.createElement("div");b.style.cssText="display:flex;gap:6px;margin-bottom:8px;";[["image","Goruntu"],["video","Video"],["music","Muzik"],["canvas","Canvas"]].forEach(t=>{var x=document.createElement("button");x.textContent=t[1];x.onclick=()=>{var q=prompt(t[1]);if(q)fetch("/api/multimodal",{method:"POST",body:JSON.stringify({mode:t[0],prompt:q,title:q.slice(0,20)})}).then(r=>r.json()).then(d=>{o.textContent=(d.preview||d.error||"Tamam");if(d.media_url){var box=document.getElementById("mt16-media-box")||document.createElement("div");box.id="mt16-media-box";box.style.cssText="margin:8px 0;padding:8px;background:#0d1117;border:1px solid #30363d;border-radius:6px;";var h="<a href=\""+d.media_url+"\" download style=\"color:#58a6ff;font-weight:bold;\">⬇️ Uretilen Dosyayi Indir ("+d.file+")</a><br><br>";if(d.mode==="image")h+="<img src=\""+d.media_url+"\" style=\"max-width:100%;border-radius:6px;\">";if(d.mode==="video")h+="<video src=\""+d.media_url+"\" controls autoplay style=\"max-width:100%;border-radius:6px;\"></video>";if(d.mode==="music")h+="<audio src=\""+d.media_url+"\" controls autoplay style=\"width:100%;\"></audio>";box.innerHTML=h;o.parentElement.insertBefore(box,o);}});};b.appendChild(x);});g.parentElement.insertBefore(b,g);},400);</script></body></html>`;
+</script><script>
+window.addEventListener("load", function() {
+  var o = document.getElementById("out");
+  if (!o || document.getElementById("mt16-mm-bar")) return;
+  var b = document.createElement("div");
+  b.id = "mt16-mm-bar";
+  b.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;padding:7px 10px;margin:6px 0;background:#161b22;border:1px solid #30363d;border-radius:6px;align-items:center;";
+  b.innerHTML = "<span style=\"font-size:12px;color:#58a6ff;font-weight:700;margin-right:4px;\">✨ Multimodal Stüdyo:</span>";
+  [["image","🖼️ Görüntü","#2563eb"],["video","🎬 Video","#db2777"],["music","🎵 Müzik","#059669"],["canvas","📝 Canvas","#d97706"]].forEach(function(t) {
+    var x = document.createElement("button");
+    x.textContent = t[1];
+    x.style.cssText = "background:"+t[2]+";color:#fff;border:none;padding:6px 12px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;";
+    x.onclick = function() {
+      var q = prompt(t[1] + " için isteminizi yazın:");
+      if (!q) return;
+      o.textContent = "⏳ " + t[1] + " üretiliyor...";
+      fetch("/api/multimodal", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({mode: t[0], prompt: q, title: q.slice(0, 24)})
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        o.textContent = d.preview || d.error || "Tamam";
+        if (d.media_url) {
+          var box = document.getElementById("mt16-media-box") || document.createElement("div");
+          box.id = "mt16-media-box";
+          box.style.cssText = "margin:8px 0;padding:10px;background:#0d1117;border:1px solid #30363d;border-radius:6px;";
+          var h = "<a href=\""+d.media_url+"\" download style=\"color:#58a6ff;font-weight:bold;\">⬇️ Üretilen Dosyayı İndir ("+d.file+")</a><br><br>";
+          if (d.mode === "image") h += "<img src=\""+d.media_url+"\" style=\"max-width:100%;border-radius:6px;\">";
+          if (d.mode === "video") h += "<video src=\""+d.media_url+"\" controls autoplay style=\"max-width:100%;border-radius:6px;\"></video>";
+          if (d.mode === "music") h += "<audio src=\""+d.media_url+"\" controls autoplay style=\"width:100%;\"></audio>";
+          box.innerHTML = h;
+          o.parentElement.insertBefore(box, o);
+        }
+      });
+    };
+    b.appendChild(x);
+  });
+  o.parentElement.insertBefore(b, o);
+});
+</script></body></html>`;
 
 http.createServer((req, res) => {
   if (mt16SpecialRoute(req, res)) return;
