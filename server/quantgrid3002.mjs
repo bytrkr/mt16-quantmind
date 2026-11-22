@@ -1,5 +1,5 @@
 import http from "node:http";
-import { execFileSync } from "node:child_process";
+import { execFile } from "node:child_process";
 
 const PORT = 3002;
 const PY_BIN = "/home/bytrkr/bistapp/.venv/bin/python";
@@ -180,7 +180,7 @@ const server = http.createServer(async (req, res) => {
 
   if (url.pathname === "/api/quant-grid") {
     try {
-      const out = execFileSync(PY_BIN, ["-c", "import sys,json; sys.path.insert(0,'/home/bytrkr/bistapp/python'); from quant_grid_service import build_quant_grid_payload; print(json.dumps(build_quant_grid_payload(), ensure_ascii=False))"], { maxBuffer: 10 * 1024 * 1024 });
+      const out = execFile(PY_BIN, ["-c", "import sys,json; sys.path.insert(0,'/home/bytrkr/bistapp/python'); from quant_grid_service import build_quant_grid_payload; print(json.dumps(build_quant_grid_payload(), ensure_ascii=False))"], { maxBuffer: 10 * 1024 * 1024 });
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
       res.end(out);
     } catch (err) {
@@ -192,7 +192,7 @@ const server = http.createServer(async (req, res) => {
 
   if (url.pathname === "/api/export-excel") {
     try {
-      const buf = execFileSync(PY_BIN, ["-c", "import sys; sys.path.insert(0,'/home/bytrkr/bistapp/python'); from quant_grid_service import build_excel_bytes; sys.stdout.buffer.write(build_excel_bytes())"], { maxBuffer: 20 * 1024 * 1024 });
+      const buf = execFile(PY_BIN, ["-c", "import sys; sys.path.insert(0,'/home/bytrkr/bistapp/python'); from quant_grid_service import build_excel_bytes; sys.stdout.buffer.write(build_excel_bytes())"], { maxBuffer: 20 * 1024 * 1024 });
       res.writeHead(200, {
         "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         "Content-Disposition": "attachment; filename=\"MT16_QuantMind_Rapor.xlsx\"",
