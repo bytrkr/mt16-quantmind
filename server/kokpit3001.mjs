@@ -802,146 +802,58 @@ window.addEventListener("DOMContentLoaded", function() {
   else boot();
 })();
 </script><script>(function(){if(document.getElementById("mt16-f-bar"))return;function init(){var c=document.getElementById("cmd"),o=document.getElementById("out"),g=document.getElementById("main-grid");if(!c||!o||!g)return setTimeout(init,150);var d=document.createElement("div");d.id="mt16-f-bar";d.style.cssText="display:flex;flex-wrap:wrap;gap:6px;padding:6px 10px;margin-bottom:8px;background:#111827;border:1px solid #374151;border-radius:6px;";var b=document.createElement("button");b.textContent="📎 @Dosya İçerik Oku";b.style.cssText="background:#2563eb;color:#fff;border:none;padding:5px 10px;border-radius:4px;font-size:11.5px;cursor:pointer;";b.onclick=function(){var m=(c.value||"").match(/@([A-Za-z0-9_./-]+)/);var t=m?m[1]:prompt("Dosya yolu:","server/kokpit3001.mjs");if(!t)return;fetch("/api/read-file?path="+encodeURIComponent(t)+"&lines=140").then(function(r){return r.json();}).then(function(j){o.textContent=j.ok?("=== "+j.path+" ("+j.shown_lines+"/"+j.total_lines+") ===\n"+j.content):("[HATA] "+j.error);});};var a=document.createElement("a");a.href="/download-bundle";a.download="mt16_full_ports_bundle.tar.gz";a.textContent="⬇️ Tam Paket İndir (.tar.gz)";a.style.cssText="background:#059669;color:#fff;padding:5px 10px;border-radius:4px;font-size:11.5px;text-decoration:none;";d.appendChild(b);d.appendChild(a);g.parentElement.insertBefore(d,g);}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();})();</script>
+
+
+
+
+
+
+
+
+
 <script>
 (function(){
-  function mountMM(){
-    if(document.getElementById("mt16-mm-bar")) return;
-    var anchor = document.querySelector("textarea") || document.body;
-    var container = anchor.closest("div") || document.body;
+  function showFixedMM(){
+    if(document.getElementById("mt16-mm-fixed")) return;
     var b = document.createElement("div");
-    b.id = "mt16-mm-bar";
-    b.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;padding:7px 10px;margin:6px 0;background:#161b22;border:1px solid #30363d;border-radius:6px;align-items:center;z-index:9999;";
-    b.innerHTML = "<span style=\"font-size:12px;color:#58a6ff;font-weight:700;margin-right:4px;\">✨ Multimodal Stüdyo:</span>";
+    b.id = "mt16-mm-fixed";
+    b.style.cssText = "position:fixed;bottom:14px;right:14px;z-index:999999;display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px;background:#161b22;border:2px solid #58a6ff;border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,0.65);align-items:center;";
+    b.innerHTML = "<span style=\"font-size:12px;color:#58a6ff;font-weight:700;\">✨ Stüdyo:</span>";
     [["image","🖼️ Görüntü","#2563eb"],["video","🎬 Video","#db2777"],["music","🎵 Müzik","#059669"],["canvas","📝 Canvas","#d97706"]].forEach(function(t){
       var x = document.createElement("button");
       x.type = "button";
       x.textContent = t[1];
-      x.style.cssText = "background:"+t[2]+";color:#fff;border:none;padding:6px 12px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;";
+      x.style.cssText = "background:"+t[2]+";color:#fff;border:none;padding:6px 10px;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer;";
       x.onclick = function(){
         var q = prompt(t[1] + " için isteminizi yazın:");
         if(!q) return;
-        var outPane = document.querySelector("pre") || document.body;
-        var box = document.getElementById("mt16-media-box") || document.createElement("div");
-        box.id = "mt16-media-box";
-        box.style.cssText = "margin:8px 0;padding:10px;background:#0d1117;border:1px solid #58a6ff;border-radius:6px;color:#e6edf3;font-family:monospace;white-space:pre-wrap;";
-        box.textContent = "⏳ " + t[1] + " üretiliyor...";
-        b.insertAdjacentElement("afterend", box);
+        var modal = document.getElementById("mt16-mm-modal") || document.createElement("div");
+        modal.id = "mt16-mm-modal";
+        modal.style.cssText = "position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1000000;max-width:90vw;max-height:85vh;overflow:auto;padding:16px;background:#0d1117;border:2px solid #58a6ff;border-radius:10px;color:#e6edf3;box-shadow:0 12px 40px rgba(0,0,0,0.85);";
+        modal.innerHTML = "<div style=\"margin-bottom:8px;\">⏳ " + t[1] + " üretiliyor...</div><button type=\"button\" onclick=\"this.parentElement.remove()\" style=\"background:#30363d;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;\">Kapat</button>";
+        document.body.appendChild(modal);
         fetch("/api/multimodal", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({mode: t[0], prompt: q, title: q.slice(0, 24)})
         }).then(function(r){ return r.json(); }).then(function(d){
-          var h = "<div>" + (d.preview || d.error || "Tamam").replace(/</g,"&lt;") + "</div>";
+          var h = "<div style=\"display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;\"><strong>✅ " + t[1] + " Çıktısı</strong><button type=\"button\" onclick=\"this.parentElement.parentElement.remove()\" style=\"background:#da3633;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;\">Kapat ✕</button></div>";
           if(d.media_url){
-            h = "<a href=\""+d.media_url+"\" download style=\"color:#58a6ff;font-weight:bold;display:inline-block;margin-bottom:8px;\">⬇️ Üretilen Dosyayı İndir ("+d.file+")</a><br>" + h + "<br>";
-            if(d.mode === "image") h += "<img src=\""+d.media_url+"\" style=\"max-width:100%;max-height:360px;border-radius:6px;\">";
-            if(d.mode === "video") h += "<video src=\""+d.media_url+"\" controls autoplay style=\"max-width:100%;max-height:360px;border-radius:6px;\"></video>";
+            h += "<div style=\"margin-bottom:10px;\"><a href=\""+d.media_url+"\" download style=\"color:#58a6ff;font-weight:bold;\">⬇️ Dosyayı İndir ("+d.file+")</a></div>";
+            if(d.mode === "image") h += "<img src=\""+d.media_url+"\" style=\"max-width:100%;max-height:55vh;border-radius:6px;\">";
+            if(d.mode === "video") h += "<video src=\""+d.media_url+"\" controls autoplay style=\"max-width:100%;max-height:55vh;border-radius:6px;\"></video>";
             if(d.mode === "music") h += "<audio src=\""+d.media_url+"\" controls autoplay style=\"width:100%;\"></audio>";
           }
-          box.innerHTML = h;
-        }).catch(function(e){ box.textContent = "Hata: " + e; });
+          h += "<pre style=\"margin-top:10px;white-space:pre-wrap;font-size:12px;color:#c9d1d9;\">" + (d.preview || d.error || "Tamam").replace(/</g,"&lt;") + "</pre>";
+          modal.innerHTML = h;
+        }).catch(function(e){ modal.innerHTML = "Hata: " + e + " <button onclick=\"this.parentElement.remove()\">Kapat</button>"; });
       };
       b.appendChild(x);
     });
-    container.insertAdjacentElement("afterend", b);
+    document.body.appendChild(b);
   }
-  setTimeout(mountMM, 250);
-})();
-</script>
-
-
-<script>
-(function(){
-  function mountMM(){
-    if(document.getElementById("mt16-mm-bar")) return;
-    var anchor = document.querySelector("textarea") || document.body;
-    var container = anchor.closest("div") || document.body;
-    var b = document.createElement("div");
-    b.id = "mt16-mm-bar";
-    b.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;padding:7px 10px;margin:6px 0;background:#161b22;border:1px solid #30363d;border-radius:6px;align-items:center;z-index:9999;";
-    b.innerHTML = "<span style=\"font-size:12px;color:#58a6ff;font-weight:700;margin-right:4px;\">✨ Multimodal Stüdyo:</span>";
-    [["image","🖼️ Görüntü","#2563eb"],["video","🎬 Video","#db2777"],["music","🎵 Müzik","#059669"],["canvas","📝 Canvas","#d97706"]].forEach(function(t){
-      var x = document.createElement("button");
-      x.type = "button";
-      x.textContent = t[1];
-      x.style.cssText = "background:"+t[2]+";color:#fff;border:none;padding:6px 12px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;";
-      x.onclick = function(){
-        var q = prompt(t[1] + " için isteminizi yazın:");
-        if(!q) return;
-        var outPane = document.querySelector("pre") || document.body;
-        var box = document.getElementById("mt16-media-box") || document.createElement("div");
-        box.id = "mt16-media-box";
-        box.style.cssText = "margin:8px 0;padding:10px;background:#0d1117;border:1px solid #58a6ff;border-radius:6px;color:#e6edf3;font-family:monospace;white-space:pre-wrap;";
-        box.textContent = "⏳ " + t[1] + " üretiliyor...";
-        b.insertAdjacentElement("afterend", box);
-        fetch("/api/multimodal", {
-          method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({mode: t[0], prompt: q, title: q.slice(0, 24)})
-        }).then(function(r){ return r.json(); }).then(function(d){
-          var h = "<div>" + (d.preview || d.error || "Tamam").replace(/</g,"&lt;") + "</div>";
-          if(d.media_url){
-            h = "<a href=\""+d.media_url+"\" download style=\"color:#58a6ff;font-weight:bold;display:inline-block;margin-bottom:8px;\">⬇️ Üretilen Dosyayı İndir ("+d.file+")</a><br>" + h + "<br>";
-            if(d.mode === "image") h += "<img src=\""+d.media_url+"\" style=\"max-width:100%;max-height:360px;border-radius:6px;\">";
-            if(d.mode === "video") h += "<video src=\""+d.media_url+"\" controls autoplay style=\"max-width:100%;max-height:360px;border-radius:6px;\"></video>";
-            if(d.mode === "music") h += "<audio src=\""+d.media_url+"\" controls autoplay style=\"width:100%;\"></audio>";
-          }
-          box.innerHTML = h;
-        }).catch(function(e){ box.textContent = "Hata: " + e; });
-      };
-      b.appendChild(x);
-    });
-    container.insertAdjacentElement("afterend", b);
-  }
-  setTimeout(mountMM, 250);
-})();
-</script>
-
-
-<script>
-(function(){
-  function mountMM(){
-    if(document.getElementById("mt16-mm-bar")) return;
-    var anchor = document.querySelector("textarea") || document.body;
-    var container = anchor.closest("div") || document.body;
-    var b = document.createElement("div");
-    b.id = "mt16-mm-bar";
-    b.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;padding:7px 10px;margin:6px 0;background:#161b22;border:1px solid #30363d;border-radius:6px;align-items:center;z-index:9999;";
-    b.innerHTML = "<span style=\"font-size:12px;color:#58a6ff;font-weight:700;margin-right:4px;\">✨ Multimodal Stüdyo:</span>";
-    [["image","🖼️ Görüntü","#2563eb"],["video","🎬 Video","#db2777"],["music","🎵 Müzik","#059669"],["canvas","📝 Canvas","#d97706"]].forEach(function(t){
-      var x = document.createElement("button");
-      x.type = "button";
-      x.textContent = t[1];
-      x.style.cssText = "background:"+t[2]+";color:#fff;border:none;padding:6px 12px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;";
-      x.onclick = function(){
-        var q = prompt(t[1] + " için isteminizi yazın:");
-        if(!q) return;
-        var outPane = document.querySelector("pre") || document.body;
-        var box = document.getElementById("mt16-media-box") || document.createElement("div");
-        box.id = "mt16-media-box";
-        box.style.cssText = "margin:8px 0;padding:10px;background:#0d1117;border:1px solid #58a6ff;border-radius:6px;color:#e6edf3;font-family:monospace;white-space:pre-wrap;";
-        box.textContent = "⏳ " + t[1] + " üretiliyor...";
-        b.insertAdjacentElement("afterend", box);
-        fetch("/api/multimodal", {
-          method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({mode: t[0], prompt: q, title: q.slice(0, 24)})
-        }).then(function(r){ return r.json(); }).then(function(d){
-          var h = "<div>" + (d.preview || d.error || "Tamam").replace(/</g,"&lt;") + "</div>";
-          if(d.media_url){
-            h = "<a href=\""+d.media_url+"\" download style=\"color:#58a6ff;font-weight:bold;display:inline-block;margin-bottom:8px;\">⬇️ Üretilen Dosyayı İndir ("+d.file+")</a><br>" + h + "<br>";
-            if(d.mode === "image") h += "<img src=\""+d.media_url+"\" style=\"max-width:100%;max-height:360px;border-radius:6px;\">";
-            if(d.mode === "video") h += "<video src=\""+d.media_url+"\" controls autoplay style=\"max-width:100%;max-height:360px;border-radius:6px;\"></video>";
-            if(d.mode === "music") h += "<audio src=\""+d.media_url+"\" controls autoplay style=\"width:100%;\"></audio>";
-          }
-          box.innerHTML = h;
-        }).catch(function(e){ box.textContent = "Hata: " + e; });
-      };
-      b.appendChild(x);
-    });
-    container.insertAdjacentElement("afterend", b);
-  }
-  setTimeout(mountMM, 250);
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", showFixedMM);
+  else showFixedMM();
 })();
 </script>
 
