@@ -137,10 +137,22 @@ def build_quant_grid_payload() -> Dict[str, Any]:
     return {"ok": True, "generated_at": now_utc, "regulatory_compliance": "TR-SPK Seri:V No:55 Uyumlu Kantitatif Karar Destek Terminali", "sheet_order": list(sheets.keys()), "sheets": sheets}
 
 def build_excel_bytes() -> bytes:
+    from openpyxl.formatting.rule import CellIsRule
+    from openpyxl.utils import get_column_letter
+
     payload = build_quant_grid_payload()
     wb = openpyxl.Workbook()
     wb.remove(wb.active)
-    hfill, hfont = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid"), Font(color="FFFFFF", bold=True, size=11)
+
+    hfill = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
+    hfont = Font(color="FFFFFF", bold=True, size=11)
+    pos_fill = PatternFill(start_color="E6F4EA", end_color="E6F4EA", fill_type="solid")
+    pos_font = Font(color="137333", bold=True)
+    neg_fill = PatternFill(start_color="FCE8E6", end_color="FCE8E6", fill_type="solid")
+    neg_font = Font(color="C5221F", bold=True)
+    tot_fill = PatternFill(start_color="D9E1F2", end_color="D9E1F2", fill_type="solid")
+    tot_font = Font(bold=True, size=10)
+
     for sk in payload["sheet_order"]:
         sd = payload["sheets"][sk]
         ws = wb.create_sheet(title=sk[:31])
@@ -149,117 +161,72 @@ def build_excel_bytes() -> bytes:
         for ci in range(1, len(cols) + 1):
             c = ws.cell(row=1, column=ci)
             c.fill, c.font, c.alignment = hfill, hfont, Alignment(horizontal="center", vertical="center")
-        for r in sd["rows"]: ws.append([r.get(cn, "") for cn in cols])
+
+        for r in sd["rows"]:
+            ws.append([r.get(cn, "") for cn in cols])
+
+        ws.freeze_panes = "A2"
+        if len(cols) > 0 and ws.max_row >= 1:
+            ws.auto_filter.ref = f"A1:{get_column_letter(len(cols))}{ws.max_row}"
+
+        for ri in range(2, ws.max_row + 1):
+            for ci, cn in enumerate(cols, start=1):
+                cell = ws.cell(row=ri, column=ci)
+                if isinstance(cell.value, (int, float)):
+                    if any(k in cn for k in ("Fiyat", "Maliyet", "Deger", "Zarar", "Giris", "Hedef", "Stop")):
+                        cell.number_format = "#,##0.00"
+                    elif any(k in cn for k in ("Lot", "Adet", "Miktar", "Skor", "Guven")):
+                        cell.number_format = "#,##0.00" if "Skor" in cn or "Guven" in cn else "#,##0"
+                    elif "Yuzde" in cn or "Getiri" in cn:
+                        cell.number_format = "0.00"
+                    elif "Agirlik" in cn and ri > 1:
+                        cell.number_format = "0.0000"
+
+        for ci, cn in enumerate(cols, start=1):
+            if any(k in cn for k in ("Kar_Zarar", "Getiri_Yuzde")) and ws.max_row >= 2:
+                rng = f"{get_column_letter(ci)}2:{get_column_letter(ci)}{ws.max_row}"
+                ws.conditional_formatting.add(rng, CellIsRule(operator="greaterThan", formula=["0"], fill=pos_fill, font=pos_font))
+                ws.conditional_formatting.add(rng, CellIsRule(operator="lessThan", formula=["0"], fill=neg_fill, font=neg_font))
+
+    if "03_Aktif_Portfoy" in wb.sheetnames and ws_pf := wb["03_Aktif_Portfoy"]:
+        pf_cols = {ws_pf.cell(row=1, column=i).value: get_column_letter(i) for i in range(1, ws_pf.max_column + 1)}
+        if ws_pf.max_row >= 2 and {"Lot", "Giris_Fiyati", "Guncel_Fiyat", "Maliyet_TL", "Piyasa_Degeri_TL", "Kar_Zarar_TL", "Getiri_Yuzde"}.issubset(pf_cols.keys()):
+            for r in range(2, ws_pf.max_row + 1):
+                c_lot, c_gir, c_gun = pf_cols["Lot"], pf_cols["Giris_Fiyati"], pf_cols["Guncel_Fiyat"]
+                c_mal, c_deg, c_pnl, c_pct = pf_cols["Maliyet_TL"], pf_cols["Piyasa_Degeri_TL"], pf_cols["Kar_Zarar_TL"], pf_cols["Getiri_Yuzde"]
+                ws_pf[f"{c_mal}{r}"] = f"={c_lot}{r}*{c_gir}{r}"
+                ws_pf[f"{c_deg}{r}"] = f"={c_lot}{r}*{c_gun}{r}"
+                ws_pf[f"{c_pnl}{r}"] = f"={c_deg}{r}-{c_mal}{r}"
+                ws_pf[f"{c_pct}{r}"] = f"=IF({c_gir}{r}>0,({c_gun}{r}-{c_gir}{r})/{c_gir}{r}*100,0)"
+            tot_r = ws_pf.max_row + 1
+            ws_pf[f"A{tot_r}"] = "TOPLAM"
+            for key_sum in ("Lot", "Maliyet_TL", "Piyasa_Degeri_TL", "Kar_Zarar_TL"):
+                col_l = pf_cols[key_sum]
+                ws_pf[f"{col_l}{tot_r}"] = f"=SUM({col_l}2:{col_l}{tot_r - 1})"
+                ws_pf[f"{col_l}{tot_r}"].number_format = "#,##0.00" if key_sum != "Lot" else "#,##0"
+            for ci in range(1, ws_pf.max_column + 1):
+                ws_pf.cell(row=tot_r, column=ci).fill = tot_fill
+                ws_pf.cell(row=tot_r, column=ci).font = tot_font
+
+    if "01_Yonetici_Ozeti" in wb.sheetnames and "03_Aktif_Portfoy" in wb.sheetnames:
+        ws_sum = wb["01_Yonetici_Ozeti"]
+        ws_pf = wb["03_Aktif_Portfoy"]
+        pf_cols = {ws_pf.cell(row=1, column=i).value: get_column_letter(i) for i in range(1, ws_pf.max_column + 1)}
+        last_data_r = max(ws_pf.max_row - 1, 2)
+        for r in range(2, ws_sum.max_row + 1):
+            m = str(ws_sum[f"A{r}"].value or "")
+            if "Açık Pozisyon Maliyeti" in m and "Maliyet_TL" in pf_cols:
+                ws_sum[f"B{r}"] = f"=SUM('03_Aktif_Portfoy'!{pf_cols['Maliyet_TL']}2:{pf_cols['Maliyet_TL']}{last_data_r})"
+            elif "Açık Pozisyon Piyasa Değeri" in m and "Piyasa_Degeri_TL" in pf_cols:
+                ws_sum[f"B{r}"] = f"=SUM('03_Aktif_Portfoy'!{pf_cols['Piyasa_Degeri_TL']}2:{pf_cols['Piyasa_Degeri_TL']}{last_data_r})"
+            elif "Açık Pozisyon Kâr / Zarar" in m and "Kar_Zarar_TL" in pf_cols:
+                ws_sum[f"B{r}"] = f"=SUM('03_Aktif_Portfoy'!{pf_cols['Kar_Zarar_TL']}2:{pf_cols['Kar_Zarar_TL']}{last_data_r})"
+
+    for ws in wb.worksheets:
         for col in ws.columns:
-            ws.column_dimensions[col[0].column_letter].width = min(max(max((len(str(c.value or "")) for c in col), default=10) + 4, 14), 48)
+            max_len = max((len(str(c.value or "")) for c in col), default=10)
+            ws.column_dimensions[col[0].column_letter].width = min(max(max_len + 4, 14), 48)
+
     buf = io.BytesIO()
     wb.save(buf)
     return buf.getvalue()
-
-def save_quant_grid_edits(sheet_key: str, rows: List[Dict[str, Any]]) -> Dict[str, Any]:
-    if sheet_key == "08_Sistem_Kokpit_Ayarlar":
-        new_weights = {}
-        for r in rows:
-            cat = str(r.get("Kategori") or "")
-            name = str(r.get("Bilesen_Ajan") or "").strip()
-            if "Ajan" in cat and name and not name.startswith("Port "):
-                val = _num(r.get("Agirlik_Deger"), 0.0)
-                if val > 0:
-                    new_weights[name] = val
-        if not new_weights:
-            return {"ok": False, "error": "Gecerli ajan agirligi bulunamadi"}
-        w_sum = sum(new_weights.values()) or 1.0
-        norm = {k: round(v / w_sum, 4) for k, v in new_weights.items()}
-        wp = ROOT_DIR / "python/agent_weights.json"
-        if wp.exists():
-            wp.with_suffix(".json.bak_grid").write_text(wp.read_text(encoding="utf-8"), encoding="utf-8")
-        wp.write_text(json.dumps(norm, indent=2, ensure_ascii=False), encoding="utf-8")
-        dbp = ROOT_DIR / "python/agent_memory.db"
-        if dbp.exists():
-            try:
-                conn = sqlite3.connect(str(dbp))
-                for k, v in norm.items():
-                    conn.execute("UPDATE agent_profiles SET weight = ? WHERE agent_name = ?", (v, k))
-                conn.commit()
-                conn.close()
-            except Exception:
-                pass
-        return {"ok": True, "message": f"{len(norm)} ajan agirligi normalize edilerek kaydedildi", "weights": norm}
-
-    if sheet_key == "03_Aktif_Portfoy":
-        pf_path = ROOT_DIR / "data/sanal_portfoy.json"
-        raw_pf = _read_json_path("data/sanal_portfoy.json", [])
-        if not isinstance(raw_pf, list):
-            return {"ok": False, "error": "sanal_portfoy.json liste formatinda degil"}
-        edits = {str(r.get("Hisse") or "").upper(): r for r in rows if r.get("Hisse")}
-        updated = 0
-        for item in raw_pf:
-            if not isinstance(item, dict):
-                continue
-            sym = str(item.get("sembol") or item.get("symbol") or "").upper()
-            if sym in edits and str(item.get("durum") or "ACIK").upper() == "ACIK":
-                ed = edits[sym]
-                if "Hedef" in ed: item["hedef"] = round(_num(ed["Hedef"], _num(item.get("hedef"))), 2)
-                if "Stop" in ed: item["stop"] = round(_num(ed["Stop"], _num(item.get("stop"))), 2)
-                if "Lot" in ed and _num(ed["Lot"]) > 0: item["lot"] = _num(ed["Lot"])
-                updated += 1
-        if pf_path.exists():
-            pf_path.with_suffix(".json.bak_grid").write_text(pf_path.read_text(encoding="utf-8"), encoding="utf-8")
-        pf_path.write_text(json.dumps(raw_pf, indent=2, ensure_ascii=False), encoding="utf-8")
-        return {"ok": True, "message": f"{updated} acik pozisyon (Hedef/Stop/Lot) guncellendi"}
-
-    return {"ok": False, "error": "Bu sekme salt-okunur denetim defteridir"}
-
-def save_quant_grid_edits(sheet_key: str, rows: List[Dict[str, Any]]) -> Dict[str, Any]:
-    if sheet_key == "08_Sistem_Kokpit_Ayarlar":
-        new_weights = {}
-        for r in rows:
-            cat = str(r.get("Kategori") or "")
-            name = str(r.get("Bilesen_Ajan") or "").strip()
-            if "Ajan" in cat and name and not name.startswith("Port "):
-                val = _num(r.get("Agirlik_Deger"), 0.0)
-                if val > 0:
-                    new_weights[name] = val
-        if not new_weights:
-            return {"ok": False, "error": "Gecerli ajan agirligi bulunamadi"}
-        w_sum = sum(new_weights.values()) or 1.0
-        norm = {k: round(v / w_sum, 4) for k, v in new_weights.items()}
-        wp = ROOT_DIR / "python/agent_weights.json"
-        if wp.exists():
-            wp.with_suffix(".json.bak_grid").write_text(wp.read_text(encoding="utf-8"), encoding="utf-8")
-        wp.write_text(json.dumps(norm, indent=2, ensure_ascii=False), encoding="utf-8")
-        dbp = ROOT_DIR / "python/agent_memory.db"
-        if dbp.exists():
-            try:
-                conn = sqlite3.connect(str(dbp))
-                for k, v in norm.items():
-                    conn.execute("UPDATE agent_profiles SET weight = ? WHERE agent_name = ?", (v, k))
-                conn.commit()
-                conn.close()
-            except Exception:
-                pass
-        return {"ok": True, "message": f"{len(norm)} ajan agirligi normalize edilerek kaydedildi", "weights": norm}
-
-    if sheet_key == "03_Aktif_Portfoy":
-        pf_path = ROOT_DIR / "data/sanal_portfoy.json"
-        raw_pf = _read_json_path("data/sanal_portfoy.json", [])
-        if not isinstance(raw_pf, list):
-            return {"ok": False, "error": "sanal_portfoy.json liste formatinda degil"}
-        edits = {str(r.get("Hisse") or "").upper(): r for r in rows if r.get("Hisse")}
-        updated = 0
-        for item in raw_pf:
-            if not isinstance(item, dict):
-                continue
-            sym = str(item.get("sembol") or item.get("symbol") or "").upper()
-            if sym in edits and str(item.get("durum") or "ACIK").upper() == "ACIK":
-                ed = edits[sym]
-                if "Hedef" in ed: item["hedef"] = round(_num(ed["Hedef"], _num(item.get("hedef"))), 2)
-                if "Stop" in ed: item["stop"] = round(_num(ed["Stop"], _num(item.get("stop"))), 2)
-                if "Lot" in ed and _num(ed["Lot"]) > 0: item["lot"] = _num(ed["Lot"])
-                updated += 1
-        if pf_path.exists():
-            pf_path.with_suffix(".json.bak_grid").write_text(pf_path.read_text(encoding="utf-8"), encoding="utf-8")
-        pf_path.write_text(json.dumps(raw_pf, indent=2, ensure_ascii=False), encoding="utf-8")
-        return {"ok": True, "message": f"{updated} acik pozisyon (Hedef/Stop/Lot) guncellendi"}
-
-    return {"ok": False, "error": "Bu sekme salt-okunur denetim defteridir"}
