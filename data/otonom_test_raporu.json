@@ -1,6 +1,36 @@
 {
-  "toplam_tur": 1128,
+  "toplam_tur": 1134,
   "kayitlar": [
+    {
+      "zaman": "17:58:59",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "17:54:45",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "17:50:31",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "17:46:17",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "17:42:02",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "17:37:48",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
     {
       "zaman": "17:33:34",
       "tip": "TUR",
@@ -125,39 +155,9 @@
       "zaman": "15:54:26",
       "tip": "TUR",
       "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:50:11",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:45:55",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:41:40",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:37:26",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:33:12",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:28:56",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
     }
   ],
-  "son_guncelleme": "2026-11-22 17:33:34",
+  "son_guncelleme": "2026-11-22 17:58:59",
   "saglayici_durumu": [
     {
       "ad": "GROQ",
