@@ -1,3 +1,6 @@
+import { spawnSync } from "node:child_process";
+import fsSync from "node:fs";
+import pathMod from "node:path";
 process.chdir("/home/bytrkr/bistapp");
 import http from 'node:http';
 import os from 'node:os';
@@ -6,8 +9,6 @@ import path from 'node:path';
 import { execSync, execFileSync } from 'node:child_process';
 
 
-import fsSync from "node:fs";
-import pathMod from "node:path";
 import { execSync as mt16Exec } from "node:child_process";
 
 const MT16_ROOT = "/home/bytrkr/bistapp";
@@ -815,90 +816,423 @@ window.addEventListener("DOMContentLoaded", function() {
 
 
 <script>
-window.addEventListener("DOMContentLoaded", function() {
-  if (document.getElementById("mt16-mm-clean")) return;
-  var box = document.createElement("div");
-  box.id = "mt16-mm-clean";
-  box.style.cssText = "position:fixed;bottom:14px;right:14px;z-index:2147483647;display:flex;gap:6px;padding:8px 10px;background:#161b22;border:2px solid #58a6ff;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,0.7);";
-  var lbl = document.createElement("span");
-  lbl.textContent = "✨ Stüdyo:";
-  lbl.style.cssText = "color:#58a6ff;font-weight:700;font-size:12px;align-self:center;margin-right:2px;";
-  box.appendChild(lbl);
-  var items = [["image","🖼️ Görüntü","#2563eb"],["video","🎬 Video","#db2777"],["music","🎵 Müzik","#059669"],["canvas","📝 Canvas","#d97706"]];
-  for (var i = 0; i < items.length; i++) {
-    (function(it) {
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.textContent = it[1];
-      btn.style.cssText = "background:"+it[2]+";color:#fff;border:none;padding:6px 10px;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer;";
-      btn.addEventListener("click", function() {
-        var q = prompt(it[1] + " için istem yazın:");
-        if (!q) return;
-        var out = document.getElementById("mt16-mm-res");
-        if (!out) {
-          out = document.createElement("div");
-          out.id = "mt16-mm-res";
-          out.style.cssText = "position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2147483647;max-width:90vw;max-height:85vh;overflow:auto;padding:16px;background:#0d1117;border:2px solid #58a6ff;border-radius:10px;color:#e6edf3;box-shadow:0 12px 36px rgba(0,0,0,0.85);";
-          document.body.appendChild(out);
-        }
-        out.textContent = "⏳ " + it[1] + " üretiliyor...";
-        fetch("/api/multimodal", {
-          method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({mode: it[0], prompt: q, title: q.slice(0, 24)})
-        }).then(function(r){ return r.json(); }).then(function(d){
-          out.innerHTML = "";
-          var closeBtn = document.createElement("button");
-          closeBtn.type = "button";
-          closeBtn.textContent = "Kapat ✕";
-          closeBtn.style.cssText = "float:right;background:#da3633;color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;";
-          closeBtn.onclick = function(){ out.remove(); };
-          out.appendChild(closeBtn);
-          if (d.media_url) {
-            var lnk = document.createElement("a");
-            lnk.href = d.media_url;
-            lnk.download = "";
-            lnk.textContent = "⬇️ Dosyayı İndir (" + d.file + ")";
-            lnk.style.cssText = "display:inline-block;margin:8px 0;color:#58a6ff;font-weight:bold;";
-            out.appendChild(lnk);
-            out.appendChild(document.createElement("br"));
-            if (d.mode === "image") {
-              var im = document.createElement("img");
-              im.src = d.media_url;
-              im.style.cssText = "max-width:100%;max-height:55vh;border-radius:6px;";
-              out.appendChild(im);
-            } else if (d.mode === "video") {
-              var vd = document.createElement("video");
-              vd.src = d.media_url;
-              vd.controls = true;
-              vd.autoplay = true;
-              vd.style.cssText = "max-width:100%;max-height:55vh;border-radius:6px;";
-              out.appendChild(vd);
-            } else if (d.mode === "music") {
-              var au = document.createElement("audio");
-              au.src = d.media_url;
-              au.controls = true;
-              au.autoplay = true;
-              au.style.cssText = "width:100%;";
-              out.appendChild(au);
-            }
-          }
-          var pr = document.createElement("pre");
-          pr.textContent = d.preview || d.error || "Tamam";
-          pr.style.cssText = "margin-top:10px;white-space:pre-wrap;font-size:12px;color:#c9d1d9;";
-          out.appendChild(pr);
-        }).catch(function(e){ out.textContent = "Hata: " + e; });
-      });
-      box.appendChild(btn);
-    })(items[i]);
+(function initMt16GeminiChatStudio() {
+  if (document.getElementById("mt16-gemini-studio")) return;
+
+  var STORAGE_KEY = "mt16_gemini_chats_v1";
+  function loadChats() {
+    try {
+      var raw = window.name || "";
+      if (raw.indexOf("MT16_CHATS:") === 0) {
+        return JSON.parse(raw.slice("MT16_CHATS:".length));
+      }
+    } catch (_) {}
+    return [{
+      id: "chat_" + Date.now(),
+      title: "Yeni Multimodal Sohbet",
+      messages: [{
+        role: "assistant",
+        mode: "canvas",
+        text: "MT16 Multimodal Gemini Stüdyo hazır. + menüsünden veya alt satırdan Görüntü, Video, Müzik veya Canvas seçip istem yazabilir; sol panelden sohbet arşivini yönetebilirsiniz.",
+        media_url: "",
+        file: ""
+      }]
+    }];
   }
-  document.body.appendChild(box);
-});
+
+  var state = {
+    chats: loadChats(),
+    activeId: null,
+    selectedMode: "canvas",
+    open: false
+  };
+  state.activeId = state.chats[0].id;
+
+  function saveChats() {
+    try {
+      window.name = "MT16_CHATS:" + JSON.stringify(state.chats.slice(0, 25));
+    } catch (_) {}
+  }
+
+  function currentChat() {
+    for (var i = 0; i < state.chats.length; i++) {
+      if (state.chats[i].id === state.activeId) return state.chats[i];
+    }
+    return state.chats[0];
+  }
+
+  // Sag altta Gemini Sohbet Stüdyosu acma butonu
+  var launcher = document.createElement("button");
+  launcher.id = "mt16-gemini-launcher";
+  launcher.type = "button";
+  launcher.textContent = "✦ Gemini Multimodal";
+  launcher.style.cssText = "position:fixed;bottom:14px;right:14px;z-index:2147483647;background:linear-gradient(135deg,#1d4ed8,#7c3aed);color:#fff;border:1px solid #93c5fd;padding:9px 14px;border-radius:999px;font-size:12.5px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.65);";
+
+  var overlay = document.createElement("div");
+  overlay.id = "mt16-gemini-studio";
+  overlay.style.cssText = "display:none;position:fixed;inset:0;z-index:2147483647;background:#0b0f17;color:#e6edf3;font-family:Segoe UI,Inter,sans-serif;flex-direction:row;";
+
+  // Sol Arşiv Kenar Çubuğu
+  var sidebar = document.createElement("aside");
+  sidebar.style.cssText = "width:270px;min-width:220px;max-width:42vw;background:#111622;border-right:1px solid #263042;display:flex;flex-direction:column;padding:12px;gap:10px;overflow:hidden;";
+
+  var sideTop = document.createElement("div");
+  sideTop.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:8px;";
+  var brand = document.createElement("div");
+  brand.textContent = "✦ MT16 Gemini";
+  brand.style.cssText = "font-weight:700;font-size:15px;color:#f8fafc;";
+  var closeStudioBtn = document.createElement("button");
+  closeStudioBtn.type = "button";
+  closeStudioBtn.textContent = "Kokpite Dön ✕";
+  closeStudioBtn.style.cssText = "background:#1e293b;color:#e2e8f0;border:1px solid #334155;padding:5px 9px;border-radius:6px;font-size:11.5px;cursor:pointer;";
+  closeStudioBtn.onclick = function() {
+    state.open = false;
+    overlay.style.display = "none";
+  };
+  sideTop.appendChild(brand);
+  sideTop.appendChild(closeStudioBtn);
+
+  var newChatBtn = document.createElement("button");
+  newChatBtn.type = "button";
+  newChatBtn.textContent = "+ Yeni sohbet";
+  newChatBtn.style.cssText = "width:100%;text-align:left;background:#1a2234;color:#f1f5f9;border:1px solid #2e3b55;padding:9px 12px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;";
+  newChatBtn.onclick = function() {
+    var c = {
+      id: "chat_" + Date.now(),
+      title: "Yeni Multimodal Sohbet",
+      messages: [{
+        role: "assistant",
+        mode: state.selectedMode,
+        text: "Yeni sohbet açıldı. Mod: " + state.selectedMode.toUpperCase() + ". İsteminizi yazın.",
+        media_url: "",
+        file: ""
+      }]
+    };
+    state.chats.unshift(c);
+    state.activeId = c.id;
+    saveChats();
+    renderAll();
+  };
+
+  var archiveLabel = document.createElement("div");
+  archiveLabel.textContent = "SOHBET ARŞİVİ";
+  archiveLabel.style.cssText = "font-size:10.5px;letter-spacing:0.06em;color:#94a3b8;font-weight:700;margin-top:4px;";
+
+  var archiveList = document.createElement("div");
+  archiveList.style.cssText = "flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:4px;";
+
+  sidebar.appendChild(sideTop);
+  sidebar.appendChild(newChatBtn);
+  sidebar.appendChild(archiveLabel);
+  sidebar.appendChild(archiveList);
+
+  // Sag Ana Sohbet ve Multimodal Alanı
+  var mainPane = document.createElement("main");
+  mainPane.style.cssText = "flex:1;display:flex;flex-direction:column;min-width:0;background:#0b0f17;";
+
+  var topHeader = document.createElement("header");
+  topHeader.style.cssText = "display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:10px 16px;border-bottom:1px solid #1e293b;background:#0f1520;";
+  var chatTitleEl = document.createElement("div");
+  chatTitleEl.style.cssText = "font-size:14px;font-weight:700;color:#f8fafc;";
+  var modeBar = document.createElement("div");
+  modeBar.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;";
+
+  var modes = [
+    ["image", "🖼️ Görüntü"],
+    ["video", "🎬 Video"],
+    ["music", "🎵 Müzik"],
+    ["canvas", "📝 Canvas"]
+  ];
+  var modeBtns = {};
+  modes.forEach(function(m) {
+    var mb = document.createElement("button");
+    mb.type = "button";
+    mb.textContent = m[1];
+    mb.style.cssText = "padding:5px 10px;border-radius:999px;font-size:11.5px;font-weight:600;cursor:pointer;border:1px solid #334155;background:#161e2e;color:#cbd5e1;";
+    mb.onclick = function() {
+      state.selectedMode = m[0];
+      renderModes();
+    };
+    modeBtns[m[0]] = mb;
+    modeBar.appendChild(mb);
+  });
+
+  function renderModes() {
+    Object.keys(modeBtns).forEach(function(k) {
+      var active = (k === state.selectedMode);
+      modeBtns[k].style.background = active ? "#2563eb" : "#161e2e";
+      modeBtns[k].style.color = active ? "#ffffff" : "#cbd5e1";
+      modeBtns[k].style.borderColor = active ? "#60a5fa" : "#334155";
+    });
+  }
+
+  topHeader.appendChild(chatTitleEl);
+  topHeader.appendChild(modeBar);
+
+  var streamArea = document.createElement("div");
+  streamArea.style.cssText = "flex:1;overflow-y:auto;padding:18px 20px;display:flex;flex-direction:column;gap:14px;max-width:960px;width:100%;margin:0 auto;box-sizing:border-box;";
+
+  // Alt Gemini İstem Kutusu
+  var composerWrap = document.createElement("div");
+  composerWrap.style.cssText = "padding:12px 16px 16px;background:#0b0f17;";
+
+  var composerBox = document.createElement("div");
+  composerBox.style.cssText = "max-width:960px;margin:0 auto;background:#151c2c;border:1px solid #2b3852;border-radius:18px;padding:10px 14px;display:flex;flex-direction:column;gap:8px;box-shadow:0 8px 28px rgba(0,0,0,0.45);";
+
+  var promptInput = document.createElement("textarea");
+  promptInput.rows = 2;
+  promptInput.placeholder = "Birlikte yazalım veya üretelim... (Enter ile gönder, Shift+Enter yeni satır)";
+  promptInput.style.cssText = "width:100%;background:transparent;border:none;outline:none;color:#f8fafc;font-size:13.5px;resize:none;font-family:inherit;box-sizing:border-box;";
+
+  var composerBottom = document.createElement("div");
+  composerBottom.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;";
+
+  var leftTools = document.createElement("div");
+  leftTools.style.cssText = "display:flex;align-items:center;gap:6px;flex-wrap:wrap;";
+
+  var plusBtn = document.createElement("button");
+  plusBtn.type = "button";
+  plusBtn.textContent = "+";
+  plusBtn.title = "Mod değiştir (Görüntü / Video / Müzik / Canvas)";
+  plusBtn.style.cssText = "width:30px;height:30px;border-radius:50%;background:#222c42;color:#f8fafc;border:1px solid #374666;font-size:16px;font-weight:700;cursor:pointer;";
+  plusBtn.onclick = function() {
+    var order = ["image", "video", "music", "canvas"];
+    var idx = order.indexOf(state.selectedMode);
+    state.selectedMode = order[(idx + 1) % order.length];
+    renderModes();
+  };
+
+  var canvasChip = document.createElement("button");
+  canvasChip.type = "button";
+  canvasChip.textContent = "Canvas";
+  canvasChip.style.cssText = "background:#1e293b;color:#e2e8f0;border:1px solid #334155;padding:5px 11px;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;";
+  canvasChip.onclick = function() {
+    state.selectedMode = "canvas";
+    renderModes();
+  };
+
+  var activeModeBadge = document.createElement("span");
+  activeModeBadge.style.cssText = "font-size:11.5px;color:#93c5fd;font-weight:600;";
+
+  leftTools.appendChild(plusBtn);
+  leftTools.appendChild(canvasChip);
+  leftTools.appendChild(activeModeBadge);
+
+  var sendBtn = document.createElement("button");
+  sendBtn.type = "button";
+  sendBtn.textContent = "Gönder ➤";
+  sendBtn.style.cssText = "background:#2563eb;color:#fff;border:none;padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:700;cursor:pointer;";
+
+  function sendPrompt() {
+    var q = (promptInput.value || "").trim();
+    if (!q) return;
+    var ch = currentChat();
+    if (ch.title === "Yeni Multimodal Sohbet") {
+      ch.title = q.slice(0, 34);
+    }
+    ch.messages.push({
+      role: "user",
+      mode: state.selectedMode,
+      text: q,
+      media_url: "",
+      file: ""
+    });
+    var pendingIdx = ch.messages.push({
+      role: "assistant",
+      mode: state.selectedMode,
+      text: "⏳ " + state.selectedMode.toUpperCase() + " üretiliyor...",
+      media_url: "",
+      file: ""
+    }) - 1;
+    promptInput.value = "";
+    saveChats();
+    renderAll();
+
+    fetch("/api/multimodal", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        mode: state.selectedMode,
+        prompt: q,
+        title: q.slice(0, 28)
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      ch.messages[pendingIdx] = {
+        role: "assistant",
+        mode: d.mode || state.selectedMode,
+        text: d.preview || d.error || "Tamamlandı.",
+        media_url: d.media_url || "",
+        file: d.file || ""
+      };
+      saveChats();
+      renderAll();
+    })
+    .catch(function(err) {
+      ch.messages[pendingIdx] = {
+        role: "assistant",
+        mode: state.selectedMode,
+        text: "Hata: " + String(err),
+        media_url: "",
+        file: ""
+      };
+      saveChats();
+      renderAll();
+    });
+  }
+
+  sendBtn.onclick = sendPrompt;
+  promptInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendPrompt();
+    }
+  });
+
+  composerBottom.appendChild(leftTools);
+  composerBottom.appendChild(sendBtn);
+  composerBox.appendChild(promptInput);
+  composerBox.appendChild(composerBottom);
+  composerWrap.appendChild(composerBox);
+
+  mainPane.appendChild(topHeader);
+  mainPane.appendChild(streamArea);
+  mainPane.appendChild(composerWrap);
+
+  overlay.appendChild(sidebar);
+  overlay.appendChild(mainPane);
+
+  function renderArchive() {
+    archiveList.innerHTML = "";
+    state.chats.forEach(function(c) {
+      var item = document.createElement("button");
+      item.type = "button";
+      var isAct = (c.id === state.activeId);
+      item.textContent = c.title;
+      item.style.cssText = "width:100%;text-align:left;padding:8px 10px;border-radius:8px;border:none;font-size:12.5px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:" + (isAct ? "#1e293b" : "transparent") + ";color:" + (isAct ? "#ffffff" : "#cbd5e1") + ";font-weight:" + (isAct ? "700" : "400") + ";";
+      item.onclick = function() {
+        state.activeId = c.id;
+        renderAll();
+      };
+      archiveList.appendChild(item);
+    });
+  }
+
+  function renderStream() {
+    var ch = currentChat();
+    chatTitleEl.textContent = ch.title;
+    activeModeBadge.textContent = "Aktif Mod: " + state.selectedMode.toUpperCase();
+    streamArea.innerHTML = "";
+    ch.messages.forEach(function(msg) {
+      var row = document.createElement("div");
+      row.style.cssText = "display:flex;justify-content:" + (msg.role === "user" ? "flex-end" : "flex-start") + ";";
+
+      var bubble = document.createElement("div");
+      bubble.style.cssText = "max-width:82%;padding:12px 15px;border-radius:16px;font-size:13px;line-height:1.5;background:" + (msg.role === "user" ? "#232b3b" : "#121926") + ";border:1px solid " + (msg.role === "user" ? "#334155" : "#223047") + ";color:#f1f5f9;";
+
+      if (msg.media_url) {
+        var dl = document.createElement("a");
+        dl.href = msg.media_url;
+        dl.download = "";
+        dl.textContent = "⬇️ İndir (" + (msg.file || msg.media_url) + ")";
+        dl.style.cssText = "display:inline-block;margin-bottom:8px;color:#60a5fa;font-weight:700;text-decoration:none;";
+        bubble.appendChild(dl);
+        bubble.appendChild(document.createElement("br"));
+
+        if (msg.mode === "image") {
+          var img = document.createElement("img");
+          img.src = msg.media_url;
+          img.style.cssText = "max-width:100%;max-height:420px;border-radius:10px;display:block;margin-bottom:8px;";
+          bubble.appendChild(img);
+        } else if (msg.mode === "video") {
+          var vid = document.createElement("video");
+          vid.src = msg.media_url;
+          vid.controls = true;
+          vid.style.cssText = "max-width:100%;max-height:420px;border-radius:10px;display:block;margin-bottom:8px;";
+          bubble.appendChild(vid);
+        } else if (msg.mode === "music") {
+          var aud = document.createElement("audio");
+          aud.src = msg.media_url;
+          aud.controls = true;
+          aud.style.cssText = "width:100%;display:block;margin-bottom:8px;";
+          bubble.appendChild(aud);
+        }
+      }
+
+      var txt = document.createElement("div");
+      txt.textContent = msg.text || "";
+      txt.style.cssText = "white-space:pre-wrap;word-break:break-word;";
+      bubble.appendChild(txt);
+      row.appendChild(bubble);
+      streamArea.appendChild(row);
+    });
+    streamArea.scrollTop = streamArea.scrollHeight;
+  }
+
+  function renderAll() {
+    renderModes();
+    renderArchive();
+    renderStream();
+  }
+
+  launcher.onclick = function() {
+    state.open = !state.open;
+    overlay.style.display = state.open ? "flex" : "none";
+    if (state.open) {
+      renderAll();
+      setTimeout(function() { promptInput.focus(); }, 60);
+    }
+  };
+
+  document.body.appendChild(overlay);
+  document.body.appendChild(launcher);
+  renderAll();
+})();
 </script>
 
 </body></html>`;
 
 http.createServer((req, res) => {
+
+  if (req && req.url && req.url.split("?")[0].startsWith("/media/")) {
+    const cleanName = decodeURIComponent(req.url.split("?")[0].replace("/media/", "")).replace(/[^A-Za-z0-9_.-]/g, "_");
+    const fullFile = pathMod.join("/home/bytrkr/bistapp/workspace/media", cleanName);
+    if (fsSync.existsSync(fullFile) && fsSync.statSync(fullFile).isFile()) {
+      const ext = pathMod.extname(fullFile).toLowerCase();
+      const mime = ext === ".png" ? "image/png" : ext === ".mp4" ? "video/mp4" : ext === ".wav" ? "audio/wav" : "text/markdown; charset=utf-8";
+      res.writeHead(200, { "Content-Type": mime });
+      fsSync.createReadStream(fullFile).pipe(res);
+    } else {
+      res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+      res.end("Media not found: " + cleanName);
+    }
+    return;
+  }
+  if (req && req.url && req.url.split("?")[0] === "/api/multimodal" && req.method === "POST") {
+    let rawBody = "";
+    req.on("data", chunk => { rawBody += chunk; });
+    req.on("end", () => {
+      const pyCode = "import sys,json;sys.path.insert(0,r'/home/bytrkr/bistapp/python');from multimodal_studio import run_multimodal_task;d=json.loads(sys.stdin.read() or '{}');print(json.dumps(run_multimodal_task(d.get('mode','canvas'),d.get('prompt',''),d.get('title','sohbet')),ensure_ascii=False))";
+      const r = spawnSync("/home/bytrkr/bistapp/.venv/bin/python", ["-c", pyCode], {
+        input: rawBody,
+        encoding: "utf8",
+        timeout: 25000
+      });
+      res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
+      if (r.status === 0 && r.stdout) {
+        res.end(r.stdout.trim());
+      } else {
+        res.end(JSON.stringify({ ok: false, error: r.stderr || (r.error && r.error.message) || "Uretim hatasi" }));
+      }
+    });
+    return;
+  }
+
+
+  
+  
+
   if (mt16SpecialRoute(req, res)) return;
   if (mt16SpecialRoute(req, res)) return;
 if (req.url && req.url.split("?")[0] === "/download-bundle") { const f = "/home/bytrkr/bistapp/backups/latest_ports_bundle.tar.gz"; if (fs.existsSync(f)) { const st = fs.statSync(f); res.writeHead(200, { "Content-Type": "application/gzip", "Content-Disposition": "attachment; filename=\"mt16_full_ports_bundle.tar.gz\"", "Content-Length": st.size }); return fs.createReadStream(f).pipe(res); } }

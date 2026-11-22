@@ -1,6 +1,86 @@
 {
-  "toplam_tur": 1111,
+  "toplam_tur": 1127,
   "kayitlar": [
+    {
+      "zaman": "17:29:20",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "17:25:06",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "17:20:50",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "17:16:37",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "17:12:19",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "17:08:05",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "17:03:50",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "16:59:37",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "16:55:25",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "16:51:11",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "16:46:54",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "16:42:39",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "16:38:25",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "16:36:49",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "16:32:33",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
+    {
+      "zaman": "16:28:19",
+      "tip": "TUR",
+      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
+    },
     {
       "zaman": "16:24:05",
       "tip": "TUR",
@@ -75,89 +155,9 @@
       "zaman": "15:24:41",
       "tip": "TUR",
       "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:20:27",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:16:13",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:11:57",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:07:43",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "15:03:29",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "14:59:15",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "14:55:02",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "14:50:48",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "14:46:35",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "14:42:20",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "14:38:05",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "14:33:50",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "14:29:35",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "14:25:21",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "14:21:04",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
-    },
-    {
-      "zaman": "14:16:51",
-      "tip": "TUR",
-      "mesaj": "Gerçek Bilanço (F/K, ROE, Borç) + Canlı Haber taraması tamamlandı (249 varlık)"
     }
   ],
-  "son_guncelleme": "2026-11-22 16:24:05",
+  "son_guncelleme": "2026-11-22 17:29:20",
   "saglayici_durumu": [
     {
       "ad": "GROQ",
