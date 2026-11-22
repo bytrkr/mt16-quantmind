@@ -1,0 +1,18 @@
+=== MT16 PORT & SERVIS ENVANTERI ===
+Sat Nov 21 19:17:09 UTC 2026
+tcp   LISTEN 0      511                0.0.0.0:3000       0.0.0.0:*    users:(("node",pid=696158,fd=37))                        
+tcp   LISTEN 0      511                0.0.0.0:3001       0.0.0.0:*    users:(("node /home/bytr",pid=697636,fd=19))             
+tcp   LISTEN 0      2048             127.0.0.1:8001       0.0.0.0:*    users:(("python",pid=696170,fd=15))                      
+┌────┬─────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name            │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼─────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 16 │ ai-studio-v8    │ default     │ 1.0.0   │ fork    │ 697636   │ 2m     │ 94   │ online    │ 0%       │ 51.5mb   │ root     │ disabled │
+│ 0  │ bistapp         │ default     │ N/A     │ fork    │ 696126   │ 23m    │ 161  │ online    │ 0%       │ 52.6mb   │ root     │ disabled │
+│ 20 │ bistapp-api     │ default     │ 1.0.0   │ fork    │ 696170   │ 23m    │ 170  │ online    │ 0%       │ 202.6mb  │ root     │ disabled │
+│ 5  │ otonom-beyin    │ default     │ 1.0.0   │ fork    │ 696182   │ 23m    │ 886… │ online    │ 0%       │ 42.9mb   │ root     │ disabled │
+└────┴─────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 4.9% | ram usage: 19% | ens3: ⇓ 179kb/s ⇑ 12kb/s | disk: ⇓ 0mb/s ⇑ 27kb/s
+--- 8001 /api/track-record ---
+{"status":"ok","track_record":{"total_decisions":0,"evaluated_decisions":0,"win_rate_pct":null,"recent_decisions":[]},"portfolio_performance":{"open_positions":8,"closed_positions":0,"realized_pnl_try":0.0,"unrealized_pnl_try":-3916.68},"agent_weights":{},"regulatory_compliance":{"jurisdiction":"TR-SPK","classification":"Yapay Zeka Destekli Kantitatif Arastirma, Risk Analizi ve Karar Destek Terminali","disclaimer":"Burada yer alan algoritmik skorlar, münazara çıktıları ve simülasyon verileri SPK Seri:V No:55 kapsamında Yatırım Danışmanlığı niteliği taşımaz; nihai yatırım kararı kullanıcıya aittir."}}--- 3000 & 3001 ---
+3000: 200
+3001: 200

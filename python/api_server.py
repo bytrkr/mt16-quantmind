@@ -2595,10 +2595,26 @@ def get_verified_track_record():
     }
 
 
-if __name__ == "__main__":
-    import uvicorn
-    port = int(os.environ.get("PYTHON_KERNEL_PORT", 8001))
-    print(f"Kernel binding to 0.0.0.0:{port}")
-    uvicorn.run("python.api_server:app", host="0.0.0.0", port=port, log_level="info")
+
+import sys as _mt16_sys
+if "/home/bytrkr/bistapp/python" not in _mt16_sys.path:
+    _mt16_sys.path.insert(0, "/home/bytrkr/bistapp/python")
 
 
+import sys as _mt16_sys
+if "/home/bytrkr/bistapp/python" not in _mt16_sys.path:
+    _mt16_sys.path.insert(0, "/home/bytrkr/bistapp/python")
+from fastapi.responses import Response as _Mt16Response
+from quant_grid_service import build_quant_grid_payload as _mt16_grid_payload, build_excel_bytes as _mt16_excel_bytes
+
+@app.get("/api/quant-grid")
+def mt16_get_quant_grid():
+    return _mt16_grid_payload()
+
+@app.get("/api/export-excel")
+def mt16_export_excel():
+    return _Mt16Response(
+        content=_mt16_excel_bytes(),
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": "attachment; filename=\"MT16_QuantMind_Rapor.xlsx\""}
+    )

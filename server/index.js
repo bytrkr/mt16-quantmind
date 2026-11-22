@@ -12,6 +12,22 @@ import express from 'express';
 import cors from 'cors';
 
 const app = express();
+
+// MT16 Quant-Grid & Excel Export Proxy -> 8001
+app.get(["/api/quant-grid", "/api/export-excel"], async (req, res) => {
+  try {
+    const upstream = await fetch("http://127.0.0.1:8001" + req.originalUrl);
+    res.status(upstream.status);
+    upstream.headers.forEach((v, k) => {
+      if (k.toLowerCase() !== "transfer-encoding") res.setHeader(k, v);
+    });
+    const buf = Buffer.from(await upstream.arrayBuffer());
+    res.send(buf);
+  } catch (err) {
+    res.status(502).json({ ok: false, error: String(err) });
+  }
+});
+
 app.use(cors());
 app.use(express.json());
 

@@ -3,6 +3,8 @@
 > Otomatik uretilir: `bash scripts/update_tree.sh`
 
 ```
+./.antigravity/rules.md
+./.cursorrules
 ./.env.example
 ./.env.yedek
 ./.github/workflows/ci.yml
@@ -24686,7 +24688,7 @@
 ./.venv/lib/python3.12/site-packages/yfinance/utils.py
 ./.venv/lib/python3.12/site-packages/yfinance/version.py
 ./.venv/pyvenv.cfg
-./=2.0
+./CLAUDE.md
 ./DECISIONS.md
 ./Dockerfile.jiro
 ./Dockerfile.node
@@ -24779,7 +24781,12 @@
 ./anomalyEngine.ts
 ./app/applet/docs/PROJECT_TREE.md
 ./app/applet/scripts/update_tree.sh
+./backups/backup.log
 ./backups/mt16_backup_20261121_184229.tar.gz
+./backups/mt16_backup_20261121_195106.tar.gz
+./backups/mt16_backup_20261122_033001.tar.gz
+./backups/mt16_full_ports_bundle_20261121_191709.tar.gz
+./backups/ports_snapshot_20261121_191709.txt
 ./bist/bilanco.ts
 ./bist/bistAdapter.ts
 ./bist/kap.ts
@@ -24838,6 +24845,8 @@
 ./docs/CLAUDE.md
 ./docs/CONTEXT.md
 ./docs/GLOSSARY.md
+./docs/KOKPIT_DEGERLEME_RAPORU.md
+./docs/KOKPIT_KULLANIM_KILAVUZU.md
 ./docs/MARKETS.md
 ./docs/MT16_SYSTEM_BIBLE.md
 ./docs/PROJECT_TREE.md
@@ -24887,6 +24896,7 @@
 ./public/assets/aistudio/TUM_x5f_KARTLAR_x5f_25_x5f_BILGI_x5f_KOMPLE_c5705718.md
 ./public/assets/aistudio/screenshot_1_f20db7e9.png
 ./public/kurtar.html
+./public/quant_grid_widget.js
 ./python/__pycache__/advanced_quant_simulation.cpython-312.pyc
 ./python/__pycache__/agent_telemetry.cpython-312.pyc
 ./python/__pycache__/agents.cpython-312.pyc
@@ -25029,6 +25039,7 @@
 ./python/api_server.py.bak_20261121_180753
 ./python/api_server.py.bak_20261121_180755
 ./python/api_server.py.bak_20261121_182054
+./python/api_server.py.bak_qgrid_20261122_093056
 ./python/ask_portfolio.py
 ./python/auth.py
 ./python/auto_repo_absorber.py
@@ -25162,6 +25173,7 @@
 ./python/qodi_final_audit_logger.py
 ./python/qodi_multi_symbol_proof.py
 ./python/qodi_root_cause_ablation.py
+./python/quant_grid_service.py
 ./python/quant_simulation.py
 ./python/rag_engine.py
 ./python/realistic_backtest_engine.py
@@ -25230,7 +25242,9 @@
 ./run_pipeline.sh
 ./schemas/jury_decision_schema.json
 ./scripts/backup_data.sh
+./scripts/backup_manager.sh
 ./scripts/check-fallbacks.ts
+./scripts/clean_logs.sh
 ./scripts/fetch_bist_markets.py
 ./scripts/fix_all_random.py
 ./scripts/fix_anomaly_card.py
@@ -25240,6 +25254,8 @@
 ./scripts/fix_queue_counter.py
 ./scripts/fix_queue_counter2.py
 ./scripts/fix_remaining_random.py
+./scripts/git_sync.sh
+./scripts/health_check.sh
 ./scripts/qodi_audit.py
 ./scripts/qodi_autofix.py
 ./scripts/qodi_fix_index.py
@@ -25248,6 +25264,7 @@
 ./scripts/qodi_ts_scan.cjs
 ./scripts/qodi_ts_scan.js
 ./scripts/qodi_verify.py
+./scripts/sys_maintain_4_5.sh
 ./scripts/update_tree.sh
 ./server/bots/BotManager.ts
 ./server/bots/GoogleFinanceBot.ts
@@ -25265,8 +25282,17 @@
 ./server/index.ts.bak_20261121_180753
 ./server/index.ts.bak_20261121_180755
 ./server/kokpit3001.mjs
+./server/kokpit3001.mjs.bak_11_17_20261121_194021
+./server/kokpit3001.mjs.bak_123_20261121_193547
 ./server/kokpit3001.mjs.bak_20261121_182906
 ./server/kokpit3001.mjs.bak_20261121_183148
+./server/kokpit3001.mjs.bak_4_10_20261121_193921
+./server/kokpit3001.mjs.bak_clean_20261121_194853
+./server/kokpit3001.mjs.bak_dl_file_20261121_194450
+./server/kokpit3001.mjs.bak_fullide_20261121_185259
+./server/kokpit3001.mjs.bak_fullide_20261121_185315
+./server/kokpit3001.mjs.bak_ribbon_20261121_185543
+./server/kokpit3001.mjs.bak_upgrade_20261121_184456
 ./server/kokpit3001.mjs.faz2_bak
 ./server/kokpit3001.mjs.faz3_bak
 ./server/kokpit3001.mjs.konsol_bak
@@ -25683,5 +25709,4 @@
 ./uploads/finance-story---managed-agent/tsconfig.json
 ./uploads/finance-story---managed-agent/vite.config.ts
 ./vite.config.ts
-./vite.config.ts.timestamp-1795284476106-38e190fe0efa9.mjs
 ```
